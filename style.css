@@ -27,17 +27,17 @@ body {
   padding: 20px;
 
   flex-direction: column;
-  gap: 20px;
-  padding: 40px 20px;
+  gap: 14px;
+  padding: 14px;
 }
 
 .card {
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
-  border-radius: 28px;
+  border-radius: 20px;
   border: 1px solid #d6dce5;
-  padding: 20px 26px;
+  padding: 20px 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.092);
 }
 
@@ -49,7 +49,7 @@ body {
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: var(--text-main);
 
@@ -63,7 +63,7 @@ body {
 }
 
 .status-counter {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-2);
@@ -123,10 +123,9 @@ body {
 /* Add Button */
 .add-btn {
   width: 100%;
-  background-color: #007bff;
+  background-color: #0080ff;
   border: none;
-  border-top: 1px solid var(--border-color);
-  padding: 12px 14px;
+  padding: 10px 16px;
   border-radius: 40px;
   margin-top: 30px;
   display: flex;
@@ -219,10 +218,7 @@ body {
 
 
 
-/* Water Header Title */
-.water-title {
-  text-decoration: none;
-}
+
 
 /* Progress Bar Container */
 .water-tracker-container {
@@ -296,11 +292,7 @@ body {
 }
 
 
-/* Weight Card Adjustments */
-.weight-title {
-  text-decoration: none;
-  font-size: 1.8rem;
-}
+
 
 /* Weight Card Add Button Styling */
 .weight-add-btn {

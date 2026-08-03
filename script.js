@@ -393,3 +393,56 @@ navButtons.forEach((btn) => {
     }
   });
 });
+
+// Color Palette Map for Scores 1 through 6
+const moodColors = {
+  1: "#c62828",
+  2: "#ef5350",
+  3: "#ffa726",
+  4: "#ffee58",
+  5: "#66bb6a",
+  6: "#2e7d32"
+};
+
+function renderMoodPieChart() {
+  const pieElement = document.getElementById("mood-pie-chart");
+  if (!pieElement || moodLogs.length === 0) return;
+
+  // 1. Tally counts for each rating (1 through 6)
+  const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+  moodLogs.forEach(log => {
+    if (counts[log.score] !== undefined) {
+      counts[log.score]++;
+    }
+  });
+
+  const totalLogs = moodLogs.length;
+  let gradientStops = [];
+  let currentPercentage = 0;
+
+  // 2. Build conic-gradient angles based on proportions
+  for (let score = 1; score <= 6; score++) {
+    const count = counts[score];
+    if (count > 0) {
+      const percentage = (count / totalLogs) * 100;
+      const start = currentPercentage;
+      const end = currentPercentage + percentage;
+      
+      gradientStops.push(`${moodColors[score]} ${start.toFixed(1)}% ${end.toFixed(1)}%`);
+      currentPercentage = end;
+    }
+  }
+
+  // 3. Apply generated gradient to pie chart
+  pieElement.style.background = `conic-gradient(${gradientStops.join(", ")})`;
+}
+
+// Update existing render function to refresh pie chart too
+const originalRenderMoodGraph = renderMoodGraph;
+renderMoodGraph = function() {
+  originalRenderMoodGraph();
+  renderMoodPieChart();
+};
+
+// Initial Render
+renderMoodPieChart();

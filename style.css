@@ -11,6 +11,7 @@
   --true-blue: #c80553;
 }
 
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -135,14 +136,14 @@ body {
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff;
+  color: #fff4e6;
   cursor: pointer;
   text-align: left;
   
   transition: all 0.3s;
 }
 .add-btn:hover{
-    background-color: #2ea1ff;
+    background-color: #b70049;
 }
 
 .plus-icon {
@@ -216,6 +217,58 @@ body {
 
 .btn-secondary { background: #e2e8f0; color: #4a5568; }
 .btn-primary { background: var(--blue-accent); color: white; }
+
+/* Mood Distribution Card Styling */
+.pie-chart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+/* Pie Chart Circle */
+.pie-chart {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #e2e8f0; /* Default fallback when empty */
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Legend Styling */
+.pie-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  padding-bottom: 20px;
+  border-bottom: solid 1px var(--border-color);
+  color: var(--text-2);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* 1–6 Mood Color Palette */
+.score-6 { background-color: #2e7d32; } /* Dark Green */
+.score-5 { background-color: #66bb6a; } /* Soft Green */
+.score-4 { background-color: #ffee58; } /* Yellow */
+.score-3 { background-color: #ffa726; } /* Orange */
+.score-2 { background-color: #ef5350; } /* Coral Red */
+.score-1 { background-color: #c62828; } /* Deep Red */
 
 
 
@@ -304,7 +357,7 @@ body {
 }
 
 .date-range-badge {
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-muted);
   display: flex;
@@ -516,5 +569,6 @@ body {
 .nav-btn:active {
   transform: scale(0.92);
 }
+
 
 

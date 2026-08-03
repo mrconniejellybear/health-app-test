@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Medication Tracker</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="card">
+    <!-- Header Section -->
+    <div class="card-header">
+      <div>
+        <h1 class="title">Medication</h1>
+        <p class="subtitle">Swipe right to log</p>
+      </div>
+      <div id="status-counter" class="status-counter">None Listed</div>
+    </div>
+
+    <!-- Medication List -->
+    <ul id="med-list" class="med-list">
+      <!-- Items dynamically added here -->
+    </ul>
+
+    <!-- Add Prescription Button -->
+    <button id="add-btn" class="add-btn">
+      <span class="plus-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M435.48-435.48V-320q0 18.92 12.91 31.72 12.91 12.8 31.61 12.8t31.61-12.8q12.91-12.8 12.91-31.72v-115.48H640q18.92 0 31.72-12.91 12.8-12.91 12.8-31.61t-12.8-31.61q-12.8-12.91-31.72-12.91H524.52V-640q0-18.92-12.91-31.72-12.91-12.8-31.61-12.8t-31.61 12.8q-12.91 12.8-12.91 31.72v115.48H320q-18.92 0-31.72 12.91-12.8 12.91-12.8 31.61t12.8 31.61q12.8 12.91 31.72 12.91h115.48ZM480-60.78q-87.52 0-163.91-32.96-76.38-32.96-132.88-89.47-56.51-56.5-89.47-132.88Q60.78-392.48 60.78-480t32.96-163.91q32.96-76.38 89.47-132.88 56.5-56.51 132.88-89.47 76.39-32.96 163.91-32.96t163.91 32.96q76.38 32.96 132.88 89.47 56.51 56.5 89.47 132.88 32.96 76.39 32.96 163.91t-32.96 163.91q-32.96 76.38-89.47 132.88-56.5 56.51-132.88 89.47Q567.52-60.78 480-60.78Zm0-106q131.74 0 222.48-90.74 90.74-90.74 90.74-222.48t-90.74-222.48Q611.74-793.22 480-793.22t-222.48 90.74Q166.78-611.74 166.78-480t90.74 222.48q90.74 90.74 222.48 90.74ZM480-480Z"/></svg></span>
+        Enter a Prescription
+    </button>
+  </div>
+
+  <!-- Add Medication Modal -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h2>Add Medication</h2>
+      <form id="med-form">
+        <label for="med-name">Medication Name</label>
+        <input type="text" id="med-name" placeholder="e.g. Adderall" required>
+
+        <label for="med-time">Scheduled Time</label>
+        <input type="time" id="med-time" required>
+
+        <div class="modal-actions">
+          <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <!-- Existing Medication Card Above -->
+
+    <!-- Water Intake Card -->
+    <div class="card">
+    <div class="card-header">
+        <div>
+        <h1 class="title water-title">Hydration</h1>
+        </div>
+        <div id="water-counter" class="status-counter">0oz / 64oz</div>
+    </div>
+
+    <!-- Progress Bar Section -->
+    <div class="water-tracker-container">
+        <div class="bar-labels">
+        <span>0oz</span>
+        <span>64oz</span>
+        </div>
+        
+        <div class="progress-bar-bg">
+        <div id="water-fill" class="progress-bar-fill" style="width: 0%;"></div>
+        <!-- Ruler Notch Ticks -->
+        <div class="ruler-ticks">
+            <span class="tick"></span>
+            <span class="tick"></span>
+            <span class="tick"></span>
+            <span class="tick"></span>
+            <span class="tick"></span>
+        </div>
+        </div>
+    </div>
+
+    <!-- Log Water Button -->
+    <button id="add-water-btn" class="add-btn">
+      <span class="plus-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M435.48-435.48V-320q0 18.92 12.91 31.72 12.91 12.8 31.61 12.8t31.61-12.8q12.91-12.8 12.91-31.72v-115.48H640q18.92 0 31.72-12.91 12.8-12.91 12.8-31.61t-12.8-31.61q-12.8-12.91-31.72-12.91H524.52V-640q0-18.92-12.91-31.72-12.91-12.8-31.61-12.8t-31.61 12.8q-12.91 12.8-12.91 31.72v115.48H320q-18.92 0-31.72 12.91-12.8 12.91-12.8 31.61t12.8 31.61q12.8 12.91 31.72 12.91h115.48ZM480-60.78q-87.52 0-163.91-32.96-76.38-32.96-132.88-89.47-56.51-56.5-89.47-132.88Q60.78-392.48 60.78-480t32.96-163.91q32.96-76.38 89.47-132.88 56.5-56.51 132.88-89.47 76.39-32.96 163.91-32.96t163.91 32.96q76.38 32.96 132.88 89.47 56.51 56.5 89.47 132.88 32.96 76.39 32.96 163.91t-32.96 163.91q-32.96 76.38-89.47 132.88-56.5 56.51-132.88 89.47Q567.52-60.78 480-60.78Zm0-106q131.74 0 222.48-90.74 90.74-90.74 90.74-222.48t-90.74-222.48Q611.74-793.22 480-793.22t-222.48 90.74Q166.78-611.74 166.78-480t90.74 222.48q90.74 90.74 222.48 90.74ZM480-480Z"/></svg></span>
+        Log Water
+    </button>
+    </div>
+
+    <!-- Log Water Modal -->
+    <div id="water-modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+        <h2>Log Water Intake</h2>
+        
+        <!-- Quick Add Shortcuts -->
+        <div class="quick-add-group">
+        <button type="button" class="quick-add-btn" data-amount="8">+8oz</button>
+        <button type="button" class="quick-add-btn" data-amount="16">+16oz</button>
+        </div>
+
+        <form id="water-form">
+        <label for="water-amount">Custom Amount (oz)</label>
+        <input type="number" id="water-amount" placeholder="e.g. 12" min="1" max="128">
+
+        <div class="modal-actions">
+            <button type="button" id="water-cancel-btn" class="btn-secondary">Cancel</button>
+            <button type="submit" class="btn-primary">Add</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <!-- Existing Water Card Above -->
+
+    <!-- Weight Trends Card -->
+    <div class="card">
+    <div class="card-header">
+        <div>
+        <h1 class="title weight-title">Body Weight</h1>
+        </div>
+        <div id="weight-date-range" class="date-range-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" width="15px" fill="currentColor"><path d="M206.78-60.78q-44.3 0-75.15-30.85-30.85-30.85-30.85-75.15v-546.44q0-44.3 30.85-75.15 30.85-30.85 75.15-30.85H240V-853q0-19.26 13.76-32.74t33.02-13.48q19.26 0 32.74 13.48T333-853v33.78h294V-853q0-19.26 13.76-32.74t33.02-13.48q19.26 0 32.74 13.48T720-853v33.78h33.22q44.3 0 75.15 30.85 30.85 30.85 30.85 75.15v546.44q0 44.3-30.85 75.15-30.85 30.85-75.15 30.85H206.78Zm0-106h546.44V-560H206.78v393.22Zm0-473.22h546.44v-73.22H206.78V-640Zm0 0v-73.22V-640ZM480-395.48q-18.92 0-31.72-12.91-12.8-12.91-12.8-31.61t12.8-31.61q12.8-12.91 31.72-12.91 18.92 0 31.72 12.91 12.8 12.91 12.8 31.61t-12.8 31.61q-12.8 12.91-31.72 12.91Zm-191.61-12.91Q275.48-421.3 275.48-440t12.91-31.61q12.91-12.91 31.61-12.91t31.61 12.91q12.91 12.91 12.91 31.61t-12.91 31.61Q338.7-395.48 320-395.48t-31.61-12.91ZM640-395.48q-18.13 0-31.33-12.91-13.19-12.91-13.19-31.61t13.19-31.61q13.2-12.91 31.61-12.91 18.42 0 31.33 12.91 12.91 12.91 12.91 31.61t-12.8 31.61q-12.8 12.91-31.72 12.91Zm-160 160q-18.92 0-31.72-13.19-12.8-13.2-12.8-31.61 0-18.42 12.8-31.33 12.8-12.91 31.72-12.91 18.92 0 31.72 12.8 12.8 12.8 12.8 31.72 0 18.13-12.8 31.33-12.8 13.19-31.72 13.19Zm-191.61-13.19q-12.91-13.2-12.91-31.61 0-18.42 12.91-31.33 12.91-12.91 31.61-12.91t31.61 12.8q12.91 12.8 12.91 31.72 0 18.13-12.91 31.33-12.91 13.19-31.61 13.19t-31.61-13.19ZM640-235.48q-18.13 0-31.33-13.19-13.19-13.2-13.19-31.61 0-18.42 13.19-31.33 13.2-12.91 31.61-12.91 18.42 0 31.33 12.8 12.91 12.8 12.91 31.72 0 18.13-12.8 31.33-12.8 13.19-31.72 13.19Z"/></svg><span id="range-text">No Data</span>
+        </div>
+    </div>
+
+    <!-- Graph Container -->
+    <div class="graph-wrapper">
+        <!-- Dynamic Y-Axis Labels -->
+        <div class="y-axis">
+        <span id="max-weight-label">-- lbs</span>
+        <span id="min-weight-label">-- lbs</span>
+        </div>
+
+        <!-- Chart Canvas Area -->
+        <div class="chart-container">
+        <!-- Grid Border Lines -->
+        <div class="chart-border-top"></div>
+
+        <!-- SVG Line Plot -->
+        <svg id="weight-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <path id="weight-path" d="" fill="none" stroke="#8c97cf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        </div>
+    </div>
+
+    <button id="add-weight-btn" class="add-btn inline-add">
+      <span class="plus-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M435.48-435.48V-320q0 18.92 12.91 31.72 12.91 12.8 31.61 12.8t31.61-12.8q12.91-12.8 12.91-31.72v-115.48H640q18.92 0 31.72-12.91 12.8-12.91 12.8-31.61t-12.8-31.61q-12.8-12.91-31.72-12.91H524.52V-640q0-18.92-12.91-31.72-12.91-12.8-31.61-12.8t-31.61 12.8q-12.91 12.8-12.91 31.72v115.48H320q-18.92 0-31.72 12.91-12.8 12.91-12.8 31.61t12.8 31.61q12.8 12.91 31.72 12.91h115.48ZM480-60.78q-87.52 0-163.91-32.96-76.38-32.96-132.88-89.47-56.51-56.5-89.47-132.88Q60.78-392.48 60.78-480t32.96-163.91q32.96-76.38 89.47-132.88 56.5-56.51 132.88-89.47 76.39-32.96 163.91-32.96t163.91 32.96q76.38 32.96 132.88 89.47 56.51 56.5 89.47 132.88 32.96 76.39 32.96 163.91t-32.96 163.91q-32.96 76.38-89.47 132.88-56.5 56.51-132.88 89.47Q567.52-60.78 480-60.78Zm0-106q131.74 0 222.48-90.74 90.74-90.74 90.74-222.48t-90.74-222.48Q611.74-793.22 480-793.22t-222.48 90.74Q166.78-611.74 166.78-480t90.74 222.48q90.74 90.74 222.48 90.74ZM480-480Z"/></svg></span>
+        Update Weight
+    </button>
+
+    </div>
+
+    <!-- Update Weight Modal -->
+    <div id="weight-modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+        <h2>Update Weight</h2>
+        <form id="weight-form">
+        <label for="weight-input">Weight (lbs)</label>
+        <input type="number" id="weight-input" step="0.1" placeholder="e.g. 175.5" required>
+
+        <label for="weight-date">Date</label>
+        <input type="date" id="weight-date" required>
+
+        <div class="modal-actions">
+            <button type="button" id="weight-cancel-btn" class="btn-secondary">Cancel</button>
+            <button type="submit" class="btn-primary">Save Entry</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

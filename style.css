@@ -34,6 +34,14 @@ body {
   padding: 14px;
 }
 
+.credit{
+  color: #64748b;
+  position: absolute;
+  top: 20px;
+  margin-left: 8px;
+  font-size: 14px;
+}
+
 .card {
   background: var(--card-bg);
   width: 100%;

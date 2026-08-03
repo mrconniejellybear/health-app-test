@@ -283,3 +283,82 @@ function renderWeightGraph() {
 
 // Initial Graph Render
 renderWeightGraph();
+
+
+// --- MOOD TRACKER LOGIC ---
+
+// Seed Data
+let moodLogs = [
+  { date: "2026-07-26", score: 3 },
+  { date: "2026-07-27", score: 4 },
+  { date: "2026-07-28", score: 2 },
+  { date: "2026-07-29", score: 5 },
+  { date: "2026-07-30", score: 5 },
+  { date: "2026-07-31", score: 6 }
+];
+
+// DOM Elements
+const addMoodBtn = document.getElementById("add-mood-btn");
+const moodModalOverlay = document.getElementById("mood-modal-overlay");
+const moodCancelBtn = document.getElementById("mood-cancel-btn");
+const moodForm = document.getElementById("mood-form");
+const moodRangeText = document.getElementById("mood-range-text");
+const moodPath = document.getElementById("mood-path");
+
+// Modal Controls
+addMoodBtn.addEventListener("click", () => {
+  document.getElementById("mood-date").value = new Date().toISOString().split('T')[0];
+  moodModalOverlay.classList.remove("hidden");
+});
+
+moodCancelBtn.addEventListener("click", () => moodModalOverlay.classList.add("hidden"));
+
+// Submit Entry
+moodForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const selectedRating = document.querySelector('input[name="mood-score"]:checked');
+  const date = document.getElementById("mood-date").value;
+
+  if (selectedRating && date) {
+    moodLogs.push({ date, score: parseInt(selectedRating.value, 10) });
+    moodLogs.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    selectedRating.checked = false;
+    moodModalOverlay.classList.add("hidden");
+    renderMoodGraph();
+  }
+});
+
+// Render Mood SVG Line
+function renderMoodGraph() {
+  if (moodLogs.length === 0) return;
+
+  // Date Range Label
+  const firstDate = formatDateShort(moodLogs[0].date);
+  const lastDate = formatDateShort(moodLogs[moodLogs.length - 1].date);
+  moodRangeText.textContent = `${firstDate} — ${lastDate}`;
+
+  // Scale fixed between 1 and 6
+  const minScore = 1;
+  const maxScore = 6;
+  const range = maxScore - minScore;
+
+  const svgWidth = 300;
+  const svgHeight = 120;
+
+  const points = moodLogs.map((item, index) => {
+    const x = (index / (moodLogs.length - 1)) * svgWidth;
+    
+    // Invert Y mapping for SVG coordinate space
+    const normalizedY = (item.score - minScore) / range;
+    const y = svgHeight - (normalizedY * svgHeight);
+
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+
+  const pathData = `M ${points.join(" L ")}`;
+  moodPath.setAttribute("d", pathData);
+}
+
+// Initial Render
+renderMoodGraph();

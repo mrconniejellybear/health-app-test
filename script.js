@@ -446,3 +446,127 @@ renderMoodGraph = function() {
 
 // Initial Render
 renderMoodPieChart();
+
+// --- MEDICATION ADHERENCE CALENDAR LOGIC ---
+
+// Mock Adherence Log ("YYYY-MM-DD": "taken" | "partial" | "missed")
+let medAdherenceLogs = {
+  "2026-08-01": "taken",
+  "2026-08-02": "taken"
+};
+
+function renderMedicationCalendar(year = 2026, month = 7) { // 0-indexed month (7 = August)
+  const grid = document.getElementById("med-calendar-grid");
+  const monthLabel = document.getElementById("cal-month-text");
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const firstDayIndex = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  const todayStr = new Date().toISOString().split("T")[0];
+
+  const monthNames = ["January", "February", "March", "April", "May", "June", 
+                      "July", "August", "September", "October", "November", "December"];
+  
+  if (monthLabel) {
+    monthLabel.textContent = `${monthNames[month]} ${year}`;
+  }
+
+  // 1. Add empty padding cells for days before the 1st of the month
+  for (let i = 0; i < firstDayIndex; i++) {
+    const emptyCell = document.createElement("div");
+    emptyCell.classList.add("cal-day", "empty");
+    grid.appendChild(emptyCell);
+  }
+
+  // 2. Build day cells
+  for (let day = 1; day <= totalDays; day++) {
+    const dayCell = document.createElement("div");
+    dayCell.classList.add("cal-day");
+    dayCell.textContent = day;
+
+    // Format date key (YYYY-MM-DD)
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = (month + 1) < 10 ? `0${month + 1}` : month + 1;
+    const dateKey = `${year}-${formattedMonth}-${formattedDay}`;
+
+    // Highlight current day outline
+    if (dateKey === todayStr) {
+      dayCell.classList.add("today");
+    }
+
+    // Apply logged adherence status color
+    const status = medAdherenceLogs[dateKey];
+    if (status) {
+      dayCell.classList.add(status);
+    }
+
+    grid.appendChild(dayCell);
+  }
+}
+
+// Update render hooks when navigating to Medication tab
+const originalNavHandler = navButtons;
+navButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.tab === "view-meds") {
+      renderMedicationCalendar(2026, 7); // August 2026
+    }
+  });
+});
+
+// Initial Render
+renderMedicationCalendar(2026, 7);
+
+// --- SYMPTOM TRACKER LOGIC ---
+
+const intensityLabels = {
+  0: "None (0)",
+  1: "Mild (1)",
+  2: "Moderate (2)",
+  3: "Severe (3)"
+};
+
+// Update badges dynamically across all symptom sliders
+document.querySelectorAll(".severity-slider").forEach((slider) => {
+  slider.addEventListener("input", (e) => {
+    const symptomKey = e.target.dataset.symptom;
+    const val = parseInt(e.target.value, 10);
+    const badge = document.getElementById(`badge-${symptomKey}`);
+
+    if (badge) {
+      badge.textContent = intensityLabels[val];
+      if (val > 0) {
+        badge.classList.add("active");
+      } else {
+        badge.classList.remove("active");
+      }
+    }
+  });
+});
+
+// Submit Form Data
+const symptomForm = document.getElementById("symptom-form");
+if (symptomForm) {
+  symptomForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Dynamically collect ratings for all sliders
+    const symptomRatings = {};
+    document.querySelectorAll(".severity-slider").forEach((slider) => {
+      symptomRatings[slider.dataset.symptom] = parseInt(slider.value, 10);
+    });
+
+    const notes = document.getElementById("symptom-notes").value;
+
+    const symptomLogEntry = {
+      date: new Date().toISOString().split("T")[0],
+      ratings: symptomRatings, // e.g. { cramps: 1, headaches: 3, mood-swings: 0, breakouts: 2 }
+      notes
+    };
+
+    console.log("Logged Symptom Entry:", symptomLogEntry);
+    alert("Symptom log saved!");
+  });
+}

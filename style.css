@@ -8,6 +8,8 @@
   --green-check: #28a745;
   --blue-accent: #007bff;
 
+  --feat-text: #fff4e6;
+
   --true-blue: #c80553;
 }
 
@@ -37,9 +39,9 @@ body {
 .credit{
   color: #64748b;
   position: absolute;
-  top: 20px;
+  top: 14px;
   margin-left: 8px;
-  font-size: 14pxch;
+  font-size: 15px;
 }
 
 .card {
@@ -76,7 +78,7 @@ body {
 .status-counter {
   margin-top: 10px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-2);
 }
 
@@ -120,8 +122,8 @@ body {
 }
 
 .med-text {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   color: var(--text-main);
 }
 
@@ -131,6 +133,94 @@ body {
   font-weight: 400;
 }
 
+/* Calendar Wrapper & Grid */
+.calendar-wrapper {
+  margin-top: 12px;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-muted, #64748b);
+  margin-bottom: 8px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+/* Individual Day Cells */
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-main, #0f172a);
+  background-color: var(--card-bg-subtle, #f1f5f9);
+  transition: transform 0.15s ease, background-color 0.2s;
+}
+
+.cal-day.empty {
+  background: transparent;
+}
+
+.cal-day.today {
+  border: 4px solid var(--true-blue);
+  font-weight: 800;
+}
+
+/* Status Highlights */
+.cal-day.taken {
+  background-color: var(--true-blue); /* Accent Green */
+  color: var(--feat-text);
+  font-weight: 800;
+}
+
+.cal-day.partial {
+  background-color: #f59e0b; /* Amber */
+  color: white;
+}
+
+.cal-day.missed {
+  background-color: #a8abad; /* Soft Red */
+  color: white;
+}
+
+/* Calendar Legend Footer */
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  font-size: 13px;
+  color: var(--text-muted, #64748b);
+}
+
+.day-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.day-dot.taken { background-color: var(--true-blue); }
+.day-dot.partial { background-color: #f59e0b; }
+.day-dot.missed { background-color: #a8abad; }
+
+
+
 /* Add Button */
 .add-btn {
   width: 100%;
@@ -138,13 +228,13 @@ body {
   border: none;
   padding: 10px 16px;
   border-radius: 40px;
-  margin-top: 30px;
+  margin-top: 24px;
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff4e6;
+  color: var(--feat-text);
   cursor: pointer;
   text-align: left;
   
@@ -366,11 +456,12 @@ body {
 
 .date-range-badge {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-muted);
   display: flex;
   align-items: flex-start;
   gap: 6px;
+  margin-top:8px;
 }
 
 /* Graph Wrapper Layout */
@@ -385,7 +476,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 400;
   color: var(--text-muted);
   padding-bottom: 4px;
@@ -396,7 +487,9 @@ body {
   position: relative;
   flex: 1;
   height: 100%;
-  background-color: #f1f5f963;
+  background-color: #f1f5f965;
+  border-top:  1px solid #e7eaed;
+  border-bottom: 1px solid #e7eaed;
 }
 
 .chart-border-top {
@@ -405,7 +498,6 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background-color: var(--border-color);
 }
 
 .chart-border-bottom {
@@ -414,7 +506,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background-color: var(--border-color);
+  background-color: #e7eaed;
 }
 
 #weight-svg {
@@ -469,7 +561,7 @@ body {
 }
 
 .rating-picker input[type="radio"]:checked + span {
-  background-color: #7e9e80; /* Sage green accent */
+  background-color: var(--true-blue); /* Sage green accent */
   color: white;
 }
 
@@ -502,8 +594,95 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+/* --- DAILY NOTES & BUTTON FIXES --- */
 
+.symptom-intro {
+  font-size: 14px;
+  color: var(--text-muted, #64748b);
+  line-height: 1.4;
+  display: none;
+}
 
+.symptom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.symptom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.symptom-title {
+  font-size: 15px;
+  font-weight:500;
+  color: var(--text-main, #0f172a);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.severity-badge {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background-color: var(--border-color);
+  color: var(--text-muted, #64748b);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Active highlight when rating > 0 */
+.severity-badge.active {
+  background-color: #f249ba;
+  color: white;
+}
+
+.severity-slider {
+  accent-color: #f249ba;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px; 
+  background: #e2e8f0; /* Soft track background */
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+/* Ensures the label sits above the textarea cleanly */
+.symptom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Full-width, styled textarea */
+#symptom-notes {
+  width: 100%;
+  box-sizing: border-box; /* Prevents overflow */
+  padding: 12px;
+  margin-top: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background-color: var(--card-bg-subtle, #f1f5f9);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-main, #0f172a);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+#symptom-notes:focus {
+  border-color: var(--true-blue);
+  background-color: #ffffff;
+}
 
 
 /* Page Layout for Fixed Navbar */
@@ -515,6 +694,7 @@ body {
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 /* Tab View Visibility */
@@ -531,7 +711,8 @@ body {
 /* Fixed Bottom Nav Styling */
 .bottom-nav {
   position: fixed;
-  bottom: 14px;
+  bottom: 0;
+  padding-bottom: 14px;
   left: 0;
   right: 0;
   height: 70px;

@@ -8,6 +8,30 @@ const modalOverlay = document.getElementById("modal-overlay");
 const cancelBtn = document.getElementById("cancel-btn");
 const medForm = document.getElementById("med-form");
 
+
+// Save the entire app state to browser storage
+function saveAppState() {
+  const appData = {
+    moodLogs: moodLogs,           // Your mood entry array
+    medAdherence: medAdherenceLogs, // Medication history object
+    symptomLogs: symptomLogs      // Symptom entries
+  };
+  
+  localStorage.setItem("healthApp_data", JSON.stringify(appData));
+}
+
+// Load data back into JS memory on page launch
+function loadAppState() {
+  const savedData = localStorage.getItem("healthApp_data");
+  
+  if (savedData) {
+    const parsed = JSON.parse(savedData);
+    moodLogs = parsed.moodLogs || [];
+    medAdherenceLogs = parsed.medAdherence || {};
+    symptomLogs = parsed.symptomLogs || [];
+  }
+}
+
 // Modal Controls
 addBtn.addEventListener("click", () => modalOverlay.classList.remove("hidden"));
 cancelBtn.addEventListener("click", () => modalOverlay.classList.add("hidden"));

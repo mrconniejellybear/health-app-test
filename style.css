@@ -39,7 +39,7 @@ body {
   position: absolute;
   top: 20px;
   margin-left: 8px;
-  font-size: 14px;
+  font-size: 14pxch;
 }
 
 .card {
@@ -396,6 +396,7 @@ body {
   position: relative;
   flex: 1;
   height: 100%;
+  background-color: #f1f5f963;
 }
 
 .chart-border-top {

@@ -436,7 +436,7 @@ body {
 /* Fixed Bottom Nav Styling */
 .bottom-nav {
   position: fixed;
-  bottom: 10px;
+  bottom: 14px;
   left: 0;
   right: 0;
   height: 70px;

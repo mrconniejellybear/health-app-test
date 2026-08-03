@@ -408,3 +408,79 @@ body {
   background-color: #7e9e80; /* Sage green accent */
   color: white;
 }
+
+
+
+/* Page Layout for Fixed Navbar */
+body {
+  padding-bottom: 90px; /* Prevents card content from hiding behind the navbar */
+}
+
+.app-views {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* Tab View Visibility */
+.tab-view {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tab-view.active {
+  display: flex;
+}
+
+/* Fixed Bottom Nav Styling */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 440px;
+  margin: 0 auto;
+  z-index: 1000;
+  /* iOS Safe Area padding for home indicator bar */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 10px 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  opacity: 0.4;
+  color: #0088cc;
+}
+
+.nav-icon {
+  font-size: 1.6rem;
+  filter: grayscale(100%);
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+/* Active State Styling */
+.nav-btn.active {
+  opacity: 1;
+}
+
+.nav-btn.active .nav-icon {
+  filter: grayscale(0%);
+}
+
+.nav-btn:active {
+  transform: scale(0.92);
+}

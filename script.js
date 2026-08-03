@@ -362,3 +362,34 @@ function renderMoodGraph() {
 
 // Initial Render
 renderMoodGraph();
+
+
+// --- NAVIGATION BAR LOGIC ---
+const navButtons = document.querySelectorAll(".nav-btn");
+const tabViews = document.querySelectorAll(".tab-view");
+
+navButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const targetTabId = btn.dataset.tab;
+
+    // 1. Update Active Nav Button
+    navButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    // 2. Switch Active View
+    tabViews.forEach((view) => {
+      if (view.id === targetTabId) {
+        view.classList.add("active");
+      } else {
+        view.classList.remove("active");
+      }
+    });
+
+    // 3. Trigger SVG path re-calculation if entering a tab with a graph
+    if (targetTabId === "view-mental" && typeof renderMoodGraph === "function") {
+      renderMoodGraph();
+    } else if (targetTabId === "view-diet" && typeof renderWeightGraph === "function") {
+      renderWeightGraph();
+    }
+  });
+});

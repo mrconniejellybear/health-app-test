@@ -49,7 +49,7 @@ body {
 }
 
 .title {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-main);
 
@@ -64,7 +64,7 @@ body {
 
 .status-counter {
   margin-top: 10px;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-2);
 }
@@ -101,7 +101,7 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
 }
 
 .med-item.logged .check-icon {
@@ -228,7 +228,7 @@ body {
 .bar-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 14px;
   color: var(--text-muted);
   font-weight: 400;
   margin-bottom: 6px;
@@ -360,11 +360,7 @@ body {
 }
 
 
-/* Mood Header & Button Styling */
-.mood-title {
-  text-decoration: none;
-  font-size: 1.8rem;
-}
+
 
 .mood-add-btn {
   margin-top: 16px;

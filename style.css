@@ -7,6 +7,8 @@
   --border-color: #edf2f7;
   --green-check: #28a745;
   --blue-accent: #007bff;
+
+  --true-blue: #c80553;
 }
 
 * {
@@ -123,7 +125,7 @@ body {
 /* Add Button */
 .add-btn {
   width: 100%;
-  background-color: #0080ff;
+  background-color: var(--true-blue);
   border: none;
   padding: 10px 16px;
   border-radius: 40px;
@@ -487,18 +489,17 @@ body {
   background: none;
   border: none;
   outline: none;
-  padding: 10px 24px;
+  padding: 10px 20px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.15s ease;
   opacity: 0.4;
-  color: #0088cc;
+  color: var(--true-blue);
 }
 
 .nav-icon {
-  font-size: 1.6rem;
   filter: grayscale(100%);
   transition: filter 0.2s, opacity 0.2s;
 }

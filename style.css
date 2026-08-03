@@ -409,6 +409,37 @@ body {
   color: white;
 }
 
+/* Cycle Tracker Card Metrics */
+.cycle-summary {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--card-bg-subtle, #f1f5f9);
+  padding: 16px;
+  border-radius: 12px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.cycle-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main, #0f172a);
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
 
 
 /* Page Layout for Fixed Navbar */
@@ -484,3 +515,5 @@ body {
 .nav-btn:active {
   transform: scale(0.92);
 }
+
+

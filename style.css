@@ -40,7 +40,7 @@ body {
   color: #64748b;
   position: absolute;
   top: 14px;
-  margin-left: 8px;
+  left: 20px;
   font-size: 15px;
 }
 
@@ -627,9 +627,9 @@ body {
 }
 
 .severity-badge {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 20px;
   background-color: var(--border-color);
   color: var(--text-muted, #64748b);

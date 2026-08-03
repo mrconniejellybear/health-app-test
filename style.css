@@ -436,10 +436,10 @@ body {
 /* Fixed Bottom Nav Styling */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   right: 0;
-  height: 68px;
+  height: 70px;
   background-color: #f8fafc;
   border-top: 1px solid #e2e8f0;
   display: flex;

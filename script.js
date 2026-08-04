@@ -457,12 +457,47 @@ function renderMedicationCalendar(year = 2026, month = 7) {
 
 // --- 8. SYMPTOM TRACKER LOGIC ---
 
+// Color map for symptom severity states
+const severityColors = {
+  0: { badgeBg: "#f1f5f9", badgeText: "#64748b", sliderColor: "#cbd5e1" }, // None (Gray)
+  1: { badgeBg: "#d1fae5", badgeText: "#065f46", sliderColor: "#58a23a" }, // Mild (Green)
+  2: { badgeBg: "#fef3c7", badgeText: "#92400e", sliderColor: "#f59e0b" }, // Moderate (Yellow)
+  3: { badgeBg: "#fee2e2", badgeText: "#991b1b", sliderColor: "#d04a35" }  // Severe (Red)
+};
+
 const intensityLabels = {
   0: "None (0)",
   1: "Mild (1)",
   2: "Moderate (2)",
   3: "Severe (3)"
 };
+
+// Update badges AND slider colors dynamically
+document.querySelectorAll(".severity-slider").forEach((slider) => {
+  slider.addEventListener("input", (e) => {
+    const symptomKey = e.target.dataset.symptom;
+    const val = parseInt(e.target.value, 10);
+    const badge = document.getElementById(`badge-${symptomKey}`);
+    const theme = severityColors[val];
+
+    // 1. Update Badge Text & Color
+    if (badge) {
+      badge.textContent = intensityLabels[val];
+      badge.style.backgroundColor = theme.badgeBg;
+      badge.style.color = theme.badgeText;
+    }
+
+    // 2. Update Slider Track & Accent Color
+    e.target.style.accentColor = theme.sliderColor; // For modern native styling
+    
+    // Custom WebKit track background styling (if custom CSS track is used)
+    const percentage = (val / 3) * 100;
+    e.target.style.background = `linear-gradient(to right, ${theme.sliderColor} ${percentage}%, #e2e8f0 ${percentage}%)`;
+  });
+  
+  // Trigger once on initialization to apply colors to pre-filled/default states
+  slider.dispatchEvent(new Event("input"));
+});
 
 document.querySelectorAll(".severity-slider").forEach((slider) => {
   slider.addEventListener("input", (e) => {

@@ -223,6 +223,106 @@ quickAddBtns.forEach((btn) => {
   });
 });
 
+// --- CAFFEINE TRACKER LOGIC ---
+
+// Global variables with localStorage recovery
+let currentCaffeineMg = JSON.parse(localStorage.getItem("healthApp_caffeineMg")) || 0;
+let goalCaffeineMg = JSON.parse(localStorage.getItem("healthApp_caffeineGoal")) || 200;
+
+// DOM Elements
+const caffeineCounter = document.getElementById("caffeine-counter");
+const caffeineFill = document.getElementById("caffeine-fill");
+const caffeineGoalLabel = document.getElementById("caffeine-goal-label");
+const addCaffeineBtn = document.getElementById("add-caffeine-btn");
+const caffeineModalOverlay = document.getElementById("caffeine-modal-overlay");
+const caffeineCancelBtn = document.getElementById("caffeine-cancel-btn");
+const caffeineForm = document.getElementById("caffeine-form");
+const caffeineGoalInput = document.getElementById("caffeine-goal-input");
+const caffeineQuickBtns = document.querySelectorAll(".caffeine-quick-btn");
+
+// Open & Close Modal Controls
+if (addCaffeineBtn) {
+  addCaffeineBtn.addEventListener("click", () => {
+    caffeineGoalInput.value = goalCaffeineMg; // Populate input with current goal
+    caffeineModalOverlay.classList.remove("hidden");
+  });
+}
+
+if (caffeineCancelBtn) {
+  caffeineCancelBtn.addEventListener("click", () => {
+    caffeineModalOverlay.classList.add("hidden");
+  });
+}
+
+// Update UI Display
+function updateCaffeineUI() {
+  if (!caffeineCounter) return;
+
+  caffeineCounter.textContent = `${currentCaffeineMg}mg / ${goalCaffeineMg}mg`;
+  if (caffeineGoalLabel) caffeineGoalLabel.textContent = `${goalCaffeineMg}mg`;
+
+  // Calculate Percentage Cap at 100%
+  const percentage = Math.min((currentCaffeineMg / goalCaffeineMg) * 100, 100);
+  if (caffeineFill) caffeineFill.style.width = `${percentage}%`;
+}
+
+// Add Caffeine Handler
+function addCaffeine(amount) {
+  if (amount > 0) {
+    currentCaffeineMg += amount;
+    
+    // Check if user updated their goal in the input field
+    const newGoal = parseInt(caffeineGoalInput.value, 10);
+    if (newGoal && newGoal > 0) {
+      goalCaffeineMg = newGoal;
+    }
+
+    saveCaffeineState();
+    updateCaffeineUI();
+    caffeineModalOverlay.classList.add("hidden");
+  }
+}
+
+// Quick Add Button Listeners
+caffeineQuickBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const amount = parseInt(btn.dataset.amount, 10);
+    addCaffeine(amount);
+  });
+});
+
+// Custom Form Submit
+if (caffeineForm) {
+  caffeineForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("caffeine-amount");
+    const amount = parseInt(input.value, 10);
+    
+    if (amount) {
+      addCaffeine(amount);
+      input.value = "";
+    } else {
+      // If user only wanted to update their daily goal limit without adding mg
+      const newGoal = parseInt(caffeineGoalInput.value, 10);
+      if (newGoal && newGoal > 0) {
+        goalCaffeineMg = newGoal;
+        saveCaffeineState();
+        updateCaffeineUI();
+        caffeineModalOverlay.classList.add("hidden");
+      }
+    }
+  });
+}
+
+// Helper: Save Caffeine State to LocalStorage
+function saveCaffeineState() {
+  localStorage.setItem("healthApp_caffeineMg", JSON.stringify(currentCaffeineMg));
+  localStorage.setItem("healthApp_caffeineGoal", JSON.stringify(goalCaffeineMg));
+}
+
+// Initial UI Call
+updateCaffeineUI();
+
 
 // --- 5. WEIGHT TRACKER LOGIC ---
 
@@ -518,36 +618,126 @@ document.querySelectorAll(".severity-slider").forEach((slider) => {
 
 
 
-// 1. Submit Symptoms, Flow & Discharge Textures
+// Submit Symptoms, Flow, Texture & Color
 const symptomForm = document.getElementById("symptom-form");
 if (symptomForm) {
   symptomForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Gather all severity slider values (Flow, Cramps, Headaches, etc.)
+    // 1. Gather sliders (Flow, Cramps, etc.)
     const symptomRatings = {};
     document.querySelectorAll(".severity-slider").forEach((slider) => {
       symptomRatings[slider.dataset.symptom] = parseInt(slider.value, 10);
     });
 
-    // Gather checked discharge texture tile values
+    // 2. Gather selected textures
     const selectedTextures = [];
     document.querySelectorAll(".texture-checkbox:checked").forEach((checkbox) => {
       selectedTextures.push(checkbox.value);
     });
 
-    // Construct entry object
+    // 3. Gather selected colors
+    const selectedColors = [];
+    document.querySelectorAll(".color-checkbox:checked").forEach((checkbox) => {
+      selectedColors.push(checkbox.value);
+    });
+
+    // 4. Create and persist entry
     const symptomLogEntry = {
       date: new Date().toISOString().split("T")[0],
       ratings: symptomRatings,
-      textures: selectedTextures
+      textures: selectedTextures,
+      colors: selectedColors
     };
 
     symptomLogs.push(symptomLogEntry);
-    saveAppState(); // Persist to local storage
-    alert("Symptoms & Texture log saved!");
+    saveAppState();
+    alert("Symptoms, Texture & Color log saved!");
   });
 }
+// --- DYNAMIC CUSTOM SYMPTOMS LOGIC ---
+
+// 1. Persistent Store for Custom Symptom Names
+let customSymptoms = JSON.parse(localStorage.getItem("healthApp_customSymptoms")) || [];
+
+// DOM Elements
+const customSymptomsList = document.getElementById("custom-symptoms-list");
+const newSymptomInput = document.getElementById("new-symptom-input");
+const addCustomSymptomBtn = document.getElementById("add-custom-symptom-btn");
+
+// 2. Render Existing Custom Symptoms on Page Load
+function renderCustomSymptoms() {
+  if (!customSymptomsList) return;
+  customSymptomsList.innerHTML = ""; // Clear existing
+
+  customSymptoms.forEach((name) => {
+    createSymptomRowDOM(name);
+  });
+}
+
+// 3. Helper: Build and Attach a New Symptom Slider Row
+function createSymptomRowDOM(symptomName) {
+  // Generate a safe slug key (e.g., "Joint Pain" -> "joint-pain")
+  const key = symptomName.toLowerCase().replace(/\s+/g, "-");
+
+  const row = document.createElement("div");
+  row.className = "symptom-row";
+  row.innerHTML = `
+    <div class="symptom-header">
+      <span class="symptom-title">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M157.37-228.28q-19.15 0-32.33-13.18-13.17-13.17-13.17-32.32t13.17-32.33q13.18-13.17 32.33-13.17h405.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.32q-13.18 13.18-32.33 13.18H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.18-13.17 32.33-13.17h645.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.32q13.18-13.18 32.33-13.18h645.26q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Z"/></svg>
+        ${symptomName}
+      </span>
+      <span class="severity-badge" id="badge-${key}">None (0)</span>
+    </div>
+    <input type="range" class="severity-slider" data-symptom="${key}" min="0" max="3" value="0" step="1">
+  `;
+
+  customSymptomsList.appendChild(row);
+
+  // Attach dynamic slider event listener (for color & badge updates)
+  const newSlider = row.querySelector(".severity-slider");
+  attachSliderEventListener(newSlider);
+}
+
+// 4. Attach Event Listener to Individual Sliders
+function attachSliderEventListener(slider) {
+  slider.addEventListener("input", (e) => {
+    const key = e.target.dataset.symptom;
+    const val = parseInt(e.target.value, 10);
+    const badge = document.getElementById(`badge-${key}`);
+
+    if (badge) {
+      badge.textContent = intensityLabels[val] || `Level ${val}`;
+    }
+
+    // Dynamic accent color styling
+    const theme = severityColors[val];
+    if (theme) {
+      e.target.style.accentColor = theme.sliderColor;
+    }
+  });
+}
+
+// 5. Add Custom Symptom Trigger
+if (addCustomSymptomBtn) {
+  addCustomSymptomBtn.addEventListener("click", () => {
+    const name = newSymptomInput.value.trim();
+    if (name) {
+      // Prevent duplicates
+      if (!customSymptoms.includes(name)) {
+        customSymptoms.push(name);
+        localStorage.setItem("healthApp_customSymptoms", JSON.stringify(customSymptoms));
+        createSymptomRowDOM(name);
+      }
+      newSymptomInput.value = "";
+    }
+  });
+}
+
+// Call on initial load
+renderCustomSymptoms();
+
 
 // 2. Submit Standalone Daily Journal Entry
 const journalForm = document.getElementById("journal-form");

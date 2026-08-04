@@ -513,6 +513,43 @@ body {
 }
 
 
+/* Caffeine Specific Progress Bar Color */
+.progress-bar-fill.caffeine-bar {
+  background: linear-gradient(90deg, #5f4227, #ef8f08); /* Warm Amber / Coffee theme */
+}
+
+/* Modal Goal Setter Styles */
+.goal-setting-group {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.goal-setting-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.caffeine-quick-btn {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.caffeine-quick-btn:active {
+  background-color: #fde68a;
+}
+
+
 
 
 /* Weight Card Add Button Styling */
@@ -814,6 +851,70 @@ body {
   transition: color 0.2s ease;
 }
 
+/* Color Selector Grid */
+.color-selector-grid {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.color-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.color-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Swatch Box Base */
+.color-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  position: relative;
+}
+
+/* Color Swatches matching your screenshot palette */
+.swatch-brown      { background-color: #8c532b; }
+.swatch-pink       { background-color: #f08080; }
+.swatch-bright-red { background-color: #ff2a1f; }
+.swatch-rust       { background-color: #c84338; }
+.swatch-dark-red   { background-color: #8b180d; }
+.swatch-black      { background-color: #3b0a07; }
+
+/* Active Selection Feedback: Border highlight & pop animation */
+.color-checkbox:checked + .color-box {
+  border: 3px solid var(--true-blue);
+}
+
+/* Checkmark indicator inside active color box */
+.color-checkbox:checked + .color-box::after {
+  content: "✓";
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* Darken label text when selected */
+.color-checkbox:checked ~ .tile-label {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
 /* --- SELECTED / CHECKED STATE --- */
 
 /* Active Box Fill (Pinkish Red Accent) */
@@ -828,6 +929,47 @@ body {
   color: var(--text-main);            /* Dark prominent text */
   font-weight: 700;
 }
+/* Custom Symptom Creation Row */
+.add-custom-symptom-group {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.custom-symptom-input {
+  flex: 1;
+  border: 1px solid #edf2f7;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-size: 15px;
+  outline: none;
+  background-color: #f1f5f9;
+}
+
+.custom-symptom-input:focus {
+  border-color: #94a3b8;
+  background-color: #ffffff;
+}
+
+.btn-secondary-sm {
+  background-color: var(--true-blue);
+  color: var(--feat-text);
+  border: none;
+  border-radius: 999px;
+  padding: 11px 20px 11px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary-sm:active {
+  background-color: #e2e8f0;
+}
+
 
 
 /* Page Layout for Fixed Navbar */
@@ -861,7 +1003,7 @@ body {
   left: 0;
   right: 0;
   height: 80px;
-  background-color: #fffcfe;
+  background-color: #fcfdff;
   border-top: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-around;

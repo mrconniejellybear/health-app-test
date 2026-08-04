@@ -695,8 +695,8 @@ body {
 }
 
 .severity-badge {
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
   background-color: var(--border-color);
@@ -735,7 +735,6 @@ body {
   width: 100%;
   box-sizing: border-box; /* Prevents overflow */
   padding: 12px;
-  margin-top: 30px;
   border-radius: 12px;
   border: 2px solid var(--border-color, #e2e8f0);
   background-color: var(--card-bg-subtle, #f1f5f9);
@@ -750,6 +749,84 @@ body {
 #symptom-notes:focus {
   border-color: #f249ba;
   background-color: #ffffff;
+}
+
+
+.subcard-subtitle {
+  font-size:15px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 12px 0 8px 0;
+}
+
+/* Texture Grid (Scrolls horizontally on very small screens, wraps nicely) */
+.texture-selector-grid {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Individual Tile Item */
+.texture-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+/* Hide native checkbox visually */
+.texture-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Default Empty Tile Box */
+.tile-box {
+  width: 59px;
+  height: 59px;
+  border-radius: 14px;
+  border: 2.5px solid var(--border-color);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8; /* Default SVG icon color */
+  transition: all 0.2s ease;
+}
+.tile-box svg{
+  height: 36px;
+  width: auto;
+}
+
+
+/* Label Below Box */
+.tile-label {
+  margin-top: 0.4rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8; /* Default light gray text */
+  transition: color 0.2s ease;
+}
+
+/* --- SELECTED / CHECKED STATE --- */
+
+/* Active Box Fill (Pinkish Red Accent) */
+.texture-checkbox:checked + .tile-box {
+  background-color: var(--true-blue); /* Matches your active accent red/pink */
+  border-color: var(--true-blue);
+  color: #ffffff;            /* SVG turns crisp white */
+}
+
+/* Darkened Label Text when Selected */
+.texture-checkbox:checked ~ .tile-label {
+  color: var(--text-main);            /* Dark prominent text */
+  font-weight: 700;
 }
 
 

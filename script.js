@@ -466,10 +466,10 @@ const severityColors = {
 };
 
 const intensityLabels = {
-  0: "None (0)",
-  1: "Mild (1)",
-  2: "Moderate (2)",
-  3: "Severe (3)"
+  0: "None",
+  1: "Mild",
+  2: "Moderate",
+  3: "Severe"
 };
 
 // Update badges AND slider colors dynamically
@@ -516,29 +516,61 @@ document.querySelectorAll(".severity-slider").forEach((slider) => {
   });
 });
 
+
+
+// 1. Submit Symptoms, Flow & Discharge Textures
 const symptomForm = document.getElementById("symptom-form");
 if (symptomForm) {
   symptomForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    // Gather all severity slider values (Flow, Cramps, Headaches, etc.)
     const symptomRatings = {};
     document.querySelectorAll(".severity-slider").forEach((slider) => {
       symptomRatings[slider.dataset.symptom] = parseInt(slider.value, 10);
     });
 
-    const notes = document.getElementById("symptom-notes").value;
+    // Gather checked discharge texture tile values
+    const selectedTextures = [];
+    document.querySelectorAll(".texture-checkbox:checked").forEach((checkbox) => {
+      selectedTextures.push(checkbox.value);
+    });
 
+    // Construct entry object
     const symptomLogEntry = {
       date: new Date().toISOString().split("T")[0],
       ratings: symptomRatings,
-      notes: notes
+      textures: selectedTextures
     };
 
     symptomLogs.push(symptomLogEntry);
-    saveAppState();
-    alert("Symptom log saved!");
+    saveAppState(); // Persist to local storage
+    alert("Symptoms & Texture log saved!");
   });
 }
+
+// 2. Submit Standalone Daily Journal Entry
+const journalForm = document.getElementById("journal-form");
+if (journalForm) {
+  journalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const notes = document.getElementById("symptom-notes").value.trim();
+
+    if (notes) {
+      // Create journal entry object
+      const journalEntry = {
+        date: new Date().toISOString().split("T")[0],
+        text: notes
+      };
+
+      // Push to journal array and persist
+      journalLogs.push(journalEntry);
+      saveAppState();
+      alert("Journal entry saved!");
+    }
+  });
+}
+
 
 
 // --- 9. NAVIGATION BAR LOGIC ---

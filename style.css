@@ -241,6 +241,29 @@ body {
 .add-btn:hover{
     background-color: #b70049;
 }
+.add-btn-final {
+  width: 100%;
+  background-color: var(--true-blue);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 40px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--feat-text);
+  cursor: pointer;
+  text-align: left;
+  
+  transition: all 0.3s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.092);
+
+}
+.add-btn-final:hover{
+    background-color: #b70049;
+}
 
 .plus-icon {
   display: inline-flex;
@@ -456,15 +479,18 @@ body {
 
 .progress-bar-bg {
   position: relative;
-  background-color: #e2f0fd; /* Empty track color */
+  background-color: #d4e8f6; /* Empty track color */
   height: 38px;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: inset 0px 10px 7px 0px #f6fbffc4;
+
 }
 
 .progress-bar-fill {
-  background-color: #00b0ff; /* Vibrant blue fill */
+  background: linear-gradient(0deg, #0c78dd, #07b6f1); /* Warm Amber / Coffee theme */
   height: 100%;
+  box-shadow: inset 0px 8px 6px 0px #f8feff37;
   width: 0%;
   border-radius: 12px;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -484,9 +510,9 @@ body {
 }
 
 .tick {
-  width: 2px;
+  width: 4px;
   height: 12px;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: #ffffff9b;
   margin-top: 0;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -514,7 +540,8 @@ body {
 
 /* Caffeine Specific Progress Bar Color */
 .progress-bar-fill.caffeine-bar {
-  background: linear-gradient(90deg, #5f4227, #ef8f08); /* Warm Amber / Coffee theme */
+  box-shadow: inset 0px 8px 6px 0px #f8feff37;
+  background: linear-gradient(0deg, #644426, #c9711e); /* Warm Amber / Coffee theme */
 }
 
 /* Modal Goal Setter Styles */
@@ -722,7 +749,7 @@ body {
 }
 
 .symptom-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight:500;
   color: var(--text-main, #0f172a);
   display: flex;
@@ -731,7 +758,7 @@ body {
 }
 
 .severity-badge {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
@@ -880,6 +907,7 @@ body {
   width: 58px;
   height: 58px;
   border-radius: 14px;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -897,14 +925,14 @@ body {
 
 /* Active Selection Feedback: Border highlight & pop animation */
 .color-checkbox:checked + .color-box {
-  border: 3px solid var(--true-blue);
+  border: 5px solid var(--true-blue);
 }
 
 /* Checkmark indicator inside active color box */
 .color-checkbox:checked + .color-box::after {
   content: "✓";
-  color: #ffffff;
-  font-size: 1.2rem;
+  color: var(--feat-text);
+  font-size: 1.3rem;
   font-weight: 800;
 }
 
@@ -920,7 +948,7 @@ body {
 .texture-checkbox:checked + .tile-box {
   background-color: var(--true-blue); /* Matches your active accent red/pink */
   border-color: var(--true-blue);
-  color: #ffffff;            /* SVG turns crisp white */
+  color: var(--feat-text);            /* SVG turns crisp white */
 }
 
 /* Darkened Label Text when Selected */

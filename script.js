@@ -559,7 +559,7 @@ function renderMedicationCalendar(year = 2026, month = 7) {
 
 // Color map for symptom severity states
 const severityColors = {
-  0: { badgeBg: "#f1f5f9", badgeText: "#64748b", sliderColor: "#cbd5e1" }, // None (Gray)
+  0: { badgeBg: "#f1f5f9", badgeText: "#64748b8f", sliderColor: "#cbd5e1" }, // None (Gray)
   1: { badgeBg: "#d1fae5", badgeText: "#065f46", sliderColor: "#4fa23a" }, // Mild (Green)
   2: { badgeBg: "#fef3c7", badgeText: "#92400e", sliderColor: "#f59e0b" }, // Moderate (Yellow)
   3: { badgeBg: "#fee2e2", badgeText: "#991b1b", sliderColor: "#d04a35" }  // Severe (Red)
@@ -685,7 +685,7 @@ function createSymptomRowDOM(symptomName) {
   row.innerHTML = `
     <div class="symptom-header">
       <span class="symptom-title">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M157.37-228.28q-19.15 0-32.33-13.18-13.17-13.17-13.17-32.32t13.17-32.33q13.18-13.17 32.33-13.17h405.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.32q-13.18 13.18-32.33 13.18H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.18-13.17 32.33-13.17h645.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.32q13.18-13.18 32.33-13.18h645.26q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="currentColor"><path d="M157.37-228.28q-19.15 0-32.33-13.18-13.17-13.17-13.17-32.32t13.17-32.33q13.18-13.17 32.33-13.17h405.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.32q-13.18 13.18-32.33 13.18H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.18-13.17 32.33-13.17h645.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.32q13.18-13.18 32.33-13.18h645.26q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Z"/></svg>
         ${symptomName}
       </span>
       <span class="severity-badge" id="badge-${key}">None (0)</span>

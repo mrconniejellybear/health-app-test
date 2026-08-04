@@ -242,12 +242,13 @@ body {
     background-color: #b70049;
 }
 .add-btn-final {
-  width: 100%;
+  width: 92%;
+  margin: auto;
   background-color: var(--true-blue);
   border: none;
-  padding: 10px 16px;
+  padding: 13px 18px;
   border-radius: 40px;
-  margin-top: 24px;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   gap: 10px;

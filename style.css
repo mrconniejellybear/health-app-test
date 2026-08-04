@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f9fafc;
+  --bg-color: #fcf9fa;
   --card-bg: #ffffff;
   --text-main: #424c5e;
   --text-2: #718096;
@@ -606,7 +606,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px;
+  padding: 14px 8px;
   border-radius: 12px;
 }
 
@@ -617,7 +617,7 @@ body {
 }
 
 .symptom-title {
-  font-size: 16px;
+  font-size: 17px;
   font-weight:500;
   color: var(--text-main, #0f172a);
   display: flex;
@@ -628,7 +628,7 @@ body {
 .severity-badge {
   font-size: 14px;
   font-weight: 400;
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: 20px;
   background-color: var(--border-color);
   color: var(--text-muted, #64748b);
@@ -668,18 +668,18 @@ body {
   padding: 12px;
   margin-top: 30px;
   border-radius: 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 2px solid var(--border-color, #e2e8f0);
   background-color: var(--card-bg-subtle, #f1f5f9);
   font-family: inherit;
   font-size: 16px;
-  color: var(--text-main, #0f172a);
+  color: var(--text-main, #50545e);
   resize: vertical;
   outline: none;
   transition: border-color 0.2s, background-color 0.2s;
 }
 
 #symptom-notes:focus {
-  border-color: var(--true-blue);
+  border-color: #f249ba;
   background-color: #ffffff;
 }
 

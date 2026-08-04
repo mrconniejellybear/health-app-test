@@ -460,7 +460,7 @@ function renderMedicationCalendar(year = 2026, month = 7) {
 // Color map for symptom severity states
 const severityColors = {
   0: { badgeBg: "#f1f5f9", badgeText: "#64748b", sliderColor: "#cbd5e1" }, // None (Gray)
-  1: { badgeBg: "#d1fae5", badgeText: "#065f46", sliderColor: "#58a23a" }, // Mild (Green)
+  1: { badgeBg: "#d1fae5", badgeText: "#065f46", sliderColor: "#4fa23a" }, // Mild (Green)
   2: { badgeBg: "#fef3c7", badgeText: "#92400e", sliderColor: "#f59e0b" }, // Moderate (Yellow)
   3: { badgeBg: "#fee2e2", badgeText: "#991b1b", sliderColor: "#d04a35" }  // Severe (Red)
 };

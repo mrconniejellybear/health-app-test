@@ -481,7 +481,7 @@ body {
 .progress-bar-bg {
   position: relative;
   background-color: #d4e8f6; /* Empty track color */
-  height: 38px;
+  height: 34px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: inset 0px 10px 7px 0px #f6fbffc4;
@@ -752,7 +752,7 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1;
   background-color: var(--card-bg, #f8fafc);
-  border: 3px solid #e2e8f0;
+  border: 2.5px solid #e2e8f0;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -811,7 +811,7 @@ body {
 }
 
 .info-icon {
-  width: 13px;
+  width: 14px;
   height: auto;
   color: var(--text-2);
   flex-shrink: 0;
@@ -820,7 +820,7 @@ body {
 }
 
 .privacy-note p {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.35;
   color: var(--text-2);
   margin: 0;
@@ -864,7 +864,7 @@ body {
 }
 
 .symptom-title {
-  font-size: 15px;
+  font-size: 16px;
   font-weight:500;
   color: var(--text-main, #0f172a);
   display: flex;
@@ -873,7 +873,7 @@ body {
 }
 
 .severity-badge {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
@@ -961,7 +961,7 @@ body {
   width: 58px;
   height: 58px;
   border-radius: 14px;
-  border: 2.5px solid var(--border-color);
+  border: 3px solid var(--border-color);
   background-color: #ffffff;
   display: flex;
   align-items: center;

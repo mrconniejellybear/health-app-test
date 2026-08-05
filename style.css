@@ -39,7 +39,7 @@ body {
   color: #64748b;
   position: absolute;
   top: 14px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .card {
@@ -160,7 +160,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--text-main, #0f172a);
   background-color: var(--card-bg-subtle, #f1f5f9);
@@ -726,6 +726,120 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+
+
+/* --- CONTRACEPTIVE SECTION --- */
+.contraceptive-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.contra-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.contra-tile input[type="radio"] {
+  display: none; /* Hide default radio button */
+}
+
+.contra-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--card-bg, #f8fafc);
+  border: 3px solid #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.contra-icon {
+  width: 38px;
+  height: auto;
+  color: var(--text-2);
+  transition: color 0.2s ease;
+}
+
+.contra-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-top: 6px;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+/* Selected Tile Accent State */
+.contra-tile input[type="radio"]:checked + .contra-box {
+  background-color: var(--true-blue); /* App primary accent */
+  border-color: var(--true-blue);
+}
+
+.contra-tile input[type="radio"]:checked + .contra-box .contra-icon {
+  color: var(--feat-text);
+}
+
+.contra-tile input[type="radio"]:checked ~ .contra-label {
+  color: var(--text-main);
+  font-weight: 700;
+}
+.text-input{
+  margin-top: 10px;
+  width: 100%;
+  background-color: #f1f5f9;
+  border: 3px solid var(--border-color);
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+
+}
+/* Privacy Note Box */
+.privacy-note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 16px 0 20px 0;
+}
+
+.info-icon {
+  width: 13px;
+  height: auto;
+  color: var(--text-2);
+  flex-shrink: 0;
+  margin-top: 1px;
+
+}
+
+.privacy-note p {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-2);
+  margin: 0;
+}
+
+/* Confirm Button Checkmark Icon */
+.confirm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-check-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
 /* --- DAILY NOTES & BUTTON FIXES --- */
 
 .symptom-intro {
@@ -750,7 +864,7 @@ body {
 }
 
 .symptom-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight:500;
   color: var(--text-main, #0f172a);
   display: flex;
@@ -759,7 +873,7 @@ body {
 }
 
 .severity-badge {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
@@ -814,7 +928,6 @@ body {
   border-color: #f249ba;
   background-color: #ffffff;
 }
-
 
 .subcard-subtitle {
   font-size:15px;
@@ -962,7 +1075,7 @@ body {
   border: 3px solid #edf2f7;
   border-radius: 10px;
   padding: 0.6rem 0.8rem;
-  font-size: 15px;
+  font-size: 14px;
   outline: none;
   background-color: #f1f5f9;
   transition: ease-in-out 0.2s;

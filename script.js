@@ -23,6 +23,10 @@ let weightLogs = JSON.parse(localStorage.getItem("healthApp_weightLogs")) || [
   { date: "2026-06-12", weight: 151 },
   { date: "2026-06-26", weight: 160 }
 ];
+let contraceptiveData = JSON.parse(localStorage.getItem("healthApp_contraceptive")) || {
+  type: "",
+  customName: ""
+};
 
 // --- 2. STORAGE HELPER ---
 
@@ -32,6 +36,7 @@ function saveAppState() {
   localStorage.setItem("healthApp_medLogs", JSON.stringify(medAdherenceLogs));
   localStorage.setItem("healthApp_symptomLogs", JSON.stringify(symptomLogs));
   localStorage.setItem("healthApp_weightLogs", JSON.stringify(weightLogs));
+  localStorage.setItem("healthApp_contraceptive", JSON.stringify(contraceptiveData));
 }
 
 
@@ -553,6 +558,42 @@ function renderMedicationCalendar(year = 2026, month = 7) {
     grid.appendChild(dayCell);
   }
 }
+
+// --- CONTRACEPTIVE MANAGEMENT LOGIC ---
+const contraForm = document.getElementById("contraceptive-form");
+const customNameInput = document.getElementById("contra-custom-name");
+
+// 1. Populate saved contraceptive data on page load
+function loadSavedContraceptive() {
+  if (contraceptiveData.type) {
+    const targetRadio = document.querySelector(`input[name="contraceptive-type"][value="${contraceptiveData.type}"]`);
+    if (targetRadio) targetRadio.checked = true;
+  }
+  if (contraceptiveData.customName && customNameInput) {
+    customNameInput.value = contraceptiveData.customName;
+  }
+}
+
+// 2. Handle form submission
+if (contraForm) {
+  contraForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const selectedType = document.querySelector('input[name="contraceptive-type"]:checked');
+    const customName = customNameInput ? customNameInput.value.trim() : "";
+
+    contraceptiveData = {
+      type: selectedType ? selectedType.value : "",
+      customName: customName
+    };
+
+    saveAppState();
+  });
+}
+
+// Call on initialization
+loadSavedContraceptive();
+
 
 
 // --- 8. SYMPTOM TRACKER LOGIC ---

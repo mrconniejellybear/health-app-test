@@ -24,6 +24,114 @@
 
   <!-- TAB 1: MENTAL HEALTH -->
   <section id="view-mental" class="tab-view active">
+
+    <!-- 2. Mood Breakdown (Pie Chart) Card -->
+    <div class="card">
+    <div class="card-header">
+      <div>
+        <h1 class="title">Mood Average</h1>
+      </div>
+    </div>
+
+    <div class="pie-chart-wrapper">
+      <!-- Dynamic CSS Conic-Gradient Donut/Pie Chart -->
+      <div id="mood-pie-chart" class="pie-chart"></div>
+
+      <!-- Color Legend -->
+      <div class="pie-legend">
+        <div class="legend-item"><span class="color-dot score-6"></span> 6 - Great</div>
+        <div class="legend-item"><span class="color-dot score-5"></span> 5 - Good</div>
+        <div class="legend-item"><span class="color-dot score-4"></span> 4 - Okay</div>
+        <div class="legend-item"><span class="color-dot score-3"></span> 3 - Neutral</div>
+        <div class="legend-item"><span class="color-dot score-2"></span> 2 - Low</div>
+        <div class="legend-item"><span class="color-dot score-1"></span> 1 - Poor</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h1 class="title">Cycle Tracker</h1>
+        </div>
+        <div id="cycle-day-badge" class="date-range-badge">
+          <span id="cycle-day-text">Day 14</span>
+        </div>
+      </div>
+
+      <!-- Quick Summary Status -->
+      <div class="cycle-summary">
+        <div class="cycle-metric">
+          <span class="metric-value" id="cycle-phase-val">Follicular</span>
+          <span class="metric-label">Current Phase</span>
+        </div>
+        <div class="cycle-metric">
+          <span class="metric-value" id="cycle-next-val">~14 Days</span>
+          <span class="metric-label">Next Period</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+    <div class="card-header">
+      <div>
+        <h1 class="title">This Month</h1>
+      </div>
+      <div id="calendar-month-year" class="date-range-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="M216-96q-29.7 0-50.85-21.5Q144-139 144-168v-528q0-29 21.15-50.5T216-768h72v-96h72v96h240v-96h72v96h72q29.7 0 50.85 21.5Q816-725 816-696v528q0 29-21.15 50.5T744-96H216Zm0-72h528v-360H216v360Zm0-432h528v-96H216v96Zm0 0v-96 96Zm264.21 216q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5ZM298.5-394.29q-10.5-10.29-10.5-25.5t10.29-25.71q10.29-10.5 25.5-10.5t25.71 10.29q10.5 10.29 10.5 25.5t-10.29 25.71q-10.29 10.5-25.5 10.5t-25.71-10.29ZM636.21-384q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5Zm-156 144q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5ZM298.5-250.29q-10.5-10.29-10.5-25.5t10.29-25.71q10.29-10.5 25.5-10.5t25.71 10.29q10.5 10.29 10.5 25.5t-10.29 25.71q-10.29 10.5-25.5 10.5t-25.71-10.29ZM636.21-240q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5Z"/></svg>
+        <span id="cal-month-text">August 2026</span>
+      </div>
+    </div>
+
+    <!-- Calendar View -->
+    <div class="calendar-wrapper">
+      <!-- Weekday Headers -->
+      <div class="calendar-weekdays">
+        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+      </div>
+
+      <!-- Calendar Days Grid -->
+      <div id="med-calendar-grid" class="calendar-days">
+        <!-- Dynamically populated via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Legend Footer -->
+    <div class="calendar-legend">
+      <div class="legend-item"><span class="day-dot taken"></span> Taken</div>
+      <div class="legend-item"><span class="day-dot partial"></span> Partial</div>
+      <div class="legend-item"><span class="day-dot missed"></span> Missed</div>
+    </div>
+    </div>
+
+  </div>
+  </section>
+
+  <!-- TAB 2: MEDICATION -->
+  <section id="view-meds" class="tab-view">
+  <div class="card">
+    <!-- Header Section -->
+    <div class="card-header">
+      <div>
+        <h1 class="title">Medication</h1>
+        <p class="subtitle">Swipe right to log</p>
+      </div>
+      <div id="status-counter" class="status-counter">None Listed</div>
+    </div>
+
+    <!-- Medication List -->
+    <ul id="med-list" class="med-list">
+      <!-- Items dynamically added here -->
+    </ul>
+
+    <!-- Add Prescription Button -->
+    <button id="add-btn" class="add-btn">
+      <span class="plus-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Zm0-91q133.04 0 225.09-92.04 92.04-92.05 92.04-225.09 0-133.04-92.04-225.09-92.05-92.04-225.09-92.04-133.04 0-225.09 92.04-92.04 92.05-92.04 225.09 0 133.04 92.04 225.09 92.05 92.04 225.09 92.04ZM315.22-360.72v-65.04q0-9.2 3.48-17.53 3.47-8.34 10.19-15.06l208.76-208q9.72-9.76 21.6-14.1 11.87-4.33 23.75-4.33 12.96 0 24.81 4.86 11.84 4.85 21.54 14.57l37 37q8.67 9.72 13.55 21.6 4.88 11.87 4.88 23.75 0 12.2-4.36 24.41-4.35 12.22-14.07 21.94l-208 208q-6.69 6.72-15.04 10.07-8.35 3.36-17.55 3.36h-65.04q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33ZM620-583l-37-37 37 37ZM380-380h38l120.04-121.04-18-19-19-18L380-418v38Zm140.04-140.04-19-18 37 37-18-19Z"/></svg></span>
+        Edit Prescriptions
+    </button>
+  </div>
+
   <div class="card">
     <div class="card-header">
       <div>
@@ -34,6 +142,36 @@
          <span id="mood-range-text">No Data</span>
       </div>
     </div>
+
+      <!-- Log Mood Modal -->
+  <div id="mood-modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h2>Log Mood</h2>
+      <p class="modal-subtitle">How would you rate your current mood, with 1 being the most negative, and 6 being the most positive?</p>
+      
+      <form id="mood-form">
+        <!-- 1 to 6 Radio Buttons / Selector -->
+        <div class="rating-picker">
+          <label><input type="radio" name="mood-score" value="1" required><span>1</span></label>
+          <label><input type="radio" name="mood-score" value="2"><span>2</span></label>
+          <label><input type="radio" name="mood-score" value="3"><span>3</span></label>
+          <label><input type="radio" name="mood-score" value="4"><span>4</span></label>
+          <label><input type="radio" name="mood-score" value="5"><span>5</span></label>
+          <label><input type="radio" name="mood-score" value="6"><span>6</span></label>
+        </div>
+
+        <label for="mood-date">Date</label>
+        <input type="date" id="mood-date" required>
+
+        <div class="modal-actions">
+          <button type="button" id="mood-cancel-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Save Entry</button>
+        </div>
+      </form>
+    </div>
+
+    
+  </div>
 
     <!-- Graph Container -->
     <div class="graph-wrapper">
@@ -70,94 +208,6 @@
     </button>
   </div>
 
-  <!-- Log Mood Modal -->
-  <div id="mood-modal-overlay" class="modal-overlay hidden">
-    <div class="modal">
-      <h2>Log Mood</h2>
-      <p class="modal-subtitle">How would you rate your current mood, with 1 being the most negative, and 6 being the most positive?</p>
-      
-      <form id="mood-form">
-        <!-- 1 to 6 Radio Buttons / Selector -->
-        <div class="rating-picker">
-          <label><input type="radio" name="mood-score" value="1" required><span>1</span></label>
-          <label><input type="radio" name="mood-score" value="2"><span>2</span></label>
-          <label><input type="radio" name="mood-score" value="3"><span>3</span></label>
-          <label><input type="radio" name="mood-score" value="4"><span>4</span></label>
-          <label><input type="radio" name="mood-score" value="5"><span>5</span></label>
-          <label><input type="radio" name="mood-score" value="6"><span>6</span></label>
-        </div>
-
-        <label for="mood-date">Date</label>
-        <input type="date" id="mood-date" required>
-
-        <div class="modal-actions">
-          <button type="button" id="mood-cancel-btn" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary">Save Entry</button>
-        </div>
-      </form>
-    </div>
-
-    
-  </div>
-  
-<!-- 2. Mood Breakdown (Pie Chart) Card -->
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <h1 class="title">Mood Average</h1>
-      </div>
-    </div>
-
-    <div class="pie-chart-wrapper">
-      <!-- Dynamic CSS Conic-Gradient Donut/Pie Chart -->
-      <div id="mood-pie-chart" class="pie-chart"></div>
-
-      <!-- Color Legend -->
-      <div class="pie-legend">
-        <div class="legend-item"><span class="color-dot score-6"></span> 6 - Great</div>
-        <div class="legend-item"><span class="color-dot score-5"></span> 5 - Good</div>
-        <div class="legend-item"><span class="color-dot score-4"></span> 4 - Okay</div>
-        <div class="legend-item"><span class="color-dot score-3"></span> 3 - Neutral</div>
-        <div class="legend-item"><span class="color-dot score-2"></span> 2 - Low</div>
-        <div class="legend-item"><span class="color-dot score-1"></span> 1 - Poor</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <button class="add-btn-final">
-      <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M360-278.09h240q17.81 0 29.86-12.09 12.05-12.1 12.05-29.82t-12.05-29.82q-12.05-12.09-29.86-12.09H360q-17.81 0-29.86 12.09-12.05 12.1-12.05 29.82t12.05 29.82q12.05 12.09 29.86 12.09Zm77.76-238.21-56.56-56.57q-11.72-11.72-29.44-11.72t-29.43 11.72q-11.72 11.72-11.72 29.32 0 17.59 11.72 29.31l83.13 83.37q13.76 13.67 32.11 13.67 18.34 0 32.02-13.67l167.37-167.37q12.47-12.48 12.09-29.69-.38-17.22-12.85-28.94-12.48-11.72-29.7-11.34-17.22.38-28.93 12.1L437.76-516.3ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Zm0-91q133.04 0 225.09-92.04 92.04-92.05 92.04-225.09 0-133.04-92.04-225.09-92.05-92.04-225.09-92.04-133.04 0-225.09 92.04-92.04 92.05-92.04 225.09 0 133.04 92.04 225.09 92.05 92.04 225.09 92.04ZM480-480Z"/></svg>
-      Complete Entry for
-      <span>[current date] </span>
-    </button>
-
-  </section>
-
-  <!-- TAB 2: MEDICATION -->
-  <section id="view-meds" class="tab-view">
-      <div class="card">
-    <!-- Header Section -->
-    <div class="card-header">
-      <div>
-        <h1 class="title">Medication</h1>
-        <p class="subtitle">Swipe right to log</p>
-      </div>
-      <div id="status-counter" class="status-counter">None Listed</div>
-    </div>
-
-    <!-- Medication List -->
-    <ul id="med-list" class="med-list">
-      <!-- Items dynamically added here -->
-    </ul>
-
-    <!-- Add Prescription Button -->
-    <button id="add-btn" class="add-btn">
-      <span class="plus-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Zm0-91q133.04 0 225.09-92.04 92.04-92.05 92.04-225.09 0-133.04-92.04-225.09-92.05-92.04-225.09-92.04-133.04 0-225.09 92.04-92.04 92.05-92.04 225.09 0 133.04 92.04 225.09 92.05 92.04 225.09 92.04ZM315.22-360.72v-65.04q0-9.2 3.48-17.53 3.47-8.34 10.19-15.06l208.76-208q9.72-9.76 21.6-14.1 11.87-4.33 23.75-4.33 12.96 0 24.81 4.86 11.84 4.85 21.54 14.57l37 37q8.67 9.72 13.55 21.6 4.88 11.87 4.88 23.75 0 12.2-4.36 24.41-4.35 12.22-14.07 21.94l-208 208q-6.69 6.72-15.04 10.07-8.35 3.36-17.55 3.36h-65.04q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33ZM620-583l-37-37 37 37ZM380-380h38l120.04-121.04-18-19-19-18L380-418v38Zm140.04-140.04-19-18 37 37-18-19Z"/></svg></span>
-        Edit Prescriptions
-    </button>
-  </div>
-
   <!-- Add Medication Modal -->
   <div id="modal-overlay" class="modal-overlay hidden">
     <div class="modal">
@@ -178,38 +228,6 @@
   </div>
 
 <!-- Medication Consistency Calendar Card -->
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <h1 class="title">Days Logged</h1>
-      </div>
-      <div id="calendar-month-year" class="date-range-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="M216-96q-29.7 0-50.85-21.5Q144-139 144-168v-528q0-29 21.15-50.5T216-768h72v-96h72v96h240v-96h72v96h72q29.7 0 50.85 21.5Q816-725 816-696v528q0 29-21.15 50.5T744-96H216Zm0-72h528v-360H216v360Zm0-432h528v-96H216v96Zm0 0v-96 96Zm264.21 216q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5ZM298.5-394.29q-10.5-10.29-10.5-25.5t10.29-25.71q10.29-10.5 25.5-10.5t25.71 10.29q10.5 10.29 10.5 25.5t-10.29 25.71q-10.29 10.5-25.5 10.5t-25.71-10.29ZM636.21-384q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5Zm-156 144q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5ZM298.5-250.29q-10.5-10.29-10.5-25.5t10.29-25.71q10.29-10.5 25.5-10.5t25.71 10.29q10.5 10.29 10.5 25.5t-10.29 25.71q-10.29 10.5-25.5 10.5t-25.71-10.29ZM636.21-240q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5Z"/></svg>
-        <span id="cal-month-text">August 2026</span>
-      </div>
-    </div>
-
-    <!-- Calendar View -->
-    <div class="calendar-wrapper">
-      <!-- Weekday Headers -->
-      <div class="calendar-weekdays">
-        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-      </div>
-
-      <!-- Calendar Days Grid -->
-      <div id="med-calendar-grid" class="calendar-days">
-        <!-- Dynamically populated via JavaScript -->
-      </div>
-    </div>
-
-    <!-- Legend Footer -->
-    <div class="calendar-legend">
-      <div class="legend-item"><span class="day-dot taken"></span> Taken</div>
-      <div class="legend-item"><span class="day-dot partial"></span> Partial</div>
-      <div class="legend-item"><span class="day-dot missed"></span> Missed</div>
-    </div>
-  </div>
-
   <button class="add-btn-final">
       <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M360-278.09h240q17.81 0 29.86-12.09 12.05-12.1 12.05-29.82t-12.05-29.82q-12.05-12.09-29.86-12.09H360q-17.81 0-29.86 12.09-12.05 12.1-12.05 29.82t12.05 29.82q12.05 12.09 29.86 12.09Zm77.76-238.21-56.56-56.57q-11.72-11.72-29.44-11.72t-29.43 11.72q-11.72 11.72-11.72 29.32 0 17.59 11.72 29.31l83.13 83.37q13.76 13.67 32.11 13.67 18.34 0 32.02-13.67l167.37-167.37q12.47-12.48 12.09-29.69-.38-17.22-12.85-28.94-12.48-11.72-29.7-11.34-17.22.38-28.93 12.1L437.76-516.3ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Zm0-91q133.04 0 225.09-92.04 92.04-92.05 92.04-225.09 0-133.04-92.04-225.09-92.05-92.04-225.09-92.04-133.04 0-225.09 92.04-92.04 92.05-92.04 225.09 0 133.04 92.04 225.09 92.05 92.04 225.09 92.04ZM480-480Z"/></svg>
       Complete Entry for
@@ -821,7 +839,7 @@
 <nav class="bottom-nav">
 
   <button class="nav-btn active" data-tab="view-mental" aria-label="Mental Health">
-    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="currentColor"><path d="M379.55-380.39q38.85 0 65.68-26.69L592.86-554.7q26.75-26.76 26.75-65.62 0-38.85-26.69-65.68-26.83-26.69-65.68-26.69-38.86 0-65.55 26.69-33.92-12.23-67.23-5.61-33.31 6.61-56.38 29.69-23.08 23.07-29.69 56.38-6.62 33.31 5.61 67.23-26.69 26.83-26.69 65.68 0 38.86 26.69 65.55 26.69 26.69 65.55 26.69ZM260-261.23q-57-52-88.5-119.19-31.5-67.2-31.5-139.86 0-141.55 99.17-240.63Q338.33-860 480-860q116.54 0 208.42 69.66 91.89 69.65 119.35 180.73l46.73 184.58q4.5 17.11-6.35 31.07Q837.31-380 819.23-380H740v127.69q0 29.83-21.24 51.07Q697.52-180 667.69-180H580v50q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q520-117.25 520-130v-73.66q0-15.65 10.39-25.99Q540.79-240 556.15-240h111.54q5.39 0 8.85-3.46t3.46-8.85v-151.54q0-15.36 10.39-25.76Q700.79-440 716.15-440H788l-38-155q-23-91.38-98.38-148.19Q576.23-800 480-800q-116 0-198 81.11t-82 197.27q0 59.91 24.5 113.82t69.5 95.84L320-288v158q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q260-117.25 260-130v-131.23ZM494-450Z"/></svg></span>
+    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="currentColor"><path d="M640.15-180q-15.61 0-25.96-10.4-10.34-10.39-10.34-25.76v-183.69q0-15.61 10.39-25.96 10.39-10.34 25.76-10.34h183.69q15.62 0 25.96 10.39Q860-415.37 860-400v183.69q0 15.62-10.4 25.96Q839.21-180 823.84-180H640.15ZM480-523.85q-15.37 0-25.76-10.39-10.39-10.39-10.39-25.76v-183.69q0-15.62 10.39-25.96Q464.63-780 480-780h343.84q15.37 0 25.76 10.4 10.4 10.39 10.4 25.76v183.69q0 15.61-10.4 25.96-10.39 10.34-25.76 10.34H480ZM136.16-180q-15.37 0-25.76-10.4-10.4-10.39-10.4-25.76v-183.69q0-15.61 10.4-25.96 10.39-10.34 25.76-10.34H480q15.37 0 25.76 10.39 10.39 10.39 10.39 25.76v183.69q0 15.62-10.39 25.96Q495.37-180 480-180H136.16Zm.15-343.85q-15.62 0-25.96-10.39Q100-544.63 100-560v-183.69q0-15.62 10.4-25.96Q120.79-780 136.16-780h183.69q15.61 0 25.96 10.4 10.34 10.39 10.34 25.76v183.69q0 15.61-10.39 25.96-10.39 10.34-25.76 10.34H136.31Zm367.53-59.99H800V-720H503.84v136.16ZM160-240h296.16v-136.16H160V-240Zm503.84 0H800v-136.16H663.84V-240ZM160-583.84h136.16V-720H160v136.16Zm343.84 0Zm-47.68 207.68Zm207.68 0ZM296.16-583.84Z"/></svg></span>
   </button>
 
   <button class="nav-btn" data-tab="view-diet" aria-label="Diet and Weight">
@@ -829,12 +847,12 @@
   </button>
 
   <button class="nav-btn" data-tab="view-meds" aria-label="Medication">
-    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="currentColor"><path d="M437.69-380v57.69q0 17.63 12.36 29.97 12.35 12.34 30 12.34 17.64 0 29.95-12.34 12.31-12.34 12.31-29.97V-380H580q17.63 0 29.97-12.35 12.34-12.36 12.34-30 0-17.65-12.34-29.96-12.34-12.3-29.97-12.3h-57.69v-57.7q0-17.63-12.36-29.96-12.35-12.34-30-12.34-17.64 0-29.95 12.34-12.31 12.33-12.31 29.96v57.7H380q-17.63 0-29.97 12.35t-12.34 30q0 17.64 12.34 29.95Q362.37-380 380-380h57.69ZM292.31-142.31q-29.83 0-51.07-21.24Q220-184.79 220-214.62V-630q0-29.83 21.24-51.07 21.24-21.24 51.07-21.24h375.38q29.83 0 51.07 21.24Q740-659.83 740-630v415.38q0 29.83-21.24 51.07-21.24 21.24-51.07 21.24H292.31Zm0-60h375.38q4.62 0 8.46-3.84Q680-210 680-214.62V-630q0-4.61-3.85-8.46-3.84-3.85-8.46-3.85H292.31q-4.62 0-8.46 3.85Q280-634.61 280-630v415.38q0 4.62 3.85 8.47 3.84 3.84 8.46 3.84Zm-13.08-555.38q-12.75 0-21.37-8.63-8.63-8.63-8.63-21.38 0-12.76 8.63-21.38 8.62-8.61 21.37-8.61h401.54q12.75 0 21.37 8.63 8.63 8.63 8.63 21.38 0 12.76-8.63 21.37-8.62 8.62-21.37 8.62H279.23Zm.77 115.38v440-440Z"/></svg></span>
+    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="currentColor"><path d="M501.38-418.63Q510-427.25 510-440v-200q0-12.75-8.63-21.37-8.63-8.63-21.38-8.63-12.76 0-21.37 8.63Q450-652.75 450-640v200q0 12.75 8.63 21.37 8.63 8.63 21.38 8.63 12.76 0 21.37-8.63Zm120-60Q630-487.25 630-500v-100q0-12.75-8.63-21.37-8.63-8.63-21.38-8.63-12.76 0-21.37 8.63Q570-612.75 570-600v100q0 12.75 8.63 21.37 8.63 8.63 21.38 8.63 12.76 0 21.37-8.63Zm-240-20Q390-507.25 390-520v-80q0-12.75-8.63-21.37-8.63-8.63-21.38-8.63-12.76 0-21.37 8.63Q330-612.75 330-600v80q0 12.75 8.63 21.37 8.63 8.63 21.38 8.63 12.76 0 21.37-8.63ZM260-261.23q-57-52-88.5-119.19-31.5-67.2-31.5-139.86 0-141.55 99.17-240.63Q338.33-860 480-860q116.54 0 208.42 69.66 91.89 69.65 119.35 180.73l46.73 184.58q4.5 17.11-6.35 31.07Q837.31-380 819.23-380H740v127.69q0 29.83-21.24 51.07Q697.52-180 667.69-180H580v50q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q520-117.25 520-130v-73.66q0-15.65 10.39-25.99Q540.79-240 556.15-240h111.54q5.39 0 8.85-3.46t3.46-8.85v-151.54q0-15.36 10.39-25.76Q700.79-440 716.15-440H788l-38-155q-23-91.38-98.38-148.19Q576.23-800 480-800q-116 0-198 81.11t-82 197.27q0 59.91 24.5 113.82t69.5 95.84L320-288v158q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q260-117.25 260-130v-131.23ZM494-450Z"/></svg></span>
   </button>
 
 
   <button class="nav-btn" data-tab="view-cycle" aria-label="Cycle Tracking">
-    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="currentColor"><path d="M454.92-105.77Q390.69-118 328.54-147.5q-62.15-29.5-110.96-82.08-48.81-52.57-78.96-129.84-30.16-77.27-30.16-184.42v-7.24q0-12.46 7.85-20.3 7.85-7.85 20.31-7.85h6.46q46.38 0 102.11 16.46t99.27 44q7.93-70.54 37.08-146.04 29.15-75.49 72.08-135.8Q464.08-815.3 480-815.3q15.92 0 26.38 14.69 42.93 60.31 72.08 136.19T615.54-518q42.38-26.38 97.34-43.23 54.96-16.85 103.27-18l5.54-.38q12.69-.39 21.65 8.57 8.97 8.96 8.58 21.66l-.38 6.3q-2.7 97.16-28.81 170.77-26.12 73.62-70.31 126.58-44.19 52.96-104.04 86.5-59.84 33.54-130.23 51.54-13 3.15-31.61 3.53-18.62.39-31.62-1.61ZM485.69-162q-11-165-99.5-250.5T169.69-518q-2 0 0 0 11 169 102.5 254t213.5 102q2 1 0 .5t0-.5ZM402-482q21.15 17.77 42.58 43.19Q466-413.38 480-389.84q14.23-23.54 35.54-48.97Q536.85-464.23 558-482q-1.23-58.92-21.73-123.61-20.5-64.7-56.27-124.85v.5-.5q-35.77 60.15-56.27 124.65T402-482Zm110.46 157.69q12 32 20.12 67.31 8.11 35.31 13.11 79.31 41-13.93 82.54-39.27 41.54-25.35 75.35-65.92 33.8-40.58 57.65-98.31 23.85-57.73 29.08-136.81 0-2 0 0-95.54 14-168.85 65.38-73.31 51.39-109 128.31Z"/></svg></span>
+    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="currentColor"><path d="M454.92-105.77Q390.69-118 328.54-147.5q-62.15-29.5-110.96-82.08-48.81-52.57-78.96-129.84-30.16-77.27-30.16-184.42v-7.24q0-12.46 7.85-20.3 7.85-7.85 20.31-7.85h6.46q46.38 0 102.11 16.46t99.27 44q7.93-70.54 37.08-146.04 29.15-75.49 72.08-135.8Q464.08-815.3 480-815.3q15.92 0 26.38 14.69 42.93 60.31 72.08 136.19T615.54-518q42.38-26.38 97.34-43.23 54.96-16.85 103.27-18l5.54-.38q12.69-.39 21.65 8.57 8.97 8.96 8.58 21.66l-.38 6.3q-2.7 97.16-28.81 170.77-26.12 73.62-70.31 126.58-44.19 52.96-104.04 86.5-59.84 33.54-130.23 51.54-13 3.15-31.61 3.53-18.62.39-31.62-1.61ZM485.69-162q-11-165-99.5-250.5T169.69-518q-2 0 0 0 11 169 102.5 254t213.5 102q2 1 0 .5t0-.5ZM402-482q21.15 17.77 42.58 43.19Q466-413.38 480-389.84q14.23-23.54 35.54-48.97Q536.85-464.23 558-482q-1.23-58.92-21.73-123.61-20.5-64.7-56.27-124.85v.5-.5q-35.77 60.15-56.27 124.65T402-482Zm110.46 157.69q12 32 20.12 67.31 8.11 35.31 13.11 79.31 41-13.93 82.54-39.27 41.54-25.35 75.35-65.92 33.8-40.58 57.65-98.31 23.85-57.73 29.08-136.81 0-2 0 0-95.54 14-168.85 65.38-73.31 51.39-109 128.31Z"/></svg></span>
   </button>  
 
 </nav>

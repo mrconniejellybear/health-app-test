@@ -646,27 +646,30 @@ function updateHomeDashboard() {
 
 function renderHomeMoodChart() {
   const headlineEl = document.getElementById("home-mood-headline");
-  const canvas = document.getElementById("home-mood-pie-chart");
+  const container = document.querySelector(".pie-chart-container");
   
-  if (!canvas || typeof Chart === "undefined") return;
+  if (!container || typeof Chart === "undefined") return;
 
   if (!moodLogs || moodLogs.length === 0) {
     if (headlineEl) headlineEl.textContent = "No mood entries logged yet this week!";
     return;
   }
 
+  // 1. Calculate Positivity Percentage
   const positiveCount = moodLogs.filter(log => log.score >= 4).length;
   const pct = Math.round((positiveCount / moodLogs.length) * 100);
   if (headlineEl) headlineEl.textContent = `${pct}% of your moods were positive!`;
 
-  if (homePieChartInstance) {
-    homePieChartInstance.destroy();
-  }
+  // 2. HARD RESET: Wipe container and insert a brand new <canvas> element
+  // This destroys any frozen Chart.js canvas state instantly!
+  container.innerHTML = '<canvas id="home-mood-pie-chart"></canvas>';
+  const canvas = document.getElementById("home-mood-pie-chart");
 
   const great = moodLogs.filter(l => l.score >= 5).length;
   const okay = moodLogs.filter(l => l.score === 3 || l.score === 4).length;
   const low = moodLogs.filter(l => l.score <= 2).length;
 
+  // 3. Render Fresh Chart
   homePieChartInstance = new Chart(canvas, {
     type: 'pie',
     data: {
@@ -684,6 +687,7 @@ function renderHomeMoodChart() {
     }
   });
 }
+
 
 function renderHomeMedicationStrip() {
   const stripEl = document.getElementById("home-med-strip");

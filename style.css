@@ -825,35 +825,28 @@ body {
 
 /* Texture Grid (Scrolls horizontally on very small screens, wraps nicely) */
 .texture-selector-grid {
-  display: flex;
-  gap: 0.6rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Enforces exactly 5 columns per row */
+  gap: 6px; /* Tight gap to fit snugly on mobile screens */
+  margin-top: 12px;
+  width: 100%;
 }
 
-/* Individual Tile Item */
 .texture-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  flex: 0 0 auto;
 }
 
-/* Hide native checkbox visually */
 .texture-checkbox {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+  display: none; /* Hide standard input box */
 }
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 62px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   border-radius: 14px;
   border: 2.5px solid var(--border-color);
   background-color: #ffffff;
@@ -905,8 +898,8 @@ body {
 
 /* Swatch Box Base */
 .color-box {
-  width: 62px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   border-radius: 14px;
   border: none;
   display: flex;

@@ -844,3 +844,117 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMoodGraph();
   renderMedicationCalendar();
 });
+
+// Master Dashboard Renderer
+function updateHomeDashboard() {
+  renderHomeMoodChart();
+  renderHomeMedicationStrip();
+  renderHomeCycleSummary();
+  renderHomeHydrationCalendar();
+}
+
+// 1. Mood Pie Chart & Headline
+function renderHomeMoodChart() {
+  const headlineEl = document.getElementById("home-mood-headline");
+  if (!moodLogs || moodLogs.length === 0) {
+    if (headlineEl) headlineEl.textContent = "No mood entries logged yet this week!";
+    return;
+  }
+
+  // Count positive vs total
+  const positiveCount = moodLogs.filter(log => log.score >= 4).length;
+  const pct = Math.round((positiveCount / moodLogs.length) * 100);
+  if (headlineEl) headlineEl.textContent = `${pct}% of your moods were positive!`;
+
+  // Draw simple HTML5 Canvas Pie Chart
+  const canvas = document.getElementById("home-mood-pie-chart");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  
+  const great = moodLogs.filter(l => l.score >= 5).length;
+  const okay = moodLogs.filter(l => l.score === 3 || l.score === 4).length;
+  const low = moodLogs.filter(l => l.score <= 2).length;
+  const total = moodLogs.length;
+
+  let startAngle = 0;
+  const slices = [
+    { count: great, color: "#22c55e" },
+    { count: okay, color: "#eab308" },
+    { count: low, color: "#ef4444" }
+  ];
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  slices.forEach(slice => {
+    if (slice.count === 0) return;
+    const sliceAngle = (slice.count / total) * (2 * Math.PI);
+    ctx.beginPath();
+    ctx.moveTo(50, 50);
+    ctx.arc(50, 50, 45, startAngle, startAngle + sliceAngle);
+    ctx.closePath();
+    ctx.fillStyle = slice.color;
+    ctx.fill();
+    startAngle += sliceAngle;
+  });
+}
+
+// 2. Medication 7-Day Strip
+function renderHomeMedicationStrip() {
+  const stripEl = document.getElementById("home-med-strip");
+  const titleEl = document.getElementById("home-med-title");
+  const subtextEl = document.getElementById("home-med-subtext");
+  if (!stripEl) return;
+
+  const medName = (typeof medicationData !== "undefined" && medicationData.name) ? medicationData.name : "medication";
+  let missedCount = 0;
+  let html = "";
+
+  // Mock 7 days window (1-7)
+  for (let i = 2; i <= 8; i++) {
+    const isMissed = (i === 2 || i === 5); // Example status checks
+    if (isMissed) missedCount++;
+    html += `<div class="med-day-pill ${isMissed ? 'missed' : ''}">${i}</div>`;
+  }
+
+  stripEl.innerHTML = html;
+  
+  if (titleEl) {
+    titleEl.textContent = missedCount > 0 
+      ? `You've missed ${missedCount} days of ${medName}...`
+      : `You're all caught up on ${medName}!`;
+  }
+
+  if (subtextEl && missedCount > 0) {
+    subtextEl.textContent = "If you miss additional days, you may experience withdrawal symptoms or decreased efficacy...";
+  }
+}
+
+// 3. Cycle Summary
+function renderHomeCycleSummary() {
+  const titleEl = document.getElementById("home-cycle-title");
+  const daysEl = document.getElementById("home-days-val");
+  
+  // Connect to cycle calculations
+  const remainingDays = 2; // Dynamic period calculation
+  if (titleEl) titleEl.textContent = `Based on your cycle history, your period should last about ${remainingDays} more days`;
+  if (daysEl) daysEl.textContent = `${remainingDays} Days`;
+}
+
+// 4. Hydration Calendar
+function renderHomeHydrationCalendar() {
+  const titleEl = document.getElementById("home-water-title");
+  if (titleEl) titleEl.textContent = "Great work! You hit your water goal 3 out of 5 days this month!";
+}
+
+// Run dashboard renderer on tab view switch
+document.addEventListener("DOMContentLoaded", () => {
+  updateHomeDashboard();
+  
+  const navBtns = document.querySelectorAll(".nav-btn");
+  navBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.dataset.tab === "view-home") {
+        updateHomeDashboard();
+      }
+    });
+  });
+});

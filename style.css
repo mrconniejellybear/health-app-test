@@ -878,7 +878,7 @@ body {
 }
 
 .severity-badge {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
@@ -997,6 +997,7 @@ body {
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
   -webkit-overflow-scrolling: touch;
+
 }
 
 .color-tile {
@@ -1034,6 +1035,171 @@ body {
 .swatch-rust       { background-color: #c84338; }
 .swatch-dark-red   { background-color: #8b180d; }
 .swatch-black      { background-color: #3b0a07; }
+
+/* --- HOME DASHBOARD CARDS --- */
+.home-card {
+  margin-bottom: 16px;
+}
+.view-title{
+  font-size: 34px;
+  color: var(--true-blue);
+}
+.view-subtitle{
+  color: var(--text-2);
+}
+
+.home-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+/* Card 1: Mood Summary */
+.mood-summary-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pie-chart-container {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.mood-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-great { background-color: #22c55e; }
+.dot-okay { background-color: #eab308; }
+.dot-low { background-color: #ef4444; }
+
+.mood-summary-text {
+  flex: 1;
+}
+
+.summary-highlight {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+/* Card 2: Medication 7-Day Strip */
+.med-strip-container {
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 6px;
+  margin: 10px 0;
+}
+
+.med-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.med-day-pill {
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.med-day-pill.missed {
+  background-color: #e11d48;
+  color: #ffffff;
+}
+
+.med-day-pill.taken {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+.card-subtext {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 6px;
+  line-height: 1.35;
+}
+
+/* Card 3: Cycle Summary Box */
+.cycle-summary-box {
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cycle-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.cycle-metric.align-right {
+  text-align: right;
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.metric-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 2px;
+}
+
+/* Card 4: Calendar Header */
+.calendar-header-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.calendar-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.calendar-date-badge {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+
 
 /* Active Selection Feedback: Border highlight & pop animation */
 .color-checkbox:checked + .color-box {

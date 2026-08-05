@@ -23,92 +23,74 @@
 <main class="app-views">
 
   <!-- TAB 1: MENTAL HEALTH -->
-  <section id="view-mental" class="tab-view active">
-
-    <!-- 2. Mood Breakdown (Pie Chart) Card -->
-    <div class="card">
-    <div class="card-header">
-      <div>
-        <h1 class="title">Mood Average</h1>
-      </div>
-    </div>
-
-    <div class="pie-chart-wrapper">
-      <!-- Dynamic CSS Conic-Gradient Donut/Pie Chart -->
-      <div id="mood-pie-chart" class="pie-chart"></div>
-
-      <!-- Color Legend -->
-      <div class="pie-legend">
-        <div class="legend-item"><span class="color-dot score-6"></span> 6 - Great</div>
-        <div class="legend-item"><span class="color-dot score-5"></span> 5 - Good</div>
-        <div class="legend-item"><span class="color-dot score-4"></span> 4 - Okay</div>
-        <div class="legend-item"><span class="color-dot score-3"></span> 3 - Neutral</div>
-        <div class="legend-item"><span class="color-dot score-2"></span> 2 - Low</div>
-        <div class="legend-item"><span class="color-dot score-1"></span> 1 - Poor</div>
-      </div>
-    </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div>
-          <h1 class="title">Cycle Tracker</h1>
-        </div>
-        <div id="cycle-day-badge" class="date-range-badge">
-          <span id="cycle-day-text">Day 14</span>
-        </div>
-      </div>
-
-      <!-- Quick Summary Status -->
-      <div class="cycle-summary">
-        <div class="cycle-metric">
-          <span class="metric-value" id="cycle-phase-val">Follicular</span>
-          <span class="metric-label">Current Phase</span>
-        </div>
-        <div class="cycle-metric">
-          <span class="metric-value" id="cycle-next-val">~14 Days</span>
-          <span class="metric-label">Next Period</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-    <div class="card-header">
-      <div>
-        <h1 class="title">This Month</h1>
-      </div>
-      <div id="calendar-month-year" class="date-range-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="M216-96q-29.7 0-50.85-21.5Q144-139 144-168v-528q0-29 21.15-50.5T216-768h72v-96h72v96h240v-96h72v96h72q29.7 0 50.85 21.5Q816-725 816-696v528q0 29-21.15 50.5T744-96H216Zm0-72h528v-360H216v360Zm0-432h528v-96H216v96Zm0 0v-96 96Zm264.21 216q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5ZM298.5-394.29q-10.5-10.29-10.5-25.5t10.29-25.71q10.29-10.5 25.5-10.5t25.71 10.29q10.5 10.29 10.5 25.5t-10.29 25.71q-10.29 10.5-25.5 10.5t-25.71-10.29ZM636.21-384q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5Zm-156 144q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5ZM298.5-250.29q-10.5-10.29-10.5-25.5t10.29-25.71q10.29-10.5 25.5-10.5t25.71 10.29q10.5 10.29 10.5 25.5t-10.29 25.71q-10.29 10.5-25.5 10.5t-25.71-10.29ZM636.21-240q-15.21 0-25.71-10.29t-10.5-25.5q0-15.21 10.29-25.71t25.5-10.5q15.21 0 25.71 10.29t10.5 25.5q0 15.21-10.29 25.71t-25.5 10.5Z"/></svg>
-        <span id="cal-month-text">August 2026</span>
-      </div>
-    </div>
-
-    <!-- Calendar View -->
-    <div class="calendar-wrapper">
-      <!-- Weekday Headers -->
-      <div class="calendar-weekdays">
-        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-      </div>
-
-      <!-- Calendar Days Grid -->
-      <div id="med-calendar-grid" class="calendar-days">
-        <!-- Dynamically populated via JavaScript -->
-      </div>
-    </div>
-
-    <!-- Legend Footer -->
-    <div class="calendar-legend">
-      <div class="legend-item"><span class="day-dot taken"></span> Taken</div>
-      <div class="legend-item"><span class="day-dot partial"></span> Partial</div>
-      <div class="legend-item"><span class="day-dot missed"></span> Missed</div>
-    </div>
-    </div>
-
+  <section id="view-home" class="tab-view active">
+  <div class="view-header">
+    <h1 class="view-title">Home</h1>
+    <p class="view-subtitle">Your daily health & streak summary</p>
   </div>
-  </section>
+
+  <div class="card home-card">
+    <h2 class="title">A glance at your week...</h2>
+    <div class="mood-summary-body">
+      <div class="pie-chart-container">
+        <canvas id="home-mood-pie-chart" width="100" height="100"></canvas>
+      </div>
+      <div class="mood-legend">
+        <div class="legend-item"><span class="legend-dot dot-great"></span>6 - Great</div>
+        <div class="legend-item"><span class="legend-dot dot-okay"></span>4 - Okay</div>
+        <div class="legend-item"><span class="legend-dot dot-low"></span>2 - Low</div>
+      </div>
+      <div class="mood-summary-text">
+        <p class="summary-highlight" id="home-mood-headline">0% of your moods were positive!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card home-card" id="home-med-card">
+    <h2 class="title" id="home-med-title">You've missed 0 days of [medication name]...</h2>
+    
+    <div class="med-strip-container">
+      <div class="med-strip" id="home-med-strip">
+        </div>
+    </div>
+
+    <p class="card-subtext" id="home-med-subtext">Keep up the great work with your daily routine!</p>
+  </div>
+
+  <div class="card">
+    <h2 class="title" id="home-cycle-title">Based on your cycle history, your period should last about 0 more days</h2>
+    <div class="cycle-summary-box">
+      <div class="cycle-metric">
+        <span class="metric-label">CURRENT PHASE</span>
+        <span class="metric-val" id="home-phase-val">Menstruation</span>
+      </div>
+      <div class="cycle-metric align-right">
+        <span class="metric-label">REMAINING</span>
+        <span class="metric-val" id="home-days-val">0 Days</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="title" id="home-water-title">Great work! You hit your water goal 0 out of 0 days this month!</h2>
+    <div class="calendar-header-group">
+      <span class="calendar-label">This Month</span>
+      <span class="calendar-date-badge" id="home-current-month-lbl">August 2026</span>
+    </div>
+
+    <div class="calendar-widget" id="home-calendar-grid">
+      </div>
+  </div>
+</section>
+
 
   <!-- TAB 2: MEDICATION -->
   <section id="view-meds" class="tab-view">
+  <div class="view-header">
+    <h1 class="view-title">Wellbeing</h1>
+    <p class="view-subtitle">Medication reminders and a place for your feelings.</p>
+  </div>
+
   <div class="card">
     <!-- Header Section -->
     <div class="card-header">
@@ -238,7 +220,11 @@
 
   <!-- TAB 3: DIET / WEIGHT -->
   <section id="view-diet" class="tab-view">
-       <!-- Water Intake Card -->
+
+      <div class="view-header">
+        <h1 class="view-title">Diet</h1>
+        <p class="view-subtitle">Track your weight, food, water, exercise, and more.</p>
+      </div>
     <div class="card">
     <div class="card-header">
         <div>
@@ -429,7 +415,11 @@
 
     <!-- TAB 4: MENSTRUATION / CYCLE -->
   <section id="view-cycle" class="tab-view">
-    
+
+    <div class="view-header">
+        <h1 class="view-title">Menstruation</h1>
+        <p class="view-subtitle">Your symptoms, timing, and more.</p>
+      </div>
     <!-- Cycle Overview Card -->
     <div class="card">
       <div class="card-header">

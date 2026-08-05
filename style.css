@@ -10,7 +10,7 @@
 
   --feat-text: #fdf1ea;
 
-  --true-blue: #c80553;
+  --true-blue: #ce004b;
 }
 
 
@@ -801,7 +801,7 @@ body {
   background-color: #f1f5f9;
   border: 3px solid var(--border-color);
   padding: 8px 14px;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 8px;
   appearance: none;
   -webkit-appearance: none;
@@ -1037,7 +1037,7 @@ body {
 
 /* Active Selection Feedback: Border highlight & pop animation */
 .color-checkbox:checked + .color-box {
-  border: 5px solid var(--true-blue);
+  border: 6px solid var(--true-blue);
 }
 
 /* Checkmark indicator inside active color box */
@@ -1080,7 +1080,7 @@ body {
   border: 3px solid #edf2f7;
   border-radius: 10px;
   padding: 0.6rem 0.8rem;
-  font-size: 14px;
+  font-size: 15px;
   outline: none;
   background-color: #f1f5f9;
   transition: ease-in-out 0.2s;

@@ -14,6 +14,7 @@ let medAdherenceLogs = JSON.parse(localStorage.getItem("healthApp_medLogs")) || 
   "2026-08-02": "taken"
 };
 let symptomLogs = JSON.parse(localStorage.getItem("healthApp_symptomLogs")) || [];
+let journalLogs = JSON.parse(localStorage.getItem("healthApp_journalLogs")) || [];
 let weightLogs = JSON.parse(localStorage.getItem("healthApp_weightLogs")) || [
   { date: "2026-02-26", weight: 154 },
   { date: "2026-03-15", weight: 158 },
@@ -28,6 +29,9 @@ let contraceptiveData = JSON.parse(localStorage.getItem("healthApp_contraceptive
   customName: ""
 };
 
+let homePieChartInstance = null;
+
+
 // --- 2. STORAGE HELPER ---
 
 function saveAppState() {
@@ -35,6 +39,7 @@ function saveAppState() {
   localStorage.setItem("healthApp_moodLogs", JSON.stringify(moodLogs));
   localStorage.setItem("healthApp_medLogs", JSON.stringify(medAdherenceLogs));
   localStorage.setItem("healthApp_symptomLogs", JSON.stringify(symptomLogs));
+  localStorage.setItem("healthApp_journalLogs", JSON.stringify(journalLogs));
   localStorage.setItem("healthApp_weightLogs", JSON.stringify(weightLogs));
   localStorage.setItem("healthApp_contraceptive", JSON.stringify(contraceptiveData));
 }
@@ -42,7 +47,6 @@ function saveAppState() {
 
 // --- 3. MEDICATION TRACKER LOGIC ---
 
-// DOM Elements
 const medList = document.getElementById("med-list");
 const statusCounter = document.getElementById("status-counter");
 const addBtn = document.getElementById("add-med-btn") || document.getElementById("add-btn");
@@ -50,7 +54,6 @@ const modalOverlay = document.getElementById("modal-overlay");
 const cancelBtn = document.getElementById("cancel-btn");
 const medForm = document.getElementById("med-form");
 
-// Modal Controls
 if (addBtn && modalOverlay) {
   addBtn.addEventListener("click", () => modalOverlay.classList.remove("hidden"));
 }
@@ -58,7 +61,6 @@ if (cancelBtn && modalOverlay) {
   cancelBtn.addEventListener("click", () => modalOverlay.classList.add("hidden"));
 }
 
-// Add Medication Form Submit
 if (medForm) {
   medForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -83,7 +85,6 @@ if (medForm) {
   });
 }
 
-// Format 24hr string "17:00" -> "5 PM"
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":");
   let h = parseInt(hours, 10);
@@ -92,7 +93,6 @@ function formatTime(timeStr) {
   return minutes === "00" ? `${h} ${ampm}` : `${h}:${minutes} ${ampm}`;
 }
 
-// Get current logged timestamp "8:07 AM"
 function getCurrentFormattedTime() {
   const now = new Date();
   let h = now.getHours();
@@ -102,7 +102,6 @@ function getCurrentFormattedTime() {
   return `${h}:${m} ${ampm}`;
 }
 
-// Render Medication List UI
 function render() {
   if (!medList) return;
   medList.innerHTML = "";
@@ -111,11 +110,7 @@ function render() {
   const takenCount = medications.filter(m => m.isLogged).length;
 
   if (statusCounter) {
-    if (total === 0) {
-      statusCounter.textContent = "None Listed";
-    } else {
-      statusCounter.textContent = `${takenCount}/${total} Taken`;
-    }
+    statusCounter.textContent = total === 0 ? "None Listed" : `${takenCount}/${total} Taken`;
   }
 
   medications.forEach((med) => {
@@ -138,7 +133,6 @@ function render() {
   });
 }
 
-// Touch Handling for Swipe Right
 function attachSwipeGesture(element, med) {
   let startX = 0;
   let currentX = 0;
@@ -173,7 +167,7 @@ function attachSwipeGesture(element, med) {
 }
 
 
-// --- 4. WATER TRACKER LOGIC ---
+// --- 4. WATER & CAFFEINE TRACKER LOGIC ---
 
 let currentWaterOz = 0;
 const goalWaterOz = 64;
@@ -228,13 +222,10 @@ quickAddBtns.forEach((btn) => {
   });
 });
 
-// --- CAFFEINE TRACKER LOGIC ---
-
-// Global variables with localStorage recovery
+// Caffeine
 let currentCaffeineMg = JSON.parse(localStorage.getItem("healthApp_caffeineMg")) || 0;
 let goalCaffeineMg = JSON.parse(localStorage.getItem("healthApp_caffeineGoal")) || 200;
 
-// DOM Elements
 const caffeineCounter = document.getElementById("caffeine-counter");
 const caffeineFill = document.getElementById("caffeine-fill");
 const caffeineGoalLabel = document.getElementById("caffeine-goal-label");
@@ -245,10 +236,9 @@ const caffeineForm = document.getElementById("caffeine-form");
 const caffeineGoalInput = document.getElementById("caffeine-goal-input");
 const caffeineQuickBtns = document.querySelectorAll(".caffeine-quick-btn");
 
-// Open & Close Modal Controls
 if (addCaffeineBtn) {
   addCaffeineBtn.addEventListener("click", () => {
-    caffeineGoalInput.value = goalCaffeineMg; // Populate input with current goal
+    caffeineGoalInput.value = goalCaffeineMg;
     caffeineModalOverlay.classList.remove("hidden");
   });
 }
@@ -259,28 +249,20 @@ if (caffeineCancelBtn) {
   });
 }
 
-// Update UI Display
 function updateCaffeineUI() {
   if (!caffeineCounter) return;
-
   caffeineCounter.textContent = `${currentCaffeineMg}mg / ${goalCaffeineMg}mg`;
   if (caffeineGoalLabel) caffeineGoalLabel.textContent = `${goalCaffeineMg}mg`;
 
-  // Calculate Percentage Cap at 100%
   const percentage = Math.min((currentCaffeineMg / goalCaffeineMg) * 100, 100);
   if (caffeineFill) caffeineFill.style.width = `${percentage}%`;
 }
 
-// Add Caffeine Handler
 function addCaffeine(amount) {
   if (amount > 0) {
     currentCaffeineMg += amount;
-    
-    // Check if user updated their goal in the input field
     const newGoal = parseInt(caffeineGoalInput.value, 10);
-    if (newGoal && newGoal > 0) {
-      goalCaffeineMg = newGoal;
-    }
+    if (newGoal && newGoal > 0) goalCaffeineMg = newGoal;
 
     saveCaffeineState();
     updateCaffeineUI();
@@ -288,15 +270,12 @@ function addCaffeine(amount) {
   }
 }
 
-// Quick Add Button Listeners
 caffeineQuickBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const amount = parseInt(btn.dataset.amount, 10);
-    addCaffeine(amount);
+    addCaffeine(parseInt(btn.dataset.amount, 10));
   });
 });
 
-// Custom Form Submit
 if (caffeineForm) {
   caffeineForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -307,7 +286,6 @@ if (caffeineForm) {
       addCaffeine(amount);
       input.value = "";
     } else {
-      // If user only wanted to update their daily goal limit without adding mg
       const newGoal = parseInt(caffeineGoalInput.value, 10);
       if (newGoal && newGoal > 0) {
         goalCaffeineMg = newGoal;
@@ -319,14 +297,10 @@ if (caffeineForm) {
   });
 }
 
-// Helper: Save Caffeine State to LocalStorage
 function saveCaffeineState() {
   localStorage.setItem("healthApp_caffeineMg", JSON.stringify(currentCaffeineMg));
   localStorage.setItem("healthApp_caffeineGoal", JSON.stringify(goalCaffeineMg));
 }
-
-// Initial UI Call
-updateCaffeineUI();
 
 
 // --- 5. WEIGHT TRACKER LOGIC ---
@@ -475,12 +449,8 @@ function renderMoodGraph() {
 }
 
 const moodColors = {
-  1: "#c62828",
-  2: "#ef5350",
-  3: "#ffa726",
-  4: "#ffee58",
-  5: "#66bb6a",
-  6: "#2e7d32"
+  1: "#c62828", 2: "#ef5350", 3: "#ffa726",
+  4: "#ffee58", 5: "#66bb6a", 6: "#2e7d32"
 };
 
 function renderMoodPieChart() {
@@ -511,7 +481,7 @@ function renderMoodPieChart() {
 }
 
 
-// --- 7. MEDICATION ADHERENCE CALENDAR LOGIC ---
+// --- 7. MEDICATION CALENDAR & CONTRACEPTIVE LOGIC ---
 
 function renderMedicationCalendar(year = 2026, month = 7) {
   const grid = document.getElementById("med-calendar-grid");
@@ -546,24 +516,19 @@ function renderMedicationCalendar(year = 2026, month = 7) {
     const formattedMonth = (month + 1) < 10 ? `0${month + 1}` : month + 1;
     const dateKey = `${year}-${formattedMonth}-${formattedDay}`;
 
-    if (dateKey === todayStr) {
-      dayCell.classList.add("today");
-    }
+    if (dateKey === todayStr) dayCell.classList.add("today");
 
     const status = medAdherenceLogs[dateKey];
-    if (status) {
-      dayCell.classList.add(status);
-    }
+    if (status) dayCell.classList.add(status);
 
     grid.appendChild(dayCell);
   }
 }
 
-// --- CONTRACEPTIVE MANAGEMENT LOGIC ---
+// Contraceptives
 const contraForm = document.getElementById("contraceptive-form");
 const customNameInput = document.getElementById("contra-custom-name");
 
-// 1. Populate saved contraceptive data on page load
 function loadSavedContraceptive() {
   if (contraceptiveData.type) {
     const targetRadio = document.querySelector(`input[name="contraceptive-type"][value="${contraceptiveData.type}"]`);
@@ -574,11 +539,9 @@ function loadSavedContraceptive() {
   }
 }
 
-// 2. Handle form submission
 if (contraForm) {
   contraForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    
     const selectedType = document.querySelector('input[name="contraceptive-type"]:checked');
     const customName = customNameInput ? customNameInput.value.trim() : "";
 
@@ -591,29 +554,20 @@ if (contraForm) {
   });
 }
 
-// Call on initialization
 loadSavedContraceptive();
 
 
+// --- 8. SYMPTOM TRACKER & JOURNAL LOGIC ---
 
-// --- 8. SYMPTOM TRACKER LOGIC ---
-
-// Color map for symptom severity states
 const severityColors = {
-  0: { badgeBg: "#f1f5f9", badgeText: "#64748b8f", sliderColor: "#cbd5e1" }, // None (Gray)
-  1: { badgeBg: "#d1fae5", badgeText: "#065f46", sliderColor: "#4fa23a" }, // Mild (Green)
-  2: { badgeBg: "#fef3c7", badgeText: "#92400e", sliderColor: "#f59e0b" }, // Moderate (Yellow)
-  3: { badgeBg: "#fee2e2", badgeText: "#991b1b", sliderColor: "#d04a35" }  // Severe (Red)
+  0: { badgeBg: "#f1f5f9", badgeText: "#64748b8f", sliderColor: "#cbd5e1" },
+  1: { badgeBg: "#d1fae5", badgeText: "#065f46", sliderColor: "#4fa23a" },
+  2: { badgeBg: "#fef3c7", badgeText: "#92400e", sliderColor: "#f59e0b" },
+  3: { badgeBg: "#fee2e2", badgeText: "#991b1b", sliderColor: "#d04a35" }
 };
 
-const intensityLabels = {
-  0: "None",
-  1: "Mild",
-  2: "Moderate",
-  3: "Severe"
-};
+const intensityLabels = { 0: "None", 1: "Mild", 2: "Moderate", 3: "Severe" };
 
-// Update badges AND slider colors dynamically
 document.querySelectorAll(".severity-slider").forEach((slider) => {
   slider.addEventListener("input", (e) => {
     const symptomKey = e.target.dataset.symptom;
@@ -621,166 +575,47 @@ document.querySelectorAll(".severity-slider").forEach((slider) => {
     const badge = document.getElementById(`badge-${symptomKey}`);
     const theme = severityColors[val];
 
-    // 1. Update Badge Text & Color
     if (badge) {
       badge.textContent = intensityLabels[val];
       badge.style.backgroundColor = theme.badgeBg;
       badge.style.color = theme.badgeText;
     }
 
-    // 2. Update Slider Track & Accent Color
-    e.target.style.accentColor = theme.sliderColor; // For modern native styling
-    
-    // Custom WebKit track background styling (if custom CSS track is used)
-    const percentage = (val / 3) * 100;
-    e.target.style.background = `linear-gradient(to right, ${theme.sliderColor} ${percentage}%, #e2e8f0 ${percentage}%)`;
+    e.target.style.accentColor = theme.sliderColor;
   });
   
-  // Trigger once on initialization to apply colors to pre-filled/default states
   slider.dispatchEvent(new Event("input"));
 });
 
-document.querySelectorAll(".severity-slider").forEach((slider) => {
-  slider.addEventListener("input", (e) => {
-    const symptomKey = e.target.dataset.symptom;
-    const val = parseInt(e.target.value, 10);
-    const badge = document.getElementById(`badge-${symptomKey}`);
-
-    if (badge) {
-      badge.textContent = intensityLabels[val];
-      if (val > 0) {
-        badge.classList.add("active");
-      } else {
-        badge.classList.remove("active");
-      }
-    }
-  });
-});
-
-
-
-// Submit Symptoms, Flow, Texture & Color
 const symptomForm = document.getElementById("symptom-form");
 if (symptomForm) {
   symptomForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // 1. Gather sliders (Flow, Cramps, etc.)
     const symptomRatings = {};
     document.querySelectorAll(".severity-slider").forEach((slider) => {
       symptomRatings[slider.dataset.symptom] = parseInt(slider.value, 10);
     });
 
-    // 2. Gather selected textures
     const selectedTextures = [];
-    document.querySelectorAll(".texture-checkbox:checked").forEach((checkbox) => {
-      selectedTextures.push(checkbox.value);
-    });
+    document.querySelectorAll(".texture-checkbox:checked").forEach((cb) => selectedTextures.push(cb.value));
 
-    // 3. Gather selected colors
     const selectedColors = [];
-    document.querySelectorAll(".color-checkbox:checked").forEach((checkbox) => {
-      selectedColors.push(checkbox.value);
-    });
+    document.querySelectorAll(".color-checkbox:checked").forEach((cb) => selectedColors.push(cb.value));
 
-    // 4. Create and persist entry
-    const symptomLogEntry = {
+    symptomLogs.push({
       date: new Date().toISOString().split("T")[0],
       ratings: symptomRatings,
       textures: selectedTextures,
       colors: selectedColors
-    };
+    });
 
-    symptomLogs.push(symptomLogEntry);
     saveAppState();
-    alert("Symptoms, Texture & Color log saved!");
-  });
-}
-// --- DYNAMIC CUSTOM SYMPTOMS LOGIC ---
-
-// 1. Persistent Store for Custom Symptom Names
-let customSymptoms = JSON.parse(localStorage.getItem("healthApp_customSymptoms")) || [];
-
-// DOM Elements
-const customSymptomsList = document.getElementById("custom-symptoms-list");
-const newSymptomInput = document.getElementById("new-symptom-input");
-const addCustomSymptomBtn = document.getElementById("add-custom-symptom-btn");
-
-// 2. Render Existing Custom Symptoms on Page Load
-function renderCustomSymptoms() {
-  if (!customSymptomsList) return;
-  customSymptomsList.innerHTML = ""; // Clear existing
-
-  customSymptoms.forEach((name) => {
-    createSymptomRowDOM(name);
+    alert("Symptoms logged successfully!");
   });
 }
 
-// 3. Helper: Build and Attach a New Symptom Slider Row
-function createSymptomRowDOM(symptomName) {
-  // Generate a safe slug key (e.g., "Joint Pain" -> "joint-pain")
-  const key = symptomName.toLowerCase().replace(/\s+/g, "-");
-
-  const row = document.createElement("div");
-  row.className = "symptom-row";
-  row.innerHTML = `
-    <div class="symptom-header">
-      <span class="symptom-title">
-        <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="currentColor"><path d="M157.37-228.28q-19.15 0-32.33-13.18-13.17-13.17-13.17-32.32t13.17-32.33q13.18-13.17 32.33-13.17h405.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.32q-13.18 13.18-32.33 13.18H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.18-13.17 32.33-13.17h645.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.32q13.18-13.18 32.33-13.18h645.26q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Z"/></svg>
-        ${symptomName}
-      </span>
-      <span class="severity-badge" id="badge-${key}">None (0)</span>
-    </div>
-    <input type="range" class="severity-slider" data-symptom="${key}" min="0" max="3" value="0" step="1">
-  `;
-
-  customSymptomsList.appendChild(row);
-
-  // Attach dynamic slider event listener (for color & badge updates)
-  const newSlider = row.querySelector(".severity-slider");
-  attachSliderEventListener(newSlider);
-}
-
-// 4. Attach Event Listener to Individual Sliders
-function attachSliderEventListener(slider) {
-  slider.addEventListener("input", (e) => {
-    const key = e.target.dataset.symptom;
-    const val = parseInt(e.target.value, 10);
-    const badge = document.getElementById(`badge-${key}`);
-
-    if (badge) {
-      badge.textContent = intensityLabels[val] || `Level ${val}`;
-    }
-
-    // Dynamic accent color styling
-    const theme = severityColors[val];
-    if (theme) {
-      e.target.style.accentColor = theme.sliderColor;
-    }
-  });
-}
-
-// 5. Add Custom Symptom Trigger
-if (addCustomSymptomBtn) {
-  addCustomSymptomBtn.addEventListener("click", () => {
-    const name = newSymptomInput.value.trim();
-    if (name) {
-      // Prevent duplicates
-      if (!customSymptoms.includes(name)) {
-        customSymptoms.push(name);
-        localStorage.setItem("healthApp_customSymptoms", JSON.stringify(customSymptoms));
-        createSymptomRowDOM(name);
-      }
-      newSymptomInput.value = "";
-    }
-  });
-}
-
-// Call on initial load
-renderCustomSymptoms();
-
-
-// 2. Submit Standalone Daily Journal Entry
+// Journal Entry Submit
 const journalForm = document.getElementById("journal-form");
 if (journalForm) {
   journalForm.addEventListener("submit", (e) => {
@@ -788,64 +623,20 @@ if (journalForm) {
     const notes = document.getElementById("symptom-notes").value.trim();
 
     if (notes) {
-      // Create journal entry object
-      const journalEntry = {
+      journalLogs.push({
         date: new Date().toISOString().split("T")[0],
         text: notes
-      };
-
-      // Push to journal array and persist
-      journalLogs.push(journalEntry);
+      });
       saveAppState();
+      document.getElementById("symptom-notes").value = "";
       alert("Journal entry saved!");
     }
   });
 }
 
 
+// --- 9. HOME DASHBOARD CALCULATIONS & CHART ---
 
-// --- 9. NAVIGATION BAR LOGIC ---
-
-const navButtons = document.querySelectorAll(".nav-btn");
-const tabViews = document.querySelectorAll(".tab-view");
-
-navButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const targetTabId = btn.dataset.tab;
-
-    navButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    tabViews.forEach((view) => {
-      if (view.id === targetTabId) {
-        view.classList.add("active");
-      } else {
-        view.classList.remove("active");
-      }
-    });
-
-    if (targetTabId === "view-mental") {
-      renderMoodGraph();
-    } else if (targetTabId === "view-diet") {
-      renderWeightGraph();
-    } else if (targetTabId === "view-meds") {
-      renderMedicationCalendar();
-    }
-  });
-});
-
-
-// --- 10. INITIAL RENDER ON PAGE LOAD ---
-
-document.addEventListener("DOMContentLoaded", () => {
-  render();
-  updateWaterUI();
-  renderWeightGraph();
-  renderMoodGraph();
-  renderMedicationCalendar();
-});
-
-// Master Dashboard Renderer
 function updateHomeDashboard() {
   renderHomeMoodChart();
   renderHomeMedicationStrip();
@@ -853,64 +644,59 @@ function updateHomeDashboard() {
   renderHomeHydrationCalendar();
 }
 
-// 1. Mood Pie Chart & Headline
 function renderHomeMoodChart() {
   const headlineEl = document.getElementById("home-mood-headline");
+  const canvas = document.getElementById("home-mood-pie-chart");
+  
+  if (!canvas || typeof Chart === "undefined") return;
+
   if (!moodLogs || moodLogs.length === 0) {
     if (headlineEl) headlineEl.textContent = "No mood entries logged yet this week!";
     return;
   }
 
-  // Count positive vs total
   const positiveCount = moodLogs.filter(log => log.score >= 4).length;
   const pct = Math.round((positiveCount / moodLogs.length) * 100);
   if (headlineEl) headlineEl.textContent = `${pct}% of your moods were positive!`;
 
-  // Draw simple HTML5 Canvas Pie Chart
-  const canvas = document.getElementById("home-mood-pie-chart");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  
+  if (homePieChartInstance) {
+    homePieChartInstance.destroy();
+  }
+
   const great = moodLogs.filter(l => l.score >= 5).length;
   const okay = moodLogs.filter(l => l.score === 3 || l.score === 4).length;
   const low = moodLogs.filter(l => l.score <= 2).length;
-  const total = moodLogs.length;
 
-  let startAngle = 0;
-  const slices = [
-    { count: great, color: "#22c55e" },
-    { count: okay, color: "#eab308" },
-    { count: low, color: "#ef4444" }
-  ];
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  slices.forEach(slice => {
-    if (slice.count === 0) return;
-    const sliceAngle = (slice.count / total) * (2 * Math.PI);
-    ctx.beginPath();
-    ctx.moveTo(50, 50);
-    ctx.arc(50, 50, 45, startAngle, startAngle + sliceAngle);
-    ctx.closePath();
-    ctx.fillStyle = slice.color;
-    ctx.fill();
-    startAngle += sliceAngle;
+  homePieChartInstance = new Chart(canvas, {
+    type: 'pie',
+    data: {
+      labels: ['Great', 'Okay', 'Low'],
+      datasets: [{
+        data: [great, okay, low],
+        backgroundColor: ['#22c55e', '#eab308', '#ef4444'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } }
+    }
   });
 }
 
-// 2. Medication 7-Day Strip
 function renderHomeMedicationStrip() {
   const stripEl = document.getElementById("home-med-strip");
   const titleEl = document.getElementById("home-med-title");
   const subtextEl = document.getElementById("home-med-subtext");
   if (!stripEl) return;
 
-  const medName = (typeof medicationData !== "undefined" && medicationData.name) ? medicationData.name : "medication";
+  const medName = (medications.length > 0) ? medications[0].name : "medication";
   let missedCount = 0;
   let html = "";
 
-  // Mock 7 days window (1-7)
   for (let i = 2; i <= 8; i++) {
-    const isMissed = (i === 2 || i === 5); // Example status checks
+    const isMissed = (i === 2 || i === 5);
     if (isMissed) missedCount++;
     html += `<div class="med-day-pill ${isMissed ? 'missed' : ''}">${i}</div>`;
   }
@@ -928,33 +714,54 @@ function renderHomeMedicationStrip() {
   }
 }
 
-// 3. Cycle Summary
 function renderHomeCycleSummary() {
   const titleEl = document.getElementById("home-cycle-title");
   const daysEl = document.getElementById("home-days-val");
   
-  // Connect to cycle calculations
-  const remainingDays = 2; // Dynamic period calculation
+  const remainingDays = 2;
   if (titleEl) titleEl.textContent = `Based on your cycle history, your period should last about ${remainingDays} more days`;
   if (daysEl) daysEl.textContent = `${remainingDays} Days`;
 }
 
-// 4. Hydration Calendar
 function renderHomeHydrationCalendar() {
   const titleEl = document.getElementById("home-water-title");
   if (titleEl) titleEl.textContent = "Great work! You hit your water goal 3 out of 5 days this month!";
 }
 
-// Run dashboard renderer on tab view switch
-document.addEventListener("DOMContentLoaded", () => {
-  updateHomeDashboard();
-  
-  const navBtns = document.querySelectorAll(".nav-btn");
-  navBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (btn.dataset.tab === "view-home") {
-        updateHomeDashboard();
+
+// --- 10. NAVIGATION & APP INITIALIZATION ---
+
+const navButtons = document.querySelectorAll(".nav-btn");
+const tabViews = document.querySelectorAll(".tab-view");
+
+navButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const targetTabId = btn.dataset.tab;
+
+    navButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    tabViews.forEach(view => {
+      view.classList.remove("active");
+      if (view.id === targetTabId) {
+        view.classList.add("active");
       }
     });
+
+    if (targetTabId === "view-home") {
+      setTimeout(() => {
+        updateHomeDashboard();
+      }, 50);
+    }
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  render();
+  updateWaterUI();
+  updateCaffeineUI();
+  renderWeightGraph();
+  renderMoodGraph();
+  renderMedicationCalendar();
+  updateHomeDashboard();
 });

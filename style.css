@@ -756,7 +756,7 @@ body {
   height: auto;
   aspect-ratio: 1 / 1;
   background-color: var(--card-bg, #f8fafc);
-  border: 3px solid #e2e8f0;
+  border: 3px solid var(--border-color);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -773,9 +773,9 @@ body {
 }
 
 .contra-label {
-  font-size: 0.75rem;
+  font-size: 13px;
   font-weight: 500;
-  color: #94a3b8;
+  color: var(--text-muted);
   margin-top: 6px;
   text-align: center;
   transition: color 0.2s ease;
@@ -793,7 +793,7 @@ body {
 
 .contra-tile input[type="radio"]:checked ~ .contra-label {
   color: var(--text-main);
-  font-weight: 700;
+  font-weight: 800;
 }
 .text-input{
   margin-top: 10px;
@@ -971,7 +971,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8; /* Default SVG icon color */
+  color: var(--text-2); /* Default SVG icon color */
   transition: all 0.2s ease;
 }
 .tile-box svg{
@@ -983,9 +983,9 @@ body {
 /* Label Below Box */
 .tile-label {
   margin-top: 0.4rem;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  color: #94a3b8; /* Default light gray text */
+  color: var(--text-muted); /* Default light gray text */
   transition: color 0.2s ease;
 }
 

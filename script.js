@@ -306,6 +306,48 @@ function saveCaffeineState() {
 }
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const activityButtons = document.querySelectorAll('.activity-btn');
+  const calcBtn = document.getElementById('calc-calories-btn');
+  const calorieCountDisplay = document.getElementById('calorie-count');
+  const durationInput = document.getElementById('exercise-duration');
+
+  let selectedActivity = null;
+
+  // Single-selection handler across activity grids
+  activityButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      activityButtons.forEach(b => b.classList.remove('is-active'));
+
+      // Highlight clicked button
+      btn.classList.add('is-active');
+      selectedActivity = btn.dataset.activity;
+
+      console.log(`Selected Activity: ${selectedActivity}`);
+    });
+  });
+
+  // Calculate Button Click Event (Placeholder Logic)
+  calcBtn?.addEventListener('click', () => {
+    if (!selectedActivity) {
+      alert('Please select an activity first!');
+      return;
+    }
+
+    const durationValue = durationInput.value; // e.g. "00:30"
+    
+    // Placeholder calculation logic until user demographics are added
+    console.log(`Calculating calories for ${selectedActivity} during ${durationValue}...`);
+    
+    // Random mock display update to verify UI response
+    const mockCalories = Math.floor(Math.random() * (350 - 150 + 1)) + 150;
+    calorieCountDisplay.textContent = mockCalories;
+  });
+});
+
+
+
 // --- 5. WEIGHT TRACKER LOGIC ---
 
 const addWeightBtn = document.getElementById("add-weight-btn");

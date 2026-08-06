@@ -248,7 +248,7 @@ body {
     background-color: #b70049;
 }
 .add-btn-final {
-  width: 100%;
+  width: 98%;
   margin: auto;
   background-color: var(--true-blue);
   border: none;
@@ -495,9 +495,8 @@ body {
 }
 
 .progress-bar-fill {
-  background: linear-gradient(0deg, #0c78dd, #07b6f1); /* Warm Amber / Coffee theme */
+  background: linear-gradient(0deg, #0c9edd, #07c2f1); /* Warm Amber / Coffee theme */
   height: 100%;
-  box-shadow: inset 0px 8px 6px 0px #f8feff37;
   width: 0%;
   border-radius: 12px;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -547,8 +546,7 @@ body {
 
 /* Caffeine Specific Progress Bar Color */
 .progress-bar-fill.caffeine-bar {
-  box-shadow: inset 0px 8px 6px 0px #f8feff37;
-  background: linear-gradient(0deg, #644426, #c9711e); /* Warm Amber / Coffee theme */
+  background: linear-gradient(0deg, #654426, #a36327); /* Warm Amber / Coffee theme */
 }
 
 /* Modal Goal Setter Styles */
@@ -1109,8 +1107,6 @@ body {
 
 /* Card 2: Medication 7-Day Strip */
 .med-strip-container {
-  border: 2px solid #3b82f6;
-  border-radius: 8px;
   padding: 6px;
   margin: 10px 0;
 }

@@ -13,6 +13,8 @@ let medAdherenceLogs = JSON.parse(localStorage.getItem("healthApp_medLogs")) || 
   "2026-08-01": "taken",
   "2026-08-02": "taken"
 };
+
+let customSymptoms = JSON.parse(localStorage.getItem("healthApp_customSymptoms")) || [];
 let symptomLogs = JSON.parse(localStorage.getItem("healthApp_symptomLogs")) || [];
 let journalLogs = JSON.parse(localStorage.getItem("healthApp_journalLogs")) || [];
 let weightLogs = JSON.parse(localStorage.getItem("healthApp_weightLogs")) || [
@@ -42,6 +44,7 @@ function saveAppState() {
   localStorage.setItem("healthApp_journalLogs", JSON.stringify(journalLogs));
   localStorage.setItem("healthApp_weightLogs", JSON.stringify(weightLogs));
   localStorage.setItem("healthApp_contraceptive", JSON.stringify(contraceptiveData));
+  localStorage.setItem("healthApp_customSymptoms", JSON.stringify(customSymptoms));
 }
 
 
@@ -568,6 +571,34 @@ const severityColors = {
 
 const intensityLabels = { 0: "None", 1: "Mild", 2: "Moderate", 3: "Severe" };
 
+// Attach event listeners to all severity sliders (built-in + dynamic)
+document.querySelectorAll(".severity-slider").forEach((slider) => {
+  slider.addEventListener("input", (e) => {
+    const symptomKey = e.target.dataset.symptom;
+    const val = parseInt(e.target.value, 10);
+    const badge = document.getElementById(`badge-${symptomKey}`);
+    const theme = severityColors[val];
+
+    // 1. Update Badge Text & Colors
+    if (badge) {
+      badge.textContent = intensityLabels[val];
+      badge.style.backgroundColor = theme.badgeBg;
+      badge.style.color = theme.badgeText;
+    }
+
+    // 2. Update Slider Thumb Color
+    e.target.style.accentColor = theme.sliderColor;
+
+    // 3. Update Filled Bar Track Background (Green -> Yellow -> Red Fill)
+    const percentage = (val / 3) * 100;
+    e.target.style.background = `linear-gradient(to right, ${theme.sliderColor} 0%, ${theme.sliderColor} ${percentage}%, #e2e8f0 ${percentage}%, #e2e8f0 100%)`;
+  });
+  
+  // Trigger once on startup to set correct initial states
+  slider.dispatchEvent(new Event("input"));
+});
+
+
 document.querySelectorAll(".severity-slider").forEach((slider) => {
   slider.addEventListener("input", (e) => {
     const symptomKey = e.target.dataset.symptom;
@@ -614,6 +645,89 @@ if (symptomForm) {
     alert("Symptoms logged successfully!");
   });
 }
+
+// --- DYNAMIC CUSTOM SYMPTOMS LOGIC ---
+
+const customSymptomsList = document.getElementById("custom-symptoms-list");
+const newSymptomInput = document.getElementById("new-symptom-input");
+const addCustomSymptomBtn = document.getElementById("add-custom-symptom-btn");
+
+// 1. Render saved custom symptoms on page load
+function renderCustomSymptoms() {
+  if (!customSymptomsList) return;
+  customSymptomsList.innerHTML = ""; // Clear list
+
+  customSymptoms.forEach((name) => {
+    createSymptomRowDOM(name);
+  });
+}
+
+// 2. Helper: Build a new slider row dynamically
+function createSymptomRowDOM(symptomName) {
+  // Convert name to slug (e.g. "Back Pain" -> "back-pain")
+  const key = symptomName.toLowerCase().replace(/\s+/g, "-");
+
+  const row = document.createElement("div");
+  row.className = "symptom-row";
+  row.innerHTML = `
+    <div class="symptom-header">
+      <span class="symptom-title">
+        <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="currentColor">
+          <path d="M157.37-228.28q-19.15 0-32.33-13.18-13.17-13.17-13.17-32.32t13.17-32.33q13.18-13.17 32.33-13.17h405.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.32q-13.18 13.18-32.33 13.18H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.18-13.17 32.33-13.17h645.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Zm0-206.22q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.32q13.18-13.18 32.33-13.18h645.26q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33q-13.18 13.17-32.33 13.17H157.37Z"/>
+        </svg>
+        ${symptomName}
+      </span>
+      <span class="severity-badge" id="badge-${key}">None</span>
+    </div>
+    <input type="range" class="severity-slider" data-symptom="${key}" min="0" max="3" value="0" step="1">
+  `;
+
+  customSymptomsList.appendChild(row);
+
+  // Attach slider listener so track color and badge update dynamically
+  const newSlider = row.querySelector(".severity-slider");
+  attachSliderEventListener(newSlider);
+}
+
+// 3. Attach slider event listener helper
+function attachSliderEventListener(slider) {
+  slider.addEventListener("input", (e) => {
+    const key = e.target.dataset.symptom;
+    const val = parseInt(e.target.value, 10);
+    const badge = document.getElementById(`badge-${key}`);
+    const theme = severityColors[val];
+
+    if (badge) {
+      badge.textContent = intensityLabels[val];
+      badge.style.backgroundColor = theme.badgeBg;
+      badge.style.color = theme.badgeText;
+    }
+
+    e.target.style.accentColor = theme.sliderColor;
+    
+    // Fill slider bar
+    const percentage = (val / 3) * 100;
+    e.target.style.background = `linear-gradient(to right, ${theme.sliderColor} 0%, ${theme.sliderColor} ${percentage}%, #e2e8f0 ${percentage}%, #e2e8f0 100%)`;
+  });
+  
+  slider.dispatchEvent(new Event("input"));
+}
+
+// 4. Add custom symptom button click handler
+if (addCustomSymptomBtn) {
+  addCustomSymptomBtn.addEventListener("click", () => {
+    const name = newSymptomInput ? newSymptomInput.value.trim() : "";
+    if (name) {
+      if (!customSymptoms.includes(name)) {
+        customSymptoms.push(name);
+        saveAppState();
+        createSymptomRowDOM(name);
+      }
+      if (newSymptomInput) newSymptomInput.value = "";
+    }
+  });
+}
+
 
 // Journal Entry Submit
 const journalForm = document.getElementById("journal-form");
@@ -767,5 +881,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderWeightGraph();
   renderMoodGraph();
   renderMedicationCalendar();
+  renderCustomSymptoms();
   updateHomeDashboard();
 });

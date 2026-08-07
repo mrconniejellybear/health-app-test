@@ -992,6 +992,7 @@ body {
   font-weight: 500;
   color: var(--text-muted); /* Default light gray text */
   transition: color 0.2s ease;
+  text-align: center;
 }
 
 /* Color Selector Grid */

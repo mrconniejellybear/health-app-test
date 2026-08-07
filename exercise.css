@@ -19,20 +19,6 @@
 
 
 
-/* Category Headings */
-.exercise-group h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #718096;
-  margin: 16px 0 12px 0;
-}
-
-/* Activity Grid */
-.activity-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
 
 /* Activity Item Buttons */
 .activity-btn {
@@ -50,11 +36,10 @@
 
 
 .activity-btn .icon-wrap {
-  width: 64px;
-  height: 64px;
+  width: 58px;
+  height: 58px;
   border-radius: 16px;
   background-color: #f7fafc;
-  border: 1.5px solid #edf2f7;
   display: flex;
   align-items: center;
   justify-content: center;

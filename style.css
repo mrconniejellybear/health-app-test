@@ -11,6 +11,7 @@
   --input-bg: #f8fbfc;
 
   --feat-text: #fdf1ea;
+  --true-blue: #d40055;
 
 }
 
@@ -1311,19 +1312,39 @@ body {
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  padding-bottom: 20px;
   left: 0;
   right: 0;
-  height: 80px;
-  background-color: #fcfdff;
-  border-top: 1px solid #e2e8f0;
+  height: 90px;
+  background-color: var(--true-blue);
+  border-radius: 999px;
   display: flex;
-  justify-content: space-around;
+  justify-content: left;
   align-items: center;
   max-width: 440px;
   padding-right: 16px;
   padding-left: 16px;
   margin: 0 auto;
+  z-index: 1000;
+  /* iOS Safe Area padding for home indicator bar */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-inner{
+    position: fixed;
+  bottom: 0;
+  padding-bottom: 20px;
+  left: 7%;
+  right: 0;
+  height: 70px;
+  background-color: #fcfdff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 240px;
+  padding-right: 16px;
+  padding-left: 16px;
+  margin: 8px auto;
   z-index: 1000;
   /* iOS Safe Area padding for home indicator bar */
   padding-bottom: env(safe-area-inset-bottom);
@@ -1341,6 +1362,17 @@ body {
   transition: opacity 0.2s ease, transform 0.15s ease;
   opacity: 0.4;
   color: var(--true-blue);
+}
+.nav-btn2{
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  color: #fff;
+  margin-left: 14px;
 }
 
 .nav-icon {

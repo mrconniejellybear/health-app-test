@@ -820,7 +820,7 @@ body {
 }
 
 .info-icon {
-  width: 14px;
+  width: 13px;
   height: auto;
   color: var(--text-2);
   flex-shrink: 0;

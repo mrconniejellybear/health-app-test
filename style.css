@@ -1315,7 +1315,7 @@ body {
   left: 0;
   right: 0;
   height: 80px;
-  background-color: var(--true-blue);
+  background-color: var(--card-bg);
   border: 1px solid #e2e8f0;
   border-radius: 999px;
   display: flex;
@@ -1341,7 +1341,7 @@ body {
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 0.6;
-  color: #ffffff;
+  color: var(--true-blue);
 }
 
 .nav-icon {
@@ -1358,9 +1358,6 @@ body {
   filter: grayscale(0%);
 }
 
-.nav-btn:active {
-  transform: scale(1.3);
-}
 
 
 

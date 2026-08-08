@@ -248,7 +248,7 @@
   transition: transform 0.5s ease, filter 0.2s ease;
 }
 .emoji-slot.active svg {
-  transform: scale(1.3);
+  transform: scale(1.2);
   filter: drop-shadow(0 0px 6px #ffffff38);
 }
 

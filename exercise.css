@@ -1,18 +1,10 @@
 :root {
-  --bg-color: #f9fafc93;
-  --card-bg: #ffffff;
-  --text-main: #3f4758;
-  --text-2: #718096;
-  --text-muted: #a0aec0;
-  --border-color: #edf2f7;
-  --green-check: #28a745;
-  --blue-accent: #007bff;
 
   --input-bg: #f8fbfc;
 
   --feat-text: #fdf1ea;
 
-  --true-blue: #bf004c;
+  --true-blue: #ca2146;
 }
 
 
@@ -130,4 +122,140 @@
 }
 .input-wrap{
   width: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- ROTARY MOOD WHEEL STYLES --- */
+.mood-rotary-card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.rotary-viewport {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+
+/* Dynamic background glow based on active mood color */
+.rotary-glow-bg {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 90%;
+  top: 90px;
+
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  background: radial-gradient(circle, rgba(234,179,8,0.25) 0%, rgba(255,255,255,0) 70%);
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+
+/* Center Headline Text */
+.rotary-center-content {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  text-align: center;
+  width: 100%;
+}
+
+
+.rotary-subtitle {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.rotary-headline {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #334155;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+/* Main Circular Track Wheel */
+/* Main Rotary Wheel Container */
+.rotary-wheel {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: 36px solid rgba(148, 163, 184, 0.25);
+  box-sizing: border-box;
+  transform-origin: center center;
+  will-change: transform;
+  z-index: 2;
+}
+
+/* Snapping transition during touch release */
+.rotary-wheel.snapping {
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
+}
+
+
+/* Smooth snapping transition class added on touch end */
+.rotary-wheel.snapping {
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
+}
+
+/* Emoji Slot Wrapper sitting on circumference */
+.emoji-slot {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  top: calc(50% - 22px);
+  left: calc(50% - 22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform-origin: center center;
+}
+
+/* SVG Icon Styling inside Slot */
+.emoji-slot svg {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease, filter 0.2s ease;
+}
+
+/* Bottom Fade Mask */
+.rotary-fade-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 80%);
+  pointer-events: none;
+  z-index: 5; /* Above wheel (z:2), below text (z:10) */
 }

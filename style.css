@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f9fafc93;
+  --bg-color: #f9fafc;
   --card-bg: #ffffff;
   --text-main: #3f4758;
   --text-2: #718096;
@@ -52,9 +52,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  border: 1px solid #d6dce5;
+  border: 1px solid #e2e8ef;
   padding: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.092);
+  box-shadow: 0 10px 25px rgba(43, 44, 45, 0.074);
 }
 
 .card-header {
@@ -1315,7 +1315,9 @@ body {
   left: 0;
   right: 0;
   height: 80px;
-  background-color: var(--card-bg);
+  background-color: #ffffffd0;
+  backdrop-filter: blur(6px);
+
   border: 1px solid #e2e8f0;
   border-radius: 999px;
   display: flex;
@@ -1357,6 +1359,7 @@ body {
 .nav-btn.active .nav-icon {
   filter: grayscale(0%);
 }
+
 
 
 

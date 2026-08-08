@@ -676,17 +676,22 @@ if (symptomForm) {
     const selectedColors = [];
     document.querySelectorAll(".color-checkbox:checked").forEach((cb) => selectedColors.push(cb.value));
 
+    // Capture the selected discharge color radio button value
+    const selectedDischargeColor = document.querySelector('input[name="discharge_color"]:checked')?.value || null;
+
     symptomLogs.push({
       date: new Date().toISOString().split("T")[0],
       ratings: symptomRatings,
       textures: selectedTextures,
-      colors: selectedColors
+      colors: selectedColors,
+      dischargeColor: selectedDischargeColor // <--- Saved alongside your symptoms
     });
 
     saveAppState();
     alert("Symptoms logged successfully!");
   });
 }
+
 
 // --- DYNAMIC CUSTOM SYMPTOMS LOGIC ---
 
@@ -754,6 +759,8 @@ function attachSliderEventListener(slider) {
   
   slider.dispatchEvent(new Event("input"));
 }
+
+
 
 // 4. Add custom symptom button click handler
 if (addCustomSymptomBtn) {

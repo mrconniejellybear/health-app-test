@@ -12,7 +12,6 @@
 
   --feat-text: #fdf1ea;
 
-  --true-blue: #ce004b;
 }
 
 
@@ -1034,13 +1033,20 @@ body {
   position: relative;
 }
 
-/* Color Swatches matching your screenshot palette */
 .swatch-brown      { background-color: #8c532b; }
 .swatch-pink       { background-color: #f08080; }
 .swatch-bright-red { background-color: #ff2a1f; }
 .swatch-rust       { background-color: #c84338; }
 .swatch-dark-red   { background-color: #8b180d; }
 .swatch-black      { background-color: #3b0a07; }
+
+.swatch-white      { background-color: #f7f5f2; }
+.swatch-clear      { background-color: #dae0e18f; }
+.swatch-cream      { background-color: #dedaca; }
+.swatch-yellow     { background-color: #eee8bddd; }
+.swatch-grey       { background-color: #b6b4b0; }
+.swatch-pale       { background-color: #d8dccf; }
+
 
 /* --- HOME DASHBOARD CARDS --- */
 .home-card {

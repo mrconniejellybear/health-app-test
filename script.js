@@ -670,27 +670,37 @@ if (symptomForm) {
       symptomRatings[slider.dataset.symptom] = parseInt(slider.value, 10);
     });
 
-    const selectedTextures = [];
-    document.querySelectorAll(".texture-checkbox:checked").forEach((cb) => selectedTextures.push(cb.value));
+    // --- 1. MENSTRUATION DATA ---
+    // (Make sure your period HTML uses name="period-texture" and name="period-color", 
+    // or whatever names you set for them originally!)
+    const periodTextures = [];
+    document.querySelectorAll('input[name="period-texture"]:checked').forEach((cb) => periodTextures.push(cb.value));
 
-    const selectedColors = [];
-    document.querySelectorAll(".color-checkbox:checked").forEach((cb) => selectedColors.push(cb.value));
+    const periodColors = [];
+    document.querySelectorAll('input[name="period-color"]:checked').forEach((cb) => periodColors.push(cb.value));
 
-    // Capture the selected discharge color radio button value
-    const selectedDischargeColor = document.querySelector('input[name="discharge_color"]:checked')?.value || null;
+    // --- 2. DISCHARGE DATA (Your new additions!) ---
+    const dischargeTextures = [];
+    document.querySelectorAll('input[name="discharge-texture"]:checked').forEach((cb) => dischargeTextures.push(cb.value));
 
+    const dischargeColors = [];
+    document.querySelectorAll('input[name="discharge-color"]:checked').forEach((cb) => dischargeColors.push(cb.value));
+
+    // --- 3. SAVE TO LOGS ---
     symptomLogs.push({
       date: new Date().toISOString().split("T")[0],
       ratings: symptomRatings,
-      textures: selectedTextures,
-      colors: selectedColors,
-      dischargeColor: selectedDischargeColor // <--- Saved alongside your symptoms
+      textures: periodTextures,             // Saves period texture
+      colors: periodColors,                 // Saves period color
+      dischargeTextures: dischargeTextures, // Saves discharge texture
+      dischargeColors: dischargeColors      // Saves discharge color
     });
 
     saveAppState();
     alert("Symptoms logged successfully!");
   });
 }
+
 
 
 // --- DYNAMIC CUSTOM SYMPTOMS LOGIC ---

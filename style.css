@@ -1315,8 +1315,8 @@ body {
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 48px;
-  width: 48px;
+  height: 46px;
+  width: 46px;
   align-items: center;
   justify-content: center;
 

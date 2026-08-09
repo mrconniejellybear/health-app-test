@@ -531,8 +531,10 @@ if (moodCancelBtn && moodModalOverlay) {
 if (moodForm) {
   moodForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const selectedRating = document.querySelector('input[name="mood-score"]:checked');
-    const date = document.getElementById("mood-date").value;
+    console.log("Mood form submit triggered!"); // 👈 See if this logs in console
+    
+    // ... rest of code
+
 
     if (selectedRating && date) {
       moodLogs.push({ date, score: parseInt(selectedRating.value, 10) });

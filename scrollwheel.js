@@ -102,13 +102,13 @@ function initRotaryWheel() {
 }
 
 
-// 3. Touch & Mouse Angle Physics Logic
-function attachRotaryPhysics() {
+function attachRotaryPhysics()
+{
   const viewport = document.getElementById("rotary-viewport");
   const wheel = document.getElementById("rotary-wheel");
   if (!viewport || !wheel) return;
 
-  function getAngle(e) {
+  function getAngle(e){
     const rect = viewport.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -116,21 +116,17 @@ function attachRotaryPhysics() {
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
     const radians = Math.atan2(clientY - centerY, clientX - centerX);
-    return radians * (180 / Math.PI);
-  }
+    return radians * (180 / Math.PI);}
 
   function onStart(e) {
-    isDragging = true;
+  isDragging = true;
     wheel.classList.remove("snapping");
     startAngle = getAngle(e) - currentRotationAngle;
   }
-
-  function onMove(e) {
-    if (!isDragging) return;
-    const angle = getAngle(e);
-    currentRotationAngle = angle - startAngle;
-
-    // Apply rotation to wheel
+   function onMove(e) {
+   if (!isDragging) return;
+   const angle = getAngle(e);
+   currentRotationAngle = angle - startAngle;
     wheel.style.transform = `translate(-50%, 0) rotate(${currentRotationAngle}deg)`;
 ;
 

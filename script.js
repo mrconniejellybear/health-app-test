@@ -895,43 +895,59 @@ if (journalForm) {
 
 // --- 9. HOME DASHBOARD CALCULATIONS & CHART ---
 
+// --- HOME DASHBOARD RECALCULATION ENGINE ---
 function updateHomeDashboard() {
-  renderHomeMoodChart();
-  renderHomeMedicationStrip();
-  renderHomeCycleSummary();
-  renderHomeHydrationCalendar();
+  renderHomeMoodCard();
+  renderHomeMedCard();
+  renderHomeWeightCard();
 }
 
-function renderHomeMoodChart() {
-  const headlineEl = document.getElementById("home-mood-headline");
-  const container = document.querySelector(".pie-chart-container");
-  
-  if (!container || typeof Chart === "undefined") return;
+// 1. Mood Hero Card Calculation
+function renderHomeMoodCard() {
+  const positivityEl = document.getElementById("home-positivity-pct");
+  const topMoodEl = document.getElementById("home-top-mood-val");
+  const canvas = document.getElementById("home-mood-pie-chart");
 
-  if (!moodLogs || moodLogs.length === 0) {
-    if (headlineEl) headlineEl.textContent = "No mood entries logged yet this week!";
+  if (!canvas || !moodLogs || moodLogs.length === 0) {
+    if (positivityEl) positivityEl.textContent = "0%";
+    if (topMoodEl) topMoodEl.textContent = "No logs";
     return;
   }
 
-  // 1. Calculate Positivity Percentage
-  const positiveCount = moodLogs.filter(log => log.score >= 4).length;
+  // Calculate Positivity % (Scores >= 4 or positive mood labels)
+  const positiveCount = moodLogs.filter(log => log.score >= 4 || log.mood === "Happy" || log.mood === "Excited" || log.mood === "Relaxed").length;
   const pct = Math.round((positiveCount / moodLogs.length) * 100);
-  if (headlineEl) headlineEl.textContent = `${pct}% of your moods were positive!`;
+  if (positivityEl) positivityEl.textContent = `${pct}%`;
 
-  // 2. HARD RESET: Wipe container and insert a brand new <canvas> element
-  // This destroys any frozen Chart.js canvas state instantly!
-  container.innerHTML = '<canvas id="home-mood-pie-chart"></canvas>';
-  const canvas = document.getElementById("home-mood-pie-chart");
+  // Find Most Logged Mood (Frequency Check)
+  const frequencyMap = {};
+  let maxCount = 0;
+  let mostLogged = "None";
 
-  const great = moodLogs.filter(l => l.score >= 5).length;
-  const okay = moodLogs.filter(l => l.score === 3 || l.score === 4).length;
-  const low = moodLogs.filter(l => l.score <= 2).length;
+  moodLogs.forEach(log => {
+    const key = log.mood || (log.score >= 5 ? "Great" : log.score >= 3 ? "Okay" : "Low");
+    frequencyMap[key] = (frequencyMap[key] || 0) + 1;
+    if (frequencyMap[key] > maxCount) {
+      maxCount = frequencyMap[key];
+      mostLogged = key;
+    }
+  });
 
-  // 3. Render Fresh Chart
+  if (topMoodEl) topMoodEl.textContent = mostLogged;
+
+  // Render/Re-render Chart.js Pie Safely
+  if (homePieChartInstance) {
+    homePieChartInstance.destroy();
+  }
+
+  const great = moodLogs.filter(l => l.score >= 5 || l.mood === "Excited" || l.mood === "Happy").length;
+  const okay = moodLogs.filter(l => l.score === 3 || l.score === 4 || l.mood === "Relaxed" || l.mood === "Neutral").length;
+  const low = moodLogs.filter(l => l.score <= 2 || l.mood === "Sad" || l.mood === "Angry" || l.mood === "Anxious").length;
+
   homePieChartInstance = new Chart(canvas, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
-      labels: ['Great', 'Okay', 'Low'],
+      labels: ['Positive', 'Neutral', 'Low'],
       datasets: [{
         data: [great, okay, low],
         backgroundColor: ['#22c55e', '#eab308', '#ef4444'],
@@ -941,54 +957,54 @@ function renderHomeMoodChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      cutout: '70%',
       plugins: { legend: { display: false } }
     }
   });
 }
 
+// 2. Medication Compact Card
+function renderHomeMedCard() {
+  const statusEl = document.getElementById("home-med-status");
+  const nextEl = document.getElementById("home-med-next");
 
-function renderHomeMedicationStrip() {
-  const stripEl = document.getElementById("home-med-strip");
-  const titleEl = document.getElementById("home-med-title");
-  const subtextEl = document.getElementById("home-med-subtext");
-  if (!stripEl) return;
-
-  const medName = (medications.length > 0) ? medications[0].name : "medication";
-  let missedCount = 0;
-  let html = "";
-
-  for (let i = 2; i <= 8; i++) {
-    const isMissed = (i === 2 || i === 5);
-    if (isMissed) missedCount++;
-    html += `<div class="med-day-pill ${isMissed ? 'missed' : ''}">${i}</div>`;
+  if (!medications || medications.length === 0) {
+    if (statusEl) statusEl.textContent = "None Set";
+    if (nextEl) nextEl.textContent = "Tap to add meds";
+    return;
   }
 
-  stripEl.innerHTML = html;
-  
-  if (titleEl) {
-    titleEl.textContent = missedCount > 0 
-      ? `You've missed ${missedCount} days of ${medName}...`
-      : `You're all caught up on ${medName}!`;
-  }
+  const takenCount = medications.filter(m => m.isLogged).length;
+  if (statusEl) statusEl.textContent = `${takenCount}/${medications.length} Taken`;
 
-  if (subtextEl && missedCount > 0) {
-    subtextEl.textContent = "If you miss additional days, you may experience withdrawal symptoms or decreased efficacy...";
+  const pendingMed = medications.find(m => !m.isLogged);
+  if (nextEl) {
+    nextEl.textContent = pendingMed ? `Next: ${pendingMed.scheduledTime || pendingMed.name}` : "All taken today!";
   }
 }
 
-function renderHomeCycleSummary() {
-  const titleEl = document.getElementById("home-cycle-title");
-  const daysEl = document.getElementById("home-days-val");
-  
-  const remainingDays = 2;
-  if (titleEl) titleEl.textContent = `Based on your cycle history, your period should last about ${remainingDays} more days`;
-  if (daysEl) daysEl.textContent = `${remainingDays} Days`;
+// 3. Weight Stat Card
+function renderHomeWeightCard() {
+  const currentEl = document.getElementById("home-current-weight");
+  const changeEl = document.getElementById("home-weight-change-val");
+
+  if (!weightLogs || weightLogs.length === 0) {
+    if (currentEl) currentEl.textContent = "--";
+    if (changeEl) changeEl.textContent = "0 lbs";
+    return;
+  }
+
+  const latestWeight = weightLogs[weightLogs.length - 1].weight;
+  const startWeight = weightLogs[0].weight;
+  const diff = (latestWeight - startWeight).toFixed(1);
+
+  if (currentEl) currentEl.textContent = latestWeight;
+  if (changeEl) {
+    const sign = diff > 0 ? "+" : "";
+    changeEl.textContent = `${sign}${diff} lbs total`;
+  }
 }
 
-function renderHomeHydrationCalendar() {
-  const titleEl = document.getElementById("home-water-title");
-  if (titleEl) titleEl.textContent = "Great work! You hit your water goal 3 out of 5 days this month!";
-}
 
 
 // --- 10. NAVIGATION & APP INITIALIZATION ---

@@ -79,10 +79,10 @@ body {
 .title svg{
   padding: 4px;
   border-radius: 99%;
-  height: 30px;
+  height: 32px;
   width: auto;
   color: #36ab46;
-  background-color: #d7fdc49a;
+  background-color: #07a22626;
 }
 .tab1 svg{
   background-color: #ebafc5cb;
@@ -1304,6 +1304,30 @@ body {
   color: var(--text-2);
   font-size: 18px;
 }
+
+/* Top Settings Row */
+.settings-row{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.row-btn{
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  padding: 10px;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #dce2e674;
+  box-shadow: 0 10px 25px #2d2c2b06;
+  border-radius: 99px;
+}
+
+
+
+
 
 
 /* Card 1: Mood Summary */

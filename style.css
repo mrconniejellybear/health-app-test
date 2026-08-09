@@ -1,6 +1,6 @@
 :root {
   --bg-color: #f6f6f6;
-  --card-bg: #ffffff71;
+  --card-bg: #ffffff;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -35,9 +35,6 @@ body {
   gap: 14px;
   padding: 14px;
 
-  background-image: url('bgpot.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 
@@ -58,7 +55,7 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  border: 1px solid #e9edf06d;
+  border: 1px solid #dce2e674;
   padding: 16px;
   box-shadow: 0 10px 25px #2d2c2b06;
 }
@@ -269,7 +266,7 @@ body {
   color:  var(--text-main);
   border: 1px solid var(--border-color);
   padding: 12px 16px;
-  border-radius: 10px;
+  border-radius: 14px;
   margin-top: 24px;
   display: flex;
   align-items: center;
@@ -293,7 +290,7 @@ body {
   color:  #ffffff;
   border: none;
   padding: 14px 18px;
-  border-radius: 10px;
+  border-radius: 14px;
   margin-bottom: 14px;
   display: flex;
   align-items: center;
@@ -786,7 +783,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 12px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: #64748b;
   background-color: #f8fafc;
@@ -881,8 +878,6 @@ body {
   height: 100%;
   overflow: visible;
 }
-
-
 
 
 .mood-add-btn {
@@ -1542,8 +1537,7 @@ body {
 /* Fixed Bottom Nav Styling */
 .bottom-nav {
   position: fixed;
-  bottom: 18px;
-  padding-bottom: 20px;
+  bottom: 14px;
   left: 0;
   right: 0;
   background-color: #ffffffcf;
@@ -1555,7 +1549,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 410px;
+  max-width: 380px;
   padding-right: 20px;
   padding-left: 20px;
   margin: 0 auto;

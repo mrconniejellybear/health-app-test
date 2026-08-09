@@ -1,5 +1,18 @@
 // --- ROTARY MOOD WHEEL ENGINE ---
 
+const clickSound = new Audio('click.mp3');
+clickSound.volume = 0.3; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
+
+// Helper function to play sound with zero latency
+function playClickSound() {
+  // Reset audio playback position to allow rapid repeated clicks while spinning fast
+  clickSound.currentTime = 0;
+  clickSound.play().catch(() => {
+    // Autoplay policy fallback: handles browsers that block audio before first tap
+  });
+}
+
+
 // 1. Mood Configuration Array (Easily add/remove items anytime!)
 const moodConfig = [
 
@@ -182,12 +195,20 @@ function calculateActiveFocalEmoji() {
   if (normalized < 0) normalized += 360;
 
   const nearestIndex = Math.round(normalized / step) % total;
+  
+  // When the wheel passes a new slot, trigger the tick!
   if (nearestIndex !== activeMoodIndex) {
     activeMoodIndex = nearestIndex;
     updateRotarySelection(activeMoodIndex);
-    if (navigator.vibrate) navigator.vibrate(5); // Soft tick vibration
+    
+    // 🔊 Play the sound effect!
+    playClickSound();
+
+    // Soft vibration for mobile tactile feel
+    if (navigator.vibrate) navigator.vibrate(5);
   }
 }
+
 
 // 5. Update UI Title, Arc Color & Active Highlights
 function updateRotarySelection(index) {

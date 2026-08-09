@@ -1286,6 +1286,14 @@ body {
   font-size: 34px;
   color: var(--text-main);
 }
+.greeting-head{
+    font-size: 36px;
+    font-weight: 400;
+}
+.greeting-head span{
+  font-weight: 700;
+  font-size: 44px;
+}
 .view-subtitle{
   color: var(--text-2);
   font-size: 18px;

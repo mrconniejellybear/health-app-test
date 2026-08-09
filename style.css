@@ -186,8 +186,12 @@ body {
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
   grid-column: span 2;
+  background-image: linear-gradient(#a2f39b4c, #88e78070);
+  border-color: #05962916;
 }
-
+.evil svg{
+  background-color: #fff;
+}
 .mood-hero-body {
   display: flex;
   align-items: center;
@@ -215,13 +219,14 @@ body {
 }
 
 .top-mood-pill {
-  font-size: 0.8rem;
-  background: rgba(34, 197, 94, 0.1);
-  color: #4ade80;
-  padding: 4px 10px;
+  font-size: 13px;
+  color: var(--green-check);
   border-radius: 12px;
   display: inline-flex;
   gap: 4px;
+}
+.top-mood-label{
+  color: var(--text-main);
 }
 
 /* CARD 2: COMPACT MEDICATION REMINDER */
@@ -250,6 +255,8 @@ body {
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
+  background-color: #0088ff40;
+  border-color: #0088ff2e;
 }
 
 .weight-stat-body {

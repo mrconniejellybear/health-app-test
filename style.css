@@ -68,7 +68,7 @@ body {
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text-main);
 
@@ -1286,17 +1286,17 @@ body {
   margin-left: 8px;
 }
 .view-title{
-  font-size: 34px;
+  font-size: 30px;
   color: var(--text-main);
   font-weight: 500;
 }
 .greeting-head{
-    font-size: 36px;
-    font-weight: 500;
+    font-size: 34px;
+    font-weight: 400;
 }
 .greeting-head span{
   font-weight: 700;
-  font-size: 42px;
+  font-size: 40px;
 }
 .view-subtitle{
   color: var(--text-2);

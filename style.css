@@ -12,6 +12,7 @@
 
   --feat-text: #fdf1ea;
 
+  --border-2: #dce2e684;
 }
 
 
@@ -55,7 +56,7 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  border: 1px solid #dce2e674;
+  border: 1px solid var(--border-2);
   padding: 16px;
   box-shadow: 0 10px 25px #2d2c2b06;
 }
@@ -1314,16 +1315,16 @@ body {
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 46px;
-  width: 46px;
+  height: 48px;
+  width: 48px;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #dce2e674;
+  border: 1px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b06;
   border-radius: 99px;
 }.row-btn svg{
-  height: 22px;
+  height: 24px;
   width: auto;
 }
 

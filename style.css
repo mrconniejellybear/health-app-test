@@ -211,15 +211,18 @@ body {
   margin: 0;
   line-height: 1;
 }
+.mood-hero-stats p {
+  font-size: 28px;
+
+}
 
 .stat-subtext {
-  font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-main);
   margin: 2px 0 8px 0;
 }
 
 .top-mood-pill {
-  font-size: 13px;
+  font-size: 24px;
   color: var(--green-check);
   border-radius: 12px;
   display: inline-flex;
@@ -255,7 +258,7 @@ body {
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-color: #0088ff40;
+  background-image: linear-gradient(#54aef843, #54aef86a);
   border-color: #0088ff2e;
 }
 

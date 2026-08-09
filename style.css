@@ -74,12 +74,12 @@ body {
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .title svg{
   padding: 4px;
   border-radius: 99%;
-  height: 28px;
+  height: 30px;
   width: auto;
   color: #36ab46;
   background-color: #d7fdc49a;

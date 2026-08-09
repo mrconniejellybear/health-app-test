@@ -214,14 +214,12 @@
   transform-origin: center center;
   will-change: transform;
   z-index: 2;
-  transition: all 0.3s;
 }
 
 /* Snapping transition during touch release */
 .rotary-wheel.snapping {
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
 }
-
 
 /* Smooth snapping transition class added on touch end */
 .rotary-wheel.snapping {

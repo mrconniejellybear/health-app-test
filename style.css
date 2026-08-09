@@ -1,6 +1,6 @@
 :root {
   --bg-color: #f6f6f6;
-  --card-bg: #ffffff;
+  --card-bg: #ffffff71;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -34,7 +34,13 @@ body {
   flex-direction: column;
   gap: 14px;
   padding: 14px;
+
+  background-image: url('bgpot.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
+
+
 
 .credit{
   color: var(--text-2);
@@ -52,7 +58,7 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  border: 1px solid #d3dbe36d;
+  border: 1px solid #e9edf06d;
   padding: 16px;
   box-shadow: 0 10px 25px #2d2c2b06;
 }
@@ -780,20 +786,30 @@ body {
   justify-content: center;
   align-items: center;
   padding: 12px;
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 600;
   color: #64748b;
   background-color: #f8fafc;
-  border: 2px solid #e2e8f0;
   border-radius: 12px;
   transition: all 0.2s ease;
 }
+.protection-btn.yes{
+  background-color: #07a22626;
+  color: #009a31;
+}
+.protection-btn.no{
+  background-color: #e45f0030;
+  color: #e44c00;
+}
 
 /* Active Selected Tile State */
-.protection-tile .tile-radio:checked + .protection-btn {
-  background-color: #fdf2f8;
-  border-color: #be18b6;
-  color: #be185d;
+.protection-tile .tile-radio:checked + .protection-btn.yes {
+  background-color: #009a31;
+  color: #fff;
+}
+.protection-tile .tile-radio:checked + .protection-btn.no {
+  background-color: #e44c00;
+  color: #fff;
 }
 
 
@@ -1539,7 +1555,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 440px;
+  max-width: 410px;
   padding-right: 20px;
   padding-left: 20px;
   margin: 0 auto;

@@ -52,9 +52,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  border: 1px solid #e2e8ef;
+  border: 1px solid #d3dbe3;
   padding: 14px;
-  box-shadow: 0 10px 25px rgba(43, 44, 45, 0.074);
+  box-shadow: 0 10px 25px #2d2c2b13;
 }
 
 .card-header {
@@ -104,7 +104,7 @@ body {
 
 
 .subtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
   margin-top: 4px;
   font-weight: 400;
@@ -112,7 +112,7 @@ body {
 
 .status-counter {
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-2);
 }
@@ -163,7 +163,7 @@ body {
 }
 
 .logged-status {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
   font-weight: 400;
 }
@@ -197,7 +197,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text-main, #0f172a);
   background-color: var(--card-bg-subtle, #f1f5f9);
@@ -259,9 +259,9 @@ body {
 /* Add Button */
 .add-btn {
   width: 100%;
-  background-color: #dce5e9;
+  background-color: #bbe5fc9c;
   border: none;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 40px;
   margin-top: 24px;
   display: flex;
@@ -270,22 +270,22 @@ body {
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  color:  var(--text-2);
+  color:  var(--blue-accent);
   cursor: pointer;
   text-align: left;
   
   transition: all 0.3s;
 }
 .add-btn:hover{
-    background-color: #cfd9de;
-    color: var(--text-main);
+  background-color: #ade0ffb8;
+  color:  var(--blue-accent);
 }
 .add-btn-final {
   width: 98%;
   margin: auto;
-  background-color: var(--blue-accent);
+  background-color: #bbe5fc9c;
   border: none;
-  padding: 12px 18px;
+  padding: 14px 18px;
   border-radius: 40px;
   margin-bottom: 14px;
   display: flex;
@@ -293,7 +293,7 @@ body {
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color:  var(--blue-accent);
   cursor: pointer;
   text-align: left;
   
@@ -303,7 +303,6 @@ body {
 }
 .add-btn-final:hover{
   background-color: #dde3ea;
-  border: 1px solid #dde3eaaa;
 }
 
 .plus-icon {
@@ -351,7 +350,7 @@ body {
 
 .modal label {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
   margin: 10px 0 4px;
 }
@@ -377,7 +376,7 @@ body {
   border-radius: 8px;
   border: none;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
 }
 /* Modal Management Section */
@@ -471,7 +470,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px 14px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   padding-bottom: 20px;
   border-bottom: solid 1px var(--border-color);
@@ -512,7 +511,7 @@ body {
 .bar-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
   font-weight: 400;
   margin-bottom: 6px;
@@ -807,7 +806,7 @@ body {
 }
 
 .date-range-badge {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text-muted);
   display: flex;
@@ -828,7 +827,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text-muted);
   padding-bottom: 4px;
@@ -1069,7 +1068,7 @@ body {
 /* --- DAILY NOTES & BUTTON FIXES --- */
 
 .symptom-intro {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted, #64748b);
   line-height: 1.4;
   display: none;
@@ -1532,8 +1531,7 @@ body {
   left: 0;
   right: 0;
   height: 80px;
-  background-color: #ffffffd0;
-  backdrop-filter: blur(6px);
+  background-color: #ffffff;
 
   border: 1px solid #e2e8f0;
   border-radius: 999px;
@@ -1559,8 +1557,8 @@ body {
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  opacity: 0.6;
-  color: var(--true-blue);
+  opacity: 0.3;
+  color: var(--text-main);
 }
 
 .nav-icon {

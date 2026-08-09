@@ -1,3 +1,13 @@
+const logSuccessSound = new Audio("MOODLOGGED.mp3");
+
+function playLogSound() {
+  logSuccessSound.currentTime = 0; // Rewind to start for rapid clicks
+  logSuccessSound.play().catch((err) => {
+    console.log("Audio play blocked or failed:", err);
+  });
+}
+
+
 // --- 1. GLOBAL APP DATA STATE & LOCALSTORAGE LOAD ---
 
 let medications = JSON.parse(localStorage.getItem("healthApp_medications")) || [];
@@ -528,13 +538,16 @@ if (moodForm) {
       moodLogs.push({ date, score: parseInt(selectedRating.value, 10) });
       moodLogs.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-      saveAppState();
+      playLogSound(); // 🔊 Play sound effect on successful log!
+      saveAppState(); // Save data to localStorage
+      
       selectedRating.checked = false;
       moodModalOverlay.classList.add("hidden");
       renderMoodGraph();
     }
   });
 }
+
 
 function renderMoodGraph() {
   if (!moodPath || moodLogs.length === 0) return;

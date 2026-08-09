@@ -1,7 +1,6 @@
-// --- ROTARY MOOD WHEEL ENGINE ---
-
+// --- AUDIO EFFECTS ---
 const clickSound = new Audio('click.mp3');
-clickSound.volume = 0.3; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
+clickSound.volume = 0.1; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
 
 // Helper function to play sound with zero latency
 function playClickSound() {
@@ -11,6 +10,7 @@ function playClickSound() {
     // Autoplay policy fallback: handles browsers that block audio before first tap
   });
 }
+
 
 
 // 1. Mood Configuration Array (Easily add/remove items anytime!)

@@ -214,6 +214,7 @@
   transform-origin: center center;
   will-change: transform;
   z-index: 2;
+  transition: all 0.3s;
 }
 
 /* Snapping transition during touch release */

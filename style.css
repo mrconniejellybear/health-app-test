@@ -65,11 +65,36 @@ body {
 }
 
 .title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text-main);
 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
 }
+.title svg{
+  background-color: #e0ecd8;
+  padding: 4px;
+  border-radius: 99%;
+  color: #28a745
+}
+
+.tab3 svg{
+  background-color: #f0c4fddc;
+  color: #9c12d2
+}
+.tab4 svg{
+  background-color: #c4e0fdcb;
+  color: #0676d9
+}
+.tab5 svg{
+  background-color: #fdeac4cb;
+  color: #ca8a0a
+}
+
+
 
 .subtitle {
   font-size: 14px;
@@ -227,24 +252,25 @@ body {
 /* Add Button */
 .add-btn {
   width: 100%;
-  background-color: var(--true-blue);
+  background-color: var(--border-color);
   border: none;
   padding: 10px 16px;
   border-radius: 40px;
   margin-top: 24px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--feat-text);
+  color: var(--text-main);
   cursor: pointer;
   text-align: left;
   
   transition: all 0.3s;
 }
 .add-btn:hover{
-    background-color: #b70049;
+    background-color: #e0e6e9;
 }
 .add-btn-final {
   width: 98%;

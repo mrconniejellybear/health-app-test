@@ -1164,11 +1164,11 @@ body {
 
 /* Texture Grid (Scrolls horizontally on very small screens, wraps nicely) */
 .texture-selector-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Enforces exactly 5 columns per row */
-  gap: 6px; /* Tight gap to fit snugly on mobile screens */
-  margin-top: 12px;
-  width: 100%;
+  display: flex;
+  gap: 0.6rem;
+  padding-bottom: 0.5rem;
+   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .texture-tile {
@@ -1184,8 +1184,8 @@ body {
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 58px;
-  height: 58px;
+  width: 59px;
+  height: 59px;
   border-radius: 14px;
   border: 3px solid var(--border-color);
   background-color: #ffffff;
@@ -1215,9 +1215,9 @@ body {
 .color-selector-grid {
   display: flex;
   gap: 0.6rem;
-  overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
 }

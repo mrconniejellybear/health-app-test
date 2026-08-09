@@ -13,19 +13,13 @@ let medAdherenceLogs = JSON.parse(localStorage.getItem("healthApp_medLogs")) || 
   "2026-08-01": "taken",
   "2026-08-02": "taken"
 };
+let sexualActivityLogs = JSON.parse(localStorage.getItem("healthApp_sexLogs")) || [];
+
 
 let customSymptoms = JSON.parse(localStorage.getItem("healthApp_customSymptoms")) || [];
 let symptomLogs = JSON.parse(localStorage.getItem("healthApp_symptomLogs")) || [];
 let journalLogs = JSON.parse(localStorage.getItem("healthApp_journalLogs")) || [];
-let weightLogs = JSON.parse(localStorage.getItem("healthApp_weightLogs")) || [
-  { date: "2026-02-26", weight: 154 },
-  { date: "2026-03-15", weight: 158 },
-  { date: "2026-04-02", weight: 156 },
-  { date: "2026-05-10", weight: 165 },
-  { date: "2026-05-28", weight: 161 },
-  { date: "2026-06-12", weight: 151 },
-  { date: "2026-06-26", weight: 160 }
-];
+let weightLogs = JSON.parse(localStorage.getItem("healthApp_weightLogs")) || [];
 let contraceptiveData = JSON.parse(localStorage.getItem("healthApp_contraceptive")) || {
   type: "",
   customName: ""
@@ -45,6 +39,8 @@ function saveAppState() {
   localStorage.setItem("healthApp_weightLogs", JSON.stringify(weightLogs));
   localStorage.setItem("healthApp_contraceptive", JSON.stringify(contraceptiveData));
   localStorage.setItem("healthApp_customSymptoms", JSON.stringify(customSymptoms));
+  localStorage.setItem("healthApp_sexLogs", JSON.stringify(sexualActivityLogs));
+
 }
 
 
@@ -346,6 +342,51 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+const sexForm = document.getElementById("sexual-activity-form");
+const sexDateInput = document.getElementById("sex-log-date");
+const sexTimeInput = document.getElementById("sex-log-time");
+
+// 1. Auto-fill date & time inputs with current moment on initialization
+if (sexDateInput && sexTimeInput) {
+  const now = new Date();
+  sexDateInput.value = now.toISOString().split("T")[0]; // YYYY-MM-DD
+  
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  sexTimeInput.value = `${hours}:${minutes}`; // HH:MM (24hr format)
+}
+
+// 2. Submit Handler
+if (sexForm) {
+  sexForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const selectedProtection = document.querySelector('input[name="protection-used"]:checked');
+    const logDate = sexDateInput.value;
+    const logTime = sexTimeInput.value;
+
+    if (!logDate || !logTime) {
+      alert("Please select both a date and time.");
+      return;
+    }
+
+    const activityEntry = {
+      id: Date.now(),
+      date: logDate,
+      time: logTime,
+      protectionUsed: selectedProtection ? selectedProtection.value === "yes" : null
+    };
+
+    // Push to state & persist
+    sexualActivityLogs.push(activityEntry);
+    saveAppState();
+
+    alert("Activity logged successfully!");
+    
+    // Reset selection state
+    if (selectedProtection) selectedProtection.checked = false;
+  });
+}
 
 
 // --- 5. WEIGHT TRACKER LOGIC ---
@@ -425,6 +466,35 @@ function renderWeightGraph() {
   });
 
   weightPath.setAttribute("d", `M ${points.join(" L ")}`);
+}
+
+// Sleep Quality Configuration Mapping
+const sleepQualityMap = {
+  1: { label: "Poor", class: "badge-poor", color: "#d04a35", fillPct: 0 },
+  2: { label: "Fair", class: "badge-fair", color: "#f59e0b", fillPct: 33 },
+  3: { label: "Good", class: "badge-good", color: "#4fa23a", fillPct: 66 },
+  4: { label: "Excellent", class: "badge-excellent", color: "#059669", fillPct: 100 }
+};
+
+const sleepSlider = document.getElementById("sleep-quality-slider");
+const sleepBadge = document.getElementById("badge-sleep-quality");
+
+if (sleepSlider && sleepBadge) {
+  sleepSlider.addEventListener("input", (e) => {
+    const val = parseInt(e.target.value, 10);
+    const config = sleepQualityMap[val];
+
+    // 1. Update Badge Text & Classes
+    sleepBadge.textContent = config.label;
+    sleepBadge.className = `sleep-badge ${config.class}`;
+
+    // 2. Update Slider Track Fill Gradient & Thumb Color
+    const trackColor = "#e2e8f0";
+    e.target.style.background = `linear-gradient(to right, ${config.color} ${config.fillPct}%, ${trackColor} ${config.fillPct}%)`;
+  });
+
+  // Trigger once on initialization to ensure correct default state
+  sleepSlider.dispatchEvent(new Event("input"));
 }
 
 

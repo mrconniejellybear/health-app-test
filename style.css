@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f4f4f3;
+  --bg-color: #f4f3f1;
   --card-bg: #ffffff;
   --text-main: #2e3248;
   --text-2: #6c7b91;
@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #dce2e684;
+  --border-2: #d3d8dc78;
 }
 
 
@@ -58,9 +58,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 24px;
-  border: 0px solid var(--border-2);
+  border: 1px solid var(--border-2);
   padding: 14px;
-  box-shadow: 0 10px 25px #2d2c2b00;
+  box-shadow: 0px 10px 40px #2d2c2b09;
 }
 
 .card-header {
@@ -100,6 +100,7 @@ body {
   background-color: #ebc4fddc;
   color: #8a4cbd
 }
+
 .tab4 svg{
   background-color: #c4e0fdcb;
   color: #0676d9
@@ -462,8 +463,8 @@ body {
 
 .add-btn-purple{
   width: 100%;
-  background-color: #e8d2f5;
-  color:  #7a3ca0;
+  background-color: #ebc4fddc;
+  color: #8a4cbd;
   border:none;
   padding: 12px 16px;
   border-radius: 12px;
@@ -648,7 +649,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 8px 14px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   padding-bottom: 20px;
   border-bottom: solid 1px var(--border-color);
   color: var(--text-2);
@@ -811,10 +812,10 @@ body {
   font-weight: 500;
   color: #334155;
   text-align: center;
-  border: 2px solid var(--border-color);
+  border: 0px solid var(--border-color);
   border-radius: 8px;
   outline: none;
-  background-color: #ffffff;
+  background-color: var(--border-color);
 }
 
 .sleep-number-input:focus {
@@ -923,8 +924,8 @@ body {
   flex: 1;
   padding: 10px 14px;
   font-size: 0.95rem;
-  font-weight: 500;
-  color: #334155;
+  font-weight: 400;
+  color: var(--text-main);
   border: 0px solid #e2e8f0;
   border-radius: 10px;
   background-color: var(--border-color);
@@ -1178,7 +1179,7 @@ body {
 
 .contra-label {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-muted);
   margin-top: 6px;
   text-align: center;
@@ -1275,7 +1276,7 @@ body {
 
 .symptom-title {
   font-size: 16px;
-  font-weight:500;
+  font-weight:400;
   color: var(--text-main, #0f172a);
   display: flex;
   align-items: center;
@@ -1392,8 +1393,8 @@ body {
 .tile-label {
   margin-top: 0.4rem;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted); /* Default light gray text */
+  font-weight: 400;
+  color: var(--text-2); /* Default light gray text */
   transition: color 0.2s ease;
   text-align: center;
 }

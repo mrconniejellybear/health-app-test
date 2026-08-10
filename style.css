@@ -1,6 +1,6 @@
 :root {
   --bg-color: #f4f3f1;
-  --card-bg: #ffffff;
+  --card-bg: #ffffff3b;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #d3d8dc78;
+  --border-2: #d3d8dc85;
 }
 
 
@@ -32,25 +32,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-
   flex-direction: column;
   gap: 14px;
   padding: 16px;
 
+  background-image: url('green.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  /* Restrict background width to match phone dimensions */
+  background-size: min(100%, 430px) auto; 
 }
 
 
-
 .credit{
-  color: var(--text-2);
+  color: var(--text-main);
   position: absolute;
   top: 14px;
   font-size: 13px;
 }
 .credit a{
   text-decoration: none;
-  color: #9a85b3;
+  color: #b459e1;
 }
 
 .card {
@@ -61,6 +63,8 @@ body {
   border: 1px solid var(--border-2);
   padding: 14px;
   box-shadow: 0px 10px 40px #2d2c2b09;
+
+  box-shadow:inset 0px 0px 50px #ffffff8f;
 }
 
 .card-header {
@@ -1000,7 +1004,6 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  margin-top:8px;
 }
 
 /* Graph Wrapper Layout */
@@ -1276,7 +1279,7 @@ body {
 
 .symptom-title {
   font-size: 16px;
-  font-weight:400;
+  font-weight:500;
   color: var(--text-main, #0f172a);
   display: flex;
   align-items: center;
@@ -1483,11 +1486,12 @@ body {
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 42px;
-  width: 42px;
+  height: 44px;
+  width: 44px;
 
   border: 1px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b06;
+  box-shadow:inset 0px 0px 10px #ffffff8f;
   border-radius: 99px;
 }.row-btn svg{
   height: 24px;
@@ -1499,7 +1503,7 @@ body {
   color: #fff;
   font-size: 15px;
   font-weight: 640;
-  height: 40px;
+  height: 38px;
   border: none;
   border-radius: 10px;
   padding: 0px 24px 0px 14px;
@@ -1509,7 +1513,7 @@ body {
   gap: 10px;
 }
 .quick-log-btn:hover{
-  background-color: #272727;
+  background-color: #363636;
 }
 
 
@@ -1663,17 +1667,15 @@ body {
   color: #94a3b8;
 }
 .mini-pill-header{
-  display: flex;
+  display:flex;
   justify-content: space-between;
   align-items: start;
   flex-direction: row;
   margin-bottom: 10px;
-  margin-top: -6px;
   gap: 6px;
 }
 .pill-icon{
   color: var(--green-check);
-  background-color:#009a053b;
   border-radius: 99px;
   height: 22px;
   width: 22px;
@@ -1786,7 +1788,8 @@ body {
   bottom: 10px;
   left: 0;
   right: 0;
-  background-color: #ffffffcf;
+  background-color: #ffffff6b;
+  box-shadow:inset 0px 0px 30px #ffffffb8;
   backdrop-filter: blur(4px);
   height: 70px;
 

@@ -182,7 +182,7 @@ body {
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
   grid-column: span 2;
-  background-image: linear-gradient(#a2f39b4c, #88e78070);
+  background-color:  #88e78070;
   border-color: #05962916;
 }
 .evil svg{
@@ -248,7 +248,7 @@ body {
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-image: linear-gradient(#007bff59, #007bff8f);
+  background-color: #007bff8f;
   border-color: #0088ff2e;
 }
 

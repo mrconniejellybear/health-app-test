@@ -248,8 +248,8 @@ body {
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-color: #007bff8f;
-  border-color: #0088ff2e;
+  background-color: #007bff65;
+  border-color: #0088ff29;
 }
 
 .weight-stat-body {
@@ -1480,14 +1480,14 @@ body {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  justify-content: space-between;
 }
+
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
   height: 46px;
   width: 46px;
-  align-items: center;
-  justify-content: center;
 
   border: 1px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b06;
@@ -1497,7 +1497,23 @@ body {
   width: auto;
 }
 
+.quick-log-btn{
+  background-color: #000000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 640;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  padding: 0px 24px 0px 14px;
 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quick-log-btn:hover{
+  background-color: #191919;
+}
 
 
 
@@ -1508,7 +1524,6 @@ body {
   align-items: center;
   gap: 12px;
 }
-
 .pie-chart-container {
   width: 90px;
   height: 90px;
@@ -1541,6 +1556,12 @@ body {
 
 .mood-summary-text {
   flex: 1;
+}
+
+.mood-report-output {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .summary-highlight {

@@ -1326,19 +1326,22 @@ body {
   box-sizing: border-box; /* Prevents overflow */
   padding: 12px;
   border-radius: 12px;
-  border: 2px solid var(--border-color, #e2e8f0);
-  background-color: var(--input-bg);
+  border: 0px solid var(--border-color, #e2e8f0);
+  background-color: var(--border-color);
   font-family: inherit;
   font-size: 16px;
-  color: var(--text-main, #50545e);
+  color: var(--text-main);
   resize: vertical;
   outline: none;
   transition: border-color 0.4s, background-color 0.2s;
 }
+#symptom-notes textarea{
+  color: var(--text-main);
+
+}
 
 #symptom-notes:focus {
-  border-color: #28a744;
-  background-color: #ffffff;
+  background-color: #eef0f2e8;
 }
 
 .subcard-subtitle {

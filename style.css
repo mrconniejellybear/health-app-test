@@ -1,6 +1,6 @@
 :root {
   --bg-color: #f4f3f1;
-  --card-bg: #fbfaf9a8;
+  --card-bg: #fbfaf9;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #d3d8dc2d;
+  --border-2: #d3d8dc60;
 }
 
 
@@ -36,7 +36,6 @@ body {
   gap: 14px;
   padding: 16px;
 
-  background-image: url('green.png');
   background-repeat: no-repeat;
   background-position: top center;
   /* Restrict background width to match phone dimensions */
@@ -60,11 +59,10 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 24px;
-  border: 1px solid var(--border-2);
+  border: none;
   padding: 14px;
   box-shadow: 0px 10px 40px #2d2c2b09;
 
-  box-shadow:inset 0px 0px 50px #ffffff8f;
 }
 
 .card-header {
@@ -187,9 +185,12 @@ body {
 
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
-  grid-column: span 2;
-  background-color:  #88e78070;
+  grid-column: span 1;
+  background-color:  #96e78067;
   border-color: #05962916;
+}
+.mood-hero-card .mini-pill-header .date-range-badge{
+  color: #000000;
 }
 .evil svg{
   background-color: #fff;
@@ -205,9 +206,10 @@ body {
 }
 
 .pie-chart-wrapper {
-  width: 90px;
-  height: 90px;
+  width: 94px;
+  height: 94px;
   position: relative;
+  margin-top: -16px;
 }
 
 .mood-hero-stats h3 {
@@ -218,7 +220,8 @@ body {
   line-height: 1;
 }
 .mood-hero-stats p {
-  font-size: 28px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .stat-subtext {
@@ -253,7 +256,7 @@ body {
 
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
-  grid-column: span 1;
+  grid-column: span 2;
   background-color: #007bff65;
   border-color: #0088ff00;
 }
@@ -963,7 +966,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 12px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #64748b;
   background-color: #f8fafc;

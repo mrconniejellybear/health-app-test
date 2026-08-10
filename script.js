@@ -531,10 +531,10 @@ if (moodCancelBtn && moodModalOverlay) {
 if (moodForm) {
   moodForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("Mood form submit triggered!"); // 👈 See if this logs in console
-    
-    // ... rest of code
 
+    const selectedRating = document.querySelector('input[name="mood-rating"]:checked');
+    const dateInput = document.getElementById("mood-date");
+    const date = dateInput ? dateInput.value : new Date().toISOString().split('T')[0];
 
     if (selectedRating && date) {
       moodLogs.push({ date, score: parseInt(selectedRating.value, 10) });
@@ -542,13 +542,15 @@ if (moodForm) {
 
       playLogSound(); // 🔊 Play sound effect on successful log!
       saveAppState(); // Save data to localStorage
+      updateHomeDashboard(); // Refresh home screen charts!
       
       selectedRating.checked = false;
-      moodModalOverlay.classList.add("hidden");
+      if (moodModalOverlay) moodModalOverlay.classList.add("hidden");
       renderMoodGraph();
     }
   });
 }
+
 
 
 function renderMoodGraph() {
@@ -895,7 +897,6 @@ if (journalForm) {
 
 // --- 9. HOME DASHBOARD CALCULATIONS & CHART ---
 
-// --- HOME DASHBOARD RECALCULATION ENGINE ---
 function updateHomeDashboard() {
   renderHomeMoodCard();
   renderHomeMedCard();
@@ -914,18 +915,22 @@ function renderHomeMoodCard() {
     return;
   }
 
-  // Calculate Positivity % (Scores >= 4 or positive mood labels)
-  const positiveCount = moodLogs.filter(log => log.score >= 4 || log.mood === "Happy" || log.mood === "Excited" || log.mood === "Relaxed").length;
+  // Check log.label (from scroll wheel) or log.mood
+  const positiveCount = moodLogs.filter(log => {
+    const moodName = log.label || log.mood;
+    return log.score >= 4 || ["Happy", "Excited", "Relaxed", "Okay", "Proud"].includes(moodName);
+  }).length;
+
   const pct = Math.round((positiveCount / moodLogs.length) * 100);
   if (positivityEl) positivityEl.textContent = `${pct}%`;
 
-  // Find Most Logged Mood (Frequency Check)
+  // Find Most Logged Mood
   const frequencyMap = {};
   let maxCount = 0;
   let mostLogged = "None";
 
   moodLogs.forEach(log => {
-    const key = log.mood || (log.score >= 5 ? "Great" : log.score >= 3 ? "Okay" : "Low");
+    const key = log.label || log.mood || (log.score >= 5 ? "Great" : log.score >= 3 ? "Okay" : "Low");
     frequencyMap[key] = (frequencyMap[key] || 0) + 1;
     if (frequencyMap[key] > maxCount) {
       maxCount = frequencyMap[key];
@@ -940,28 +945,29 @@ function renderHomeMoodCard() {
     homePieChartInstance.destroy();
   }
 
-  const great = moodLogs.filter(l => l.score >= 5 || l.mood === "Excited" || l.mood === "Happy").length;
-  const okay = moodLogs.filter(l => l.score === 3 || l.score === 4 || l.mood === "Relaxed" || l.mood === "Neutral").length;
-  const low = moodLogs.filter(l => l.score <= 2 || l.mood === "Sad" || l.mood === "Angry" || l.mood === "Anxious").length;
+  const great = moodLogs.filter(l => l.score >= 5).length;
+  const okay = moodLogs.filter(l => l.score === 3 || l.score === 4).length;
+  const low = moodLogs.filter(l => l.score <= 2).length;
 
   homePieChartInstance = new Chart(canvas, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: ['Positive', 'Neutral', 'Low'],
       datasets: [{
         data: [great, okay, low],
-        backgroundColor: ['#22c55e', '#eab308', '#ef4444'],
+        backgroundColor: ['#00ad42', '#8cdc00', '#e4d500'],
         borderWidth: 0
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: '70%',
-      plugins: { legend: { display: false } }
+      cutout: '60%',
+      plugins: {legend: { display: false } }
     }
   });
 }
+
 
 // 2. Medication Compact Card
 function renderHomeMedCard() {

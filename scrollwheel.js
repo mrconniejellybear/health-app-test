@@ -233,13 +233,28 @@ document.getElementById("save-mood-btn")?.addEventListener("click", () => {
   moodLogs.push({
     date: new Date().toISOString().split("T")[0],
     score: activeMood.score,
-    label: activeMood.label
+    label: activeMood.label,
+    mood: activeMood.label // 👈 Backup key so all filter functions detect it
   });
 
   saveAppState();
+
+  // Play audio feedback
+  if (typeof playLogSound === "function") playLogSound();
+
+  // Force full UI refresh across tabs
+  if (typeof renderMoodGraph === "function") renderMoodGraph();
   if (typeof updateHomeDashboard === "function") updateHomeDashboard();
+
+  // If home chart instance exists, force Chart.js to recalculate data
+  if (typeof homePieChartInstance !== "undefined" && homePieChartInstance !== null) {
+    homePieChartInstance.update();
+  }
+
   alert(`Logged mood: ${activeMood.label}`);
 });
+
+
 
 // Run initialization on DOM load
 document.addEventListener("DOMContentLoaded", initRotaryWheel);

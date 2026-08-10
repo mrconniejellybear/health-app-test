@@ -51,17 +51,17 @@ body {
 /* 1. Home Dashboard - Sleek Neutral / Dark Slate Theme */
 #view-home {
   background-image: linear-gradient(10deg, #ffffff2b 14%, #b3eea727 40%, #ffffff28 100%);
-  background-size: min(100%, 800px) auto; 
+  background-size: min(100%,) auto; 
 }
 /* 2. Diet & Weight - Hydration Blue & Warm Amber Gradient */
 #view-diet {
   background-image: linear-gradient(30deg, #ffffff2b 14%, #088bfd06 100%);
-  background-size: min(100%, 800px) auto; 
+  background-size: min(100%, ) auto; 
 }
 /* 3. Wellbeing (Mood & Meds) - Calming Deep Violet & Emerald Tint */
 #view-meds {
   background-image: linear-gradient(10deg, #ffffff2b 5%, #66a0d70a 20%, #ffffff00 70%);
-  background-size: min(100%, 800px) auto; 
+  background-size: min(100%,) auto; 
 }
 /* 4. Menstruation / Cycle - Rich Rose & Deep Magenta Atmosphere */
 #view-cycle {

@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #d3d8dc60;
+  --border-2: #d3d8dc79;
 }
 
 
@@ -59,9 +59,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 24px;
-  border: none;
+  border: 1px solid var(--border-2);
   padding: 14px;
-  box-shadow: 0px 10px 40px #2d2c2b09;
+  box-shadow: 0px 10px 40px #2d2c2b0e;
 
 }
 
@@ -185,7 +185,7 @@ body {
 
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
-  grid-column: span 1;
+  grid-column: span 2;
   background-color:  #96e78067;
   border-color: #05962916;
 }
@@ -206,10 +206,10 @@ body {
 }
 
 .pie-chart-wrapper {
-  width: 94px;
-  height: 94px;
+  width: 100px;
+  height: 100px;
   position: relative;
-  margin-top: -16px;
+  margin-top: -10px;
 }
 
 .mood-hero-stats h3 {
@@ -256,7 +256,7 @@ body {
 
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
-  grid-column: span 2;
+  grid-column: span 1;
   background-color: #007bff65;
   border-color: #0088ff00;
 }
@@ -1493,8 +1493,8 @@ body {
   height: 44px;
   width: 44px;
 
-  border: 0px solid var(--border-2);
-  box-shadow: 0 10px 25px #2d2c2b06;
+  border: 1px solid var(--border-2);
+  box-shadow: 0 10px 25px #2d2c2b0b;
   border-radius: 99px;
 }.row-btn svg{
   height: 24px;

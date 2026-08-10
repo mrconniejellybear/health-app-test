@@ -1493,9 +1493,8 @@ body {
   height: 44px;
   width: 44px;
 
-  border: 1px solid var(--border-2);
+  border: 0px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b06;
-  box-shadow:inset 0px 0px 10px #ffffff8f;
   border-radius: 99px;
 }.row-btn svg{
   height: 24px;

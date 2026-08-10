@@ -149,34 +149,47 @@
 .rotary-viewport {
   position: relative;
   width: 110%;
-  height: 250px;
+  height: 310px;
   overflow: hidden;
   touch-action: none;
   user-select: none;
   margin: -16px;
 }
 
-/* Dynamic background glow based on active mood color */
+/* Mental Health Tab View Container - Ensure positioning boundary */
+#view-mental {
+  position: relative;
+  overflow: hidden; /* Keeps the glow from spilling outside the view tab */
+}
+
+/* Atmospheric Focal Glow - Anchored to Top of Viewport/Screen */
 .rotary-glow-bg {
   position: absolute;
-  width: 900px;
-  height: 900px;
-  border-radius: 90%;
-  top: -40px;
-
+  top: -40px; /* Pulls glow up past the top boundary for a seamless gradient bleed */
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
-
-  background: radial-gradient(circle, rgba(234,179,8,0.25) 0%, rgba(255,255,255,0) 90%);
-  transition: background 0.4s ease;
-  pointer-events: none;
+  width: 120%; /* Wide radial sweep across mobile viewport width */
+  height: 380px; /* Tall enough to illuminate top header area down behind wheel */
+  
+  /* Radial gradient centered near the top edge */
+  background: radial-gradient(
+    circle at 50% 20%, 
+    var(--active-mood-color, rgba(234, 179, 8, 0.35)) 0%, 
+    rgba(15, 23, 42, 0) 70%
+  );
+  
+  pointer-events: none; /* Prevents glow from blocking thumb touches/drag gestures */
+  z-index: 0; /* Ensures it sits smoothly behind the wheel and center text */
+  transition: background 0.4s ease; /* Smooth color morphing when spinning wheel */
 }
+
+
+
 
 /* Center Headline Text */
 .rotary-center-content {
   position: absolute;
-  top: 95px;
+  top: 134px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -188,14 +201,14 @@
 
 .rotary-subtitle {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: var(--text-main);
   margin-top: 10px;
 }
 
 .rotary-headline {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #334155;
+  color: #000000;
   margin: 0;
   letter-spacing: -0.5px;
 }
@@ -207,7 +220,7 @@
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  top: 10px;
+  top: 34px;
   left: 50%;
   transform: translate(-50%, 0);
   border: 36px solid rgba(148, 163, 184, 0.25);
@@ -259,8 +272,8 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 180px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f6f6f6 80%);
+  height: 220px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f6f6f6 70%);
   pointer-events: none;
   z-index: 5; /* Above wheel (z:2), below text (z:10) */
 }

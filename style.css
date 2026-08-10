@@ -38,36 +38,11 @@ body {
 
   background-repeat: no-repeat;
   background-position: top center;
+    background-image: linear-gradient(10deg, #ffffff2b 14%, #b3eea727 40%, #ffffff28 100%);
+
   /* Restrict background width to match phone dimensions */
 }
 
-/* Base styling for all tab views */
-.tab-view {
-  min-height: 100vh;
-  padding: 20px 16px 100px 16px;
-  transition: background 0.4s ease; /* Smooth fade when switching tabs! */
-}
-
-/* 1. Home Dashboard - Sleek Neutral / Dark Slate Theme */
-#view-home {
-  background-image: linear-gradient(10deg, #ffffff2b 14%, #b3eea727 40%, #ffffff28 100%);
-  background-size: min(100%,) auto; 
-}
-/* 2. Diet & Weight - Hydration Blue & Warm Amber Gradient */
-#view-diet {
-  background-image: linear-gradient(30deg, #ffffff2b 14%, #088bfd06 100%);
-  background-size: min(100%, ) auto; 
-}
-/* 3. Wellbeing (Mood & Meds) - Calming Deep Violet & Emerald Tint */
-#view-meds {
-  background-image: linear-gradient(10deg, #ffffff2b 5%, #66a0d70a 20%, #ffffff00 70%);
-  background-size: min(100%,) auto; 
-}
-/* 4. Menstruation / Cycle - Rich Rose & Deep Magenta Atmosphere */
-#view-cycle {
-  background-image: linear-gradient(10deg, #eea7e615 14%, #ffffff2b 30%,#f370e40b 60%, #ffffff2b 100%);
-  background-size: min(100%, 800px) auto; 
-}
 
 
 .credit{

@@ -1,6 +1,6 @@
 :root {
-  --bg-color: #f7f3ee;
-  --card-bg: #ffffffc1;
+  --bg-color: #f2f2f2;
+  --card-bg: #ffffff;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #d3d8dc7e;
+  --border-2: #d3d8dc00;
 }
 
 
@@ -39,16 +39,13 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   /* Restrict background width to match phone dimensions */
-  background-size: min(100%, 430px) auto; 
-}
+  background-size: min(100%, 500px) auto; 
 
-.app-views{
-  background-image: url('yeah.png');
-  background-position: center center;
-  background-repeat: no-repeat; 
-  background-size: cover; 
+  background-image: linear-gradient(10deg, #ffffff2b 14%, #b3eea727 40%, #ffffff28 100%);
 
 }
+
+
 
 .credit{
   color: var(--text-main);
@@ -65,11 +62,10 @@ body {
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
-  border-radius: 24px;
-  border: 1px solid var(--border-2);
+  border-radius: 30px;
+  border: none;
   padding: 14px;
-  box-shadow: 0px 10px 40px #2d2c2b11;
-  box-shadow: inset 0px 0px 10px #ffffff5f;
+  box-shadow: 0px 10px 40px #00000000;
 }
 
 .card-header {
@@ -193,11 +189,11 @@ body {
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
   grid-column: span 2;
-  background-color:  #b2eaa281;
+  background-color:  #cff4c6cc;
   border-color: #05962916;
 }
-.mood-hero-card .mini-pill-header .date-range-badge{
-  color: #000000;
+.mini-pill-header .date-range-badge{
+  color: var(--text-main);
 }
 .evil svg{
   background-color: #fff;
@@ -267,7 +263,7 @@ body {
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-color: #007bff5a;
+  background-color: #0091ff82;
   border-color: #0088ff32;
 }
 
@@ -280,12 +276,12 @@ body {
 .weight-main-val {
   font-size: 1.3rem;
   font-weight: 800;
-  color: #f8fafc;
+  color: var(--text-main);
 }
 
 .weight-main-val small {
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--text-main);
   font-weight: 400;
 }
 
@@ -293,7 +289,11 @@ body {
   font-size: 14px;
   font-weight: 600;
   width: fit-content;
-  color: #fff;
+  color: #00a6ff;
+  background-color: rgba(255, 255, 255, 0.513);
+  border-radius: 99px;
+  padding: 2px 10px;
+  
 }
 
 
@@ -481,9 +481,8 @@ body {
 .add-btn-purple{
   width: 100%;
   background-color: #ebc4fddc;
-  box-shadow:inset 0px 0px 50px rgba(254, 252, 255, 0.769);
+  border: none;
   color: #8a4cbd;
-  border:1px solid #ebc4fd07;
   padding: 12px 16px;
   border-radius: 12px;
   margin-top: 16px;
@@ -1492,7 +1491,6 @@ body {
 .settings-row{
   display: flex;
   flex-direction: row;
-  gap: 10px;
   margin-bottom: -4px;
   justify-content: space-between;
 }
@@ -1502,7 +1500,7 @@ body {
   color: var(--text-main);
   height: 44px;
   width: 44px;
-
+  margin-right: 4px;
   border: 1px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b0b;
   border-radius: 99px;

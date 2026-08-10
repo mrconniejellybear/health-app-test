@@ -1,6 +1,6 @@
 :root {
   --bg-color: #f4f3f1;
-  --card-bg: #ffffff3b;
+  --card-bg: #fbfaf9a8;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #d3d8dc85;
+  --border-2: #d3d8dc2d;
 }
 
 
@@ -255,7 +255,7 @@ body {
 .weight-stat-card {
   grid-column: span 1;
   background-color: #007bff65;
-  border-color: #0088ff29;
+  border-color: #0088ff00;
 }
 
 .weight-stat-body {
@@ -1788,12 +1788,12 @@ body {
   bottom: 10px;
   left: 0;
   right: 0;
-  background-color: #ffffff6b;
-  box-shadow:inset 0px 0px 30px #ffffffb8;
+  background-color: rgb(0, 0, 0);
+  box-shadow:inset 0px 0px 30px #00000086;
   backdrop-filter: blur(4px);
   height: 70px;
 
-  border: 1px solid #d3dbe36d;
+  border: 1px solid var(--border-2);
   border-radius: 999px;
   display: flex;
   justify-content: space-around;
@@ -1813,20 +1813,20 @@ body {
   border: none;
   outline: none;
   padding: 8px 8px;
-  height: 50px;
-  width: 50px;
+  height: 46px;
+  width: 46px;
   border-radius: 99px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  color: var(--text-main);
+  color: white;
 }
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
-  background: #000000;
+  background: #49423b;
   color: #ffffff;
 
 }

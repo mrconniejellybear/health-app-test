@@ -1,6 +1,6 @@
 :root {
-  --bg-color: #f4f3f1;
-  --card-bg: #fbfaf9;
+  --bg-color: #f7f3ee;
+  --card-bg: #fbfaf9a8;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
@@ -14,7 +14,7 @@
 
   --feat-text: #fdf1ea;
 
-  --border-2: #d3d8dc79;
+  --border-2: #d3d8dc7e;
 }
 
 
@@ -42,6 +42,13 @@ body {
   background-size: min(100%, 430px) auto; 
 }
 
+.app-views{
+  background-image: url('tan.png');
+  background-position: center center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
+
+}
 
 .credit{
   color: var(--text-main);
@@ -61,7 +68,7 @@ body {
   border-radius: 24px;
   border: 1px solid var(--border-2);
   padding: 14px;
-  box-shadow: 0px 10px 40px #2d2c2b0e;
+  box-shadow: 0px 10px 40px #2d2c2b11;
 
 }
 
@@ -210,10 +217,11 @@ body {
   height: 100px;
   position: relative;
   margin-top: -10px;
+  pointer-events: none;
 }
 
 .mood-hero-stats h3 {
-  font-size: 40px;
+  font-size: 44px;
   font-weight: 800;
   color: var(--green-check);
   margin: 0;
@@ -245,6 +253,8 @@ body {
 /* CARD 2: COMPACT MEDICATION REMINDER */
 .med-compact-card {
   grid-column: span 1;
+  background-color: #faeba796;
+  border-color: #ffdf8d8a;
 }
 
 .med-status-badge {
@@ -258,7 +268,7 @@ body {
 .weight-stat-card {
   grid-column: span 1;
   background-color: #007bff65;
-  border-color: #0088ff00;
+  border-color: #0088ff32;
 }
 
 .weight-stat-body {

@@ -172,10 +172,6 @@ body {
   height: 20px;
 }
 
-/* Theme Color Accents */
-.mood-icon { color: #22c55e; }    /* Green accent */
-.med-icon { color: #f43f5e; }     /* Pink/Red accent */
-.weight-icon { color: #38bdf8; }  /* Blue accent */
 
 .home-card-label {
   font-size: 0.85rem;
@@ -191,6 +187,10 @@ body {
 }
 .evil svg{
   background-color: #fff;
+}
+.evil2 svg{
+  color: #fff;
+  background: none;
 }
 .mood-hero-body {
   display: flex;
@@ -213,7 +213,6 @@ body {
 }
 .mood-hero-stats p {
   font-size: 28px;
-
 }
 
 .stat-subtext {
@@ -222,14 +221,16 @@ body {
 }
 
 .top-mood-pill {
-  font-size: 24px;
+  font-size: 28px;
   color: var(--green-check);
-  border-radius: 12px;
-  display: inline-flex;
   gap: 4px;
+}
+.top-mood-label span{
+  color: var(--green-check);
 }
 .top-mood-label{
   color: var(--text-main);
+  font-size: 18px;
 }
 
 /* CARD 2: COMPACT MEDICATION REMINDER */
@@ -237,28 +238,17 @@ body {
   grid-column: span 1;
 }
 
-.med-compact-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .med-status-badge {
-  font-size: 1.2rem;
+  font-size: 18px;
   font-weight: 700;
   color: #ca8a0a;
 }
 
-.med-next-reminder {
-  font-size: 0.75rem;
-  color: #64748b;
-  margin: 0;
-}
 
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-image: linear-gradient(#54aef843, #54aef86a);
+  background-image: linear-gradient(#007bff59, #007bff8f);
   border-color: #0088ff2e;
 }
 
@@ -281,13 +271,10 @@ body {
 }
 
 .weight-change-badge {
-  font-size: 0.75rem;
+  font-size: 14px;
   font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 10px;
   width: fit-content;
-  background: rgba(56, 189, 248, 0.1);
-  color: #38bdf8;
+  color: #fff;
 }
 
 
@@ -1760,7 +1747,7 @@ body {
 /* Fixed Bottom Nav Styling */
 .bottom-nav {
   position: fixed;
-  bottom: 14px;
+  bottom: 10px;
   left: 0;
   right: 0;
   background-color: #ffffffcf;

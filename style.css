@@ -1,13 +1,13 @@
 :root {
   --bg-color: #f7f3ee;
-  --card-bg: #fbfaf9a8;
+  --card-bg: #ffffffc1;
   --text-main: #2e3248;
   --text-2: #6c7b91;
   --text-muted: #a0aec0;
 
   
   --border-color: #edf0f4;
-  --green-check: #28a745;
+  --green-check: #109d31;
   --blue-accent: #0088ff;
 
   --input-bg: #ffffff;
@@ -43,7 +43,7 @@ body {
 }
 
 .app-views{
-  background-image: url('tan.png');
+  background-image: url('yeah.png');
   background-position: center center;
   background-repeat: no-repeat; 
   background-size: cover; 
@@ -69,7 +69,7 @@ body {
   border: 1px solid var(--border-2);
   padding: 14px;
   box-shadow: 0px 10px 40px #2d2c2b11;
-
+  box-shadow: inset 0px 0px 10px #ffffff5f;
 }
 
 .card-header {
@@ -193,7 +193,7 @@ body {
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
   grid-column: span 2;
-  background-color:  #96e78067;
+  background-color:  #b2eaa281;
   border-color: #05962916;
 }
 .mood-hero-card .mini-pill-header .date-range-badge{
@@ -253,7 +253,7 @@ body {
 /* CARD 2: COMPACT MEDICATION REMINDER */
 .med-compact-card {
   grid-column: span 1;
-  background-color: #faeba796;
+  background-color: #faeba78e;
   border-color: #ffdf8d8a;
 }
 
@@ -267,7 +267,7 @@ body {
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-color: #007bff65;
+  background-color: #007bff5a;
   border-color: #0088ff32;
 }
 

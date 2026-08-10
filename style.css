@@ -127,7 +127,7 @@ body {
   margin: 0;
 }
 .dashboard-header h2 span{
-    font-weight: 700;
+    font-weight: 800;
     font-size: 40px;
 
 }
@@ -1465,14 +1465,7 @@ body {
   color: var(--text-main);
   font-weight: 500;
 }
-.greeting-head{
-    font-size: 34px;
-    font-weight: 400;
-}
-.greeting-head span{
-  font-weight: 700;
-  font-size: 40px;
-}
+
 .view-subtitle{
   color: var(--text-2);
   font-size: 18px;
@@ -1483,14 +1476,15 @@ body {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  margin-bottom: -4px;
   justify-content: space-between;
 }
 
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 46px;
-  width: 46px;
+  height: 42px;
+  width: 42px;
 
   border: 1px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b06;
@@ -1515,7 +1509,7 @@ body {
   gap: 10px;
 }
 .quick-log-btn:hover{
-  background-color: #191919;
+  background-color: #272727;
 }
 
 
@@ -1667,7 +1661,22 @@ body {
   font-size: 0.75rem;
   color: #94a3b8;
 }
-
+.mini-pill-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: row;
+  margin-bottom: 10px;
+  margin-top: -6px;
+  gap: 6px;
+}
+.pill-icon{
+  color: var(--green-check);
+  background-color:#009a053b;
+  border-radius: 99px;
+  height: 22px;
+  width: 22px;
+}
 
 
 /* Active Selection Feedback: Border highlight & pop animation */

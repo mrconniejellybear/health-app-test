@@ -258,3 +258,15 @@ document.getElementById("save-mood-btn")?.addEventListener("click", () => {
 
 // Run initialization on DOM load
 document.addEventListener("DOMContentLoaded", initRotaryWheel);
+
+
+
+
+
+
+
+
+
+
+
+

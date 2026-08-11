@@ -962,7 +962,7 @@ function renderHomeMoodCard() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: '60%',
+      cutout: '68%',
       plugins: {legend: { display: false } }
     }
   });

@@ -229,8 +229,8 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  background-color: #fffcfccf;
-  backdrop-filter: blur(4px);
+  background-color: #000000;
+  backdrop-filter: blur(2px);
   box-shadow: 0px 6px 25px #00000015;
   height: 70px;
 
@@ -240,8 +240,8 @@ body {
   justify-content: space-around;
   align-items: center;
   max-width: 370px;
-  padding-right: 28px;
-  padding-left: 28px;
+  padding-right: 32px;
+  padding-left: 32px;
   margin: 0 auto;
   z-index: 1000;
   /* iOS Safe Area padding for home indicator bar */
@@ -262,13 +262,13 @@ body {
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  color: black;
+  color: white;
 }
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
   color: #ffffff;
-  background: black;
+  background: rgba(146, 146, 146, 0.364);
   transition: all 0.3s;
 }
 

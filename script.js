@@ -1,5 +1,5 @@
 const logSuccessSound = new Audio("click.wav");
-logSuccessSound.volume = 0.05; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
+logSuccessSound.volume = 0.01; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
 
 function playLogSound() {
   logSuccessSound.currentTime = 0; // Rewind to start for rapid clicks

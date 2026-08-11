@@ -1,6 +1,6 @@
 // --- AUDIO EFFECTS ---
 const clickSound = new Audio('click.wav');
-clickSound.volume = 0.05; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
+clickSound.volume = 0.01; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
 
 // Helper function to play sound with zero latency
 function playClickSound() {

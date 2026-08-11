@@ -39,7 +39,7 @@ body {
 
   background-repeat: no-repeat;
   background-position: top center;
-  background-image: linear-gradient(0deg, #ffffff00 14%, #b3eea700 60%, #cceacb4e 100%);
+  background-image: linear-gradient(0deg, #ffffff00 14%, #b3eea700 60%, #cceacb00 100%);
   /* Restrict background width to match phone dimensions */
 }
 

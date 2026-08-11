@@ -172,20 +172,54 @@ body {
   color: #f440d6
 }
 
+
+.mini-pill-header{
+  display:flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: row;
+  margin-bottom: 10px;
+  gap: 6px;
+  color: #000000;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+.mini-pill-header.full{
+  padding-bottom: 8px;
+}
+
 .mini-pill-title{
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 540;
   color: var(--text-main);
 
   display: flex;
-  align-items: start;
+  align-items: center;
   gap: 7px;
 }
 .mini-pill-title svg{
   height: 21px;
   width: auto;
+  margin-bottom: 1px;
 }
 
+
+
+
+.date-range-badge {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.mini-pill-header .date-range-badge{
+  color: var(--text-muted)
+}
+.date-range-light{
+  color: #fff;
+}
 
 
 

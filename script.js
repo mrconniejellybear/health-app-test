@@ -1119,6 +1119,10 @@ document.getElementById("strip-today-btn")?.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   render7DayCalendarStrip();
 
+
+
+
+
   // --- TASKS STATE & RENDER LOGIC ---
 let tasksList = JSON.parse(localStorage.getItem("goodhealth_tasks")) || [];
 
@@ -1127,6 +1131,8 @@ function saveAndRenderTasks() {
   localStorage.setItem("goodhealth_tasks", JSON.stringify(tasksList));
   renderTasks();
 }
+
+
 
 // Render Task Cards
 function renderTasks() {

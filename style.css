@@ -93,13 +93,8 @@
   grid-column: span 2;
   background-color: #fff;
 }
-.mini-pill-header .date-range-badge{
-  color: var(--text-main);
-}
 
-.date-range-light{
-  color: #fff;
-}
+
 .evil svg{
   background-color: #fff;
 }
@@ -111,7 +106,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: -8px;
+  margin-bottom: -10px;
 }
 
 .pie-chart-wrapper {
@@ -131,7 +126,7 @@
 
 }
 .mood-hero-stats p {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 440;
   color: var(--text-main);
   margin: 2px 0 6px 0;
@@ -167,8 +162,7 @@
 /* CARD 3: WEIGHT STAT (Spans 1 Column) */
 .weight-stat-card {
   grid-column: span 1;
-  background-color: #0091ffe4;
-  border-color: #0088ff32;
+  background-color: #ffffff;
 }
 
 .weight-stat-body {
@@ -180,12 +174,12 @@
 .weight-main-val {
   font-size: 1.3rem;
   font-weight: 800;
-  color: #fff;
+  color: #000000;
 }
 
 .weight-main-val small {
   font-size: 0.8rem;
-  color: #fff;
+  color: black;
   font-weight: 400;
 }
 
@@ -194,10 +188,6 @@
   font-weight: 500;
   width: fit-content;
   color: var(--text-main);
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 6px 18px;
-  
 }
 
 
@@ -853,15 +843,6 @@
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid var(--border-color);
-}
-
-.date-range-badge {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-muted);
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
 }
 
 /* Graph Wrapper Layout */
@@ -1534,20 +1515,7 @@
   font-size: 0.75rem;
   color: #94a3b8;
 }
-.mini-pill-header{
-  display:flex;
-  justify-content: space-between;
-  align-items: start;
-  flex-direction: row;
-  margin-bottom: 10px;
-  gap: 6px;
-  color: #000000;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--border-color);
-}
-.mini-pill-header.full{
-  padding-bottom: 10px;
-}
+
 
 .pill-icon{
   color: var(--green-check);

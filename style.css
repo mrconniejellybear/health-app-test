@@ -187,9 +187,8 @@ body {
 
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
-  grid-column: span 1;
-  background-color:  #fff;
-  border-color: #09d63cd4;
+  grid-column: span 2;
+  background-image: linear-gradient(#b3f28b, #7be85f);
 }
 .mini-pill-header .date-range-badge{
   color: var(--text-main);
@@ -209,14 +208,17 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .pie-chart-wrapper {
   width: 90px;
   height: 90px;
   position: relative;
-  margin-top: -10px;
   pointer-events: none;
+  padding-bottom: 5px;
 }
 
 .mood-hero-stats h3 {
@@ -250,9 +252,8 @@ body {
 
 /* CARD 2: COMPACT MEDICATION REMINDER */
 .med-compact-card {
-  grid-column: span 2;
-  background-color: #faeba78e;
-  border-color: #ffdf8d8a;
+  grid-column: span 1;
+  background-color: var(--card-bg);
 }
 
 .med-status-badge {
@@ -1689,6 +1690,7 @@ body {
   flex-direction: row;
   margin-bottom: 10px;
   gap: 6px;
+  color: #fff;
 }
 .pill-icon{
   color: var(--green-check);

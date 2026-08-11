@@ -955,7 +955,7 @@ function renderHomeMoodCard() {
       labels: ['Positive', 'Neutral', 'Low'],
       datasets: [{
         data: [great, okay, low],
-        backgroundColor: ['#00ad42', '#8cdc00', '#e4d500'],
+        backgroundColor: ['#077d34', '#21ba64', '#9bce2c'],
         borderWidth: 0
       }]
     },

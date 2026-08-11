@@ -1,8 +1,10 @@
 :root {
   --bg-color: #f2f2f2;
-  --card-bg: #ffffff;
+  --card-bg: #fff;
   --text-main: #2e3248;
   --text-2: #6c7b91;
+  --text-3: #585f6b;
+
   --text-muted: #a0aec0;
 
   
@@ -38,7 +40,7 @@ body {
 
   background-repeat: no-repeat;
   background-position: top center;
-    background-image: linear-gradient(10deg, #ffffff2b 14%, #b3eea727 40%, #ffffff28 100%);
+  background-image: linear-gradient(0deg, #ffffff00 14%, #b3eea700 60%, #e2efe900 100%);
 
   /* Restrict background width to match phone dimensions */
 }
@@ -85,10 +87,9 @@ body {
 .title svg{
   padding: 4px;
   border-radius: 99%;
-  height: 32px;
+  height: 36px;
   width: auto;
-  color: #36ab46;
-  background-color: #07a22626;
+  color: var(--text-main);
 }
 .tab1 svg{
   background-color: #ebafc5cb;
@@ -186,8 +187,8 @@ body {
 
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
-  grid-column: span 2;
-  background-color:  #cff4c6cc;
+  grid-column: span 1;
+  background-color:  #fff;
   border-color: #05962916;
 }
 .mini-pill-header .date-range-badge{
@@ -207,29 +208,28 @@ body {
 }
 
 .pie-chart-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   position: relative;
   margin-top: -10px;
   pointer-events: none;
 }
 
 .mood-hero-stats h3 {
-  font-size: 44px;
+  font-size: 38px;
   font-weight: 800;
   color: var(--green-check);
   margin: 0;
   line-height: 1;
+
 }
 .mood-hero-stats p {
   font-size: 16px;
-  font-weight: 600;
-}
-
-.stat-subtext {
+  font-weight: 440;
   color: var(--text-main);
   margin: 2px 0 8px 0;
 }
+
 
 .top-mood-pill {
   font-size: 28px;
@@ -246,7 +246,7 @@ body {
 
 /* CARD 2: COMPACT MEDICATION REMINDER */
 .med-compact-card {
-  grid-column: span 1;
+  grid-column: span 2;
   background-color: #faeba78e;
   border-color: #ffdf8d8a;
 }
@@ -645,7 +645,7 @@ body {
   align-items: center;
   justify-content: space-around;
   gap: 16px;
-  padding-top: 8px;
+  padding-top:4px;
 }
 
 /* Pie Chart Circle */
@@ -658,17 +658,7 @@ body {
   flex-shrink: 0;
 }
 
-/* Legend Styling */
-.pie-legend {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 14px;
-  font-size: 13px;
-  font-weight: 400;
-  padding-bottom: 20px;
-  border-bottom: solid 1px var(--border-color);
-  color: var(--text-2);
-}
+
 
 .legend-item {
   display: flex;
@@ -1496,8 +1486,8 @@ body {
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 44px;
-  width: 44px;
+  height: 42px;
+  width: 42px;
   margin-right: 4px;
   border: 1px solid var(--border-2);
   box-shadow: 0 10px 25px #2d2c2b0b;
@@ -1525,7 +1515,20 @@ body {
   background-color: #363636;
 }
 
+.date-view-btn{
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 500;
+  height: 42px;
+  border: none;
+  border-radius: 99px;
+  padding: 0px 16px 0px 22px;
 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 
 /* Card 1: Mood Summary */
@@ -1574,7 +1577,7 @@ body {
   gap: 8px;
   margin-top: 10px;
 
-  color: #e90079;
+  color: var(--green-check);
 }
 
 .summary-highlight {

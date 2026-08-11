@@ -181,11 +181,11 @@ body {
   margin-bottom: 10px;
   gap: 6px;
   color: #000000;
-  padding-bottom: 4px;
+  padding: 0px 2px 4px 2px;
   border-bottom: 1px solid var(--border-color);
 }
 .mini-pill-header.full{
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .mini-pill-title{

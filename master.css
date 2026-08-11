@@ -195,7 +195,9 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  background-color: rgb(0, 0, 0);
+  background-color: #fffcfccf;
+  backdrop-filter: blur(4px);
+  box-shadow: 0px 6px 25px #00000015;
   height: 70px;
 
   border: 1px solid var(--border-2);
@@ -213,7 +215,7 @@ body {
 }
 
 .nav-btn {
-  background: #0f172a00;
+  background: none;
 
   border: none;
   outline: none;
@@ -226,27 +228,16 @@ body {
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  color: white;
+  color: black;
 }
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
   color: #ffffff;
+  background: black;
   transition: all 0.3s;
 }
 
 .nav-btn.active .nav-icon {
   filter: grayscale(0%);
-}
-.cycle.active{
-    color: rgb(53, 255, 90);
-}
-.mental.active{
-    color: rgb(255, 53, 147);
-}
-.diet.active{
-    color: #ff9100;
-}
-.tasks.active{
-    color: rgb(252, 227, 125);
 }

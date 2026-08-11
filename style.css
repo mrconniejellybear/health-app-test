@@ -819,7 +819,7 @@
   justify-content: center;
   align-items: center;
   padding: 12px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #64748b;
   background-color: #f8fafc;
@@ -1195,7 +1195,7 @@
 }
 
 .subcard-subtitle {
-  font-size:15px;
+  font-size:14px;
   font-weight: 600;
   color: #64748b;
   margin: 12px 0 8px 0;
@@ -1365,16 +1365,16 @@
 .date-view-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  font-size: 15px;
-  font-weight: 500;
-  height: 42px;
+  font-size: 14px;
+  font-weight: 440;
+  height: 36px;
   border: none;
   border-radius: 99px;
-  padding: 0px 16px 0px 22px;
+  padding: 0px 10px 0px 16px;
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 

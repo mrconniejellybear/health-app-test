@@ -178,11 +178,11 @@ body {
   color: var(--text-main);
 
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 7px;
 }
 .mini-pill-title svg{
-  height: 22px;
+  height: 21px;
   width: auto;
 }
 

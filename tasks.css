@@ -43,8 +43,8 @@
   flex-direction: column;
   align-items: center;
   border-radius: 99px;
-  padding-top: 12px;
-  padding-bottom: 2px;
+  padding-top: 16px;
+  padding-bottom: 6px;
   width: 43px;
   background: #e4e4e4;
   transition: all 0.25s ease;
@@ -56,6 +56,13 @@
   font-size: 15px;
   font-weight: 500;
   color: var(--text-main);
+  display: none;
+}
+
+.day-pill .day-name{
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 500;
 }
 
 /* Center / Active Day Pill Highlight */

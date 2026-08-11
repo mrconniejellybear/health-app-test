@@ -1078,7 +1078,7 @@ function render7DayCalendarStrip(centerDate = new Date()) {
     monthYearLabel.textContent = `${monthNames[centerDate.getMonth()]} ${centerDate.getFullYear()}`;
   }
 
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayNames = ["S", "M", "T", "W", "T", "F", "S"];
 
   // 2. Generate 7 days centered on target date (-3 to +3)
   for (let offset = -3; offset <= 3; offset++) {
@@ -1093,6 +1093,7 @@ function render7DayCalendarStrip(centerDate = new Date()) {
     pill.dataset.date = isoDate;
 
     pill.innerHTML = `
+      <span class="day-name">${dayNames[d.getDay()]}</span>
       <span class="day-num">${d.getDate()}</span>
       <span class="status-dot"></span>
     `;

@@ -16,44 +16,6 @@
   margin-bottom:14px;
 }
 
-.title {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-main);
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.title svg{
-  padding: 4px;
-  border-radius: 99%;
-  height: 36px;
-  width: auto;
-  color: var(--text-main);
-}
-.tab1 svg{
-  background-color: #ebafc5cb;
-  color: #ca0a54
-}
-.tab2 svg{
-  background-color: #fdeac4cb;
-  color: #ca8a0a
-}
-
-.tab3 svg{
-  background-color: #ebc4fddc;
-  color: #8a4cbd
-}
-
-.tab4 svg{
-  background-color: #c4e0fdcb;
-  color: #0676d9
-}
-.tab5 svg{
-  background-color: #fed2fccb;
-  color: #f440d6
-}
 
 
 
@@ -129,7 +91,7 @@
 /* CARD 1: MOOD HERO (Spans Full Width on Top) */
 .mood-hero-card {
   grid-column: span 2;
-  background-image: linear-gradient(#b3f28b, #7be85f);
+  background-color: #fff;
 }
 .mini-pill-header .date-range-badge{
   color: var(--text-main);
@@ -148,10 +110,8 @@
 .mood-hero-body {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 10px;
+  gap: 14px;
+  margin-bottom: -8px;
 }
 
 .pie-chart-wrapper {
@@ -159,11 +119,11 @@
   height: 90px;
   position: relative;
   pointer-events: none;
-  padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .mood-hero-stats h3 {
-  font-size: 38px;
+  font-size: 40px;
   font-weight: 800;
   color: var(--green-check);
   margin: 0;
@@ -171,10 +131,10 @@
 
 }
 .mood-hero-stats p {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 440;
   color: var(--text-main);
-  margin: 2px 0 8px 0;
+  margin: 2px 0 6px 0;
 }
 
 
@@ -392,55 +352,6 @@
 .day-dot.partial { background-color: #f59e0b; }
 .day-dot.missed { background-color: #a8abad; }
 
-
-
-/* Add Button */
-.add-btn {
-  width: 100%;
-  background-color: black;
-  color:  white;
-  border:none;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  
-  transition: all 0.3s;
-}
-.add-btn.mood{
-  margin-top: 0px;
-}
-.add-btn:hover{
-  background-color: #252525;
-  color:  #ffffff;
-}
-
-.add-btn-purple{
-  width: 100%;
-  background-color: #ebc4fddc;
-  border: none;
-  color: #8a4cbd;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  
-  transition: all 0.3s;
-}
 
 
 
@@ -1630,8 +1541,14 @@
   flex-direction: row;
   margin-bottom: 10px;
   gap: 6px;
-  color: #fff;
+  color: #000000;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
 }
+.mini-pill-header.full{
+  padding-bottom: 10px;
+}
+
 .pill-icon{
   color: var(--green-check);
   border-radius: 99px;
@@ -1682,12 +1599,12 @@
 
 .custom-symptom-input {
   flex: 1;
-  border: 2px solid #edf2f7;
+  border: 0px solid #edf2f7;
   border-radius: 10px;
   padding: 0.6rem 0.8rem;
   font-size: 15px;
   outline: none;
-  background-color: var(--input-bg);
+  background-color: var(--border-color);
   transition: ease-in-out 0.2s;
 }
 

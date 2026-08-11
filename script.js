@@ -1007,7 +1007,7 @@ function renderHomeWeightCard() {
   if (currentEl) currentEl.textContent = latestWeight;
   if (changeEl) {
     const sign = diff > 0 ? "+" : "";
-    changeEl.textContent = `${sign}${diff} lbs total`;
+    changeEl.textContent = `${sign}${diff} lbs since start`;
   }
 }
 

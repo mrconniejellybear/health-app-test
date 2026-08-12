@@ -1,0 +1,93 @@
+
+
+/* Container */
+.color-slider-container {
+  position: relative;
+  width: 98%;
+  height: 60px;
+  margin: 10px auto;
+  touch-action: none; 
+  cursor: pointer;
+}
+
+/* The Track */
+.color-track {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 15px; 
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.color-segment {
+  flex: 1; /* Makes all 3 segments take up exactly 33.33% of the bar */
+}
+
+/* --- Vertical Gradients for the 3 Sections --- */
+.severity-mild {
+  background: linear-gradient(to bottom, #FF3C00, #BA1900); 
+  border-right: 6px solid #fff;
+}
+.severity-moderate {
+  background: linear-gradient(to bottom, #CF1C00, #841200); 
+}
+.severity-severe {
+  background: linear-gradient(to bottom, #911300, #550B00); 
+  border-left: 6px solid #fff;
+}
+
+/* The Arrow Indicator */
+.slider-indicator {
+  position: absolute;
+  top: -2px;
+  /* Center of the first segment (100% / 3 segments / 2 = 16.66%) */
+  left: 16.66%; 
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #c2c2c2; 
+  transition: left 0.1s ease-out; /* The snap animation */
+}
+
+
+/* Educational Info Card */
+.color-edu-card {
+  background: #ebeff2c7;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+}
+
+.color-edu-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: var(--text-main);
+}
+
+.color-edu-card p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.learn-more-link {
+  color: #00aaff; 
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: opacity 0.2s;
+}
+
+.learn-more-link:hover {
+  opacity: 0.7;
+}

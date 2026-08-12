@@ -1008,12 +1008,12 @@
 }
 
 .contra-box {
-  width: 58px;
+  width: 56px;
   height: auto;
   aspect-ratio: 1 / 1;
-  background-color: var(--card-bg, #f8fafc);
-  border: 3px solid var(--border-color);
-  border-radius: 12px;
+  background-color:var(--border-color);
+  border: none;
+  border-radius: 99px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1022,7 +1022,7 @@
 
 
 .contra-icon {
-  width: 38px;
+  width: 32px;
   height: auto;
   color: var(--text-2);
   transition: color 0.2s ease;
@@ -1222,8 +1222,8 @@
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: 99px;
   border: 0px solid #f249ba;
   background-color: #e9bce949;
@@ -1234,7 +1234,7 @@
   transition: all 0.2s ease;
 }
 .tile-box svg{
-  height: 36px;
+  height: 30px;
   width: auto;
 }
 
@@ -1251,12 +1251,12 @@
 
 /* Color Selector Grid */
 .color-selector-grid {
-  display: flex;
+    display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
   gap: 0.6rem;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
-   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 
 }
 
@@ -1277,8 +1277,8 @@
 
 /* Swatch Box Base */
 .color-box {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: 99px;
   border: none;
   display: flex;
@@ -1344,7 +1344,7 @@
 }
 
 .quick-log-btn{
-  background-color: #366df9;
+  background-color: #245deb;
   color: #fff;
   font-size: 14px;
   font-weight: 640;
@@ -1358,7 +1358,7 @@
   gap: 6px;
 }
 .quick-log-btn:hover{
-  background-color: #5381f6;
+  background-color: #346af4;
 }
 
 .date-view-btn{

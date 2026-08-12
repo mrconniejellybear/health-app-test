@@ -1146,12 +1146,10 @@
 
 /* Active highlight when rating > 0 */
 .severity-badge.active {
-  background-color: #f249ba;
   color: white;
 }
 
 .severity-slider {
-  accent-color: #f249ba;
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -1197,14 +1195,14 @@
 .subcard-subtitle {
   font-size:14px;
   font-weight: 600;
-  color: #64748b;
-  margin: 12px 0 8px 0;
+  color: #535860;
 }
 
 /* Texture Grid (Scrolls horizontally on very small screens, wraps nicely) */
 .texture-selector-grid {
   gap: 0.6rem;
   padding-bottom: 0.5rem;
+  margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }

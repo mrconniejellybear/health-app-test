@@ -14,17 +14,17 @@ function initPeriodColorSlider() {
   // 1. The Content Data
   const colorData = [
     {
-      title: "Bright Red",
+      title: "Bright",
       desc: "Bright red hues usually appear at the beginning of a period, and indicate the flow of fresh blood. Its duration can vary: for some, it lasts the first 1-3 days, for others, it spans the entire period. Both are acceptable, healthy patterns during a typical cycle.",
       link: "https://www.healthline.com/health/womens-health/period-blood"
     },
     {
-      title: "Medium Red",
+      title: "Medium",
       desc: "Medium red hues indicate a normal, fresh flow of blood actively leaving the uterus. The shade reflects how long the blood takes to exit the body; medium red means it is relatively fresh with minimal oxidation. Hues within this range are healthy during a typical cycle.",
       link: "https://www.healthline.com/health/womens-health/period-blood"
     },
     {
-      title: "Dark Red",
+      title: "Dark",
       desc: "Dark red hues are a result of that blood has remained in the uterus longer, giving it time to oxidize (react to oxygen). It is a common color, and completely healthy to see this at both the beginning or the end of your period, when your flow is slower.",
       link: "https://www.healthline.com/health/womens-health/period-blood"
     }

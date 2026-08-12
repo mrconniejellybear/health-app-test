@@ -1665,14 +1665,14 @@ body {
 /* --- Vertical Gradients for the 3 Sections --- */
 .severity-mild {
   background: linear-gradient(to bottom, #FF3C00, #BA1900); 
-  border-right: 6px solid #fff;
+  border-right: 8px solid #fff;
 }
 .severity-moderate {
   background: linear-gradient(to bottom, #CF1C00, #841200); 
 }
 .severity-severe {
   background: linear-gradient(to bottom, #911300, #550B00); 
-  border-left: 6px solid #fff;
+  border-left: 8px solid #fff;
 }
 
 /* The Arrow Indicator */

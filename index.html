@@ -780,7 +780,8 @@
       <p class="subcard-subtitle">Texture</p>
     </div>
 
-        <div class="symptom-row">
+    <!-- 1. Flow -->
+    <div class="symptom-row">
           <div class="symptom-header">
             <span class="symptom-title">
               <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="currentColor"><path d="M700-680.63q-24.85 27.33-39.67 52.2-14.83 24.86-14.83 40.39 0 24.65 15.33 43.59Q676.15-525.5 700-525.5t39.17-18.95q15.33-18.94 15.33-43.59 0-15.53-14.83-40.39-14.82-24.87-39.67-52.2ZM480-71.87q-140.48 0-234.31-96.33-93.82-96.33-93.82-239.8 0-95.22 71.22-206.14 71.21-110.93 215.13-240.08 17.91-15.91 41.4-15.91t41.4 15.91q41.93 38.07 77.87 73.62 35.94 35.56 65.89 70.62-7.71 10.44-27.99 39.14-20.27 28.71-25.99 37.67-26.76-32-59.02-66.26-32.26-34.27-71.9-70.27-117.92 109-177.47 199.69-59.54 90.68-59.54 162.01 0 105.76 67.16 175.45 67.17 69.68 169.89 69.68 51.36 0 94.86-18.78 43.5-18.77 75.13-51.39 31.63-32.61 49.43-77.58 17.79-44.96 17.79-97.34 0-16.8-3.38-35.32t-10.38-38.05q10.32-5.47 40.7-20.79 30.39-15.31 40.58-20.79 11.48 29.71 17.48 58.62 6 28.91 6 56.29 0 143.47-93.82 239.8Q620.48-71.87 480-71.87Zm11.72-129.33q13.19-1 22.41-10.2t9.22-22.19q0-14.71-9.84-24.05t-24.79-8.34q-42.44 3-85.33-22.26t-54.65-88.43q-2-11.48-10.98-19.2-8.98-7.72-21.41-7.72-15.15 0-24.89 11.22t-6.5 26.17q17 91.24 79.92 130.12 62.92 38.88 126.84 34.88ZM700-603.57ZM596.17-480.05Q554.5-525.61 554.5-588q0-38.96 31.1-89.91 31.1-50.96 88.53-105.63 10.96-10.2 25.75-10.2t25.99 10.2q60.43 56.67 90.03 105.17T845.5-588q0 62.39-41.67 107.95Q762.15-434.5 700-434.5t-103.83-45.55Zm-118.89 13.77Z"/></svg>
@@ -801,6 +802,8 @@
       </div>
       <input type="range" class="severity-slider" data-symptom="cramps" min="0" max="3" value="0" step="1">
     </div>
+
+    <div class="card-break"></div>
 
     <div class="texture-section">
     <div class="texture-selector-grid">
@@ -863,14 +866,6 @@
       </label>
 
       <label class="texture-tile">
-        <input type="checkbox" name="period-texture" value="eggy" class="texture-checkbox">
-        <div class="tile-box">
-          <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="currentColor"><path d="M640-80q-67 0-101.5-22.5T480-150q-19-20-36.5-35T399-200q-45 0-100-15.5t-103.5-51Q147-302 114-359T80-499q-2-167 82.5-274T399-880q71 0 120 20.5t84.5 51.5q35.5 31 60 68.5T710-667q12 20 24 36.5t26 30.5q60 60 90 105t30 136q0 120-74.5 199.5T640-80ZM480-340q58 0 99-41t41-99q0-58-41-99t-99-41q-58 0-99 41t-41 99q0 58 41 99t99 41Z"/></svg>
-        </div>
-        <span class="tile-label">Eggy</span>
-      </label>
-
-      <label class="texture-tile">
         <input type="checkbox" name="period-texture" value="mixed" class="texture-checkbox">
         <div class="tile-box">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm320 0q-33 0-56.5-23.5T480-240q0-33 23.5-56.5T560-320q33 0 56.5 23.5T640-240q0 33-23.5 56.5T560-160ZM400-320q-33 0-56.5-23.5T320-400q0-33 23.5-56.5T400-480q33 0 56.5 23.5T480-400q0 33-23.5 56.5T400-320Zm320 0q-33 0-56.5-23.5T640-400q0-33 23.5-56.5T720-480q33 0 56.5 23.5T800-400q0 33-23.5 56.5T720-320ZM240-480q-33 0-56.5-23.5T160-560q0-33 23.5-56.5T240-640q33 0 56.5 23.5T320-560q0 33-23.5 56.5T240-480Zm320 0q-33 0-56.5-23.5T480-560q0-33 23.5-56.5T560-640q33 0 56.5 23.5T640-560q0 33-23.5 56.5T560-480ZM400-640q-33 0-56.5-23.5T320-720q0-33 23.5-56.5T400-800q33 0 56.5 23.5T480-720q0 33-23.5 56.5T400-640Zm320 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z"/></svg>
@@ -916,13 +911,6 @@
         <input type="checkbox" name="period-color" value="dark-red" class="color-checkbox">
         <div class="color-box swatch-dark-red"></div>
         <span class="tile-label">Maroon</span>
-      </label>
-      
-
-      <label class="color-tile">
-        <input type="checkbox" name="period-color" value="pink" class="color-checkbox">
-        <div class="color-box swatch-pink"></div>
-        <span class="tile-label">Pink</span>
       </label>
 
       <label class="color-tile">
@@ -1074,12 +1062,6 @@
       </label>
 
       <label class="color-tile">
-        <input type="checkbox" name="discharge-color" value="grey" class="color-checkbox">
-        <div class="color-box swatch-grey"></div>
-        <span class="tile-label">Grey</span>
-      </label>
-
-      <label class="color-tile">
         <input type="checkbox" name="discharge-color" value="pale" class="color-checkbox">
         <div class="color-box swatch-pale"></div>
         <span class="tile-label">Pale</span>
@@ -1130,6 +1112,28 @@
       <input type="range" class="severity-slider" data-symptom="puke" min="0" max="3" value="0" step="1">
     </div>
 
+    <!-- 4. Breakouts -->
+    <div class="symptom-row">
+      <div class="symptom-header">
+        <span class="symptom-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.25 16.75L8.25 16C8.25 15.0054 8.64509 14.0516 9.34835 13.3483C10.0516 12.6451 11.0054 12.25 12 12.25C12.9946 12.25 13.9484 12.6451 14.6517 13.3483C15.3549 14.0516 15.75 15.0054 15.75 16V16.75H8.25ZM14.1213 15.25C14.0105 14.9366 13.8305 14.6486 13.591 14.409C13.169 13.9871 12.5967 13.75 12 13.75C11.4033 13.75 10.831 13.9871 10.409 14.409C10.1695 14.6486 9.9895 14.9366 9.87868 15.25H14.1213Z" fill="currentColor"/>
+          <path d="M7.83541 7.82918C7.46493 7.64394 7.01442 7.79411 6.82918 8.16459C6.64394 8.53507 6.79411 8.98558 7.16459 9.17082L8.37574 9.77639C8.56 9.86852 8.56 10.1315 8.37574 10.2236L7.16459 10.8292C6.79411 11.0144 6.64394 11.4649 6.82918 11.8354C7.01442 12.2059 7.46493 12.3561 7.83541 12.1708L9.04656 11.5652C10.3364 10.9203 10.3364 9.07967 9.04656 8.43475L7.83541 7.82918Z" fill="currentColor"/>
+          <path d="M16.1646 7.82918C16.5351 7.64394 16.9856 7.79411 17.1708 8.16459C17.3561 8.53507 17.2059 8.98558 16.8354 9.17082L15.6243 9.77639C15.44 9.86852 15.44 10.1315 15.6243 10.2236L16.8354 10.8292C17.2059 11.0144 17.3561 11.4649 17.1708 11.8354C16.9856 12.2059 16.5351 12.3561 16.1646 12.1708L14.9534 11.5652C13.6636 10.9203 13.6636 9.07967 14.9534 8.43475L16.1646 7.82918Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z" fill="currentColor"/>
+          <path d="M10.5 5.25C10.5 5.94036 9.94036 6.5 9.25 6.5C8.55964 6.5 8 5.94036 8 5.25C8 4.55964 8.55964 4 9.25 4C9.94036 4 10.5 4.55964 10.5 5.25Z" fill="currentColor"/>
+          <path d="M20.5 15.25C20.5 15.9404 19.9404 16.5 19.25 16.5C18.5596 16.5 18 15.9404 18 15.25C18 14.5596 18.5596 14 19.25 14C19.9404 14 20.5 14.5596 20.5 15.25Z" fill="currentColor"/>
+          <path d="M11 21C11.5523 21 12 20.5523 12 20C12 19.4477 11.5523 19 11 19C10.4477 19 10 19.4477 10 20C10 20.5523 10.4477 21 11 21Z" fill="currentColor"/>
+          <path d="M6.5 15.25C6.5 15.9404 5.94036 16.5 5.25 16.5C4.55964 16.5 4 15.9404 4 15.25C4 14.5596 4.55964 14 5.25 14C5.94036 14 6.5 14.5596 6.5 15.25Z" fill="currentColor"/>
+          <path d="M14 8C14.5523 8 15 7.55228 15 7C15 6.44772 14.5523 6 14 6C13.4477 6 13 6.44772 13 7C13 7.55228 13.4477 8 14 8Z" fill="currentColor"/>
+          </svg>
+
+          Breakouts</span>
+        <span class="severity-badge" id="badge-breakouts">None (0)</span>
+      </div>
+      <input type="range" class="severity-slider" data-symptom="breakouts" min="0" max="3" value="0" step="1">
+    </div>
+
     <!-- 3. Mood Swings -->
     <div class="symptom-row">
       <div class="symptom-header">
@@ -1138,17 +1142,6 @@
         <span class="severity-badge" id="badge-mood-swings">None (0)</span>
       </div>
       <input type="range" class="severity-slider" data-symptom="mood-swings" min="0" max="3" value="0" step="1">
-    </div>
-
-    <!-- 4. Breakouts -->
-    <div class="symptom-row">
-      <div class="symptom-header">
-        <span class="symptom-title">
-          <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="currentColor"><path d="M69-109v-371q0-37.78 26.61-64.39T160-571h205.26v86.22q0 47.81 33.47 81.27 33.48 33.47 81.3 33.47t81.26-33.47q33.45-33.46 33.45-81.27V-571H800q37.78 0 64.39 26.61T891-480v371H69Zm88.61-88.61h644.78v-284.78H683.35q-1.44 83.72-60.65 142.34-59.22 58.62-142.82 58.62t-142.81-58.62q-59.22-58.62-60.42-142.34H157.61v284.78ZM480-441.43q-18.67 0-31.49-12.82-12.81-12.82-12.81-31.49 0-110.19 25.47-217.03 25.48-106.84 110.2-176.56 14.43-12.19 32.23-10.45 17.79 1.74 29.99 16.17 11.95 14.68 10.33 32.47-1.62 17.79-16.05 29.75-69.28 58.28-86.42 146.41-17.15 88.14-17.15 179.24 0 18.67-12.81 31.49-12.82 12.82-31.49 12.82Zm-226.83 94.66q9.22-9.16 9.22-23.17 0-14.02-9.16-23.23-9.16-9.22-23.17-9.22-14.02 0-23.23 9.16-9.22 9.16-9.22 23.17 0 14.02 9.16 23.23 9.16 9.22 23.17 9.22 14.02 0 23.23-9.16Zm40 100q9.22-9.16 9.22-23.17 0-14.02-9.16-23.23-9.16-9.22-23.17-9.22-14.02 0-23.23 9.16-9.22 9.16-9.22 23.17 0 14.02 9.16 23.23 9.16 9.22 23.17 9.22 14.02 0 23.23-9.16Zm460-100q9.22-9.16 9.22-23.17 0-14.02-9.16-23.23-9.16-9.22-23.17-9.22-14.02 0-23.23 9.16-9.22 9.16-9.22 23.17 0 14.02 9.16 23.23 9.16 9.22 23.17 9.22 14.02 0 23.23-9.16ZM157.61-197.61h644.78-644.78Z"/></svg>
-          Breakouts</span>
-        <span class="severity-badge" id="badge-breakouts">None (0)</span>
-      </div>
-      <input type="range" class="severity-slider" data-symptom="breakouts" min="0" max="3" value="0" step="1">
     </div>
 
 

@@ -203,10 +203,6 @@ body {
   width: auto;
   margin-bottom: 1px;
 }
-
-
-
-
 .date-range-badge {
   font-size: 13px;
   font-weight: 400;
@@ -221,6 +217,14 @@ body {
 .date-range-light{
   color: #fff;
 }
+
+
+
+
+.card-break{
+  height: 30px;
+}
+
 
 
 

@@ -1,12 +1,3 @@
-const logSuccessSound = new Audio("click.wav");
-logSuccessSound.volume = 0.01; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
-
-function playLogSound() {
-  logSuccessSound.currentTime = 0; // Rewind to start for rapid clicks
-  logSuccessSound.play().catch((err) => {
-    console.log("Audio play blocked or failed:", err);
-  });
-}
 
 
 // --- 1. GLOBAL APP DATA STATE & LOCALSTORAGE LOAD ---

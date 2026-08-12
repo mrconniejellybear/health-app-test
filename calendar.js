@@ -1,3 +1,58 @@
+// Web Audio API generator for date clicks
+function playDateSelectSound() {
+    try {
+        const audioCtx = window.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.012);
+
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.012);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.012);
+    } catch (e) {
+    }
+}
+// --- DEDICATED CALENDAR STRIP POP SOUND ---
+function playCalendarPopSound() {
+  try {
+    const audioCtx = window.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    // Pure sine wave gives it a round, clean "pop"
+    osc.type = "sine";
+
+    // Quick frequency pitch-drop (750 Hz down to 200 Hz in 15 milliseconds)
+    osc.frequency.setValueAtTime(750, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.015);
+
+    // Fast volume envelope so it stays snappy
+    gain.gain.setValueAtTime(0.12, audioCtx.currentTime); // Volume
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.015);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.015);
+  } catch (e) {
+    // Silently ignore if audio isn't unlocked yet
+  }
+}
+
+
 
 
 // --- ACTIVITES 7-DAY CALENDAR STRIP LOGIC ---
@@ -38,11 +93,19 @@ function render7DayCalendarStrip(centerDate = new Date()) {
     `;
 
     // Click handler to center on clicked date
-    pill.addEventListener("click", () => {
+     pill.addEventListener("click", () => {
       selectedActivitiesDate = new Date(d);
       render7DayCalendarStrip(selectedActivitiesDate);
-      if (typeof playLogSound === "function") playLogSound(); // Audio cue!
+      
+      playCalendarPopSound(); 
     });
+    // "Today" Button Listener
+document.getElementById("strip-today-btn")?.addEventListener("click", () => {
+  playCalendarPopSound(); // Call it here too!
+  selectedActivitiesDate = new Date();
+  render7DayCalendarStrip(selectedActivitiesDate);
+});
+
 
     rowContainer.appendChild(pill);
   }
@@ -183,7 +246,6 @@ form?.addEventListener("submit", (e) => {
     completed: false
   };
 
-  // Add to array, sound, save to localStorage & render!
   tasksList.push(newTask);
   if (typeof playLogSound === "function") playLogSound();
   saveAndRenderTasks();

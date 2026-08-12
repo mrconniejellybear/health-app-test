@@ -1115,7 +1115,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px 4px;
+  padding: 10px 4px;
   border-radius: 12px;
 }
 
@@ -1203,11 +1203,10 @@
 
 /* Texture Grid (Scrolls horizontally on very small screens, wraps nicely) */
 .texture-selector-grid {
-  display: flex;
   gap: 0.6rem;
   padding-bottom: 0.5rem;
-   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .texture-tile {
@@ -1223,9 +1222,9 @@
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 59px;
-  height: 59px;
-  border-radius: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 99px;
   border: 0px solid #f249ba;
   background-color: #e9bce949;
   display: flex;
@@ -1280,7 +1279,7 @@
 .color-box {
   width: 58px;
   height: 58px;
-  border-radius: 14px;
+  border-radius: 99px;
   border: none;
   display: flex;
   align-items: center;

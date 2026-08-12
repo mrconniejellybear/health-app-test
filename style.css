@@ -1022,7 +1022,7 @@
 
 
 .contra-icon {
-  width: 32px;
+  width: 34px;
   height: auto;
   color: var(--text-2);
   transition: color 0.2s ease;
@@ -1242,7 +1242,7 @@
 /* Label Below Box */
 .tile-label {
   margin-top: 0.4rem;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--text-2); /* Default light gray text */
   transition: color 0.2s ease;
@@ -1251,7 +1251,7 @@
 
 /* Color Selector Grid */
 .color-selector-grid {
-    display: grid;
+  display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   gap: 0.6rem;
@@ -1550,7 +1550,7 @@
 /* Darken label text when selected */
 .color-checkbox:checked ~ .tile-label {
   color: var(--text-main);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* --- SELECTED / CHECKED STATE --- */
@@ -1565,7 +1565,7 @@
 /* Darkened Label Text when Selected */
 .texture-checkbox:checked ~ .tile-label {
   color: var(--text-main);            /* Dark prominent text */
-  font-weight: 700;
+  font-weight: 600;
 }
 /* Custom Symptom Creation Row */
 .add-custom-symptom-group {

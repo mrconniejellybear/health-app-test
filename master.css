@@ -19,6 +19,10 @@
   --border-2: #d3d8dc00;
 }
 
+.contraceptive-qs{
+  display: none;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -39,7 +43,7 @@ body {
 
   background-repeat: no-repeat;
   background-position: top center;
-  background-image: linear-gradient(0deg, #ffffff00 14%, #b3eea700 60%, #cceacb00 100%);
+  background-image: linear-gradient(30deg, #f2f2f2 60%,  #e4a17b19 70%, #f2f2f2 80%,  #a7c7ee31 90%, #df99e922 100%);
   /* Restrict background width to match phone dimensions */
 }
 

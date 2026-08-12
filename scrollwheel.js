@@ -21,7 +21,7 @@ function playClickSound() {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(1, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.5, audioCtx.currentTime + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.05, audioCtx.currentTime + 0.015);
 
   noise.connect(filter);
   filter.connect(gain);

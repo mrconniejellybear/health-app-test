@@ -54,6 +54,7 @@ body {
   position: absolute;
   top: 14px;
   font-size: 13px;
+  display: none;
 }
 .credit a{
   text-decoration: none;

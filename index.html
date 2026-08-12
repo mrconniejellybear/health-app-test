@@ -695,7 +695,6 @@
           </div>
           <input type="range" class="severity-slider" data-symptom="flow" min="0" max="3" value="0" step="1">
     </div>
-
     <!-- 1. Cramps -->
     <div class="symptom-row">
       <div class="symptom-header">
@@ -707,10 +706,26 @@
       <input type="range" class="severity-slider" data-symptom="cramps" min="0" max="3" value="0" step="1">
     </div>
 
+<div class="symptom-section-header" style="margin-top: 1.25rem;">
+  <p class="subcard-subtitle">
+  Hue</p>
+</div>
+<div class="color-slider-container" id="period-color-slider">
+  <div class="slider-indicator" id="slider-arrow"></div>
+  
+  <div class="color-track">
+    <div class="color-segment severity-mild"></div>
+    <div class="color-segment severity-moderate"></div>
+    <div class="color-segment severity-severe"></div>
+  </div>
+</div>
+
+
     <div class="card-break"></div>
 
-    <div class="texture-section">
-    <div class="texture-selector-grid">
+
+<div class="texture-section">
+  <div class="texture-selector-grid">
 
       <label class="texture-tile">
         <input type="checkbox" name="period-texture" value="thin" class="texture-checkbox">
@@ -795,47 +810,8 @@
 
 
     </div>
-    </div>
+</div>
 
-    <div class="symptom-section-header" style="margin-top: 1.25rem;">
-    <p class="subcard-subtitle">
-    Shade
-    </p>
-    </div>
-
-    <div class="color-selector-grid">
-
-      <label class="color-tile">
-        <input type="checkbox" name="period-color" value="bright-red" class="color-checkbox">
-        <div class="color-box swatch-bright-red"></div>
-        <span class="tile-label">Red</span>
-      </label>
-
-      <label class="color-tile">
-        <input type="checkbox" name="period-color" value="dark-red" class="color-checkbox">
-        <div class="color-box swatch-dark-red"></div>
-        <span class="tile-label">Maroon</span>
-      </label>
-
-      <label class="color-tile">
-        <input type="checkbox" name="period-color" value="rust" class="color-checkbox">
-        <div class="color-box swatch-rust"></div>
-        <span class="tile-label">Rust</span>
-      </label>
-
-      <label class="color-tile">
-        <input type="checkbox" name="period-color" value="black" class="color-checkbox">
-        <div class="color-box swatch-black"></div>
-        <span class="tile-label">Dark</span>
-      </label>
-
-      <label class="color-tile">
-        <input type="checkbox" name="period-color" value="brown" class="color-checkbox">
-        <div class="color-box swatch-brown"></div>
-        <span class="tile-label">Brown</span>
-      </label>
-
-    </div>
     
 </div>
 
@@ -1193,5 +1169,6 @@ Contraceptives</h2>
   <script src="script.js"></script>
   <script type="module" src="scrollwheel.js"></script>
   <script src="calendar.js" ></script>
+  <script src="cycle.js" ></script>
 </body>
 </html>

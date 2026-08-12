@@ -1633,3 +1633,59 @@ body {
 .tab-view.active {
   display: flex;
 }
+
+
+
+
+/* Container */
+.color-slider-container {
+  position: relative;
+  width: 98%;
+  height: 60px;
+  margin: 20px auto;
+  touch-action: none; 
+  cursor: pointer;
+}
+
+/* The Track */
+.color-track {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 15px; 
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.color-segment {
+  flex: 1; /* Makes all 3 segments take up exactly 33.33% of the bar */
+}
+
+/* --- Vertical Gradients for the 3 Sections --- */
+.severity-mild {
+  background: linear-gradient(to bottom, #FF3C00, #BA1900); 
+  border-right: 6px solid #fff;
+}
+.severity-moderate {
+  background: linear-gradient(to bottom, #CF1C00, #841200); 
+}
+.severity-severe {
+  background: linear-gradient(to bottom, #911300, #550B00); 
+  border-left: 6px solid #fff;
+}
+
+/* The Arrow Indicator */
+.slider-indicator {
+  position: absolute;
+  top: -2px;
+  /* Center of the first segment (100% / 3 segments / 2 = 16.66%) */
+  left: 16.66%; 
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #c2c2c2; 
+  transition: left 0.1s ease-out; /* The snap animation */
+}

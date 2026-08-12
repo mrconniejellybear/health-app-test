@@ -249,9 +249,9 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 370px;
-  padding-right: 40px;
-  padding-left: 40px;
+  max-width: 93vw;
+  margin-right: 40px;
+  margin-left: 40px;
   margin: 0 auto;
   z-index: 1000;
   /* iOS Safe Area padding for home indicator bar */

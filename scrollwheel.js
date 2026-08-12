@@ -1,5 +1,4 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 function playClickSound() {
   if (audioCtx.state === "suspended") audioCtx.resume();
 
@@ -21,8 +20,8 @@ function playClickSound() {
   filter.frequency.value = 700;
 
   const gain = audioCtx.createGain();
-  gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.015);
+  gain.gain.setValueAtTime(1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.5, audioCtx.currentTime + 0.015);
 
   noise.connect(filter);
   filter.connect(gain);
@@ -200,6 +199,8 @@ function attachRotaryPhysics()
     if (navigator.vibrate) navigator.vibrate(12);
   }
 
+  
+
   viewport.addEventListener("touchstart", onStart, { passive: true });
   viewport.addEventListener("touchmove", onMove, { passive: true });
   viewport.addEventListener("touchend", onEnd);
@@ -218,7 +219,6 @@ function calculateActiveFocalEmoji() {
 
   const nearestIndex = Math.round(normalized / step) % total;
   
-  // When the wheel passes a new slot, trigger the tick!
   if (nearestIndex !== activeMoodIndex) {
     activeMoodIndex = nearestIndex;
     updateRotarySelection(activeMoodIndex);
@@ -226,8 +226,11 @@ function calculateActiveFocalEmoji() {
     // 🔊 Play the sound effect!
     playClickSound();
 
+    // 📳 Trigger native iOS haptic feedback!
+    haptic();
+
     // Soft vibration for mobile tactile feel
-    if (navigator.vibrate) navigator.vibrate(5);
+    if (navigator.vibrate) navigator.vibrate(10);
   }
 }
 

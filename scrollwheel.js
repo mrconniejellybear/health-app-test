@@ -3,13 +3,42 @@ const clickSound = new Audio('click.wav');
 clickSound.volume = 0.01; // Adjust volume (0.0 to 1.0) so it's subtle, not loud!
 
 // Helper function to play sound with zero latency
+// Initialize Web Audio Context
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
 function playClickSound() {
-  // Reset audio playback position to allow rapid repeated clicks while spinning fast
-  clickSound.currentTime = 0;
-  clickSound.play().catch(() => {
-    // Autoplay policy fallback: handles browsers that block audio before first tap
-  });
+  if (audioCtx.state === "suspended") audioCtx.resume();
+
+  // Generate 15ms of organic noise
+  const bufferSize = audioCtx.sampleRate * 0.015; 
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = Math.random() * 2 - 1; // Pure random noise
+  }
+
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = buffer;
+
+  // Filter out low frequencies to make it sound like a crisp snap
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = "highpass";
+  filter.frequency.value = 700;
+
+  const gain = audioCtx.createGain();
+  gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.015);
+
+  noise.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  noise.start();
 }
+
+
+
 
 
 
@@ -252,6 +281,7 @@ document.getElementById("save-mood-btn")?.addEventListener("click", () => {
   }
 
   alert(`Logged mood: ${activeMood.label}`);
+  
 });
 
 

@@ -60,7 +60,7 @@
 
 /* Educational Info Card */
 .color-edu-card {
-  background: #e9eef194;
+  background-image: linear-gradient( #e9eef194, #e3e9eb94);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 14px;

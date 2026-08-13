@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
 
@@ -200,62 +200,18 @@
 }
 
 .status-counter {
-  margin-top: 10px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-2);
 }
 
-/* List Items */
-.med-list {
-  list-style: none;
-}
 
-.med-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 0;
-  border-top: 1px solid var(--border-color);
-  touch-action: pan-y;
-  transition: transform 0.2s ease-out;
-}
 
-.med-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
 
-.check-icon {
-  display: none;
-  background-color: var(--green-check);
-  color: #D6F9B9;
-  width: 56px;
-  height: 30px;
-  border-radius: 6px;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
 
-.med-item.logged .check-icon {
-  display: flex;
-}
 
-.med-text {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text-main);
-}
 
-.logged-status {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 400;
-}
+
 
 /* Calendar Wrapper & Grid */
 .calendar-wrapper {
@@ -395,7 +351,6 @@
   padding: 18px;
   border-radius: 16px;
   max-width: 320px;
-  max-height: 360px;
 }
 
 .modal h2 {
@@ -466,20 +421,7 @@
   font-size: 0.8rem;
   color: #94a3b8;
 }
-.med-item.completed.med-name,
-.med-card.completed.med-name {
-  text-decoration: line-through;
-  opacity: 0.5;
-  color: #94a3b8;
-  transition: all 0.2s ease;
-}
-.med-item.completed,
-.med-card.completed {
-  opacity: 0.7;
-    text-decoration: line-through;
 
-  background: rgba(212, 212, 212, 0.707);
-}
 
 .med-actions {
   display: flex;

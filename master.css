@@ -241,17 +241,17 @@ body {
 .title-icon{
   background-color: #e9c1709a;
   color: #ca8a0c;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   padding: 4px;
   border-radius: 99px;
 }
 
 
 .subtitle {
+  margin-top: 6px;
   font-size: 14px;
-  color: var(--text-muted);
-  margin-top: 2px;
+  color: var(--blue-accent);
   font-weight: 400;
 }
 

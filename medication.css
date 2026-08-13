@@ -1,0 +1,147 @@
+/* --- Modal Selection Grids --- */
+.icon-selector-grid,
+.color-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+/* Hide Native Radio Inputs */
+.icon-option input[type="radio"],
+.color-option input[type="radio"] {
+  display: none;
+}
+
+/* Icon Choice Box */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(239, 239, 239, 0.951);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-option input[type="radio"]:checked + .icon-box {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* Color Circle Buttons */
+.color-btn {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.color-option input[type="radio"]:checked + .color-btn {
+  border-color: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Card Icon + Grid Alignment --- */
+.med-card-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.med-icon-display {
+  font-size: 1.5rem;
+  display: flex;
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 99px;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+
+
+/* --- Medication List Item Styles --- */
+/* Card Container */
+.med-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: opacity 0.3s ease, transform 0.15s ease;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.med-item.completed {
+  opacity: 0.4;
+  filter: grayscale(20%);
+}
+
+.med-item.completed .med-name {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 2x2 Grid Content Container */
+.med-grid {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Left side expands, Right side fits content */
+  grid-template-rows: auto auto;
+  gap: 4px 16px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Quadrant Positioning */
+.med-name {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 17px;
+  font-weight: 600;
+  color: #030303;
+}
+
+.med-dosage {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.med-time {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.logged-status {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: right;
+  font-size: 14px;
+  color: var(--text-main);
+  font-weight: 400;
+  padding: 2px 0px;
+  border-radius: 10px;
+  width: fit-content;
+  justify-self: end;
+}

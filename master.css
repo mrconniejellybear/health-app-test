@@ -235,9 +235,10 @@ body {
 .header-title-row{
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items:center;
   gap: 10px;
 }
+
 .title-icon{
   background-color: #e9c1709a;
   color: #ca8a0c;
@@ -249,13 +250,28 @@ body {
 
 
 .subtitle {
-  margin-top: 6px;
   font-size: 14px;
   color: var(--blue-accent);
   font-weight: 400;
+  margin-top: 6px;
+}
+.status-counter {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-2);
+  margin-top: 4px;
 }
 
 
+
+.add-btn-mini{
+  background-color: var(--btn-blue);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  height: 38px;
+  width: 38px;
+}
 
 .bottom-nav {
   position: fixed;

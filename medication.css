@@ -113,7 +113,7 @@
 .med-name {
   grid-column: 1;
   grid-row: 1;
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
   color: #030303;
 }
@@ -122,7 +122,8 @@
   grid-column: 1;
   grid-row: 2;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  color: var(--text-main);
 }
 .med-time {
   grid-column: 2;

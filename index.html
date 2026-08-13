@@ -117,7 +117,7 @@
         </div>
       </div>
         <div class="med-status-badge" id="home-med-status">0/0 Taken</div>
-    </div>
+        </div>
 
     <div class="card weight-stat-card">
       <div class="mini-pill-header">
@@ -570,18 +570,19 @@
   <div class="card">
     <div class="card-header">
 
-        <div class="header-title-row">
+     <div class="header-title-row">
 
         <div class="header-titles">
-        <h1 class="title tab2">Medication</h1>
-        <p id="add-btn" class="subtitle">Edit List</p>
+           <h1 class="title tab2">Medication</h1>
+              <div id="status-counter" class="status-counter">None Listed</div>
+              <p class="subtitle">Edit List</p>
         </div>
-        </div>
+     </div>
 
-      <div id="status-counter" class="status-counter">None Listed</div>
+        <button class="add-btn-mini" id="add-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -1040 960 960" width="24px" fill="currentColor"><path d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z"/></svg></button>
     </div>
     
-    
+
     <!-- Medication List -->
     <ul id="med-list" class="med-list">
       <!-- Items dynamically added here -->

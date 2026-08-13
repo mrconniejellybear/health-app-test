@@ -365,21 +365,25 @@
 
 /* Modal Styling */
 .modal-overlay {
-  position: fixed;
+  position: fixed; /* CRITICAL: Breaks it out of the parent container */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
+  
+  /* Centers the modal card perfectly */
   display: flex;
   justify-content: center;
   align-items: center;
+  
   padding: 20px;
   box-sizing: border-box;
-  z-index: 9999; /* Forces modal above the bottom nav */
+  
+  z-index: 9999; /* Now that it's fixed, this will actually beat the navbar */
 }
 
 
@@ -388,11 +392,18 @@
 }
 
 .modal {
+  position: fixed; /* CRITICAL: Breaks it out of the parent container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 100vh;
   background: white;
   padding: 18px;
   border-radius: 16px;
-  width: 100%;
   max-width: 320px;
+  max-height: 360px;
 }
 
 .modal h2 {
@@ -444,6 +455,8 @@
   color: #64748b;
   margin-bottom: 0.5rem;
 }
+
+
 .modal-med-list {
   list-style: none;
   padding: 0;
@@ -451,13 +464,8 @@
   max-height: 180px;
   overflow-y: auto;
 }
-.modal-med-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #f1f5f9;
-}
+
+
 .modal-med-item .med-info {
   display: flex;
   flex-direction: column;
@@ -466,7 +474,20 @@
   font-size: 0.8rem;
   color: #94a3b8;
 }
+.med-item.completed.med-name,
+.med-card.completed.med-name {
+  text-decoration: line-through;
+  opacity: 0.5;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+.med-item.completed,
+.med-card.completed {
+  opacity: 0.7;
+    text-decoration: line-through;
 
+  background: rgba(212, 212, 212, 0.707);
+}
 
 .med-actions {
   display: flex;
@@ -1151,7 +1172,7 @@
 }
 
 .quick-log-btn{
-  background-color: #245deb;
+  background-color: var(--btn-blue);
   color: #fff;
   font-size: 14px;
   font-weight: 640;
@@ -1333,14 +1354,6 @@
 }
 
 
-.pill-icon{
-  color: var(--green-check);
-  border-radius: 99px;
-  height: 22px;
-  width: 22px;
-}
-
-
 .btn-secondary-sm {
   background-color: black;
   color: white;
@@ -1372,6 +1385,7 @@ body {
   max-width: 440px;
   margin: 0 auto;
   margin-top: 14px;
+  padding-bottom: 34px;
 }
 
 /* Tab View Visibility */

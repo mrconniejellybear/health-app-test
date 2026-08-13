@@ -17,6 +17,8 @@
   --feat-text: #fdf1ea;
 
   --border-2: #d3d8dc00;
+
+  --btn-blue: #3744f0;
 }
 
 .contraceptive-qs{
@@ -69,7 +71,7 @@ body {
 /* Add Button */
 .add-btn {
   width: 100%;
-  background-color: black;
+  background-color:var(--btn-blue);
   color:  white;
   border:none;
   padding: 12px 16px;

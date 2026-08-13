@@ -58,7 +58,8 @@ const medList = document.getElementById("med-list");
 const statusCounter = document.getElementById("status-counter");
 const addBtn = document.getElementById("add-med-btn") || document.getElementById("add-btn");
 const modalOverlay = document.getElementById("modal-overlay");
-const cancelBtn = document.getElementById("cancel-btn");
+const cancelBtn = document.getElementById("cancel-btn") || document.getElementById("cancel-med-btn");
+
 const medForm = document.getElementById("med-form");
 
 if (addBtn && modalOverlay) {
@@ -129,17 +130,18 @@ function render() {
     const isTakenToday = med.history.includes(today);
 
     const li = document.createElement("li");
-    li.className = `med-item ${isTakenToday ? "logged" : ""}`;
+    // Switch "logged" to "completed" for CSS strikethrough styling
+    li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
 
-    // Show frequency alongside time!
+    // Checkmark removed, structured with .med-name and .med-time for CSS targeting
     li.innerHTML = `
       <div class="med-info">
-        <div class="check-icon">✓</div>
-        <span class="med-text">${med.name}: ${med.scheduledTime} (${med.frequency || 'Daily'})</span>
+        <span class="med-name">${med.name}</span>
+        <span class="med-time">${med.scheduledTime} (${med.frequency || 'Daily'})</span>
       </div>
       <span class="logged-status">
-        ${isTakenToday ? `Taken Today` : "Pending"}
+        ${isTakenToday ? "Taken Today" : "Pending"}
       </span>
     `;
 
@@ -147,6 +149,7 @@ function render() {
     medList.appendChild(li);
   });
 }
+
 
 function attachSwipeGesture(element, med, today) {
   let startX = 0;
@@ -161,11 +164,12 @@ function attachSwipeGesture(element, med, today) {
     currentX = e.touches[0].clientX;
     const diffX = currentX - startX;
     
-    // Swipe right to take (if pending), swipe left to undo (if taken)
-    if (diffX > 0 && !isTakenToday) {
-      element.style.transform = `translateX(${Math.min(diffX, 80)}px)`;
-    } else if (diffX < 0 && isTakenToday) {
+    // Swipe LEFT (diffX < 0) to take (if pending)
+    // Swipe RIGHT (diffX > 0) to undo (if taken)
+    if (diffX < 0 && !isTakenToday) {
       element.style.transform = `translateX(${Math.max(diffX, -80)}px)`;
+    } else if (diffX > 0 && isTakenToday) {
+      element.style.transform = `translateX(${Math.min(diffX, 80)}px)`;
     }
   }, { passive: true });
 
@@ -173,8 +177,8 @@ function attachSwipeGesture(element, med, today) {
     const diffX = currentX - startX;
     element.style.transform = "translateX(0px)";
 
-    if (diffX > 60 && !isTakenToday) {
-      // TAKE PILL: Add today to history
+    // Swiped LEFT past -60px threshold -> TAKE PILL
+    if (diffX < -60 && !isTakenToday) {
       med.history.push(today);
       if (typeof playLogSound === "function") playLogSound();
       
@@ -182,8 +186,8 @@ function attachSwipeGesture(element, med, today) {
       render();
       if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
       
-    } else if (diffX < -60 && isTakenToday) {
-      // UNDO PILL: Remove today from history
+    // Swiped RIGHT past 60px threshold -> UNDO PILL
+    } else if (diffX > 60 && isTakenToday) {
       med.history = med.history.filter(date => date !== today);
       
       saveAppState();
@@ -195,6 +199,7 @@ function attachSwipeGesture(element, med, today) {
     currentX = 0;
   });
 }
+
 
 
 // --- 4. WATER & CAFFEINE TRACKER LOGIC ---

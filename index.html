@@ -643,20 +643,31 @@
     </button>
 </div>
 <div id="modal-overlay" class="modal-overlay hidden">
-    <div class="modal">
-      <h2>Add Medication</h2>
-      <form id="med-form">
-        <label for="med-name">Medication Name</label>
-        <input type="text" id="med-name" placeholder="e.g. Sertraline" required>
+  <div class="modal">
+    <h2>Add Medication</h2>
+    <form id="med-form">
+      <label for="med-name">Medication Name</label>
+      <input type="text" id="med-name" placeholder="e.g. Sertraline" required>
 
-        <label for="med-frequency">Frequency</label>
-        <select id="med-frequency" required>
-          <option value="Daily">Daily</option>
-          <option value="Every Other Day">Every Other Day</option>
-          <option value="As Needed">As Needed</option>
-        </select>
-    </div>
+      <label for="med-time">Time</label>
+      <input type="time" id="med-time" required>
+
+      <label for="med-frequency">Frequency</label>
+      <select id="med-frequency" required>
+        <option value="Daily">Daily</option>
+        <option value="Every Other Day">Every Other Day</option>
+        <option value="As Needed">As Needed</option>
+      </select>
+
+      <div class="modal-btn-group" style="display: flex; gap: 12px; margin-top: 24px;">
+        <button type="button" class="btn-secondary" id="cancel-btn" style="flex: 1;">Cancel</button>
+        <button type="submit" class="btn-primary" style="flex: 1;">Save</button>
+      </div>
+    </form>
+  </div>
 </div>
+
+
 
 
 </section>

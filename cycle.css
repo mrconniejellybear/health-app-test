@@ -27,14 +27,14 @@
 
 /* --- Vertical Gradients for the 3 Sections --- */
 .severity-mild {
-  background: linear-gradient(to bottom, #FF3C00, #BA1900); 
+  background: linear-gradient(to bottom, #f83a00, #bf1900); 
   border-right: 6px solid #fff;
 }
 .severity-moderate {
-  background: linear-gradient(to bottom, #CF1C00, #841200); 
+  background: linear-gradient(to bottom, #be1900, #841200); 
 }
 .severity-severe {
-  background: linear-gradient(to bottom, #911300, #550B00); 
+  background: linear-gradient(to bottom, #861200, #4c0a00); 
   border-left: 6px solid #fff;
 }
 
@@ -56,7 +56,7 @@
 
 /* Educational Info Card */
 .color-edu-card {
-  background: #ebeff2c7;
+  background: #e9eef194;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 14px;
@@ -106,3 +106,171 @@
 .learn-more-link:hover {
   opacity: 0.7;
 }
+
+
+
+
+/* --- DAILY NOTES & BUTTON FIXES --- */
+
+.symptom-intro {
+  font-size: 13px;
+  color: var(--text-muted, #64748b);
+  line-height: 1.4;
+  display: none;
+}
+
+.symptom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0px;
+  border-radius: 12px;
+}
+
+.symptom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.symptom-title {
+  font-size: 14px;
+  font-weight:500;
+  color: var(--text-main, #0f172a);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.severity-badge {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: var(--border-color);
+  color: var(--text-muted, #64748b);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Active highlight when rating > 0 */
+.severity-badge.active {
+  color: white;
+}
+
+.severity-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px; 
+  background: #e2e8f0; /* Soft track background */
+  border-radius: 99px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+/* Ensures the label sits above the textarea cleanly */
+.symptom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Full-width, styled textarea */
+#symptom-notes {
+  width: 100%;
+  box-sizing: border-box; /* Prevents overflow */
+  padding: 12px;
+  border-radius: 12px;
+  border: 0px solid var(--border-color, #e2e8f0);
+  background-color: var(--border-color);
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text-main);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.4s, background-color 0.2s;
+}
+#symptom-notes textarea{
+  color: var(--text-main);
+
+}
+
+#symptom-notes:focus {
+  background-color: #eef0f2e8;
+}
+
+
+
+/* Texture Grid (Scrolls horizontally on very small screens, wraps nicely) */
+.texture-selector-grid {
+  margin: 14px 0px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.texture-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f2f5f7a9;
+  border-radius: 10px;
+  width: 60px;
+  padding: 8px 0px;
+
+}
+.add-tex-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #e9edf0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3e3f41; /* Default SVG icon color */
+  transition: all 0.2s ease;
+}
+.texture-checkbox {
+  display: none; /* Hide standard input box */
+}
+
+/* Default Empty Tile Box */
+.tile-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #ffeafb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f249ba; /* Default SVG icon color */
+  transition: all 0.2s ease;
+}
+.tile-box svg{
+  height: 32px;
+  width: auto;
+}
+
+
+/* Label Below Box */
+.tile-label {
+  margin-top: 0.4rem;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-2); /* Default light gray text */
+  transition: color 0.2s ease;
+  text-align: center;
+}
+
+
+
+
+
+.swatch-white      { background-color: #f7f5f2; }
+.swatch-clear      { background-color: #dae0e18f; }
+.swatch-cream      { background-color: #dedaca; }
+.swatch-yellow     { background-color: #eee8bddd; }
+.swatch-grey       { background-color: #b6b4b0; }
+.swatch-pale       { background-color: #d8dccf; }

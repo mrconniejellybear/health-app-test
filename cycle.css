@@ -27,19 +27,19 @@
 
 /* --- Vertical Gradients for the 3 Sections --- */
 .severity-mild {
-  background: linear-gradient(to bottom, #f83a00, #bf1900); 
-  border-right: 6px solid #fff;
+  background: linear-gradient(to bottom, #ff3c00, #b61800); 
+  border-right: 5px solid #fff;
 }
 .severity-moderate {
-  background: linear-gradient(to bottom, #be1900, #841200); 
+  background: linear-gradient(to bottom, #b41800, #781202); 
 }
 .severity-severe {
-  background: linear-gradient(to bottom, #861200, #4c0a00); 
-  border-left: 6px solid #fff;
+  background: linear-gradient(to bottom, #8d1806, #4e1006); 
+  border-left: 5px solid #fff;
 }
 .severity-end{
-  background: linear-gradient(to bottom, #44180d, #2f1b15); 
-  border-left: 6px solid #fff;
+  background: linear-gradient(to bottom, #70221b, #3f241b); 
+  border-left: 5px solid #fff;
 }
 
 /* The Arrow Indicator */
@@ -60,7 +60,7 @@
 
 /* Educational Info Card */
 .color-edu-card {
-  background-image: linear-gradient( #ebf0f394, #cdd3d694);
+  background:  #ebf0f394;
   border-radius: 12px;
   padding: 14px;
   text-align: left;

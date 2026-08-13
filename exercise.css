@@ -149,7 +149,7 @@
 .rotary-viewport {
   position: relative;
   width: 110%;
-  height: 280px;
+  height: 370px;
   overflow: hidden;
   touch-action: none;
   user-select: none;
@@ -165,11 +165,10 @@
 /* Atmospheric Focal Glow - Anchored to Top of Viewport/Screen */
 .rotary-glow-bg {
   position: absolute;
-  top: -40px; /* Pulls glow up past the top boundary for a seamless gradient bleed */
   left: 50%;
   transform: translateX(-50%);
   width: 120%; /* Wide radial sweep across mobile viewport width */
-  height: 380px; /* Tall enough to illuminate top header area down behind wheel */
+  height: 400px; /* Tall enough to illuminate top header area down behind wheel */
   
   /* Radial gradient centered near the top edge */
   background: radial-gradient(
@@ -189,7 +188,7 @@
 /* Center Headline Text */
 .rotary-center-content {
   position: absolute;
-  top:124px;
+  top:148px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -217,8 +216,8 @@
 /* Main Rotary Wheel Container */
 .rotary-wheel {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   top: 34px;
   left: 50%;
@@ -269,6 +268,7 @@
 /* Bottom Fade Mask */
 .rotary-fade-overlay {
   position: absolute;
+  display: none;
   bottom: 0;
   left: 0;
   width: 100%;

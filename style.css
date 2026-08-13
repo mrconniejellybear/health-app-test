@@ -4,7 +4,7 @@
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
-  border-radius: 24px;
+  border-radius: 28px;
   border: none;
   padding: 14px;
 }
@@ -1125,7 +1125,7 @@
 
 
 .subcard-subtitle {
-  font-size:14px;
+  font-size:17px;
   font-weight: 600;
   color: #535860;
 }

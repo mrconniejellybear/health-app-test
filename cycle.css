@@ -61,7 +61,7 @@
 /* Educational Info Card */
 .color-edu-card {
   background:  #ebf0f394;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 14px;
   text-align: left;
 }
@@ -77,13 +77,13 @@
   color: #5e5e5e;
   padding: 3px 10px;
   border-radius: 99px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   margin-top: 1px;
 }
 
 .color-edu-card h4 {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--text-main);
 }
 
@@ -183,12 +183,12 @@
   justify-content: space-between;
 }
 .view-more{
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-2);
   font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 1px;
 }
 
 /* Full-width, styled textarea */
@@ -253,9 +253,9 @@
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 46px;
-  height: 46px;
-  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  border-radius:8px;
   background-color: #f249ba;
 
   display: flex;
@@ -265,7 +265,7 @@
   transition: all 0.2s ease;
 }
 .tile-box svg{
-  height: 32px;
+  height: 34px;
   width: auto;
 }
 
@@ -274,8 +274,8 @@
 .tile-label {
   margin-top: 0.4rem;
   font-size: 13px;
-  font-weight: 400;
-  color: var(--text-2); /* Default light gray text */
+  font-weight: 600;
+  color: var(--text-3); /* Default light gray text */
   transition: color 0.2s ease;
   text-align: center;
 }

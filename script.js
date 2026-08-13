@@ -48,6 +48,12 @@ function saveAppState() {
 
 // --- 3. MEDICATION TRACKER LOGIC ---
 
+// Helper to reliably get today's date in YYYY-MM-DD format based on local time
+function getTodayStr() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+}
+
 const medList = document.getElementById("med-list");
 const statusCounter = document.getElementById("status-counter");
 const addBtn = document.getElementById("add-med-btn") || document.getElementById("add-btn");
@@ -67,6 +73,10 @@ if (medForm) {
     e.preventDefault();
     const name = document.getElementById("med-name").value.trim();
     const rawTime = document.getElementById("med-time").value;
+    
+    // Safely grab frequency if the dropdown exists in HTML, default to Daily
+    const freqInput = document.getElementById("med-frequency");
+    const frequency = freqInput ? freqInput.value : "Daily";
 
     if (name && rawTime) {
       const formattedTime = formatTime(rawTime);
@@ -74,14 +84,15 @@ if (medForm) {
         id: Date.now(),
         name,
         scheduledTime: formattedTime,
-        isLogged: false,
-        loggedTime: null
+        frequency: frequency,
+        history: [] // <--- New recurring logic engine!
       });
 
       saveAppState();
       medForm.reset();
       modalOverlay.classList.add("hidden");
       render();
+      if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
     }
   });
 }
@@ -94,49 +105,53 @@ function formatTime(timeStr) {
   return minutes === "00" ? `${h} ${ampm}` : `${h}:${minutes} ${ampm}`;
 }
 
-function getCurrentFormattedTime() {
-  const now = new Date();
-  let h = now.getHours();
-  const m = now.getMinutes().toString().padStart(2, "0");
-  const ampm = h >= 12 ? "PM" : "AM";
-  h = h % 12 || 12;
-  return `${h}:${m} ${ampm}`;
-}
-
 function render() {
   if (!medList) return;
   medList.innerHTML = "";
 
+  const today = getTodayStr();
+
+  // 1. Data Migration: Ensure old med objects have a history array
+  medications.forEach(med => {
+    if (!med.history) med.history = [];
+  });
+
   const total = medications.length;
-  const takenCount = medications.filter(m => m.isLogged).length;
+  // 2. Count meds where today's date exists in the history array
+  const takenCount = medications.filter(m => m.history.includes(today)).length;
 
   if (statusCounter) {
     statusCounter.textContent = total === 0 ? "None Listed" : `${takenCount}/${total} Taken`;
   }
 
   medications.forEach((med) => {
+    // 3. Determine if taken today
+    const isTakenToday = med.history.includes(today);
+
     const li = document.createElement("li");
-    li.className = `med-item ${med.isLogged ? "logged" : ""}`;
+    li.className = `med-item ${isTakenToday ? "logged" : ""}`;
     li.dataset.id = med.id;
 
+    // Show frequency alongside time!
     li.innerHTML = `
       <div class="med-info">
         <div class="check-icon">✓</div>
-        <span class="med-text">${med.name}: ${med.scheduledTime}</span>
+        <span class="med-text">${med.name}: ${med.scheduledTime} (${med.frequency || 'Daily'})</span>
       </div>
       <span class="logged-status">
-        ${med.isLogged ? `Logged: ${med.loggedTime}` : "Not Logged"}
+        ${isTakenToday ? `Taken Today` : "Pending"}
       </span>
     `;
 
-    attachSwipeGesture(li, med);
+    attachSwipeGesture(li, med, today);
     medList.appendChild(li);
   });
 }
 
-function attachSwipeGesture(element, med) {
+function attachSwipeGesture(element, med, today) {
   let startX = 0;
   let currentX = 0;
+  const isTakenToday = med.history.includes(today);
 
   element.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
@@ -146,8 +161,11 @@ function attachSwipeGesture(element, med) {
     currentX = e.touches[0].clientX;
     const diffX = currentX - startX;
     
-    if (diffX > 0 && !med.isLogged) {
+    // Swipe right to take (if pending), swipe left to undo (if taken)
+    if (diffX > 0 && !isTakenToday) {
       element.style.transform = `translateX(${Math.min(diffX, 80)}px)`;
+    } else if (diffX < 0 && isTakenToday) {
+      element.style.transform = `translateX(${Math.max(diffX, -80)}px)`;
     }
   }, { passive: true });
 
@@ -155,11 +173,22 @@ function attachSwipeGesture(element, med) {
     const diffX = currentX - startX;
     element.style.transform = "translateX(0px)";
 
-    if (diffX > 60 && !med.isLogged) {
-      med.isLogged = true;
-      med.loggedTime = getCurrentFormattedTime();
+    if (diffX > 60 && !isTakenToday) {
+      // TAKE PILL: Add today to history
+      med.history.push(today);
+      if (typeof playLogSound === "function") playLogSound();
+      
       saveAppState();
       render();
+      if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
+      
+    } else if (diffX < -60 && isTakenToday) {
+      // UNDO PILL: Remove today from history
+      med.history = med.history.filter(date => date !== today);
+      
+      saveAppState();
+      render();
+      if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
     }
     
     startX = 0;

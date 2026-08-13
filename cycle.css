@@ -37,6 +37,10 @@
   background: linear-gradient(to bottom, #861200, #4c0a00); 
   border-left: 6px solid #fff;
 }
+.severity-end{
+  background: linear-gradient(to bottom, #44180d, #2f1b15); 
+  border-left: 6px solid #fff;
+}
 
 /* The Arrow Indicator */
 .slider-indicator {
@@ -135,8 +139,8 @@
 
 .symptom-title {
   font-size: 14px;
-  font-weight:500;
-  color: var(--text-main, #0f172a);
+  font-weight:400;
+  color: var(--text-2);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -206,6 +210,7 @@
 .texture-selector-grid {
   margin: 14px 0px;
   display: grid;
+  gap: 10px 0px;
   grid-template-columns: repeat(5, 1fr);
 }
 .texture-tile {
@@ -213,22 +218,22 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  background-color: #f2f5f7a9;
+  background-color: #f2f5f7;
   border-radius: 10px;
   width: 60px;
   padding: 8px 0px;
 
 }
 .add-tex-btn {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 8px;
   background-color: #e2e3e5;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3e3f41; /* Default SVG icon color */
+  color: var(--text-2); /* Default SVG icon color */
   transition: all 0.2s ease;
 }
 .texture-checkbox {
@@ -237,8 +242,8 @@
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 8px;
   background-color: #f249ba;
 
@@ -249,7 +254,7 @@
   transition: all 0.2s ease;
 }
 .tile-box svg{
-  height: 34px;
+  height: 32px;
   width: auto;
 }
 
@@ -259,7 +264,7 @@
   margin-top: 0.4rem;
   font-size: 13px;
   font-weight: 400;
-  color: var(--text-main); /* Default light gray text */
+  color: var(--text-2); /* Default light gray text */
   transition: color 0.2s ease;
   text-align: center;
 }

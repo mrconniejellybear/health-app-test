@@ -7,7 +7,7 @@ function initPeriodColorSlider() {
   const infoDesc = document.getElementById('color-info-desc');
   const infoLink = document.getElementById('color-info-link');
 
-  const totalSegments = 3; 
+  const totalSegments = 4; 
   let currentSegment = 0;
   let isDragging = false;
   
@@ -16,7 +16,7 @@ function initPeriodColorSlider() {
     {
       title: "Bright",
       desc: "Bright red hues usually appear at the beginning of a period, and indicate the flow of fresh blood. Its duration can vary: for some, it lasts the first 1-3 days, for others, it spans the entire period. Both are acceptable, healthy patterns during a typical cycle.",
-      link: "https://www.healthline.com/health/womens-health/period-blood"
+      link: "https://www.medicalnewstoday.com/articles/324848#bright-red"
     },
     {
       title: "Medium",
@@ -27,6 +27,11 @@ function initPeriodColorSlider() {
       title: "Dark",
       desc: "Dark red hues are a result of that blood has remained in the uterus longer, giving it time to oxidize (react to oxygen). It is a common color, and completely healthy to see this at both the beginning or the end of your period, when your flow is slower.",
       link: "https://www.healthline.com/health/womens-health/period-blood"
+    },
+    {
+      title: "Darkest",
+      desc: "Black to brown hues are merely leftover blood. They are typical at the beginning or ends of a cycle, when flow is slow. If this color lasts longer than the duration of your typical period, and you have not started/changed birth controls, consult a physician",
+      link: "https://www.medicalnewstoday.com/articles/324848#brown-or-dark-red"
     }
   ];
 

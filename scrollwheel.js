@@ -106,7 +106,7 @@ function initRotaryWheel() {
 
   wheel.innerHTML = "";
   const total = moodConfig.length;
-  const radius = 142; // Perfect radius alignment for 300px wheel!
+  const radius = 147; // Perfect radius alignment for 300px wheel!
 
   moodConfig.forEach((item, index) => {
     const slotAngle = (index / total) * 360;

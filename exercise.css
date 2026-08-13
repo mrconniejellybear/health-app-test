@@ -149,7 +149,7 @@
 .rotary-viewport {
   position: relative;
   width: 110%;
-  height: 370px;
+  height: 400px;
   overflow: hidden;
   touch-action: none;
   user-select: none;
@@ -188,7 +188,7 @@
 /* Center Headline Text */
 .rotary-center-content {
   position: absolute;
-  top:148px;
+  top:156px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -216,8 +216,8 @@
 /* Main Rotary Wheel Container */
 .rotary-wheel {
   position: absolute;
-  width: 320px;
-  height: 320px;
+  width: 330px;
+  height: 330px;
   border-radius: 50%;
   top: 34px;
   left: 50%;

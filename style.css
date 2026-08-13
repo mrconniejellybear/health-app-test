@@ -126,7 +126,7 @@
 
 }
 .mood-hero-stats p {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 440;
   color: var(--text-main);
   margin: 2px 0 6px 0;
@@ -841,7 +841,7 @@
   justify-content: center;
   align-items: center;
   padding: 12px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #64748b;
   background-color: #f8fafc;
@@ -1174,7 +1174,7 @@
 .quick-log-btn{
   background-color: var(--btn-blue);
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 640;
   height: 34px;
   border: none;
@@ -1192,7 +1192,7 @@
 .date-view-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 440;
   height: 36px;
   border: none;

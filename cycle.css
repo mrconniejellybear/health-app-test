@@ -89,7 +89,7 @@
 
 .color-edu-card p {
   margin: 0 0 20px 0;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-2);
   line-height: 1.4;
   font-weight: 400;
@@ -101,7 +101,7 @@
   gap: 4px;
   align-items: center;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   transition: opacity 0.2s;
 }
@@ -137,7 +137,7 @@
 }
 
 .symptom-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight:400;
   color: var(--text-2);
   display: flex;
@@ -183,7 +183,7 @@
   justify-content: space-between;
 }
 .view-more{
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-2);
   font-weight: 400;
   display: flex;

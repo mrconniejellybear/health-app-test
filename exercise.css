@@ -149,11 +149,12 @@
 .rotary-viewport {
   position: relative;
   width: 110%;
-  height: 400px;
+  height: 460px;
   overflow: hidden;
   touch-action: none;
   user-select: none;
   margin: -16px;
+  margin-top: -90px;
 }
 
 /* Mental Health Tab View Container - Ensure positioning boundary */
@@ -167,14 +168,14 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 120%; /* Wide radial sweep across mobile viewport width */
-  height: 400px; /* Tall enough to illuminate top header area down behind wheel */
+  width: 110%; /* Wide radial sweep across mobile viewport width */
+  height: 800px; /* Tall enough to illuminate top header area down behind wheel */
   
   /* Radial gradient centered near the top edge */
   background: radial-gradient(
     circle at 50% 20%, 
-    var(--active-mood-color, rgba(234, 179, 8, 0.35)) 0%, 
-    rgba(15, 23, 42, 0) 70%
+    var(--active-mood-color, rgba(234, 179, 8, 0.35)) 70%, 
+    rgba(15, 23, 42, 0) 0%
   );
   
   pointer-events: none; /* Prevents glow from blocking thumb touches/drag gestures */
@@ -188,7 +189,7 @@
 /* Center Headline Text */
 .rotary-center-content {
   position: absolute;
-  top:156px;
+  top:210px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -219,7 +220,7 @@
   width: 330px;
   height: 330px;
   border-radius: 50%;
-  top: 34px;
+  top: 90px;
   left: 50%;
   transform: translate(-50%, 0);
   border: 36px solid rgba(148, 163, 184, 0.25);

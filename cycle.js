@@ -91,3 +91,5 @@ function initPeriodColorSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', initPeriodColorSlider);
+
+

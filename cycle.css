@@ -223,7 +223,7 @@
   width: 48px;
   height: 48px;
   border-radius: 8px;
-  background-color: #e9edf0;
+  background-color: #e2e3e5;
 
   display: flex;
   align-items: center;
@@ -240,16 +240,16 @@
   width: 48px;
   height: 48px;
   border-radius: 8px;
-  background-color: #ffeafb;
+  background-color: #f249ba;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f249ba; /* Default SVG icon color */
+  color: #fff; /* Default SVG icon color */
   transition: all 0.2s ease;
 }
 .tile-box svg{
-  height: 32px;
+  height: 34px;
   width: auto;
 }
 
@@ -259,12 +259,67 @@
   margin-top: 0.4rem;
   font-size: 13px;
   font-weight: 400;
-  color: var(--text-2); /* Default light gray text */
+  color: var(--text-main); /* Default light gray text */
   transition: color 0.2s ease;
   text-align: center;
 }
 
 
+/* Active Selection Feedback: Border highlight & pop animation */
+.color-checkbox:checked + .color-box {
+  border: 6px solid var(--true-blue);
+}
+
+/* Checkmark indicator inside active color box */
+.color-checkbox:checked + .color-box::after {
+  content: "✓";
+  color: var(--feat-text);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+/* Darken label text when selected */
+.color-checkbox:checked ~ .tile-label {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* --- SELECTED / CHECKED STATE --- */
+
+/* Active Box Fill (Pinkish Red Accent) */
+.texture-checkbox:checked + .tile-box {
+  background-color: #f249ba; /* Matches your active accent red/pink */
+  border-color: var(--true-blue);
+  color: white;            /* SVG turns crisp white */
+}
+
+/* Darkened Label Text when Selected */
+.texture-checkbox:checked ~ .tile-label {
+  color: var(--text-main);            /* Dark prominent text */
+  font-weight: 600;
+}
+/* Custom Symptom Creation Row */
+.add-custom-symptom-group {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.custom-symptom-input {
+  flex: 1;
+  border: 0px solid #edf2f7;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-size: 15px;
+  outline: none;
+  background-color: var(--border-color);
+  transition: ease-in-out 0.2s;
+}
+
+.custom-symptom-input:focus {
+  border-color: #f249ba;
+  background-color: #ffffff;
+}
 
 
 

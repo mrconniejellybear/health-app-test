@@ -199,17 +199,9 @@
   color: var(--text-main);
 }
 
-
-.subtitle {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 4px;
-  font-weight: 400;
-}
-
 .status-counter {
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-2);
 }

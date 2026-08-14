@@ -988,6 +988,10 @@ navButtons.forEach((btn) => {
         updateHomeDashboard();
       }, 50);
     }
+
+    if (targetTabId === "view-meds") { 
+    updateMoodSubtitle();
+    }  
   });
 });
 
@@ -1000,4 +1004,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMedicationCalendar();
   renderCustomSymptoms();
   updateHomeDashboard();
+  updateMoodSubtitle();
 });

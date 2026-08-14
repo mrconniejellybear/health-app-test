@@ -189,7 +189,7 @@ position: absolute;
 /* Center Headline Text */
 .rotary-center-content {
   position: absolute;
-  top:210px;
+  top:215px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -201,8 +201,9 @@ position: absolute;
 
 .rotary-subtitle {
   font-size: 16px;
-  color: var(--text-main);
+  color: #000;
   margin-top: 10px;
+  font-weight: 500;
 }
 
 .rotary-headline {

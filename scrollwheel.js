@@ -32,6 +32,30 @@ function playClickSound() {
 
 
 
+// Array of dynamic prompt variations for the Mood Wheel
+const moodPrompts = [
+  "I'm feeling...",
+  "I feel...",
+  "Right now, I'm...",
+  "Right now, I feel...",
+  "I am...",
+  "In this moment, I'm...",
+  "My mood is...",
+  "Currently feeling...",
+  "Today I'm...",
+  "Today I feel..."
+];
+
+// Helper function to pick a random prompt and update the DOM
+function updateMoodSubtitle() {
+  const subtitleEl = document.querySelector(".rotary-subtitle");
+  if (!subtitleEl) return;
+
+  const randomIndex = Math.floor(Math.random() * moodPrompts.length);
+  subtitleEl.textContent = moodPrompts[randomIndex];
+}
+
+
 
 
 
@@ -103,6 +127,8 @@ function getSelectedRotaryMood() {
 function initRotaryWheel() {
   const wheel = document.getElementById("rotary-wheel");
   if (!wheel) return;
+
+    updateMoodSubtitle();
 
   wheel.innerHTML = "";
   const total = moodConfig.length;

@@ -1,6 +1,13 @@
 
+.baby-card.menstruation{
+  background-color: #f9c8ebad
+}
+.menstruation.article-header{
+  color: #b900aa;
+}
 
-/* Container */
+
+
 .color-slider-container {
   position: relative;
   width: 100%;
@@ -345,3 +352,7 @@
 .swatch-yellow     { background-color: #eee8bddd; }
 .swatch-grey       { background-color: #b6b4b0; }
 .swatch-pale       { background-color: #d8dccf; }
+
+
+
+

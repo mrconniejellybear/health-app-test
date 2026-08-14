@@ -178,7 +178,7 @@ function renderMedications() {
           <span class="med-dosage">${med.dosage}</span>
           <span class="med-time" style="color: ${colorTheme.main}">${med.scheduledTime || med.time || ''}</span>
           <span class="logged-status">
-            ${isTakenToday ? "✓ Taken Today" : "Pending"}
+            ${isTakenToday ? "Taken" : "Not Taken"}
           </span>
         </div>
       </div>
@@ -270,7 +270,7 @@ document.getElementById("edit-meds-btn")?.addEventListener("click", () => {
   
   if (editBtn) {
     editBtn.textContent = isMedEditMode ? "Done" : "Edit List";
-    editBtn.style.color = isMedEditMode ? "#34c759" : "#3883e0"; // Green for Done, Blue for Edit
+    editBtn.style.color = isMedEditMode ? "#1bb040" : "#3883e0"; // Green for Done, Blue for Edit
   }
   
   if (listEl) {

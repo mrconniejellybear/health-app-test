@@ -1,3 +1,15 @@
+
+.baby-card.meds{
+  background-color: #eff6cd
+}
+.meds.article-header{
+  color: #88aa00;
+}
+
+
+
+
+
 /* --- Modal Selection Grids --- */
 .icon-selector-grid,
 .color-selector-grid {
@@ -151,7 +163,7 @@
   border: none;
   color: #3883e0;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 440;
   cursor: pointer;
   margin-top: 6px;
   text-align: left;
@@ -198,3 +210,5 @@
   opacity: 0.3; /* Soften checkboxes/status during edit */
   pointer-events: none;
 }
+
+

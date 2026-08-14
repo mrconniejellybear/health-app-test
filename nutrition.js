@@ -204,122 +204,43 @@ if (sexForm) {
 }
 
 
+// --- COMPLETE NUTRITION & MACROS CONTROLLER ---
 
-
-// --- NUTRITION & CALORIE LOGIC ---
-
-// Helper: Get today's key string (YYYY-MM-DD)
 function getNutritionTodayKey() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-// State retrieval from localStorage
-let calorieGoal = parseInt(localStorage.getItem("healthApp_calorieGoal"), 10) || 2000;
-let dailyCalorieLogs = JSON.parse(localStorage.getItem("healthApp_calorieLogs")) || {};
+// 1. Persistent Goals (Defaults)
+let nutritionGoals = JSON.parse(localStorage.getItem("healthApp_nutritionGoals")) || {
+  calories: 2000,
+  protein: 140,
+  carbs: 220,
+  fats: 65,
+  water: 64
+};
 
-// SVG Ring Circumference (2 * Math.PI * 66)
-const CIRCUMFERENCE = 414.7;
+// 2. Persistent Logs (By Date)
+let nutritionLogs = JSON.parse(localStorage.getItem("healthApp_nutritionLogs")) || {};
 
-function getTodayCalories() {
+// Helper: Get today's object
+function getTodayNutrition() {
   const today = getNutritionTodayKey();
-  return dailyCalorieLogs[today] || 0;
+  if (!nutritionLogs[today]) {
+    nutritionLogs[today] = { calories: 0, protein: 0, carbs: 0, fats: 0 };
+  }
+  return nutritionLogs[today];
 }
 
-function updateCalorieUI() {
-  const currentCals = getTodayCalories();
-  const fillRing = document.getElementById("calorie-doughnut-fill");
-  const currentDisplay = document.getElementById("calorie-current-display");
-  const goalDisplay = document.getElementById("calorie-goal-display");
-  const remainingDisplay = document.getElementById("calorie-remaining-display");
-
-  if (goalDisplay) goalDisplay.textContent = calorieGoal.toLocaleString();
-  if (currentDisplay) currentDisplay.textContent = currentCals.toLocaleString();
-
-  // Progress Calculation & Doughnut offset
-  const ratio = Math.min(currentCals / calorieGoal, 1);
-  const offset = CIRCUMFERENCE - (ratio * CIRCUMFERENCE);
-
-  if (fillRing) {
-    fillRing.style.strokeDashoffset = offset;
-    // Turn green if goal hit / exceeded
-    if (currentCals >= calorieGoal) {
-      fillRing.style.stroke = "#30d158";
-    } else {
-      fillRing.style.stroke = "#37b813";
-    }
-  }
-
-  if (remainingDisplay) {
-    const diff = calorieGoal - currentCals;
-    if (diff > 0) {
-      remainingDisplay.textContent = `${diff.toLocaleString()}`;
-      remainingDisplay.style.color = "#757575";
-    } else if (diff === 0) {
-      remainingDisplay.textContent = "Goal Reached! 🎯";
-      remainingDisplay.style.color = "#30d158";
-    } else {
-      remainingDisplay.textContent = `+${Math.abs(diff).toLocaleString()} over`;
-      remainingDisplay.style.color = "#30d158";
-    }
-  }
-}
-
-function logCalories(amount) {
-  const today = getNutritionTodayKey();
-  dailyCalorieLogs[today] = (dailyCalorieLogs[today] || 0) + amount;
-  localStorage.setItem("healthApp_calorieLogs", JSON.stringify(dailyCalorieLogs));
-  
-  if (typeof playLogSound === "function") playLogSound();
-  updateCalorieUI();
-}
-
-// Form & Goal Listeners
-document.addEventListener("DOMContentLoaded", () => {
-  const calForm = document.getElementById("calorie-log-form");
-  const calInput = document.getElementById("calorie-input");
-  const editGoalBtn = document.getElementById("edit-calorie-goal-btn");
-
-  if (calForm && calInput) {
-    calForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const val = parseInt(calInput.value, 10);
-      if (val > 0) {
-        logCalories(val);
-        calInput.value = "";
-      }
-    });
-  }
-
-  if (editGoalBtn) {
-    editGoalBtn.addEventListener("click", () => {
-      const userGoal = prompt("Set your daily calorie goal (kcal):", calorieGoal);
-      const parsed = parseInt(userGoal, 10);
-      if (parsed && parsed > 0) {
-        calorieGoal = parsed;
-        localStorage.setItem("healthApp_calorieGoal", calorieGoal);
-        updateCalorieUI();
-      }
-    });
-  }
-
-  updateCalorieUI();
-});
-
-
-
-
-// --- CONFIGURABLE HERO METRICS SYSTEM ---
-
-// Metrics definition schema
+// 3. Definitions Schema for Hero Graph & Toggles
 const NUTRITION_METRICS = [
   {
     id: "water",
     label: "Water",
     unit: "oz",
     icon: "💧",
-    color: "#0ca7fd", // Water blue
-    getGoal: () => parseInt(localStorage.getItem("healthApp_waterGoal"), 10) || 64,
+    color: "#3883e0",
+    getGoal: () => nutritionGoals.water,
     getValue: () => {
       const logs = JSON.parse(localStorage.getItem("healthApp_waterLogs")) || {};
       return logs[getNutritionTodayKey()] || 0;
@@ -327,22 +248,112 @@ const NUTRITION_METRICS = [
   },
   {
     id: "calories",
-    label: "Cal",
-    unit: "kcal",
+    label: "Calories",
+    unit: "cal",
     icon: "🔥",
-    color: "#36b811", // Calorie orange
-    getGoal: () => parseInt(localStorage.getItem("healthApp_calorieGoal"), 10) || 2000,
-    getValue: () => {
-      const logs = JSON.parse(localStorage.getItem("healthApp_calorieLogs")) || {};
-      return logs[getNutritionTodayKey()] || 0;
-    }
+    color: "#ff9f0a",
+    getGoal: () => nutritionGoals.calories,
+    getValue: () => getTodayNutrition().calories
+  },
+  {
+    id: "protein",
+    label: "Protein",
+    unit: "g",
+    icon: "🥩",
+    color: "#ff453a",
+    getGoal: () => nutritionGoals.protein,
+    getValue: () => getTodayNutrition().protein
+  },
+  {
+    id: "carbs",
+    label: "Carbs",
+    unit: "g",
+    icon: "🍞",
+    color: "#64d2ff",
+    getGoal: () => nutritionGoals.carbs,
+    getValue: () => getTodayNutrition().carbs
+  },
+  {
+    id: "fats",
+    label: "Fats",
+    unit: "g",
+    icon: "🥑",
+    color: "#ffd60a",
+    getGoal: () => nutritionGoals.fats,
+    getValue: () => getTodayNutrition().fats
   }
-  // Ready to add protein, carbs, fats, caffeine later!
 ];
 
-// Persistent state for which metrics the user turned ON
-let visibleMetrics = JSON.parse(localStorage.getItem("healthApp_visibleNutritionMetrics")) || ["water", "calories"];
+// Display Toggles (Persisted)
+let visibleMetrics = JSON.parse(localStorage.getItem("healthApp_visibleNutritionMetrics")) || ["water", "calories", "protein", "carbs", "fats"];
 
+// SVG Ring Circumference (2 * Math.PI * 66)
+const CIRCUMFERENCE = 414.7;
+
+// UI Updater for Calorie Ring & Macro Summary Pills
+function updateCalorieUI() {
+  const todayData = getTodayNutrition();
+  const cals = todayData.calories;
+  const goal = nutritionGoals.calories;
+
+  // 1. Doughnut Chart (Remaining focus)
+  const remainingValEl = document.getElementById("calorie-remaining-val");
+  const loggedSubEl = document.getElementById("calorie-logged-sub");
+  const fillRing = document.getElementById("calorie-doughnut-fill");
+
+  const diff = goal - cals;
+  if (remainingValEl) remainingValEl.textContent = Math.max(0, diff).toLocaleString();
+  if (loggedSubEl) loggedSubEl.textContent = `${cals.toLocaleString()} / ${goal.toLocaleString()}`;
+
+  const ratio = Math.min(cals / goal, 1);
+  const offset = CIRCUMFERENCE - (ratio * CIRCUMFERENCE);
+
+  if (fillRing) {
+    fillRing.style.strokeDashoffset = offset;
+    fillRing.style.stroke = cals >= goal ? "#30d158" : "#ff9f0a";
+  }
+
+  // 2. Macro Pills Fill & Text
+  const updateMacroPill = (type, unit = "g") => {
+    const current = todayData[type] || 0;
+    const target = nutritionGoals[type] || 1;
+    const display = document.getElementById(`macro-${type}-display`);
+    const fill = document.getElementById(`macro-${type}-fill`);
+    if (display) display.textContent = `${current}/${target}${unit}`;
+    if (fill) fill.style.width = `${Math.min((current / target) * 100, 100)}%`;
+  };
+
+  updateMacroPill("protein");
+  updateMacroPill("carbs");
+  updateMacroPill("fats");
+}
+
+// Log Food Function (Calories + Macros)
+function logNutrition({ calories = 0, protein = 0, carbs = 0, fats = 0 }) {
+  const today = getNutritionTodayKey();
+  const todayData = getTodayNutrition();
+
+  // If calories not entered directly, auto-calculate from macros (4-4-9 rule)
+  let calculatedCals = calories;
+  if (!calculatedCals && (protein || carbs || fats)) {
+    calculatedCals = (protein * 4) + (carbs * 4) + (fats * 9);
+  }
+
+  todayData.calories += calculatedCals;
+  todayData.protein += protein;
+  todayData.carbs += carbs;
+  todayData.fats += fats;
+
+  nutritionLogs[today] = todayData;
+  localStorage.setItem("healthApp_nutritionLogs", JSON.stringify(nutritionLogs));
+
+  if (typeof playLogSound === "function") playLogSound();
+
+  updateCalorieUI();
+  renderHeroGraph();
+}
+
+// --- HERO BAR GRAPH & TOGGLE MODAL LOGIC ---
 function renderHeroGraph() {
   const container = document.getElementById("metric-bars-row");
   if (!container) return;
@@ -351,7 +362,7 @@ function renderHeroGraph() {
   const activeConfigs = NUTRITION_METRICS.filter(m => visibleMetrics.includes(m.id));
 
   if (activeConfigs.length === 0) {
-    container.innerHTML = `<span style="color: rgba(255,255,255,0.4); font-size: 0.85rem; margin: auto;">No metrics selected. Tap Edit Display to add bars.</span>`;
+    container.innerHTML = `<span style="color: rgba(255,255,255,0.4); font-size: 0.85rem; margin: auto;">No metrics selected. Tap Edit Display to choose bars.</span>`;
     return;
   }
 
@@ -365,7 +376,7 @@ function renderHeroGraph() {
     col.innerHTML = `
       <span class="bar-goal-top">${goal.toLocaleString()}${m.unit === 'oz' ? 'oz' : ''}</span>
       <div class="bar-track-wrapper">
-        <div class="bar-fill" style="height: ${percent}%; background-color: ${percent >= 100 ? '#30d158' : m.color};"></div>
+        <div class="bar-fill" style="height: ${percent}%; background-color: ${percent >= 100 ? '#17bb40' : m.color};"></div>
       </div>
       <span class="bar-value-bottom">${value.toLocaleString()}</span>
       <span class="bar-label-tag">${m.label}</span>
@@ -409,25 +420,74 @@ function renderDisplayToggles() {
   });
 }
 
-// Hook up graph updates to logging triggers
-const originalLogCalories = logCalories;
-logCalories = function(amount) {
-  originalLogCalories(amount);
-  renderHeroGraph();
-};
+// Goal Customizer Prompt Helper
+function openGoalSetter() {
+  const cals = prompt("Set Daily Calories Goal (kcal):", nutritionGoals.calories);
+  if (cals && parseInt(cals, 10) > 0) nutritionGoals.calories = parseInt(cals, 10);
 
-// Modal Open/Close Listeners
+  const prot = prompt("Set Daily Protein Goal (g):", nutritionGoals.protein);
+  if (prot && parseInt(prot, 10) > 0) nutritionGoals.protein = parseInt(prot, 10);
+
+  const carb = prompt("Set Daily Carbs Goal (g):", nutritionGoals.carbs);
+  if (carb && parseInt(carb, 10) > 0) nutritionGoals.carbs = parseInt(carb, 10);
+
+  const fat = prompt("Set Daily Fats Goal (g):", nutritionGoals.fats);
+  if (fat && parseInt(fat, 10) > 0) nutritionGoals.fats = parseInt(fat, 10);
+
+  localStorage.setItem("healthApp_nutritionGoals", JSON.stringify(nutritionGoals));
+  updateCalorieUI();
+  renderHeroGraph();
+}
+
+// Form & Modal Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("nutrition-log-form");
+  const calsInput = document.getElementById("input-cals");
+  const protInput = document.getElementById("input-protein");
+  const carbsInput = document.getElementById("input-carbs");
+  const fatsInput = document.getElementById("input-fats");
+  const editGoalsBtn = document.getElementById("edit-nutrition-goals-btn");
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const calories = parseInt(calsInput.value, 10) || 0;
+      const protein = parseInt(protInput.value, 10) || 0;
+      const carbs = parseInt(carbsInput.value, 10) || 0;
+      const fats = parseInt(fatsInput.value, 10) || 0;
+
+      if (calories > 0 || protein > 0 || carbs > 0 || fats > 0) {
+        logNutrition({ calories, protein, carbs, fats });
+        form.reset();
+      }
+    });
+  }
+
+  if (editGoalsBtn) {
+    editGoalsBtn.addEventListener("click", openGoalSetter);
+  }
+
+  updateCalorieUI();
+  renderHeroGraph();
+  renderDisplayToggles();
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Initial renders
+  updateCalorieUI();
+  updateWaterUI();
   renderHeroGraph();
   renderDisplayToggles();
 
+  // 2. Edit Display Modal Open/Close wiring
   const openModalBtn = document.getElementById("open-display-modal-btn");
   const closeModalBtn = document.getElementById("close-display-modal-btn");
   const modalOverlay = document.getElementById("display-modal-overlay");
 
   if (openModalBtn && modalOverlay) {
     openModalBtn.addEventListener("click", () => {
-      renderDisplayToggles();
+      renderDisplayToggles(); // Refresh checkboxes
       modalOverlay.classList.remove("hidden");
     });
   }
@@ -440,7 +500,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modalOverlay) {
     modalOverlay.addEventListener("click", (e) => {
-      if (e.target === modalOverlay) modalOverlay.classList.add("hidden");
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.add("hidden");
+      }
+    });
+  }
+
+  // 3. Goal setter & form submits
+  const editGoalsBtn = document.getElementById("edit-nutrition-goals-btn");
+  if (editGoalsBtn) {
+    editGoalsBtn.addEventListener("click", openGoalSetter);
+  }
+
+  const form = document.getElementById("nutrition-log-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const calories = parseInt(document.getElementById("input-cals")?.value, 10) || 0;
+      const protein = parseInt(document.getElementById("input-protein")?.value, 10) || 0;
+      const carbs = parseInt(document.getElementById("input-carbs")?.value, 10) || 0;
+      const fats = parseInt(document.getElementById("input-fats")?.value, 10) || 0;
+
+      if (calories > 0 || protein > 0 || carbs > 0 || fats > 0) {
+        logNutrition({ calories, protein, carbs, fats });
+        form.reset();
+      }
     });
   }
 });

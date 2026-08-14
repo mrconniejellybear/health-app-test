@@ -204,8 +204,11 @@ body {
 }
 
 .tab4 svg{
-  background-color: #c4e0fdcb;
-  color: #0676d9
+  background-color: #fff;
+  color: #0299ea;
+  height: 40px;
+  width: auto;
+  padding: 6px;
 }
 .tab5 svg{
   background-color: #fed2fccb;

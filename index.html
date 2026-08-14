@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="master.css">
     <link rel="stylesheet" href="medication.css">
     <link rel="stylesheet" href="exercise.css">
+    <link rel="stylesheet" href="nutrition.css">
     <link rel="stylesheet" href="tasks.css">
     <link rel="stylesheet" href="cycle.css">
 
@@ -491,12 +492,19 @@
    </div>
 
 
-<div class="card">
+<div class="card water">
     <div class="card-header">
-        <div>
-        <h1 class="title tab4"><svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="currentColor"><path d="M197.37-111.87q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.18-13.17 32.33-13.17h565.26q19.15 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.18 13.17-32.33 13.17H197.37Zm120.96-166.22q-68.87 0-117.67-48.79-48.79-48.79-48.79-117.66v-312.59q0-37.78 26.61-64.39t64.39-26.61h554.5q37.44 0 64.1 26.73 26.66 26.73 26.66 64.03v120q0 37.3-26.66 64.03-26.66 26.73-64.1 26.73h-75.46v102.07q0 68.87-48.96 117.66-48.97 48.79-117.73 48.79H318.33Zm.24-91h236.41q31.32 0 53.63-22.23 22.3-22.24 22.3-53.46v-312.35H242.87v312.35q0 31.22 22.24 53.46 22.23 22.23 53.46 22.23Zm403.34-268.28h75.22v-120h-75.22v120ZM318.57-369.09h-75.7 388.04H318.57Z"/></svg>Hydration</h1>
+     <div class="header-title-row">
+        <div class="header-titles">
+           <h1 class="title tab2">Water</h1>
+           <div id="water-counter" class="status-counter">None Listed</div>
+           <button id="edit-meds-btn" class="subtitle-btn">Edit Items</button>
         </div>
-        <div id="water-counter" class="status-counter">0oz / 64oz</div>
+     </div>
+
+     <button class="add-btn-mini" id="add-btn">
+       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z"/></svg>
+     </button>
     </div>
 
     <!-- Progress Bar Section -->

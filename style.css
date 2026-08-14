@@ -510,7 +510,7 @@
 
 .progress-bar-bg {
   position: relative;
-  background-color: #d4e8f6; /* Empty track color */
+  background-color: #f1f8fef4; /* Empty track color */
   height: 34px;
   border-radius: 12px;
   overflow: hidden;
@@ -519,7 +519,7 @@
 }
 
 .progress-bar-fill {
-  background: linear-gradient(0deg, #0c9edd, #07c2f1); /* Warm Amber / Coffee theme */
+  background: linear-gradient(0deg, #0092f3, #0daeff); /* Warm Amber / Coffee theme */
   height: 100%;
   width: 0%;
   border-radius: 12px;
@@ -542,7 +542,7 @@
 .tick {
   width: 4px;
   height: 12px;
-  background-color: #ffffff9b;
+  background-color: #fff;
   margin-top: 0;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;

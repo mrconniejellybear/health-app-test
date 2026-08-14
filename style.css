@@ -157,6 +157,7 @@
 
 /* CARD 2: COMPACT MEDICATION REMINDER */
 .med-compact-card {
+  display: none;
   grid-column: span 1;
   background-color: var(--card-bg);
 }

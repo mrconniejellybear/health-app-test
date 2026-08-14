@@ -167,11 +167,9 @@
 
 /* --- HERO BAR GRAPH CONTAINER --- */
 .nutrition-hero-container {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.842)100%);
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.015)100%);
   border-radius: 26px;
   padding: 14px;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;

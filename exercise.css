@@ -165,17 +165,17 @@
 
 /* Atmospheric Focal Glow - Anchored to Top of Viewport/Screen */
 .rotary-glow-bg {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110%; /* Wide radial sweep across mobile viewport width */
-  height: 800px; /* Tall enough to illuminate top header area down behind wheel */
+position: absolute;
+  top: 24px; /* Pulls glow above status bar */
+  left: 0;
+  right: 0;
+  height: 450px;
   
-  /* Radial gradient centered near the top edge */
+  /* Radial gradient centered at the top edge */
   background: radial-gradient(
-    circle at 50% 20%, 
-    var(--active-mood-color, rgba(234, 179, 8, 0.35)) 70%, 
-    rgba(15, 23, 42, 0) 0%
+    circle at 90% 0%, 
+    var(--current-mood-color) 0%, 
+    #ffffff 80%
   );
   
   pointer-events: none; /* Prevents glow from blocking thumb touches/drag gestures */

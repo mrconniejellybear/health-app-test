@@ -137,6 +137,39 @@ body {
 
 
 
+.baby-card{
+  padding: 14px;
+  border-radius: 18px;
+  border: none;
+  background-color: rgba(205, 234, 154, 0.826)
+}
+.article-header{
+  color: #2f6f07;
+  display: flex;
+  justify-content: space-between;
+}
+.article-icon{
+  background-color: #fff;
+  height: 80px;
+  width: 143px;
+  margin-right: 14px;
+  border-radius: 999px;
+  padding: 10px;
+}
+
+.article-title{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 8px;
+
+}
+.article-tease{
+  color: #000;
+  font-size: 15px;
+}
 
 
 
@@ -267,19 +300,17 @@ body {
 .add-btn-mini{
   background-color: var(--btn-blue);
   color: #fff;
-  font-size: 15px;
   font-weight: 640;
-  height: 34px;
   border: none;
-  border-radius: 8px;
-  padding: 0px 20px 0px 12px;
+  border-radius: 99px;
+  padding: 6px;
 
   display: flex;
   align-items: center;
   gap: 6px;
 }
 .add-btn-mini svg{
-  width: 20px;
+  width: 19px;
   height: auto;
 }
 

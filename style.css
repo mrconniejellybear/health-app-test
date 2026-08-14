@@ -4,7 +4,7 @@
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
-  border-radius: 28px;
+  border-radius: 26px;
   border: none;
   padding: 14px;
 }
@@ -1122,8 +1122,8 @@
   background-color: var(--card-bg);
   color: var(--text-main);
   font-size: 15px;
-  font-weight: 440;
-  height: 36px;
+  font-weight: 400;
+  height: 40px;
   border: none;
   border-radius: 99px;
   padding: 0px 10px 0px 16px;

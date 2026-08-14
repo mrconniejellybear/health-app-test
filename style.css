@@ -1043,14 +1043,16 @@
 /* --- HOME DASHBOARD CARDS --- */
 .home-card {
   margin-bottom: 16px;
+  
 }
 .view-header{
-  margin-left: 8px;
+  display: none;
 }
 .view-title{
   font-size: 30px;
   color: var(--text-main);
   font-weight: 500;
+  display: none;
 }
 
 .view-subtitle{

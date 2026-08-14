@@ -19,7 +19,7 @@
 
 .calorie-card-header {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
 }
 .card-icon{
@@ -41,8 +41,9 @@
 .goal-edit-btn {
   border: none;
   background: none;
-  color: var(--blue-accent);
-  font-size: 14px;
+  color: #777;
+  font-size: 16px;
+  margin-top: 5px;
   font-weight: 440;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
@@ -100,9 +101,9 @@
 }
 
 .doughnut-val {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 800;
-  color: #ff9f0a;
+  color: #37b813;
   line-height: 1.1;
 }
 
@@ -111,10 +112,11 @@
   color: #000;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: none;
 }
 
 .doughnut-sub {
-  font-size: 0.78rem;
+  font-size: 30px;
   color: #000;
   margin-top: 3px;
   font-weight: 500;
@@ -158,6 +160,8 @@
   transform: scale(0.96);
   opacity: 0.9;
 }
+
+
 
 
 
@@ -210,7 +214,7 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  height: 180px;
+  height: 230px;
   padding-top: 10px;
   gap: 12px;
 }
@@ -232,21 +236,25 @@
   white-space: nowrap;
 }
 
+/* Outer Track Wrapper */
 .bar-track-wrapper {
   flex: 1;
-  width: 42px;
+  width: 60px;
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
+  /* Top-Left | Top-Right | Bottom-Right | Bottom-Left */
+  border-radius: 6px 6px 0 0; 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: hidden;
+  overflow: hidden; /* Clips the inner fill cleanly to the top curve */
   position: relative;
 }
 
+/* Inner Dynamic Bar Fill */
 .bar-fill {
   width: 100%;
-  border-radius: 12px;
+  /* Only round the top corners as the bar grows */
+  border-radius: 6px 6px 0 0; 
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
 }
 

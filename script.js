@@ -879,3 +879,13 @@ document.addEventListener("DOMContentLoaded", () => {
   updateHomeDashboard();
   updateMoodSubtitle();
 });
+
+
+// Auto-refresh UI if the user returns to the app on a new day
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    updateWaterUI();
+    updateCalorieUI();
+    if (typeof renderHeroGraph === "function") renderHeroGraph();
+  }
+});

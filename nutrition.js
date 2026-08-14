@@ -1,8 +1,16 @@
+// --- 4. WATER TRACKER LOGIC ---
 
-// --- 4. WATER & CAFFEINE TRACKER LOGIC ---
+// 1. Load today's logs and goal from localStorage
+let dailyWaterLogs = JSON.parse(localStorage.getItem("healthApp_waterLogs")) || {};
+let goalWaterOz = parseInt(localStorage.getItem("healthApp_waterGoal"), 10) || 64;
 
-let currentWaterOz = 0;
-const goalWaterOz = 64;
+// Helper to get today's intake
+function getTodayWater() {
+  const today = typeof getNutritionTodayKey === "function" 
+    ? getNutritionTodayKey() 
+    : new Date().toISOString().split("T")[0];
+  return dailyWaterLogs[today] || 0;
+}
 
 const waterCounter = document.getElementById("water-counter");
 const waterFill = document.getElementById("water-fill");
@@ -20,16 +28,34 @@ if (waterCancelBtn && waterModalOverlay) {
 }
 
 function updateWaterUI() {
-  if (!waterCounter || !waterFill) return;
-  waterCounter.textContent = `${currentWaterOz} oz / ${goalWaterOz} oz`;
-  const percentage = Math.min((currentWaterOz / goalWaterOz) * 100, 100);
-  waterFill.style.width = `${percentage}%`;
+  const currentWaterOz = getTodayWater();
+  
+  if (waterCounter) {
+    waterCounter.textContent = `${currentWaterOz} oz / ${goalWaterOz} oz`;
+  }
+  if (waterFill) {
+    const percentage = Math.min((currentWaterOz / goalWaterOz) * 100, 100);
+    waterFill.style.width = `${percentage}%`;
+  }
 }
 
 function addWater(amount) {
   if (amount > 0) {
-    currentWaterOz += amount;
+    const today = typeof getNutritionTodayKey === "function" 
+      ? getNutritionTodayKey() 
+      : new Date().toISOString().split("T")[0];
+
+    // Increment & Save to localStorage
+    dailyWaterLogs[today] = (dailyWaterLogs[today] || 0) + amount;
+    localStorage.setItem("healthApp_waterLogs", JSON.stringify(dailyWaterLogs));
+
+    // Sound feedback
+    if (typeof playLogSound === "function") playLogSound();
+
+    // Re-render UI and Hero Bar Graph
     updateWaterUI();
+    if (typeof renderHeroGraph === "function") renderHeroGraph();
+    
     if (waterModalOverlay) waterModalOverlay.classList.add("hidden");
   }
 }
@@ -53,6 +79,7 @@ quickAddBtns.forEach((btn) => {
     addWater(amount);
   });
 });
+
 
 let currentCaffeineMg = JSON.parse(localStorage.getItem("healthApp_caffeineMg")) || 0;
 let goalCaffeineMg = JSON.parse(localStorage.getItem("healthApp_caffeineGoal")) || 200;
@@ -219,7 +246,7 @@ function updateCalorieUI() {
     if (currentCals >= calorieGoal) {
       fillRing.style.stroke = "#30d158";
     } else {
-      fillRing.style.stroke = "#ff9f0a";
+      fillRing.style.stroke = "#37b813";
     }
   }
 
@@ -291,7 +318,7 @@ const NUTRITION_METRICS = [
     label: "Water",
     unit: "oz",
     icon: "💧",
-    color: "#3883e0", // Water blue
+    color: "#0ca7fd", // Water blue
     getGoal: () => parseInt(localStorage.getItem("healthApp_waterGoal"), 10) || 64,
     getValue: () => {
       const logs = JSON.parse(localStorage.getItem("healthApp_waterLogs")) || {};
@@ -303,7 +330,7 @@ const NUTRITION_METRICS = [
     label: "Cal",
     unit: "kcal",
     icon: "🔥",
-    color: "#ff9f0a", // Calorie orange
+    color: "#36b811", // Calorie orange
     getGoal: () => parseInt(localStorage.getItem("healthApp_calorieGoal"), 10) || 2000,
     getValue: () => {
       const logs = JSON.parse(localStorage.getItem("healthApp_calorieLogs")) || {};

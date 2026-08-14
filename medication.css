@@ -67,8 +67,8 @@
   border-radius: 99px;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
 }
 
@@ -104,7 +104,7 @@
   display: grid;
   grid-template-columns: 1fr auto; /* Left side expands, Right side fits content */
   grid-template-rows: auto auto;
-  gap: 4px 16px;
+  gap: 0px 16px;
   width: 100%;
   align-items: center;
 }

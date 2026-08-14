@@ -157,18 +157,6 @@
 }
 
 
-/* Subtitle Button Reset */
-.subtitle-btn {
-  background: transparent;
-  border: none;
-  color: #3883e0;
-  font-size: 14px;
-  font-weight: 440;
-  cursor: pointer;
-  margin-top: 6px;
-  text-align: left;
-}
-
 /* Edit Mode Animation & Delete Button */
 .med-item {
   display: flex;

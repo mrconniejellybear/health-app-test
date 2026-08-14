@@ -1,3 +1,403 @@
 .card.water{
-    background-color: #2da1ff2b;
+    background-color: #fff;
+}
+
+
+
+
+
+
+/* --- CALORIE CARD STYLES --- */
+.calorie-card {
+  background: #fff;
+  border-radius: 26px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calorie-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-icon{
+  display: none;
+}
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title-group h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.goal-edit-btn {
+  border: none;
+  background: none;
+  color: var(--blue-accent);
+  font-size: 14px;
+  font-weight: 440;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.goal-edit-btn:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* SVG Doughnut */
+.calorie-visual-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.doughnut-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.doughnut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Starts fill from the top (12 o'clock) */
+}
+
+.doughnut-track {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 16;
+}
+
+.doughnut-fill {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap:round;
+  stroke-dasharray: 414.7; /* 2 * PI * 66 */
+  stroke-dashoffset: 414.7;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s ease;
+}
+
+.doughnut-center-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.doughnut-val {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ff9f0a;
+  line-height: 1.1;
+}
+
+.doughnut-unit {
+  font-size: 12px;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doughnut-sub {
+  font-size: 0.78rem;
+  color: #000;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* Input Row */
+.calorie-input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.calorie-input {
+  flex: 1;
+  background: var(--border-color);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.calorie-input:focus {
+  border-color: #000;
+}
+
+.calorie-add-btn {
+  background: #ff9f0a;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0 18px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.calorie-add-btn:active {
+  transform: scale(0.96);
+  opacity: 0.9;
+}
+
+
+
+
+
+
+
+/* --- HERO BAR GRAPH CONTAINER --- */
+.nutrition-hero-container {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.842)100%);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  border-radius: 26px;
+  padding: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-graph-title h4 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.hero-graph-subtitle {
+  font-size: 0.75rem;
+  color: rgba(40, 35, 35, 0.936);
+  display: none;
+}
+
+.edit-display-btn {
+  background: transparent;
+  border: none;
+  color: #3883e0;
+  font-size: 14px;
+  font-weight: 440;
+  cursor: pointer;
+  text-align: left;
+}
+
+
+/* Vertical Bars Layout */
+.metric-bars-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 180px;
+  padding-top: 10px;
+  gap: 12px;
+}
+
+.metric-bar-col {
+  flex: 1;
+  max-width: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bar-goal-top {
+  font-size: 14px;
+  font-weight: 400;
+  color: #999;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.bar-track-wrapper {
+  flex: 1;
+  width: 42px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  width: 100%;
+  border-radius: 12px;
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+.bar-value-bottom {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.bar-label-tag {
+  font-size: 13px;
+  font-weight: 400;
+  color: #777;
+  margin-top: 2px;
+  letter-spacing: 0.3px;
+}
+
+
+
+
+
+/* --- EDIT DISPLAY MODAL --- */
+.display-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.display-modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.display-modal-card {
+  width: 88%;
+  max-width: 360px;
+  background: #1c1c20;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.display-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display-modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.close-modal-x {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.display-modal-hint {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 8px 0 16px 0;
+}
+
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.toggle-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-icon {
+  font-size: 1.1rem;
+}
+
+.toggle-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* iOS-style toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-switch {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.16);
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.slider-switch:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider-switch {
+  background-color: #30d158;
+}
+
+input:checked + .slider-switch:before {
+  transform: translateX(20px);
 }

@@ -1,25 +1,4 @@
 
-
-.card {
-  background: var(--card-bg);
-  width: 100%;
-  max-width: 440px;
-  border-radius: 26px;
-  border: none;
-  padding: 14px;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom:12px;
-}
-
-
-
-
-
 /* --- HOME DASHBOARD GRID STYLING --- */
 .dashboard-header {
   display: flex;

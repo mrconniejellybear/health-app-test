@@ -67,6 +67,26 @@ body {
 
 
 
+.card {
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 440px;
+  border-radius: 26px;
+  border: none;
+  padding: 14px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom:12px;
+}
+
+
+
+
+
 
 /* Add Button */
 .add-btn {
@@ -293,6 +313,16 @@ body {
 }
 
 
+.subtitle-btn {
+  background: transparent;
+  border: none;
+  color: #3883e0;
+  font-size: 14px;
+  font-weight: 440;
+  cursor: pointer;
+  margin-top: 6px;
+  text-align: left;
+}
 
 .add-btn-mini{
   background-color: var(--btn-blue);

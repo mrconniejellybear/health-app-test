@@ -143,3 +143,58 @@
   width: fit-content;
   justify-self: end;
 }
+
+
+/* Subtitle Button Reset */
+.subtitle-btn {
+  background: transparent;
+  border: none;
+  color: #3883e0;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 6px;
+  text-align: left;
+}
+
+/* Edit Mode Animation & Delete Button */
+.med-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Hidden by default */
+.med-delete-btn {
+  display: none;
+  background: #ff3b30;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.med-delete-btn:active {
+  transform: scale(0.85);
+}
+
+/* When Edit Mode is active on the list */
+.med-list.editing .med-delete-btn {
+  display: inline-flex;
+}
+
+.med-list.editing .logged-status {
+  opacity: 0.3; /* Soften checkboxes/status during edit */
+  pointer-events: none;
+}

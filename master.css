@@ -282,12 +282,6 @@ body {
 }
 
 
-.subtitle {
-  font-size: 14px;
-  color: var(--blue-accent);
-  font-weight: 400;
-  margin-top: 6px;
-}
 .status-counter {
   font-size: 14px;
   font-weight: 400;

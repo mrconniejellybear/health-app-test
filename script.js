@@ -120,11 +120,18 @@ if (medForm) {
 }
 
 function renderMedications() {
+  const medList = document.getElementById("med-list");
   if (!medList) return;
   medList.innerHTML = "";
 
-  const today = getTodayStr();
+  const today = getTodayStr ? getTodayStr() : new Date().toISOString().split("T")[0];
 
+  // 1. Maintain Edit Mode class state
+  if (isMedEditMode) {
+    medList.classList.add("editing");
+  }
+
+  // 2. Data Migration Fallbacks
   medications.forEach(med => {
     if (!med.history) med.history = [];
     if (!med.dosage) med.dosage = "200mg";
@@ -139,32 +146,37 @@ function renderMedications() {
     statusCounter.textContent = total === 0 ? "None Listed" : `${takenCount}/${total} Taken`;
   }
 
+  // 3. Sort: Pending first, Taken last
   const sortedMeds = [...medications].sort((a, b) => {
     const aTaken = a.history.includes(today);
     const bTaken = b.history.includes(today);
     return aTaken === bTaken ? 0 : aTaken ? 1 : -1;
   });
 
+  // 4. Render Items
   sortedMeds.forEach((med) => {
     const isTakenToday = med.history.includes(today);
-    const colorTheme = MED_COLOR_PALETTE[med.colorKey] || MED_COLOR_PALETTE["color-1"];
+    const colorTheme = (typeof MED_COLOR_PALETTE !== "undefined" && MED_COLOR_PALETTE[med.colorKey])
+      ? MED_COLOR_PALETTE[med.colorKey] 
+      : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.1)" };
 
     const li = document.createElement("li");
     li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
-
     li.style.backgroundColor = colorTheme.bg;
     li.style.borderColor = `${colorTheme.main}40`;
 
+    // UNIFIED SINGLE INNERHTML: Delete Button + Icon + Info Card
     li.innerHTML = `
+      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
       <div class="med-card-wrapper">
         <div class="med-icon-display" style="color: ${colorTheme.main}">
-          ${getIconSVG(med.icon)}
+          ${typeof getIconSVG === "function" ? getIconSVG(med.icon) : ""}
         </div>
         <div class="med-grid">
           <span class="med-name" style="color: ${colorTheme.main}">${med.name}</span>
           <span class="med-dosage">${med.dosage}</span>
-          <span class="med-time" style="color: ${colorTheme.main}">${med.scheduledTime}</span>
+          <span class="med-time" style="color: ${colorTheme.main}">${med.scheduledTime || med.time || ''}</span>
           <span class="logged-status">
             ${isTakenToday ? "✓ Taken Today" : "Pending"}
           </span>
@@ -172,10 +184,14 @@ function renderMedications() {
       </div>
     `;
 
-    attachSwipeGesture(li, med, today);
+    if (typeof attachSwipeGesture === "function") {
+      attachSwipeGesture(li, med, today);
+    }
+    
     medList.appendChild(li);
   });
 }
+
 
 function getIconSVG(iconKey) {
   const iconMap = {
@@ -241,6 +257,40 @@ function attachSwipeGesture(element, med, today) {
     startX = 0;
     currentX = 0;
   });
+}
+
+let isMedEditMode = false;
+
+// Toggle Edit Mode on button click
+document.getElementById("edit-meds-btn")?.addEventListener("click", () => {
+  isMedEditMode = !isMedEditMode;
+  
+  const editBtn = document.getElementById("edit-meds-btn");
+  const listEl = document.getElementById("med-list");
+  
+  if (editBtn) {
+    editBtn.textContent = isMedEditMode ? "Done" : "Edit List";
+    editBtn.style.color = isMedEditMode ? "#34c759" : "#3883e0"; // Green for Done, Blue for Edit
+  }
+  
+  if (listEl) {
+    listEl.classList.toggle("editing", isMedEditMode);
+  }
+});
+
+function deleteMedication(id) {
+  // Remove from master list
+  medications = medications.filter(med => String(med.id) !== String(id));
+  
+  // Save updated state to localStorage
+  saveAppState();
+
+  // Play click/tap sound
+  if (typeof playClickSound === "function") playClickSound();
+
+  // Re-render the list and home dashboard summary
+  renderMedications();
+  if (typeof updateHomeDashboard === "function") updateHomeDashboard();
 }
 
 

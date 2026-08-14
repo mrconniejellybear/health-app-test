@@ -234,25 +234,29 @@
 
 <div class="card">
     <div class="card-header">
-
      <div class="header-title-row">
-
         <div class="header-titles">
            <h1 class="title tab2">Medication</h1>
-              <div id="status-counter" class="status-counter">None Listed</div>
-              <p class="subtitle">Edit List</p>
+           <div id="status-counter" class="status-counter">None Listed</div>
+           <button id="edit-meds-btn" class="subtitle-btn">Edit List</button>
         </div>
      </div>
 
-        <button class="add-btn-mini" id="add-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z"/></svg></button>
+     <button class="add-btn-mini" id="add-btn">
+       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z"/></svg>
+     </button>
     </div>
     
+    <ul id="med-list" class="med-list">
+      </ul>
+</div>
 
     <!-- Medication List -->
     <ul id="med-list" class="med-list">
       <!-- Items dynamically added here -->
     </ul>
 </div>
+
 <div id="modal-overlay" class="modal-overlay hidden">
    <div class="modal">
       <h2>Add Medication</h2>

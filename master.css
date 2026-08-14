@@ -141,7 +141,7 @@ body {
   padding: 14px;
   border-radius: 18px;
   border: none;
-  background-color: rgba(205, 234, 154, 0.826)
+  background-color: #b6ea9aad
 }
 .article-header{
   color: #2f6f07;
@@ -150,8 +150,8 @@ body {
 }
 .article-icon{
   background-color: #fff;
-  height: 80px;
-  width: 143px;
+  height: 70px;
+  width: 114px;
   margin-right: 14px;
   border-radius: 999px;
   padding: 10px;
@@ -162,12 +162,12 @@ body {
   gap: 8px;
   align-items: center;
   justify-content: space-between;
-  font-size: 20px;
-  margin-bottom: 8px;
+  font-size: 16px;
+  margin-bottom: 2px;
 
 }
 .article-tease{
-  color: #000;
+  color: #070707c7;
   font-size: 15px;
 }
 

@@ -1081,6 +1081,9 @@
   height: 28px;
   width: auto;
 }
+.row-btn a{
+padding: 10px solid #fff;
+}
 
 .quick-log-btn{
   background-color: var(--btn-blue);

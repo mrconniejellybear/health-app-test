@@ -895,11 +895,24 @@ document.addEventListener("visibilitychange", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Restore the order of Home cards (or any tab view)
-  restoreCardOrder("view-home");
 
-  // Initialize the drag-and-drop listeners
+  restoreCardOrder("view-home");
   initCardReordering("#view-home");
+
+  restoreCardOrder("view-wellbeing");
+  initCardReordering("#view-wellbeing");
+
+  restoreCardOrder("view-diet");
+  initCardReordering("#view-diet");
+
+  restoreCardOrder("view-home");
+  initCardReordering("#view-home");
+
+  const customizeCycleBtn = document.getElementById("customize-cycle-btn");
+if (customizeCycleBtn) {
+  customizeCycleBtn.addEventListener("click", openCycleDisplayModal);
+}
+
 });
 
 

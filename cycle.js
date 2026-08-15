@@ -98,3 +98,75 @@ function initPeriodColorSlider() {
 document.addEventListener('DOMContentLoaded', initPeriodColorSlider);
 
 
+// --- CYCLE CARDS VISIBILITY CONTROLLER ---
+const DEFAULT_CYCLE_CARD_VISIBILITY = {
+  "card-cycle-symptoms": true,
+  "card-cycle-flow": true,
+  "card-cycle-discharge": true,
+  "card-cycle-bc": true,
+  "card-cycle-sex": true
+};
+
+let cycleCardVisibility = JSON.parse(localStorage.getItem("cycle_card_visibility")) || DEFAULT_CYCLE_CARD_VISIBILITY;
+
+// 1. Open / Close Modal
+function openCycleDisplayModal() {
+  const modal = document.getElementById("cycle-display-modal");
+  if (!modal) return;
+
+  // Sync checkboxes with current state
+  const checkboxes = modal.querySelectorAll('input[type="checkbox"][data-card]');
+  checkboxes.forEach((cb) => {
+    const cardId = cb.dataset.card;
+    cb.checked = cycleCardVisibility[cardId] !== false;
+  });
+
+  modal.classList.remove("hidden");
+  if (typeof playClickSound === "function") playClickSound();
+}
+
+function closeCycleDisplayModal() {
+  const modal = document.getElementById("cycle-display-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+// 2. Apply Visibility to DOM Cards
+function applyCycleCardVisibility() {
+  Object.keys(cycleCardVisibility).forEach((cardId) => {
+    const cardEl = document.getElementById(cardId);
+    if (!cardEl) return;
+
+    if (cycleCardVisibility[cardId]) {
+      cardEl.classList.remove("card-hidden");
+    } else {
+      cardEl.classList.add("card-hidden");
+    }
+  });
+}
+
+// 3. Form Submit Listener & Initialization
+document.addEventListener("DOMContentLoaded", () => {
+  // Apply saved visibility on load
+  applyCycleCardVisibility();
+
+  const displayForm = document.getElementById("cycle-display-form");
+  if (displayForm) {
+    displayForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const checkboxes = displayForm.querySelectorAll('input[type="checkbox"][data-card]');
+      checkboxes.forEach((cb) => {
+        const cardId = cb.dataset.card;
+        cycleCardVisibility[cardId] = cb.checked;
+      });
+
+      // Save to localStorage & update DOM
+      localStorage.setItem("cycle_card_visibility", JSON.stringify(cycleCardVisibility));
+      applyCycleCardVisibility();
+      closeCycleDisplayModal();
+
+      if (typeof playLogSound === "function") playLogSound();
+      if (navigator.vibrate) navigator.vibrate(10);
+    });
+  }
+});

@@ -72,9 +72,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 24px;
-  border: 1px solid #eee;
+  border: 1px solid #ededed;
   padding: 14px;
-  box-shadow: 0px 5px 10px #00000006;
+  box-shadow: 0px 5px 10px #00000005;
 }
 
 .card-header {
@@ -188,7 +188,7 @@ body {
 
 }
 .article-tease{
-  color: #070707c7;
+  color: #222;
   font-size: 14px;
 }
 
@@ -357,8 +357,8 @@ body {
   justify-content: space-around;
   align-items: center;
   max-width: 93vw;
-  margin-right: 40px;
-  margin-left: 40px;
+  padding-left: 12px;
+  padding-right: 12px;
   margin: 0 auto;
   z-index: 1000;
   /* iOS Safe Area padding for home indicator bar */
@@ -390,4 +390,40 @@ body {
 
 .nav-btn.active .nav-icon {
   filter: grayscale(0%);
+}
+
+
+
+
+
+
+/* --- Modal Toggle Row Styles --- */
+.display-toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+.toggle-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary-accent, #e42c38);
+  cursor: pointer;
+}
+
+/* Hidden Card State */
+.card.card-hidden {
+  display: none !important;
 }

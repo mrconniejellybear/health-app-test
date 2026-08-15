@@ -74,7 +74,7 @@ body {
   border-radius: 24px;
   border: none;
   padding: 14px;
-  box-shadow: 0px 5px 10px #00000006;
+  box-shadow: 0px 5px 10px #00000009;
 }
 
 .card-header {
@@ -171,11 +171,11 @@ body {
 }
 .article-icon{
   background-color: #fff;
-  height: 66px;
-  width: 102px;
+  height: 58px;
+  width: 96px;
   margin-right: 14px;
   border-radius: 999px;
-  padding: 8px;
+  padding: 4px;
 }
 
 .article-title{
@@ -184,7 +184,7 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 
 }
 .article-tease{
@@ -349,7 +349,7 @@ body {
   right: 0;
   background-color: #000000;
   backdrop-filter: blur(2px);
-  box-shadow: 0px 6px 25px #00000015;
+  box-shadow: 0px 10px 20px #00000034;
   height: 70px;
 
   border: 1px solid var(--border-2);

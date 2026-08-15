@@ -894,4 +894,13 @@ document.addEventListener("visibilitychange", () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  // Restore the order of Home cards (or any tab view)
+  restoreCardOrder("view-home");
+
+  // Initialize the drag-and-drop listeners
+  initCardReordering("#view-home");
+});
+
+
 

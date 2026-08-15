@@ -1077,13 +1077,12 @@
   border: 1px solid #eee;
   border-radius: 99px;
   box-shadow: 0px 5px 10px #00000006;
-}.row-btn svg{
+}
+.row-btn svg{
   height: 28px;
   width: auto;
 }
-.row-btn a{
-padding: 10px solid #fff;
-}
+
 
 .quick-log-btn{
   background-color: var(--btn-blue);

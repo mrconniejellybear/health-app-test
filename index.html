@@ -33,11 +33,14 @@
   <!-- TAB 1: DASHBOARD -->
 <section id="view-home" class="tab-view">
   <div class="dashboard-header">
-    <h2>Goodmorning,
-      <br><span>[name]</span>
-    </h2>
-    <span class="date-badge" id="home-date-badge">Today</span>
-  </div>
+  <h2>
+    <span id="dashboard-greeting-prefix">Good morning,</span>
+    <br>
+    <span id="user-display-name" onclick="promptChangeName()" title="Tap to change name">Friend</span>
+  </h2>
+  <span class="date-badge" id="home-date-badge">Today</span>
+</div>
+
 
   <div class="settings-row">
       <div class="settings-btns">

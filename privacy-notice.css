@@ -1,0 +1,63 @@
+:root {
+  --bg-color: #f2f2f2;
+  --card-bg: #fff;
+  --text-main: #2e3248;
+  --text-2: #6c7b91;
+  --text-3: #585f6b;
+
+  --text-muted: #a0aec0;
+
+  
+  --border-color: #edf0f4;
+  --green-check: #109d31;
+  --blue-accent: #0088ff;
+
+  --input-bg: #ffffff;
+
+  --feat-text: #fdf1ea;
+
+  --border-2: #d3d8dc00;
+
+  --btn-blue: #3744f0;
+}
+
+.contraceptive-qs{
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans";
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+
+  background-repeat: no-repeat;
+  background-position: top center;
+  /* Restrict background width to match phone dimensions */
+}
+
+.disclaimer{
+    margin-top: 30px;
+}
+
+.disclaimer h1{
+    font-size: 18px;
+}
+.disclaimer p{
+    font-size: 15px;
+    margin-top: 14px;
+    line-height: 22px;
+    color: #585f6b;
+}

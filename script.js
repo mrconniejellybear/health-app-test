@@ -42,6 +42,57 @@ function saveAppState() {
 
 
 
+// --- DYNAMIC GREETING & USER PROFILE ---
+
+// 1. Get relative time-of-day greeting
+function getTimeBasedGreeting() {
+  const currentHour = new Date().getHours();
+
+  if (currentHour >= 4 && currentHour < 12) {
+    return "Good morning,";
+  } else if (currentHour >= 12 && currentHour < 17) {
+    return "Good afternoon,";
+  } else {
+    return "Good evening,";
+  }
+}
+
+// 2. Update Header UI
+function updateDashboardGreeting() {
+  const greetingPrefixEl = document.getElementById("dashboard-greeting-prefix");
+  const userNameEl = document.getElementById("user-display-name");
+
+  if (greetingPrefixEl) {
+    greetingPrefixEl.textContent = getTimeBasedGreeting();
+  }
+
+  if (userNameEl) {
+    const savedName = localStorage.getItem("user_profile_name") || "Friend";
+    userNameEl.textContent = savedName;
+  }
+}
+
+// 3. Prompt user to change their name when tapped
+function promptChangeName() {
+  const currentName = localStorage.getItem("user_profile_name") || "";
+  const newName = prompt("What should we call you?", currentName);
+
+  if (newName !== null && newName.trim() !== "") {
+    const cleanName = newName.trim();
+    localStorage.setItem("user_profile_name", cleanName);
+    updateDashboardGreeting();
+    
+    if (typeof playLogSound === "function") playLogSound();
+    if (navigator.vibrate) navigator.vibrate(10);
+  }
+}
+
+// 4. Hook into page initialization & tab switching
+document.addEventListener("DOMContentLoaded", () => {
+  updateDashboardGreeting();
+});
+
+
 
 
 // --- 3. MEDICATION TRACKER LOGIC ---

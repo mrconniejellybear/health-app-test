@@ -1064,7 +1064,6 @@
 .settings-row{
   display: flex;
   flex-direction: row;
-  margin-bottom: -4px;
   justify-content: space-between;
   align-items: end;
 }
@@ -1072,8 +1071,8 @@
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 40px;
-  width: 40px;
+  height: 42px;
+  width: 42px;
   margin-right: 4px;
   border: 1px solid #eee;
   border-radius: 99px;

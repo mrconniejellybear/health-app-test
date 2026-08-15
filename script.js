@@ -41,6 +41,9 @@ function saveAppState() {
 }
 
 
+
+
+
 // --- 3. MEDICATION TRACKER LOGIC ---
 
 function getTodayStr() {
@@ -889,3 +892,6 @@ document.addEventListener("visibilitychange", () => {
     if (typeof renderHeroGraph === "function") renderHeroGraph();
   }
 });
+
+
+

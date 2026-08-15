@@ -74,7 +74,7 @@ body {
   border-radius: 24px;
   border: none;
   padding: 14px;
-  box-shadow: 0px 6px 10px #00000003;
+  box-shadow: 0px 5px 10px #00000006;
 }
 
 .card-header {
@@ -175,7 +175,7 @@ body {
   width: 102px;
   margin-right: 14px;
   border-radius: 999px;
-  padding: 10px;
+  padding: 8px;
 }
 
 .article-title{
@@ -321,7 +321,7 @@ body {
   font-size: 14px;
   font-weight: 440;
   cursor: pointer;
-  margin-top: 6px;
+  margin-top: 4px;
   text-align: left;
 }
 

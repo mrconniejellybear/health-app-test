@@ -1421,7 +1421,7 @@ body {
   flex-direction: column-reverse;
   justify-content: space-between;
   padding-bottom: 26px; /* aligns with bottom grid border */
-  width: 60px;
+  width: 70px;
   flex-shrink: 0;
 }
 
@@ -1437,10 +1437,9 @@ body {
 }
 
 .scatter-y-item svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height:auto;
   flex-shrink: 0;
-  display: none;
 }
 
 .scatter-grid-container {
@@ -1452,7 +1451,7 @@ body {
 
 .scatter-canvas {
   position: relative;
-  height: 400px; /* 14 moods * 28px */
+  height: 380px; /* 14 moods * 28px */
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }

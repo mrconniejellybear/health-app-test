@@ -14,13 +14,18 @@
     <link rel="stylesheet" href="tasks.css">
     <link rel="stylesheet" href="cycle.css">
 
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
    
-   
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GoodHealth">
+
 </head>
 <body>
+
 
   <div class="credit">
     Powered by <a href="https://mauslabs.netlify.app/">MausLabs</a>
@@ -232,6 +237,18 @@
     <div id="calendar-7day-row" class="calendar-7day-row">
       </div>
       </div>
+
+
+<div class="medication-reminder-card">
+  <div class="reminder-header">
+    <h3>🔔 Medication Reminders</h3>
+    <p>Receive lock-screen alerts for your daily doses even when GoodHealth is closed.</p>
+  </div>
+  <button id="enable-med-reminders" onclick="requestMedicationNotificationPermission()">
+    Enable Push Reminders
+  </button>
+</div>
+
 
 
 <div class="baby-card meds">

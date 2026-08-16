@@ -42,6 +42,61 @@ function saveAppState() {
 
 
 
+
+
+
+// 1. Register the Service Worker
+if ('serviceWorker' in navigator && 'Notification' in window) {
+  navigator.serviceWorker.register('/sw.js')
+    .then((registration) => {
+      console.log('GoodHealth Service Worker active:', registration.scope);
+    })
+    .catch((err) => {
+      console.error('Service Worker registration failed:', err);
+    });
+}
+
+// 2. Request Notification Permission
+async function requestMedicationNotificationPermission() {
+  if (!('Notification' in window)) {
+    alert('This browser does not support notifications.');
+    return false;
+  }
+
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') {
+    // Send immediate confirmation test
+    triggerMedicationTestAlert('200mg Sertraline', '9:00 PM');
+    return true;
+  } else if (permission === 'denied') {
+    alert('Notification permissions are blocked. Please enable them in your device settings.');
+    return false;
+  }
+  return false;
+}
+
+// 3. Helper to trigger an immediate local test notification via SW
+async function triggerMedicationTestAlert(medName, scheduledTime) {
+  if (Notification.permission !== 'granted') return;
+  
+  const registration = await navigator.serviceWorker.ready;
+  registration.showNotification('💊 Medication Reminder', {
+    body: `It is ${scheduledTime} — time for your ${medName}!`,
+    icon: '/icon-192.png',
+    badge: '/icon-192.png',
+    vibrate: [200, 100, 200],
+    data: { url: '/' }
+  });
+}
+
+
+
+
+
+
+
+
+
 // --- DYNAMIC GREETING & USER PROFILE ---
 
 // 1. Get relative time-of-day greeting

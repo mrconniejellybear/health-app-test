@@ -1,5 +1,5 @@
 .baby-card.diet{
-    background-color: #e1ecf8;
+    background-color: #bcd2fa;
 }
 .article-header.diet{
   color: #0669d4;
@@ -12,7 +12,7 @@
 
 /* --- CALORIE CARD STYLES --- */
 .calorie-card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 26px;
   padding: 14px;
   display: flex;
@@ -37,7 +37,7 @@
 .card-title-group h3 {
   font-size: 22px;
   font-weight: 600;
-  color: #000000;
+  color: var(--text-main);
   margin: 0;
 }
 
@@ -89,7 +89,7 @@
 
 .doughnut-track {
   fill: none;
-  stroke: #eee;
+  stroke: #afafaf20;
   stroke-width: 20;
 }
 
@@ -458,7 +458,7 @@ input:checked + .slider-switch:before {
 .macro-bar-track {
   width: 100%;
   height: 14px;
-  background-color: #eee;
+  background-color: #afafaf20;
   border-radius: 4px;
   overflow: hidden;
 }

@@ -1,6 +1,6 @@
 
 .baby-card.menstruation{
-  background-color: #f9c8ebad
+  background-color: #fbdaf1
 }
 .menstruation.article-header{
   color: #b900aa;
@@ -35,18 +35,18 @@
 /* --- Vertical Gradients for the 3 Sections --- */
 .severity-mild {
   background: linear-gradient(to bottom, #ff3c00, #b61800); 
-  border-right: 5px solid #fff;
+  border-right: 5px solid var(--card-bg);
 }
 .severity-moderate {
   background: linear-gradient(to bottom, #b41800, #781202); 
 }
 .severity-severe {
   background: linear-gradient(to bottom, #8d1806, #4e1006); 
-  border-left: 5px solid #fff;
+  border-left: 5px solid var(--card-bg);
 }
 .severity-end{
   background: linear-gradient(to bottom, #70221b, #3f241b); 
-  border-left: 5px solid #fff;
+  border-left: 5px solid var(--card-bg);
 }
 
 /* The Arrow Indicator */
@@ -67,7 +67,7 @@
 
 /* Educational Info Card */
 .color-edu-card {
-  background:  #ebf0f394;
+  background:  #ebeef310;
   border-radius: 18px;
   padding: 14px;
   text-align: left;
@@ -81,7 +81,7 @@
 }
 .dismiss-btn{
   background-color: #8989892a;
-  color: #5e5e5e;
+  color: #828282;
   padding: 3px 10px;
   border-radius: 99px;
   font-size: 13px;

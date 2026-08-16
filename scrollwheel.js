@@ -284,15 +284,20 @@ function updateRotarySelection(index) {
   });
 }
 
-// 6. Hook up Save Button to existing moodLogs & LocalStorage engine
+
+
+// Hook up Save Button to existing moodLogs & LocalStorage engine
 document.getElementById("save-mood-btn")?.addEventListener("click", () => {
   const activeMood = moodConfig[activeMoodIndex];
   
+  // Push with moodId so scatterplot.js captures it!
   moodLogs.push({
     date: new Date().toISOString().split("T")[0],
+    moodId: activeMood.id,       // 👈 CRITICAL: Added moodId
     score: activeMood.score,
     label: activeMood.label,
-    mood: activeMood.label // 👈 Backup key so all filter functions detect it
+    mood: activeMood.label,
+    timestamp: Date.now()
   });
 
   saveAppState();
@@ -300,18 +305,27 @@ document.getElementById("save-mood-btn")?.addEventListener("click", () => {
   // Play audio feedback
   if (typeof playLogSound === "function") playLogSound();
 
-  // Force full UI refresh across tabs
-  if (typeof renderMoodGraph === "function") renderMoodGraph();
-  if (typeof updateHomeDashboard === "function") updateHomeDashboard();
-
-  // If home chart instance exists, force Chart.js to recalculate data
-  if (typeof homePieChartInstance !== "undefined" && homePieChartInstance !== null) {
-    homePieChartInstance.update();
+  // Refresh Scatterplot & Dashboard
+  if (typeof renderMoodScatterplot === "function") {
+    renderMoodScatterplot();
+  }
+  if (typeof updateHomeDashboard === "function") {
+    updateHomeDashboard();
   }
 
-  alert(`Logged mood: ${activeMood.label}`);
-  
+  // Visual button feedback
+  const saveBtn = document.getElementById("save-mood-btn");
+  if (saveBtn) {
+    const origText = saveBtn.textContent;
+    saveBtn.textContent = "✓ Logged!";
+    saveBtn.style.opacity = "0.7";
+    setTimeout(() => {
+      saveBtn.textContent = origText;
+      saveBtn.style.opacity = "1";
+    }, 1200);
+  }
 });
+
 
 
 

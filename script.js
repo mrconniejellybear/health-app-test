@@ -1032,6 +1032,9 @@ navButtons.forEach((btn) => {
     if (targetTabId === "view-home") {
       setTimeout(() => {
         updateHomeDashboard();
+        if (typeof renderMoodScatterplot === "function") {
+          renderMoodScatterplot();
+        }
       }, 50);
     }
 
@@ -1046,7 +1049,10 @@ document.addEventListener("DOMContentLoaded", () => {
   updateWaterUI();
   updateCaffeineUI();
   renderWeightGraph();
-  renderMoodGraph();
+    if (typeof renderMoodScatterplot === "function") {
+    renderMoodScatterplot();
+  }
+
   renderMedicationCalendar();
   renderCustomSymptoms();
   updateHomeDashboard();
@@ -1077,6 +1083,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restoreCardOrder("view-home");
   initCardReordering("#view-home");
+  
 
   const customizeCycleBtn = document.getElementById("customize-cycle-btn");
 if (customizeCycleBtn) {

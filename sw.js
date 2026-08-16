@@ -13,7 +13,7 @@ self.addEventListener('push', (event) => {
   const data = event.data ? event.data.json() : {
     title: 'Medication Reminder',
     body: 'Time for your scheduled dose!',
-    icon: 'healthappicon.pngg'
+    icon: '/healthappicon.png'
   };
 
   const options = {

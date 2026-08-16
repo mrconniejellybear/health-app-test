@@ -66,7 +66,7 @@ async function requestMedicationNotificationPermission() {
   const permission = await Notification.requestPermission();
   if (permission === 'granted') {
     // Send immediate confirmation test
-    triggerMedicationTestAlert('200mg Sertraline', '9:00 PM');
+    triggerMedicationTestAlert('[item_name]', '[time_value]');
     return true;
   } else if (permission === 'denied') {
     alert('Notification permissions are blocked. Please enable them in your device settings.');
@@ -82,8 +82,8 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
   const registration = await navigator.serviceWorker.ready;
   registration.showNotification('Mr. Connie Healthy Bear', {
     body: `It is ${scheduledTime} — time for your ${medName}!`,
-    icon: '/health',
-    badge: 'healthappicon.png',
+    icon: '/healthappicon.png',
+    badge: '/healthappicon.png',
     vibrate: [200, 100, 200],
     data: { url: '/' }
   });

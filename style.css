@@ -1390,18 +1390,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  margin-bottom:10px;
 }
 
 .scatter-title {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   color: var(--text-main);
-  letter-spacing: -0.3px;
 }
 
 .scatter-subtitle {
   font-size: 0.75rem;
   color: #94a3b8;
+  display: none;
 }
 
 .scatter-window-pill {
@@ -1421,7 +1422,7 @@ body {
   flex-direction: column-reverse;
   justify-content: space-between;
   padding-bottom: 26px; /* aligns with bottom grid border */
-  width: 70px;
+  width: 68px;
   flex-shrink: 0;
 }
 
@@ -1440,6 +1441,7 @@ body {
   width: 14px;
   height:auto;
   flex-shrink: 0;
+  display: none;
 }
 
 .scatter-grid-container {
@@ -1451,7 +1453,7 @@ body {
 
 .scatter-canvas {
   position: relative;
-  height: 380px; /* 14 moods * 28px */
+  height: 340px; /* 14 moods * 28px */
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1461,7 +1463,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: #efefeff7;
+  background: #efefefd4;
 }
 
 .scatter-grid-col {
@@ -1523,5 +1525,4 @@ body {
   transform: translate(-50%, -130%);
   display: none;
   z-index: 30;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
 }

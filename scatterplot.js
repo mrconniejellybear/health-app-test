@@ -145,7 +145,6 @@ function renderMoodScatterplot() {
     dot.style.left = `${(colIdx + 0.5) * (100 / totalCols)}%`;
     dot.style.top = `${(totalRows - 1 - moodIdx + 0.5) * (100 / totalRows)}%`;
     dot.style.backgroundColor = moodMeta.color;
-    dot.style.boxShadow = `0 0 ${glow}px ${moodMeta.color}`;
 
     if (count > 1) {
       dot.textContent = count;

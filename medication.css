@@ -247,6 +247,11 @@
   margin-bottom: 10px;
 }
 
+.reminder-header{
+display: flex;
+align-self: center;
+gap: 8px;
+}
 
 .reminder-header h3{
   font-size: 20px;

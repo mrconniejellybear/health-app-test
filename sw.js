@@ -13,13 +13,13 @@ self.addEventListener('push', (event) => {
   const data = event.data ? event.data.json() : {
     title: 'Medication Reminder',
     body: 'Time for your scheduled dose!',
-    icon: '/healthappicon.png'
+    icon: 'healthappicon.pngg'
   };
 
   const options = {
     body: data.body,
-    icon: data.icon || '/healthappicon.png',
-    badge: '/healthappicon.png',
+    icon: data.icon || 'healthappicon.png',
+    badge: 'healthappicon.png',
     vibrate: [200, 100, 200],
     data: {
       url: data.url || '/'

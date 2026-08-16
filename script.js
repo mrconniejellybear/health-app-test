@@ -402,6 +402,70 @@ function deleteMedication(id) {
   if (typeof updateHomeDashboard === "function") updateHomeDashboard();
 }
 
+function calculateReminderTimes(doseTimeStr, selectedOffsets) {
+  // doseTimeStr format: "21:00" or "09:00 PM"
+  let [hours, minutes] = doseTimeStr.includes(":") ? doseTimeStr.split(":") : [9, 0];
+  hours = parseInt(hours, 10);
+  minutes = parseInt(minutes, 10);
+
+  const baseMinutes = hours * 60 + minutes;
+
+  return selectedOffsets.map(offset => {
+    let targetMinutes = baseMinutes;
+
+    if (offset === "30_before") targetMinutes -= 30;
+    if (offset === "15_before") targetMinutes -= 15;
+    if (offset === "15_after")  targetMinutes += 15;
+    if (offset === "30_after")  targetMinutes += 30;
+
+    // Wrap around 24-hour clock (1440 minutes in a day)
+    targetMinutes = (targetMinutes + 1440) % 1440;
+
+    const h = Math.floor(targetMinutes / 60);
+    const m = targetMinutes % 60;
+    const formattedTime = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+
+    return {
+      type: offset,
+      triggerTime: formattedTime,
+      label: offset.replace('_', ' ')
+    };
+  });
+}
+
+// 2. Updated Med Save / Submit Handler
+function handleMedicationFormSubmit(e) {
+  e.preventDefault();
+
+  const medName = document.getElementById("med-name").value;
+  const medDosage = document.getElementById("med-dosage").value;
+  const medTime = document.getElementById("med-time").value; // e.g. "21:00"
+  const medFreq = document.getElementById("med-frequency") ? document.getElementById("med-frequency").value : "Daily";
+
+  // Gather all selected reminder chips
+  const checkedChips = Array.from(document.querySelectorAll('input[name="med-reminder-offset"]:checked'))
+    .map(el => el.value);
+
+  const reminders = calculateReminderTimes(medTime, checkedChips);
+
+  const newMed = {
+    id: "med_" + Date.now(),
+    name: medName,
+    dosage: medDosage,
+    scheduledTime: medTime,
+    frequency: medFreq,
+    reminders: reminders, // Array of calculated alert objects
+    history: []
+  };
+
+  medications.push(newMed);
+  if (typeof saveAppState === "function") saveAppState();
+  if (typeof playLogSound === "function") playLogSound();
+  
+  renderMedications();
+  toggleMedModal(false);
+}
+
 
 
 // --- 5. WEIGHT TRACKER LOGIC ---

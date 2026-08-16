@@ -1,0 +1,278 @@
+.btn-primary, .btn-secondary {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+.btn-primary { background: #2563eb; color: #ffffff; ;
+ }
+.btn-secondary { background: #f1f5f9; color: #475569;  margin-right: 8px;
+ }
+
+
+
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+
+.modal-overlay {
+  position: fixed; /* CRITICAL: Breaks it out of the parent container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(38, 42, 44, 0.278);
+  backdrop-filter: blur(5px);
+  
+  /* Centers the modal card perfectly */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  padding: 20px;
+  box-sizing: border-box;
+  animation: slideUp 0.25s ease-out;
+
+  
+  z-index: 9999; /* Now that it's fixed, this will actually beat the navbar */
+}
+
+
+
+
+.modal-overlay.hidden { display: none; }
+
+
+
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed; /* CRITICAL: Breaks it out of the parent container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-height: 85vh;               /* Caps height to 85% of mobile screen */
+  overflow-y: auto;               /* Allows smooth vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Butter-smooth momentum scrolling on iOS */
+  background: white;
+  padding: 14px 14px 70px 14px;
+  border-radius: 14px;
+  max-width: 88%;
+
+}
+
+.modal h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+
+.modal label {
+  display: block;
+  font-size: 15px;
+  color: var(--text-3);
+  margin: 16px 0 6px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #c8ced597;
+  background-color: #f8fafce8;
+  border-radius:8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.modal select {
+  width: 100%;
+  padding: 14px 10px;
+  border: 1px solid #c8ced597;
+  background-color: #f8fafce8;
+  border-radius:8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+}
+/* Modal Management Section */
+.modal-divider {
+  margin: 1.25rem 0;
+  border: 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.modal-manage-section h4 {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.section-sublabel{
+    display: flex;
+    align-items: center;
+}
+.modal-med-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+
+.modal-med-item .med-info {
+  display: flex;
+  flex-direction: column;
+}
+.modal-med-item .med-info span {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+
+
+.modal-header h3 { margin: 0; color: #0f172a; font-size: 1.2rem; }
+
+.close-btn {
+  background: #f1f5f9;
+  border: none;
+  font-size: 1.2rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-group.half { flex: 1; }
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-3);
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.optional { font-weight: 400; color: #94a3b8; }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size:14px;
+  color: #0f172a;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+
+
+/* --- Modal Selection Grids --- */
+.icon-selector-grid,
+.color-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px 10px;
+  margin-bottom: 28px;
+}
+
+/* Hide Native Radio Inputs */
+.icon-option input[type="radio"],
+.color-option input[type="radio"] {
+  display: none;
+}
+
+/* Icon Choice Box */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(239, 239, 239, 0.951);
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.icon-option input[type="radio"]:checked + .icon-box {
+  border-color: #ffffff;
+  background: rgba(63, 213, 255, 0.2);
+  transform: scale(1.05);
+  color: var(--blue-accent);
+}
+
+/* Color Circle Buttons */
+.color-btn {
+  display: block;
+  width: 62px;
+  height: 40px;
+  border-radius: 12px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.color-option input[type="radio"]:checked + .color-btn {
+  transform: scale(1.1);
+  border: 5px solid var(--blue-accent);
+}

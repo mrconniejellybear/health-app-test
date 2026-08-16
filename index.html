@@ -8,11 +8,13 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="master.css">
-    <link rel="stylesheet" href="medication.css">
-    <link rel="stylesheet" href="exercise.css">
-    <link rel="stylesheet" href="nutrition.css">
-    <link rel="stylesheet" href="tasks.css">
-    <link rel="stylesheet" href="cycle.css">
+      <link rel="stylesheet" href="modal.css">
+
+      <link rel="stylesheet" href="medication.css">
+      <link rel="stylesheet" href="exercise.css">
+      <link rel="stylesheet" href="nutrition.css">
+      <link rel="stylesheet" href="tasks.css">
+      <link rel="stylesheet" href="cycle.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,9 +198,9 @@
 
 <div id="modal-overlay" class="modal-overlay hidden">
    <div class="modal">
-      <h2>Add Medication</h2>
+      <h2>Perscription Form</h2>
        <form id="med-form">
-  <label for="med-name">Medication Name</label>
+  <label for="med-name">Name</label>
   <input type="text" id="med-name" placeholder="e.g. Atorvastatin" required />
 
   <label for="med-dosage">Dosage</label>
@@ -216,7 +218,9 @@
   </select>
 
   <div class="form-group reminder-settings-group">
-  <label class="section-sublabel"> Remind me to take this medication:</label>
+  <label class="section-sublabel">
+    <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="M492.52-246.7 369.85-369.13q-6.72-6.72-10.08-15.05-3.36-8.34-3.36-17.54v-151.11q0-18.43 12.58-31.01 12.58-12.57 31.01-12.57t31.01 12.57q12.58 12.58 12.58 31.01v135.4l109.95 109.95q12.2 12.2 12.2 30.39 0 18.2-12.2 30.39-12.19 12.2-30.51 12.2-18.31 0-30.51-12.2Zm416.65-241.02q-18.43 3.24-32.75-7.36-14.31-10.59-19.79-29.03-30-112.98-108.15-198.01-78.15-85.03-186.89-123.79-17.44-5.96-26.16-21.77-8.71-15.82-4.23-33.25 5.23-18.44 22.31-26.16 17.08-7.71 35.27-1.24 130.89 46.48 224.72 148.95 93.83 102.47 129.3 238.6 5.48 18.43-4.85 34.13-10.34 15.69-28.78 18.93Zm-167.3-3.95q-17.44 4.71-33.49-3.76-16.05-8.48-23.25-25.68-18.57-45.78-51.64-83.12-33.08-37.33-75.86-61.94-15.2-9.44-21.31-26.37-6.12-16.94.83-33.37 6.96-17.2 24.01-23.44 17.06-6.24 33.01 2.96 60.26 33.56 105.06 85.38 44.79 51.81 70.07 116.08 7.2 17.19-.9 32.86-8.1 15.68-26.53 20.4ZM401-3.59q-82.28 0-154.57-31.26-72.28-31.26-126.3-85.16-54.02-53.9-85.28-126.31Q3.59-318.72 3.59-400q0-82.28 31.26-154.57 31.26-72.28 85.28-126.3 54.02-54.02 126.3-85.28 72.29-31.26 154.57-31.26 18.43 0 31.13 12.57 12.7 12.58 12.7 31.01 0 18.44-12.7 31.13Q419.43-710 401-710q-129.46 0-219.73 90.27Q91-529.46 91-400q0 128.46 90.27 218.73Q271.54-91 401-91q128.46 0 218.73-90.27Q710-271.54 710-400q0-18.43 12.7-31.13 12.69-12.7 31.13-12.7 18.43 0 31.01 12.7 12.57 12.7 12.57 31.13 0 81.28-31.26 153.68-31.26 72.41-85.16 126.31-53.9 53.9-125.81 85.16Q483.28-3.59 401-3.59Z"/></svg>
+    Remind me to take this medication:</label>
   
   <div class="reminder-chips-grid">
     <label class="reminder-chip">
@@ -247,7 +251,7 @@
 </div>
 
 
-  <label>Select an icon</label>
+  <label>Medication Icon</label>
   <div class="icon-selector-grid">
 
     <label class="icon-option">
@@ -314,7 +318,7 @@
   </div>
 
 
-  <label>Add a custom a color</label>
+  <label>Medication Color</label>
   <div class="color-selector-grid">
     <label class="color-option">
       <input type="radio" name="med_color" value="color-1" checked />
@@ -1077,10 +1081,9 @@
           placeholder="Custom symptom..." 
           class="custom-symptom-input"
         />
-        <button type="button" id="add-custom-symptom-btn" class="btn-secondary-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M435.48-435.48V-320q0 18.92 12.91 31.72 12.91 12.8 31.61 12.8t31.61-12.8q12.91-12.8 12.91-31.72v-115.48H640q18.92 0 31.72-12.91 12.8-12.91 12.8-31.61t-12.8-31.61q-12.8-12.91-31.72-12.91H524.52V-640q0-18.92-12.91-31.72-12.91-12.8-31.61-12.8t-31.61 12.8q-12.91 12.8-12.91 31.72v115.48H320q-18.92 0-31.72 12.91-12.8 12.91-12.8 31.61t12.8 31.61q12.8 12.91 31.72 12.91h115.48ZM480-60.78q-87.52 0-163.91-32.96-76.38-32.96-132.88-89.47-56.51-56.5-89.47-132.88Q60.78-392.48 60.78-480t32.96-163.91q32.96-76.38 89.47-132.88 56.5-56.51 132.88-89.47 76.39-32.96 163.91-32.96t163.91 32.96q76.38 32.96 132.88 89.47 56.51 56.5 89.47 132.88 32.96 76.39 32.96 163.91t-32.96 163.91q-32.96 76.38-89.47 132.88-56.5 56.51-132.88 89.47Q567.52-60.78 480-60.78Zm0-106q131.74 0 222.48-90.74 90.74-90.74 90.74-222.48t-90.74-222.48Q611.74-793.22 480-793.22t-222.48 90.74Q166.78-611.74 166.78-480t90.74 222.48q90.74 90.74 222.48 90.74ZM480-480Z"/></svg>
-          Add
-        </button>
+      <button class="add-btn-mini"  id="add-custom-symptom-btn">
+       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z"/></svg>
+     </button>
       </div>
 </div>
 

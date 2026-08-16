@@ -1422,7 +1422,7 @@ body {
   flex-direction: column-reverse;
   justify-content: space-between;
   padding-bottom: 26px; /* aligns with bottom grid border */
-  width: 68px;
+  width: 60px;
   flex-shrink: 0;
 }
 
@@ -1432,7 +1432,6 @@ body {
   height: 20px;
   display: flex;
   align-items: center;
-  gap: 4px;
   white-space: nowrap;
   font-weight: 300;
 }
@@ -1454,8 +1453,10 @@ body {
 .scatter-canvas {
   position: relative;
   height: 340px; /* 14 moods * 28px */
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient( #1d0b35de 0%, #12141e 100%);
+  border-radius: 10px;
+
 }
 
 .scatter-grid-row {
@@ -1463,7 +1464,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: #efefefd4;
+  background: #8c8896;
 }
 
 .scatter-grid-col {
@@ -1471,7 +1472,7 @@ body {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: #d5d7dc;
+  background: #4441527b;
 }
 
 .scatter-x-labels {
@@ -1525,4 +1526,174 @@ body {
   transform: translate(-50%, -130%);
   display: none;
   z-index: 30;
+}
+
+
+
+/* --- UNIFIED MOOD CARD & SWITCHER --- */
+.mood-hero-card {
+  padding: 20px 16px;
+  background: var(--card-bg, rgba(22, 30, 49, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  margin-bottom: 20px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+}
+
+.mood-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mood-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mood-main-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.mood-sub-title {
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+/* Segmented Switcher */
+.mood-view-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 12px;
+  gap: 2px;
+}
+
+.mood-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.mood-toggle-btn.active {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Display Pane Visibility */
+.mood-display-pane {
+  display: none;
+}
+.mood-display-pane.active {
+  display: block;
+}
+
+/* --- 2D COMPASS VIEWPORT --- */
+.compass-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(circle at center, #130625de 0%, #161926 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 4px 0 12px 0;
+}
+
+.axis-x {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.axis-y {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.quadrant-label {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  pointer-events: none;
+}
+.quadrant-label span {
+  font-weight: 400;
+  opacity: 0.7;
+  font-size: 12px;
+
+}
+.q-top-left     { top: 10px; left: 12px; }
+.q-top-right    { top: 10px; right: 12px; text-align: right; }
+.q-bottom-left  { bottom: 10px; left: 12px; }
+.q-bottom-right { bottom: 10px; right: 12px; text-align: right; }
+
+.axis-tag {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  pointer-events: none;
+  display: none;
+}
+.tag-high-arousal { top: 6px; left: 52%; }
+.tag-low-arousal  { bottom: 6px; left: 52%; }
+.tag-neg-valence  { top: 51%; left: 8px; transform: translateY(-16px); }
+.tag-pos-valence  { top: 51%; right: 8px; transform: translateY(-16px); }
+
+/* Compass Node Dots */
+.compass-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.compass-node:hover {
+  transform: translate(-50%, -50%) scale(1.35);
+  z-index: 15;
+}
+
+.compass-insight-bar {
+  background:#eee;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.compass-insight-bar p {
+  color: var(--text-2);
+  font-size: 13px;
 }

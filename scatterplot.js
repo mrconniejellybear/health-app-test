@@ -167,3 +167,156 @@ function renderMoodScatterplot() {
     canvas.appendChild(dot);
   });
 }
+
+// --- 1. AFFECT COORDINATE MAP (Valence & Arousal: -1.0 to +1.0) ---
+const AFFECT_COORDINATES = {
+  // Top-Left: Negative Valence, High Arousal (Fight-or-Flight / Stress)
+  angry:        { valence: -0.75, arousal:  0.75, color: "#eb4200", label: "Angry" },
+  anxious:      { valence: -0.65, arousal:  0.65, color: "#ff63b1", label: "Anxious" },
+  overwhelmed:  { valence: -0.80, arousal:  0.50, color: "#e42c38", label: "Overwhelmed" },
+  embarrassed:  { valence: -0.45, arousal:  0.40, color: "#00b05b", label: "Embarrassed" },
+
+  // Bottom-Left: Negative Valence, Low Arousal (Depletion / Fatigue)
+  sad:          { valence: -0.65, arousal: -0.45, color: "#3883e0", label: "Sad" },
+  dissapointed: { valence: -0.50, arousal: -0.35, color: "#3b82f6", label: "Disappointed" },
+  depressed:    { valence: -0.85, arousal: -0.70, color: "#475569", label: "Depressed" },
+  tired:        { valence: -0.30, arousal: -0.75, color: "#7c3aed", label: "Tired" },
+
+  // Center: Equilibrium
+  neutral:      { valence:  0.00, arousal:  0.00, color: "#94a3b8", label: "Neutral" },
+  idk:          { valence: -0.15, arousal: -0.10, color: "#26abb2", label: "Lost" },
+
+  // Bottom-Right: Positive Valence, Low Arousal (Rest & Calm)
+  okay:         { valence:  0.30, arousal: -0.15, color: "#ffd900", label: "Okay" },
+  relaxed:      { valence:  0.65, arousal: -0.55, color: "#a900bc", label: "Relaxed" },
+
+  // Top-Right: Positive Valence, High Arousal (Joy & Engagement)
+  happy:        { valence:  0.75, arousal:  0.45, color: "#ffd000", label: "Happy" },
+  loved:        { valence:  0.85, arousal:  0.55, color: "#ff00d0", label: "Loved" },
+  proud:        { valence:  0.70, arousal:  0.70, color: "#ff8c00", label: "Proud" },
+  excited:      { valence:  0.80, arousal:  0.85, color: "#ffb700", label: "Excited" }
+};
+
+let currentMoodView = "timeline"; // 'timeline' or 'compass'
+
+// --- 2. RENDER 2D COMPASS ---
+function renderMoodCompass() {
+  const container = document.getElementById("compass-nodes-layer");
+  const dominantTxt = document.getElementById("compass-dominant-txt");
+  const tooltip = document.getElementById("shared-mood-tooltip");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const currentLogs = (typeof moodLogs !== "undefined") ? moodLogs : (JSON.parse(localStorage.getItem("healthApp_moodLogs")) || []);
+  const counts = {};
+
+  currentLogs.forEach(log => {
+    let id = log.moodId;
+    if (!id && log.score !== undefined) {
+      const legacy = { 1: "depressed", 2: "sad", 3: "neutral", 4: "okay", 5: "relaxed", 6: "happy" };
+      id = legacy[log.score];
+    }
+    if (id && AFFECT_COORDINATES[id]) {
+      counts[id] = (counts[id] || 0) + 1;
+    }
+  });
+
+  const quadCounts = { tension: 0, passion: 0, fatigue: 0, serenity: 0 };
+
+  Object.keys(counts).forEach(id => {
+    const meta = AFFECT_COORDINATES[id];
+    const count = counts[id];
+
+    // Quadrant grouping
+    if (meta.valence >= 0 && meta.arousal >= 0) quadCounts.passion += count;
+    else if (meta.valence < 0 && meta.arousal >= 0) quadCounts.tension += count;
+    else if (meta.valence < 0 && meta.arousal < 0) quadCounts.fatigue += count;
+    else if (meta.valence >= 0 && meta.arousal < 0) quadCounts.serenity += count;
+
+    // Convert -1..+1 to 0..100%
+    const posX = ((meta.valence + 1) / 2) * 100;
+    const posY = ((1 - meta.arousal) / 2) * 100;
+
+    const node = document.createElement("div");
+    node.className = "compass-node";
+    const size = Math.min(16 + (count - 1) * 6, 32);
+    const glow = 4 + count * 5;
+
+    node.style.width = `${size}px`;
+    node.style.height = `${size}px`;
+    node.style.left = `${posX}%`;
+    node.style.top = `${posY}%`;
+    node.style.backgroundColor = meta.color;
+
+    if (count > 1) node.textContent = count;
+
+    node.addEventListener("mouseenter", () => {
+      if (tooltip) {
+        tooltip.innerHTML = `<strong>${meta.label}</strong>: ${count} log${count > 1 ? 's' : ''}`;
+        tooltip.style.left = `${posX}%`;
+        tooltip.style.top = `${posY}%`;
+        tooltip.style.display = "block";
+      }
+    });
+
+    node.addEventListener("mouseleave", () => {
+      if (tooltip) tooltip.style.display = "none";
+    });
+
+    container.appendChild(node);
+  });
+
+  // Calculate Dominant Quadrant
+  if (dominantTxt) {
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    if (total === 0) {
+      dominantTxt.textContent = "No logs yet";
+    } else {
+      const max = Math.max(quadCounts.tension, quadCounts.passion, quadCounts.fatigue, quadCounts.serenity);
+      if (quadCounts.tension === max) dominantTxt.textContent = "High Energy & Tension (Fight/Flight)";
+      else if (quadCounts.passion === max) dominantTxt.textContent = "High Energy & Joy (Engagement)";
+      else if (quadCounts.fatigue === max) dominantTxt.textContent = "Low Energy & Fatigue (Depletion)";
+      else dominantTxt.textContent = "Low Energy & Serenity (Rest/Calm)";
+    }
+  }
+}
+
+// --- 3. MASTER RENDER DISPATCHER & TOGGLE SWITCHER ---
+function renderMoodVisualizations() {
+  if (typeof renderMoodScatterplot === "function") renderMoodScatterplot();
+  renderMoodCompass();
+}
+
+// Setup Switcher Tab Listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtns = document.querySelectorAll(".mood-toggle-btn");
+  const titleEl = document.getElementById("mood-view-title");
+  const subTitleEl = document.getElementById("mood-view-subtitle");
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const view = btn.dataset.view;
+      currentMoodView = view;
+
+      toggleBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      document.querySelectorAll(".mood-display-pane").forEach(p => p.classList.remove("active"));
+      const targetPane = document.getElementById(`pane-${view}`);
+      if (targetPane) targetPane.classList.add("active");
+
+      if (view === "timeline") {
+        if (titleEl) titleEl.textContent = "Weekly Timeline";
+        if (subTitleEl) subTitleEl.textContent = "Frequency across past 7 days";
+        if (typeof renderMoodScatterplot === "function") renderMoodScatterplot();
+      } else if (view === "compass") {
+        if (titleEl) titleEl.textContent = "Affect Compass";
+        if (subTitleEl) subTitleEl.textContent = "2D Valence & Arousal distribution";
+        renderMoodCompass();
+      }
+    });
+  });
+
+  renderMoodVisualizations();
+});

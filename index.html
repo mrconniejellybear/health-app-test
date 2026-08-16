@@ -69,25 +69,60 @@
     </div>
 
 
-<div class="card mood-scatter-card">
-  <div class="card-header">
-    <div class="scatter-header-left">
-      <span class="scatter-title">Mood Graph</span>
-      <span class="scatter-subtitle">Date Range</span>
+<div class="card mood-hero-card">
+  <div class="mood-card-header">
+    <div class="mood-header-titles">
+      <span class="mood-main-title" id="mood-view-title">Weekly Timeline</span>
+      <span class="mood-sub-title" id="mood-view-subtitle">Frequency across past 7 days</span>
     </div>
-    <span class="scatter-window-pill" id="scatter-window-label"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -1040 960 960" width="24px" fill="currentColor"><path d="M249.23-420q-24.75 0-42.37-17.63-17.63-17.62-17.63-42.37 0-24.75 17.63-42.37Q224.48-540 249.23-540q24.75 0 42.38 17.63 17.62 17.62 17.62 42.37 0 24.75-17.62 42.37Q273.98-420 249.23-420ZM480-420q-24.75 0-42.37-17.63Q420-455.25 420-480q0-24.75 17.63-42.37Q455.25-540 480-540q24.75 0 42.37 17.63Q540-504.75 540-480q0 24.75-17.63 42.37Q504.75-420 480-420Zm230.77 0q-24.75 0-42.38-17.63-17.62-17.62-17.62-42.37 0-24.75 17.62-42.37Q686.02-540 710.77-540q24.75 0 42.37 17.63 17.63 17.62 17.63 42.37 0 24.75-17.63 42.37Q735.52-420 710.77-420Z"/></svg></span>
-  </div>
-
-  <div class="mood-scatter-wrapper">
-    <div class="scatter-y-labels" id="scatter-y-labels"></div>
-
-    <div class="scatter-grid-container">
-      <div class="scatter-canvas" id="scatter-canvas"></div>
-      <div class="scatter-x-labels" id="scatter-x-labels"></div>
-      <div class="scatter-tooltip" id="scatter-tooltip"></div>
+    
+    <div class="mood-view-toggle">
+      <button type="button" class="mood-toggle-btn active" data-view="timeline" title="Timeline Matrix">
+        <svg viewBox="0 -960 960 960" width="16" height="16" fill="currentColor"><path d="M120-120v-720h120v720H120Zm240 0v-520h120v520H360Zm240 0v-320h120v320H600Zm240 0v-640h120v640H840Z"/></svg>
+      </button>
+      <button type="button" class="mood-toggle-btn" data-view="compass" title="2D Affect Compass">
+        <svg viewBox="0 -960 960 960" width="16" height="16" fill="currentColor"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54-54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm-40-160h80v-120h120v-80H520v-120h-80v120H320v80h120v120Z"/></svg>
+      </button>
     </div>
   </div>
+
+  <div class="mood-display-pane active" id="pane-timeline">
+    <div class="mood-scatter-wrapper">
+      <div class="scatter-y-labels" id="scatter-y-labels"></div>
+      <div class="scatter-grid-container">
+        <div class="scatter-canvas" id="scatter-canvas"></div>
+        <div class="scatter-x-labels" id="scatter-x-labels"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mood-display-pane" id="pane-compass">
+    <div class="compass-viewport" id="compass-viewport">
+      <div class="axis-x"></div>
+      <div class="axis-y"></div>
+      
+      <div class="quadrant-label q-top-left">Stress<br><span>High Energy (-)</span></div>
+      <div class="quadrant-label q-top-right">Joy<br><span>High Energy (+)</span></div>
+      <div class="quadrant-label q-bottom-left">Exhaustion<br><span>Low Energy (-)</span></div>
+      <div class="quadrant-label q-bottom-right">Rest<br><span>Low Energy (+)</span></div>
+
+      <span class="axis-tag tag-high-arousal">+ High Energy</span>
+      <span class="axis-tag tag-low-arousal">- Low Energy</span>
+      <span class="axis-tag tag-neg-valence">Unpleasant (-)</span>
+      <span class="axis-tag tag-pos-valence">Pleasant (+)</span>
+
+      <div id="compass-nodes-layer"></div>
+    </div>
+
+    <div class="compass-insight-bar">
+      <span>Prevalent:</span>
+      <p id="compass-dominant-txt">Balanced</p>
+    </div>
+  </div>
+
+  <div class="scatter-tooltip" id="shared-mood-tooltip"></div>
 </div>
+
 
 
 

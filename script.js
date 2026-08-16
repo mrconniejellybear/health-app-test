@@ -80,10 +80,10 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
   if (Notification.permission !== 'granted') return;
   
   const registration = await navigator.serviceWorker.ready;
-  registration.showNotification('💊 Medication Reminder', {
+  registration.showNotification('Mr. Connie Healthy Bear', {
     body: `It is ${scheduledTime} — time for your ${medName}!`,
-    icon: '/icon-192.png',
-    badge: '/icon-192.png',
+    icon: '/health',
+    badge: 'healthappicon.png',
     vibrate: [200, 100, 200],
     data: { url: '/' }
   });

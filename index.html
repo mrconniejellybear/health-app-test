@@ -23,7 +23,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="GoodHealth">
 
-    <link rel="apple-touch-icon" href="/healthappicon.png">
+    <link rel="apple-touch-icon" href="healthappicon.png">
 
 
 </head>
@@ -294,6 +294,7 @@
       <!-- Items dynamically added here -->
     </ul>
   </div>
+
 <div id="modal-overlay" class="modal-overlay hidden">
    <div class="modal">
       <h2>Add Medication</h2>
@@ -314,6 +315,38 @@
     <option value="Weekly">Weekly</option>
     <option value="As Needed">As Needed</option>
   </select>
+
+  <div class="form-group reminder-settings-group">
+  <label class="section-sublabel"> Remind me to take this medication:</label>
+  
+  <div class="reminder-chips-grid">
+    <label class="reminder-chip">
+      <input type="checkbox" name="med-reminder-offset" value="30_before">
+      <span class="chip-bubble">30m before</span>
+    </label>
+
+    <label class="reminder-chip">
+      <input type="checkbox" name="med-reminder-offset" value="15_before">
+      <span class="chip-bubble">15m before</span>
+    </label>
+
+    <label class="reminder-chip">
+      <input type="checkbox" name="med-reminder-offset" value="at_time" checked>
+      <span class="chip-bubble">At dose time</span>
+    </label>
+
+    <label class="reminder-chip">
+      <input type="checkbox" name="med-reminder-offset" value="15_after">
+      <span class="chip-bubble">15m after (follow-up)</span>
+    </label>
+
+    <label class="reminder-chip">
+      <input type="checkbox" name="med-reminder-offset" value="30_after">
+      <span class="chip-bubble">30m after</span>
+    </label>
+  </div>
+</div>
+
 
   <label>Select an icon</label>
   <div class="icon-selector-grid">
@@ -419,8 +452,8 @@
   </div>
 
   <div class="modal-buttons">
-    <button type="button" id="cancel-btn">Cancel</button>
-    <button type="submit" id="save-med-btn">Add Medication</button>
+    <button class="btn-secondary" type="button" id="cancel-btn">Cancel</button>
+    <button class="btn-primary" type="submit" id="save-med-btn">Add Medication</button>
   </div>
        </form>
     </div>

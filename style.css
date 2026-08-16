@@ -310,6 +310,7 @@
 }
 
 
+
 .modal-overlay.hidden {
   display: none;
 }
@@ -321,11 +322,13 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 100vh;
+  max-height: 85vh;               /* Caps height to 85% of mobile screen */
+  overflow-y: auto;               /* Allows smooth vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Butter-smooth momentum scrolling on iOS */
   background: white;
-  padding: 18px;
+  padding: 18px 18px 70px 18px;
   border-radius: 16px;
-  max-width: 320px;
+  max-width: 84%;
 }
 
 .modal h2 {
@@ -1071,8 +1074,8 @@
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-main);
-  height: 42px;
-  width: 42px;
+  height: 40px;
+  width: 40px;
   margin-right: 4px;
   border: 1px solid #eee;
   border-radius: 99px;
@@ -1107,8 +1110,8 @@
   color: var(--text-main);
   font-size: 15px;
   font-weight: 440;
-  height: 40px;
-  border: none;
+  border: 1px solid #efefef;
+  height: 38px;
   border-radius: 99px;
   padding: 0px 10px 0px 16px;
 

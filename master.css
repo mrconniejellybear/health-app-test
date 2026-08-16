@@ -357,27 +357,50 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  background-color: #000000;
-  box-shadow: 0px 10px 20px #00000063;
+  background-color: #00000000;
+  box-shadow: 0px 10px 20px #00000000;
   height: 70px;
 
-  border: 1px solid var(--border-2);
+  border: none;
   border-radius: 999px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   max-width: 93vw;
-  padding-left: 12px;
-  padding-right: 12px;
+
   margin: 0 auto;
   z-index: 1000;
   /* iOS Safe Area padding for home indicator bar */
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-.nav-btn {
-  background: none;
+.nav-inner{
+  padding: 0px 30px;
+  gap: 30px;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #000000;
+  box-shadow: 0px 10px 20px #00000063;
+  height: 70px;
+  border-radius: 99px;
+}
+.nav-btn.dashboard{
+  display: flex;
+  border: none;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #000000;
+  box-shadow: 0px 10px 20px #00000063;
+  height: 70px;
+  width: 70px;
+  border-radius: 99px;
+  color: #fff;
+}
 
+.nav-btn {
+  background: #000000;
   border: none;
   outline: none;
   height: 50px;

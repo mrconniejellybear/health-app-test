@@ -6,16 +6,13 @@
   align-items: flex-start;
 }
 
-.dashboard-header h2 {
-  font-size: 34px;
+#dashboard-greeting-prefix{
   font-weight: 400;
-  color: var(--text-main);
-  margin: 0;
+  font-size: 30px;
 }
 .dashboard-header h2 span{
-    font-weight: 800;
-    font-size: 40px;
-
+    font-weight: 600;
+    font-size: 34px;
 }
 
 .date-badge {
@@ -1378,7 +1375,6 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 24px;
   backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   margin-bottom: 18px;
 }
 
@@ -1411,10 +1407,7 @@ body {
 .scatter-window-pill {
   font-size: 0.72rem;
   color: #94a3b8;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 4px 10px;
-  border-radius: 14px;
+
   font-weight: 600;
 }
 
@@ -1428,25 +1421,26 @@ body {
   flex-direction: column-reverse;
   justify-content: space-between;
   padding-bottom: 26px; /* aligns with bottom grid border */
-  width: 104px;
+  width: 60px;
   flex-shrink: 0;
 }
 
 .scatter-y-item {
-  font-size: 0.72rem;
-  color: #94a3b8;
-  height: 28px;
+  font-size: 12px;
+  color: #6f7680;
+  height: 20px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .scatter-y-item svg {
   width: 15px;
   height: 15px;
   flex-shrink: 0;
+  display: none;
 }
 
 .scatter-grid-container {
@@ -1458,7 +1452,7 @@ body {
 
 .scatter-canvas {
   position: relative;
-  height: 392px; /* 14 moods * 28px */
+  height: 400px; /* 14 moods * 28px */
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1468,7 +1462,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #efefeff7;
 }
 
 .scatter-grid-col {
@@ -1476,7 +1470,7 @@ body {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #d5d7dc;
 }
 
 .scatter-x-labels {
@@ -1487,9 +1481,9 @@ body {
 }
 
 .scatter-x-item {
-  font-size: 0.72rem;
-  color: #64748b;
-  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-2);
+  font-weight: 500;
 }
 
 .scatter-x-item.today {

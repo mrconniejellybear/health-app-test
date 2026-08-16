@@ -157,31 +157,7 @@
 }
 
 
-.reminder-chip {
-  cursor: pointer;
-  user-select: none;
-}
-.reminder-chip input {
-  display: none; /* Hide default checkbox */
-}
-.reminder-chip input:checked + .chip-bubble {
-  background: var(--blue-accent); /* Matches pink theme accent */
-  color: #ffffff;
-  border-color: var(--blue-accent);
-  transform: translateY(-1px);
-}
 
-.reminder-chips-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px; /* Tighter gap */
-}
-
-.reminder-chip .chip-bubble {
-  padding: 4px 10px;  /* Smaller pill padding */
-  font-size: 14px; /* Slightly more compact font */
-  border-radius: 14px;
-}
 
 /* Shrink the section gap inside modal forms */
 .modal-content .form-group {

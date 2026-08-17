@@ -213,3 +213,14 @@ gap: 8px;
   width: 44px;
   padding: 2px;
 }
+
+
+
+.med-edit-btn{
+  background:none;
+  border: none;
+  color: var(--text-3);
+}
+.med-edit-btn:hover{
+  color: var(--blue-accent);
+}

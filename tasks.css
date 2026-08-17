@@ -32,7 +32,7 @@
   color:var(--text-3);
   border: none;
   background: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 440;
   cursor: pointer;
 }
@@ -72,7 +72,7 @@
   height: 38px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  box-shadow: 0px 4px 8px #00000005;
+  box-shadow: 0px 4px 8px #00000006;
   transition: all 0.25s ease;
   gap: 4px;
 }

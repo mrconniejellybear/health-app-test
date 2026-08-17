@@ -86,11 +86,14 @@ function render7DayCalendarStrip(centerDate = new Date()) {
     pill.className = `day-pill ${isSelected ? "active" : ""}`;
     pill.dataset.date = isoDate;
 
-    pill.innerHTML = `
-      <span class="day-name">${dayNames[d.getDay()]}</span>
-      <span class="day-num">${d.getDate()}</span>
-      <span class="status-dot"></span>
-    `;
+   pill.innerHTML = `
+    <span class="day-name">${dayNames[d.getDay()]}</span>
+      <div class="pill-box">
+        <span class="day-num">${d.getDate()}</span>
+     <span class="status-dot"></span>
+    </div>
+`;
+
 
     // Click handler to center on clicked date
      pill.addEventListener("click", () => {

@@ -317,8 +317,7 @@ body {
 .status-counter {
   font-size: 14px;
   font-weight: 440;
-  color: var(--text-2);
-  margin-top: 2px;
+  color: var(--text-3);
 }
 
 
@@ -326,10 +325,10 @@ body {
   background: transparent;
   border: none;
   color: #3883e0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 440;
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: 8px;
   text-align: left;
 }
 

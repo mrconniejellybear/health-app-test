@@ -8,12 +8,13 @@
 
 #dashboard-greeting-prefix{
   font-weight: 400;
-  font-size: 30px;
+  font-size: 20px;
   color: var(--text-2);
 }
 .dashboard-header h2 span{
-    font-weight: 600;
-    font-size: 34px;
+    font-weight: 700;
+    font-size: 32px;
+      margin-top: -4px;
     color: var(--text-main);
 }
 

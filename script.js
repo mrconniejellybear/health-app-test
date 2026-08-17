@@ -133,7 +133,7 @@ function getTimeBasedGreeting() {
   const currentHour = new Date().getHours();
 
   if (currentHour >= 4 && currentHour < 12) {
-    return "Good morning,";
+    return 'Good morning,';
   } else if (currentHour >= 12 && currentHour < 17) {
     return "Good afternoon,";
   } else {

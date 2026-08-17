@@ -80,9 +80,9 @@
 .med-dosage {
   grid-column: 1;
   grid-row: 2;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
-  color: var(--text-2);
+  color: var(--text-main);
 }
 .med-time {
   grid-column: 2;

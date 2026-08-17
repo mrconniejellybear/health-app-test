@@ -43,8 +43,6 @@ function saveAppState() {
 
 
 
-
-
 // 1. Register the Service Worker
 if ('serviceWorker' in navigator && 'Notification' in window) {
   navigator.serviceWorker.register('/sw.js')
@@ -92,6 +90,37 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
 
 
 
+// --- THEME TOGGLE CONTROLLER ---
+function initThemeToggle() {
+  const themeBtn = document.getElementById("theme-tog");
+  const savedTheme = localStorage.getItem("healthApp_theme") || "light";
+
+  // Apply saved theme on initial load
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+  } else {
+    document.body.classList.remove("dark-theme");
+  }
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+      const isDark = document.body.classList.contains("dark-theme");
+
+      // Save preference so it persists across refreshes/tabs
+      localStorage.setItem("healthApp_theme", isDark ? "dark" : "light");
+
+      // Optional: Audio feedback
+      if (typeof playClickSound === "function") playClickSound();
+    });
+  }
+}
+
+// Add initThemeToggle() inside your DOMContentLoaded listener:
+document.addEventListener("DOMContentLoaded", () => {
+  initThemeToggle();
+  // ... your other init functions
+});
 
 
 

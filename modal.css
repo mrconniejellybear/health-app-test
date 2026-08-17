@@ -74,8 +74,8 @@
   max-height: 85vh;               /* Caps height to 85% of mobile screen */
   overflow-y: auto;               /* Allows smooth vertical scrolling */
   -webkit-overflow-scrolling: touch; /* Butter-smooth momentum scrolling on iOS */
-  background: white;
-  border: 1px solid #eee;
+  background:var(--bg-color);
+  border: 1px solid var(--border-color);
   box-shadow: 0px 4px 20px #0000001c;
   padding: 16px 16px 24px 16px;
   border-radius: 14px;

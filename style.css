@@ -965,12 +965,12 @@
 
 .row-btn{
   background-color: var(--card-bg);
-  color: var(--text-main);
+  color: var(--text-2);
   height: 40px;
   width: 40px;
   border: 1px solid var(--border-color);
   border-radius: 99px;
-  box-shadow: 0px 5px 10px #00000000;
+  box-shadow: 0px 5px 10px #00000004;
 }
 .row-btn svg{
   height: 28px;

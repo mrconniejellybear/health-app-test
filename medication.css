@@ -79,7 +79,7 @@
 .med-dosage {
   grid-column: 1;
   grid-row: 2;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text-main);
 }
@@ -87,7 +87,7 @@
   grid-column: 2;
   grid-row: 1;
   text-align: right;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-main);
 }
@@ -96,11 +96,10 @@
   grid-column: 2;
   grid-row: 2;
   text-align: right;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-main);
   font-weight: 400;
-  padding: 2px 0px;
-  border-radius: 10px;
+  padding: 0px;
   width: fit-content;
   justify-self: end;
 }

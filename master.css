@@ -1,7 +1,7 @@
 :root {
   --bg-color: #f4f4f4;
   --card-bg: #fff;
-  --contrast-bg: #ededed;
+  --contrast-bg: #eaeaea;
 
   --text-main: #252627;
   --text-2: #60646b;
@@ -31,7 +31,7 @@ body.dark-theme {
   --text-3: #5e6472;
   --btn-blue: #38bdf8;
 
-  --contrast-bg: #1f222d;
+  --contrast-bg: #212430;
 
 }
 

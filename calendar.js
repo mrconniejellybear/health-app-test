@@ -66,7 +66,7 @@ function render7DayCalendarStrip(centerDate = new Date()) {
   rowContainer.innerHTML = "";
 
   // 1. Update Month / Year Title
-  const monthNames = ["January", "February", "March", "April", "May", "June", 
+  const monthNames = ['January', "February", "March", "April", "May", "June", 
                       "July", "August", "September", "October", "November", "December"];
   if (monthYearLabel) {
     monthYearLabel.textContent = `${monthNames[centerDate.getMonth()]} ${centerDate.getFullYear()}`;
@@ -104,7 +104,6 @@ function render7DayCalendarStrip(centerDate = new Date()) {
     });
     // "Today" Button Listener
 document.getElementById("strip-today-btn")?.addEventListener("click", () => {
-  playCalendarPopSound(); // Call it here too!
   selectedActivitiesDate = new Date();
   render7DayCalendarStrip(selectedActivitiesDate);
 });

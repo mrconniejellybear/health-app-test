@@ -1583,7 +1583,7 @@ body {
 }
 
 .compass-insight-bar {
-  background:#eee;
+  background:var(--contrast-bg);
   border-radius: 12px;
   padding: 14px;
   font-weight: 500;

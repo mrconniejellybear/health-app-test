@@ -10,8 +10,8 @@
 
 .calendar-strip-header {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: end;
+  justify-content: space-between;
   margin-bottom: 14px;
   color: var(--text-3);
 }
@@ -21,13 +21,19 @@
   font-weight: 440;
   margin: 0;
 }
+.month-icon{
+  display: flex;
+  gap: 6px;
+  flex-direction: row;
+  align-items: center;
+}
 
 .strip-today-badge {
-  color: black;
+  color:var(--text-3);
   border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
+  background: none;
+  font-size: 14px;
+  font-weight: 440;
   cursor: pointer;
 }
 

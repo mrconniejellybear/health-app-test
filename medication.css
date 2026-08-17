@@ -185,3 +185,31 @@ gap: 8px;
   font-weight: 540;
 
 }
+
+
+
+
+.consistency-card{
+  padding: 14px;
+  display: none;
+  border-radius: 18px;
+  border: none;
+  background-image: linear-gradient(rgb(250, 164, 26), rgb(236, 78, 5));
+}
+.consistency-header{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.consistency-header h1{
+  font-size: 16px;
+  color: white;
+}
+.flame-icon{
+  background-color: #ffffff;
+  color: #ff9d00;
+  border-radius: 50%;
+  height: 44px;
+  width: 44px;
+  padding: 2px;
+}

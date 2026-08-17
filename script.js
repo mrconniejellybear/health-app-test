@@ -81,7 +81,7 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
   
   const registration = await navigator.serviceWorker.ready;
   registration.showNotification('Mr. Connie Healthy Bear', {
-    body: `It is ${scheduledTime} — time for your ${medName}!`,
+    body: `Test Notification! Can you see it?`,
     icon: '/healthappicon.png',
     badge: '/healthappicon.png',
     vibrate: [200, 100, 200],

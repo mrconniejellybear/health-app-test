@@ -53,7 +53,7 @@
 .day-pill .day-name {
   font-size: 12px;
   color: var(--text-3);
-  font-weight: 460;
+  font-weight: 440;
 }
 
 .day-pill .pill-box {
@@ -85,7 +85,7 @@
 }
 
 .day-pill.active .day-name {
-  color: #6196ff;
+  color: #679aff;
   font-weight: 700;
 }
 

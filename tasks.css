@@ -33,7 +33,7 @@
   border: none;
   background: none;
   font-size: 14px;
-  font-weight: 440;
+  font-weight: 300;
   cursor: pointer;
 }
 
@@ -61,7 +61,7 @@
 .day-pill .day-name {
   font-size: 13px;
   color: var(--text-3);
-  font-weight: 440;
+  font-weight: 300;
 }
 
 .day-pill .pill-box {
@@ -81,7 +81,7 @@
 
 .day-pill .day-num {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 440;
   color: var(--text-main);
 }
 

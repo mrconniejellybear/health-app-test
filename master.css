@@ -11,7 +11,7 @@
   
   --border-color: #dfdfdf00;
   --green-check: #109d31;
-  --blue-accent: #ff004c;
+  --blue-accent: #ff0037;
 
   --input-bg: #fafafa;
 
@@ -161,8 +161,8 @@ body {
 }
 .article-icon{
   background-color: #fff;
-  height: 52px;
-  width: 52px;
+  height: 56px;
+  width: 56px;
   border-radius: 999px;
   padding: 6px;
 }
@@ -173,7 +173,7 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 15px;
-  margin-bottom: 2px;
+  font-weight: 500;
 
 }
 .article-tease{
@@ -182,7 +182,7 @@ body {
   font-weight: 300;
 }
 .article-text-wrap{
-  max-width: calc((100%) - (64px));
+  max-width: calc((100%) - (68px));
 }
 
 
@@ -209,6 +209,7 @@ body {
 .tab2 {
   margin-left: 6px;
   font-size: 22px;
+  font-weight: 500;
   margin-bottom: -8px;
 }
 

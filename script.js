@@ -127,8 +127,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Medication reminder alarm clock SVG icon
 const reminderClockIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" height="14px" viewBox="0 -960 960 960" width="14px" fill="currentColor"><path d="M520-456v-144q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600v159q0 8 3 15.5t9 13.5l112 112q11 11 28 11t28-11q11-11 11-28t-11-28L520-456ZM339.5-108.5q-65.5-28.5-114-77t-77-114Q120-365 120-440t28.5-140.5q28.5-65.5 77-114t114-77Q405-800 480-800t140.5 28.5q65.5 28.5 114 77t77 114Q840-515 840-440t-28.5 140.5q-28.5 65.5-77 114t-114 77Q555-80 480-80t-140.5-28.5ZM480-440ZM82-668q-11-11-11-28t11-28l114-114q11-11 28-11t28 11q11 11 11 28t-11 28L138-668q-11 11-28 11t-28-11Zm796 0q-11 11-28 11t-28-11L708-782q-11-11-11-28t11-28q11-11 28-11t28 11l114 114q11 11 11 28t-11 28ZM480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720q-117 0-198.5 81.5T200-440q0 117 81.5 198.5T480-160Z"/></svg>
+  <svg class="med-reminder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="14" height="14" fill="currentColor" style="display: inline-block; vertical-align: -1px; margin-left: 2px; margin-bottom: 2px; flex-shrink: 0;">
+    <path d="M533-459.74V-589q0-21.6-15-37.3-15-15.7-37.5-15.7t-38 15Q427-612 427-589v147q0 13 5 24.93T447-395l97 97q15.8 16 37.9 15.5 22.1-.5 38.1-16t16-37.98q0-22.48-16-38.52l-87-84.74ZM323-67q-74-32-129.5-87T106-283q-32-74-32-158t32-157.5q32-73.5 87.5-129T323.24-815q74.23-32 157.5-32Q564-847 638-815q74 32 129 87.5t87 129Q886-525 886-441t-32 158q-32 74-87 129T637.76-67q-74.23 32-157.5 32Q397-35 323-67Zm157-374ZM35-679q-15-15.8-14.5-37.4Q21-738 36-754l132-131q16-16 37-15.5t37 15.5q16 15 16 36.98 0 21.98-16 38.02L110-679q-15 16-36.98 16-21.98 0-38.02-16Zm890 0q-15 16-36.98 16-21.98 0-38.02-16L719-810q-16-16.04-16-38.02Q703-870 719-885q16-15 37.5-15t37.5 16l131 131q16 16 15.5 37T925-679ZM480-171q113 0 191.5-79.18t78.5-191Q750-553 671.5-632T480-711q-112 0-191 79t-79 191.5q0 112.5 79 191T480-171Z"/></svg>
 `;
+
 
 
 
@@ -243,6 +245,11 @@ if (medForm) {
 
     if (name && rawTime) {
       const formattedTime = formatTime(rawTime);
+      
+      // Check if your reminder checkbox/toggle is checked (or default to true if every created med has an alarm)
+      const reminderInput = document.getElementById("med-reminder") || document.getElementById("med-alarm");
+      const hasReminder = reminderInput ? reminderInput.checked : true;
+
       const newMed = {
         id: Date.now(),
         name,
@@ -251,6 +258,7 @@ if (medForm) {
         frequency,
         icon: selectedIcon,
         colorKey: selectedColorKey,
+        hasReminder: hasReminder, // <-- Added this property
         history: []
       };
 
@@ -261,6 +269,7 @@ if (medForm) {
       renderMedications();
       if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
     }
+
   });
 }
 

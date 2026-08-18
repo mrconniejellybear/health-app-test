@@ -451,7 +451,7 @@ body {
   display: flex;
   font-weight: 440;
   font-size: 15px;
-  color: var(--text-2);
+  color: var(--text-3);
   text-decoration: none;
   justify-content: space-between;
   transition: all 0.1s;

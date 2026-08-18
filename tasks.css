@@ -5,7 +5,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .calendar-strip-header {
@@ -57,7 +57,7 @@
 }
 
 .day-pill .day-name {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-3);
   font-weight: 440;
 }
@@ -102,7 +102,7 @@
   height: 4px;
   border-radius: 50%;
   background: #9efa00;
-  margin-top: 6px;
+  margin-bottom: 10px;
   opacity: 0;
   z-index: 5000;
   display: none;

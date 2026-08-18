@@ -449,13 +449,14 @@ body {
   padding: 12px;
   border-radius: 16px;
   display: flex;
-  color: var(--text-2);
+  font-weight: 440;
+  font-size: 15px;
+  color: var(--text-3);
   text-decoration: none;
   justify-content: space-between;
   transition: all 0.1s;
 }
 .card.settings:hover{
-  background-color: #ffffff76;
   color: var(--blue-accent);
 }
 .settings-inner{

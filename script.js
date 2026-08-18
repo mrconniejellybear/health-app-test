@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Medication reminder alarm clock SVG icon
 const reminderClockIcon = `
-  <svg class="med-reminder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="13" height="13" fill="currentColor" style="display: inline-block; vertical-align: -1px; margin-left: 2px; margin-bottom: 1px; flex-shrink: 0;">
+  <svg class="med-reminder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="13" height="13" fill="currentColor" style="display: inline-block; vertical-align: -1px; margin-left: 2px; margin-bottom: 2px; flex-shrink: 0;">
     <path d="M528-458v-134q0-20-14-34t-34-14q-20 0-34 14t-14 34v150q0 13 4.5 24t13.5 20l100 100q14 14 34.5 13.5T619-299q14-14 14-34.5T619-368l-91-90ZM327-77q-72-31-125.5-84.5T117-287q-31-72-31-153t31-153q31-72 84.5-125.5T327-803q72-31 153-31t153 31q72 31 125.5 84.5T843-593q31 72 31 153t-31 153q-31 72-84.5 125.5T633-77q-72 31-153 31T327-77Zm153-363ZM45-677q-14-14-13.5-34T46-745l130-130q14-14 33.5-14t33.5 14q14 14 14 34t-14 34L113-677q-14 14-34 14t-34-14Zm870 0q-14 14-34 14t-34-14L717-807q-14-14-14-34t14-34q14-14 34-13.5t34 14.5l130 130q14 14 14 33.5T915-677ZM480-172q112 0 190-78t78-190q0-112-78-190t-190-78q-112 0-190 78t-78 190q0 112 78 190t190 78Z"/></svg>
 `;
 

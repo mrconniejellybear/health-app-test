@@ -9,7 +9,7 @@
 
   --text-muted: #b2bbc7;
   
-  --border-color: #d6dfea9b;
+  --border-color: #d6dfea00;
   --green-check: #109d31;
   --blue-accent: #ff0037;
 
@@ -80,7 +80,14 @@ body {
   color: #9755e3;
 }
 
-
+.account-icon{
+  margin-top: 8px;
+  color: var(--blue-accent);
+}
+.account-icon svg{
+  height: 40px;
+  width: 40px;
+}
 
 
 
@@ -164,7 +171,7 @@ body {
   height: 56px;
   width: 56px;
   border-radius: 999px;
-  padding: 6px;
+  padding: 8px;
 }
 
 .article-title{

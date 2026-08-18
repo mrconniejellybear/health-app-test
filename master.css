@@ -198,8 +198,8 @@ body {
 }
 .article-icon{
   background-color: #fff;
-  height: 60px;
-  width: 60px;
+  height: 52px;
+  width: 52px;
   border-radius: 999px;
   padding: 6px;
 }
@@ -209,16 +209,16 @@ body {
   gap: 8px;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 15px;
   margin-bottom: 2px;
 
 }
 .article-tease{
   color: #222;
-  font-size: 14px;
+  font-size: 13px;
 }
 .article-text-wrap{
-  max-width: calc((100%) - (72px));
+  max-width: calc((100%) - (64px));
 }
 
 

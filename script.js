@@ -729,47 +729,57 @@ function renderMoodPieChart() {
 
 // --- 7. MEDICATION CALENDAR & CONTRACEPTIVE LOGIC ---
 
-function renderMedicationCalendar(year = 2026, month = 7) {
-  const grid = document.getElementById("med-calendar-grid");
-  const monthLabel = document.getElementById("cal-month-text");
-  if (!grid) return;
+// Clean Checkmark SVG icon for completed calendar days
+const calCheckmarkIcon = `
+  <svg class="day-check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+`;
 
-  grid.innerHTML = "";
+function renderMedicationCalendar(year, month) {
+  const calGrid = document.getElementById("calendar-grid");
+  if (!calGrid) return;
+  calGrid.innerHTML = "";
 
-  const firstDayIndex = new Date(year, month, 1).getDay();
-  const totalDays = new Date(year, month + 1, 0).getDate();
-  const todayStr = new Date().toISOString().split("T")[0];
+  const now = new Date();
+  const currentYear = year !== undefined ? year : now.getFullYear();
+  const currentMonth = month !== undefined ? month : now.getMonth();
+  const todayStr = getTodayStr();
 
-  const monthNames = ["January", "February", "March", "April", "May", "June", 
-                      "July", "August", "September", "October", "November", "December"];
-  
-  if (monthLabel) {
-    monthLabel.textContent = `${monthNames[month]} ${year}`;
-  }
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
 
+  // Blank slots for previous month alignment
   for (let i = 0; i < firstDayIndex; i++) {
     const emptyCell = document.createElement("div");
-    emptyCell.classList.add("cal-day", "empty");
-    grid.appendChild(emptyCell);
+    emptyCell.className = "cal-day empty";
+    calGrid.appendChild(emptyCell);
   }
 
-  for (let day = 1; day <= totalDays; day++) {
-    const dayCell = document.createElement("div");
-    dayCell.classList.add("cal-day");
-    dayCell.textContent = day;
+  // Populate Month Days
+  for (let day = 1; day <= daysInMonth; day++) {
+    const formattedDate = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const isToday = formattedDate === todayStr;
 
-    const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth = (month + 1) < 10 ? `0${month + 1}` : month + 1;
-    const dateKey = `${year}-${formattedMonth}-${formattedDay}`;
+    // Check adherence: are all registered meds taken on this date?
+    const hasMeds = medications.length > 0;
+    const isFullyCompleted = hasMeds && medications.every(med => (med.history || []).includes(formattedDate));
 
-    if (dateKey === todayStr) dayCell.classList.add("today");
+    const dayEl = document.createElement("div");
+    dayEl.className = `cal-day ${isToday ? "today" : ""} ${isFullyCompleted ? "completed-day" : ""}`;
+    dayEl.dataset.date = formattedDate;
 
-    const status = medAdherenceLogs[dateKey];
-    if (status) dayCell.classList.add(status);
+    // IF completed -> Show Checkmark; ELSE -> Show Day Number
+    dayEl.innerHTML = `
+      <div class="day-circle">
+        ${isFullyCompleted ? calCheckmarkIcon : day}
+      </div>
+    `;
 
-    grid.appendChild(dayCell);
+    calGrid.appendChild(dayEl);
   }
 }
+
 
 const contraForm = document.getElementById("contraceptive-form");
 const customNameInput = document.getElementById("contra-custom-name");

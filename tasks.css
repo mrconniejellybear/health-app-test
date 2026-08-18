@@ -84,21 +84,17 @@
 }
 
 /* Active State */
-.day-pill.active .pill-box {
-  background: var(--btn-blue);
-  border-color: var(--btn-blue);
+.day-pill.active {
+  background: var(--blue-accent);
   transform: translateY(-2px);
 }
 
-.day-pill.active .day-name {
-  color: #679aff;
-  font-weight: 700;
-}
 
-.day-pill.active .day-num {
+.day-pill.active .day-name {
   color: #fff;
   font-weight: 700;
 }
+
 
 /* Completion indicator dot */
 .day-pill .status-dot {

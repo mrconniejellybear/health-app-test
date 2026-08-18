@@ -6,13 +6,17 @@
   color: #b900aa;
 }
 
-.cycle-builder{
+.cycle-builder-intro{
   margin-left: 6px;
   color: var(--text-2);
   font-size: 14px;
   font-weight: 280;
-  display: flex;
-  align-items: center;
+}
+.cycle-builder-intro p{
+  font-size: 13px;
+}
+.cycle-builder-intro h1, p{
+  margin-bottom: 6px;
 }
 
 .color-slider-container {
@@ -84,14 +88,14 @@
   justify-content: space-between;
   display: flex;
   align-items: start;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .dismiss-btn{
   background-color: #8989892a;
   color: #828282;
   padding: 3px 10px;
   border-radius: 99px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   margin-top: 1px;
 }
@@ -102,15 +106,15 @@
 }
 
 .color-edu-card p {
-  margin: 0 0 20px 0;
-  font-size: 14px;
+  margin: 0 0 16px 0;
+  font-size: 13px;
   color: var(--text-2);
   line-height: 1.4;
   font-weight: 280;
 }
 
 .learn-more-link {
-  color: #00aaff; 
+  color: var(--link-blue); 
   display: flex;
   gap: 4px;
   align-items: center;

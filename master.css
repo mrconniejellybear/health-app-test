@@ -179,7 +179,7 @@ body {
 .article-tease{
   color: #222;
   font-size: 13px;
-  font-weight: 240;
+  font-weight: 280;
 }
 .article-text-wrap{
   max-width: calc((100%) - (68px));
@@ -264,7 +264,7 @@ body {
 }
 .date-range-badge {
   font-size: 13px;
-  font-weight: 240;
+  font-weight: 280;
   color: var(--text-muted);
   display: flex;
   align-items: flex-start;
@@ -303,7 +303,7 @@ body {
 
 .status-counter {
   font-size: 14px;
-  font-weight: 240;
+  font-weight: 280;
   color: var(--text-3);
 }
 
@@ -313,7 +313,7 @@ body {
   border: none;
   color: var(--link-blue);
   font-size: 13px;
-  font-weight: 240;
+  font-weight: 280;
   cursor: pointer;
   margin-top: 2px;
   text-align: left;

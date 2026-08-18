@@ -11,7 +11,7 @@
   
   --border-color: #dfdfdf00;
   --green-check: #109d31;
-  --blue-accent: #0088ff;
+  --blue-accent: #ff004c;
 
   --input-bg: #fafafa;
 
@@ -21,7 +21,7 @@
 
   --medicon: #fff;
 
-  --btn-blue: #3744f0;
+  --link-blue: #0088ff;
 }
 
 body.dark-theme {
@@ -30,7 +30,7 @@ body.dark-theme {
   --text-main: #dde3e9;
   --text-2: #94a3b8;
   --text-3: #5e6472;
-  --btn-blue: #38bdf8;
+  --blue-accent: #ff5f94;
 
   --contrast-bg: #181b24;
 
@@ -119,7 +119,7 @@ body {
 /* Add Button */
 .add-btn {
   width: 100%;
-  background-color:var(--btn-blue);
+  background-color:var(--blue-accent);
   color:  white;
   border:none;
   padding: 12px 16px;
@@ -144,44 +144,6 @@ body {
   color:  #ffffff;
 }
 
-.add-btn-purple{
-  width: 100%;
-  background-color: #ebc4fddc;
-  border: none;
-  color: #8a4cbd;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  
-  transition: all 0.3s;
-}
-.add-btn-blue{
-  width: 100%;
-  background-color: #cfe6fd;
-  border: none;
-  color: #0976d9;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  
-  transition: all 0.3s;
-}
 
 
 
@@ -347,7 +309,7 @@ body {
 .subtitle-btn {
   background: transparent;
   border: none;
-  color: #3883e0;
+  color: var(--link-blue);
   font-size: 13px;
   font-weight: 440;
   cursor: pointer;
@@ -356,7 +318,7 @@ body {
 }
 
 .add-btn-mini{
-  background-color: var(--btn-blue);
+  background-color: var(--blue-accent);
   color: #fff;
   font-weight: 640;
   border: none;

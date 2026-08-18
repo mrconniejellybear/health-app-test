@@ -20,7 +20,7 @@
 
 .med-icon-display {
   display: flex;
-  background-color: #ffffff;
+  background-color: var(--medicon);
   border-radius: 99px;
   align-items: center;
   justify-content: center;

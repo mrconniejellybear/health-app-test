@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f6f6f6;
+  --bg-color: #f6f7f9;
   --card-bg: #fff;
   --contrast-bg: #eeeeee;
 
@@ -9,7 +9,7 @@
 
   --text-muted: #b2bbc7;
   
-  --border-color: #dfdfdf00;
+  --border-color: #d6dfea9b;
   --green-check: #109d31;
   --blue-accent: #ff0037;
 
@@ -179,7 +179,7 @@ body {
 .article-tease{
   color: #222;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 240;
 }
 .article-text-wrap{
   max-width: calc((100%) - (68px));
@@ -264,7 +264,7 @@ body {
 }
 .date-range-badge {
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 240;
   color: var(--text-muted);
   display: flex;
   align-items: flex-start;
@@ -303,7 +303,7 @@ body {
 
 .status-counter {
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 240;
   color: var(--text-3);
 }
 
@@ -313,7 +313,7 @@ body {
   border: none;
   color: var(--link-blue);
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 240;
   cursor: pointer;
   margin-top: 2px;
   text-align: left;

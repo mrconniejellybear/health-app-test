@@ -10,7 +10,7 @@
   margin-left: 6px;
   color: var(--text-2);
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 240;
   display: flex;
   align-items: center;
 }
@@ -106,7 +106,7 @@
   font-size: 14px;
   color: var(--text-2);
   line-height: 1.4;
-  font-weight: 300;
+  font-weight: 240;
 }
 
 .learn-more-link {
@@ -116,7 +116,7 @@
   align-items: center;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 240;
   transition: opacity 0.2s;
 }
 

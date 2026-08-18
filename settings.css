@@ -1,0 +1,35 @@
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans";
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+
+  background-repeat: no-repeat;
+  background-position: top center;
+  /* Restrict background width to match phone dimensions */
+}
+
+
+.drug-pref{
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 440px;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  padding: 14px 12px;
+  box-shadow: 0px 1px 5px #0000000e;
+}

@@ -125,6 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// Medication reminder alarm clock SVG icon
+const reminderClockIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" height="14px" viewBox="0 -960 960 960" width="14px" fill="currentColor"><path d="M520-456v-144q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600v159q0 8 3 15.5t9 13.5l112 112q11 11 28 11t28-11q11-11 11-28t-11-28L520-456ZM339.5-108.5q-65.5-28.5-114-77t-77-114Q120-365 120-440t28.5-140.5q28.5-65.5 77-114t114-77Q405-800 480-800t140.5 28.5q65.5 28.5 114 77t77 114Q840-515 840-440t-28.5 140.5q-28.5 65.5-77 114t-114 77Q555-80 480-80t-140.5-28.5ZM480-440ZM82-668q-11-11-11-28t11-28l114-114q11-11 28-11t28 11q11 11 11 28t-11 28L138-668q-11 11-28 11t-28-11Zm796 0q-11 11-28 11t-28-11L708-782q-11-11-11-28t11-28q11-11 28-11t28 11l114 114q11 11 11 28t-11 28ZM480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720q-117 0-198.5 81.5T200-440q0 117 81.5 198.5T480-160Z"/></svg>
+`;
+
+
+
 
 // --- DYNAMIC GREETING & USER PROFILE ---
 
@@ -298,6 +305,9 @@ function renderMedications() {
       ? MED_COLOR_PALETTE[med.colorKey] 
       : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.1)" };
 
+    // --- Check if an alarm/reminder is active ---
+    const hasAlarm = Boolean(med.hasReminder || med.reminder || med.alarm);
+
     const li = document.createElement("li");
     li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
@@ -314,7 +324,9 @@ function renderMedications() {
         <div class="med-grid">
           <span class="med-name" style="color: ${colorTheme.main}">${med.name}</span>
           <span class="med-dosage">${med.dosage}</span>
-          <span class="med-time" style="color: ${colorTheme.main}">${med.scheduledTime || med.time || ''}</span>
+          <span class="med-time" style="color: ${colorTheme.main}">
+            ${med.scheduledTime || med.time || ''} ${hasAlarm ? reminderClockIcon : ''}
+          </span>
           <span class="logged-status">
             ${isTakenToday ? "Taken" : "Not Taken"}
           </span>
@@ -406,10 +418,6 @@ document.getElementById("edit-meds-btn")?.addEventListener("click", () => {
   const editBtn = document.getElementById("edit-meds-btn");
   const listEl = document.getElementById("med-list");
   
-  if (editBtn) {
-    editBtn.textContent = isMedEditMode ? "Done" : "Edit List";
-    editBtn.style.color = isMedEditMode ? "#1bb040" : "#3883e0"; // Green for Done, Blue for Edit
-  }
   
   if (listEl) {
     listEl.classList.toggle("editing", isMedEditMode);
@@ -477,15 +485,20 @@ function handleMedicationFormSubmit(e) {
 
   const reminders = calculateReminderTimes(medTime, checkedChips);
 
+  const hasReminderInput = document.getElementById("med-reminder-toggle");
+  const hasReminder = hasReminderInput ? hasReminderInput.checked : false;
+
   const newMed = {
-    id: "med_" + Date.now(),
-    name: medName,
-    dosage: medDosage,
-    scheduledTime: medTime,
-    frequency: medFreq,
-    reminders: reminders, // Array of calculated alert objects
-    history: []
-  };
+  id: Date.now(),
+  name,
+  dosage,
+  scheduledTime: formattedTime,
+  frequency,
+  icon: selectedIcon,
+  colorKey: selectedColorKey,
+  hasReminder: hasReminder, // <-- Make sure this flag is included!
+  history: []
+};
 
   medications.push(newMed);
   if (typeof saveAppState === "function") saveAppState();

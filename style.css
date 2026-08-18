@@ -1438,7 +1438,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   backdrop-filter: blur(16px);
-  margin-bottom: 20px;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
 }
 

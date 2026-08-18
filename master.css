@@ -33,7 +33,10 @@ body.dark-theme {
 
   --contrast-bg: #181b24;
 
+  --pill-fix1: #12141c;
+  --pill-fix2: #181b24;
 }
+
 
 .contraceptive-qs{
   display: none;
@@ -182,9 +185,10 @@ body {
 
 
 .baby-card{
-  padding: 14px;
+  padding: 12px;
   border-radius: 18px;
   border: none;
+  text-decoration: none;
   background-color: #b1e7acf8
 }
 .article-header{
@@ -194,11 +198,10 @@ body {
 }
 .article-icon{
   background-color: #fff;
-  height: 58px;
-  width: 96px;
-  margin-right: 14px;
+  height: 60px;
+  width: 60px;
   border-radius: 999px;
-  padding: 4px;
+  padding: 6px;
 }
 
 .article-title{
@@ -214,7 +217,9 @@ body {
   color: #222;
   font-size: 14px;
 }
-
+.article-text-wrap{
+  max-width: calc((100%) - (72px));
+}
 
 
 .title {
@@ -439,7 +444,23 @@ body {
 }
 
 
-
+.card.settings{
+  background-color: var(--card-bg);
+  padding: 12px;
+  border-radius: 16px;
+  display: flex;
+  color: var(--text-2);
+  text-decoration: none;
+  justify-content: space-between;
+}
+.settings-inner{
+  color: var(--text-2);
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 440;
+}
 
 
 

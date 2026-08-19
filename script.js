@@ -426,6 +426,11 @@ document.getElementById("edit-meds-btn")?.addEventListener("click", () => {
   
   const editBtn = document.getElementById("edit-meds-btn");
   const listEl = document.getElementById("med-list");
+
+   if (editBtn) {
+    editBtn.textContent = isMedEditMode ? "Done" : "Edit List";
+    editBtn.style.color = isMedEditMode ? "#1bb040" : "#3883e0"; // Green for Done, Blue for Edit
+  }
   
   
   if (listEl) {

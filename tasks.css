@@ -48,8 +48,8 @@
   position: relative;
   overflow: hidden;
   /* Optional: subtle side-fade masks for visual depth */
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 0%, black 100%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 0%, black 100%, transparent);
 }
 
 /* Horizontal scrolling track with iOS momentum & snapping */

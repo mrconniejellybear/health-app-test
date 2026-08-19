@@ -11,9 +11,12 @@
   color: var(--text-2);
   font-size: 14px;
   font-weight: 280;
+  margin-bottom: 12px;
 }
 .cycle-builder-intro p{
   font-size: 13px;
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 
 

@@ -11,7 +11,7 @@
   
   --border-color: #d6dfea00;
   --green-check: #109d31;
-  --blue-accent: #ff0037;
+  --blue-accent: #ff0044;
 
   --input-bg: #fafafa;
 
@@ -34,7 +34,6 @@ body.dark-theme {
   --text-main: #dde3e9;
   --text-2: #94a3b8;
   --text-3: #5e6472;
-  --blue-accent: #ff5f94;
 
   --contrast-bg: #181b24;
 
@@ -220,7 +219,7 @@ body {
 .article-tease{
   color: #222;
   font-size: 13px;
-  font-weight: 280;
+  font-weight: 300;
 }
 .article-text-wrap{
   max-width: calc((100%) - (68px));
@@ -455,7 +454,7 @@ body {
   padding: 12px;
   border-radius: 16px;
   display: flex;
-  font-weight: 340;
+  font-weight: 320;
   font-size: 15px;
   color: var(--text-2);
   text-decoration: none;
@@ -469,7 +468,7 @@ body {
   align-items: center;
   display: flex;
   gap: 6px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
   text-decoration: none;
 }
 

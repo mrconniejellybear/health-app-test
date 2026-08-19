@@ -50,7 +50,7 @@ function renderContinuousMonthCalendar(centerDate = new Date()) {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   if (monthYearLabel) {
     monthYearLabel.textContent = `${monthNames[month]} ${year}`;

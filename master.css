@@ -464,19 +464,22 @@ body {
 .settings-inner{
   align-items: center;
   display: flex;
-  gap: 6px;
+  gap: 8px;
   text-decoration: none;
 }
+
 
 .order-btn{
   border: none;
   background: none;
   margin-left: 4px;
-  margin-bottom: -12px;
-  color: var(--text-2);
+  margin-bottom: -8px;
+  color: var(--text-3);
 }.order-btn svg{
-height: 30px;
+height: 36px;
 width: auto;
+}.order-btn:hover{
+  color: var(--link-blue);
 }
 
 /* --- Modal Toggle Row Styles --- */

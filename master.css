@@ -468,7 +468,16 @@ body {
   text-decoration: none;
 }
 
-
+.order-btn{
+  border: none;
+  background: none;
+  margin-left: 4px;
+  margin-bottom: -10px;
+  color: var(--text-2);
+}.order-btn svg{
+height: 30px;
+width: auto;
+}
 
 /* --- Modal Toggle Row Styles --- */
 .display-toggle-list {

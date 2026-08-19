@@ -83,7 +83,7 @@
   grid-column: 1;
   grid-row: 2;
   font-size: 12px;
-  font-weight: 280;
+  font-weight: 300;
   color: var(--text-main);
 }
 .med-time {
@@ -104,7 +104,7 @@
   text-align: right;
   font-size: 12px;
   color: var(--text-main);
-  font-weight: 280;
+  font-weight: 300;
   padding: 0px;
   width: fit-content;
   justify-self: end;

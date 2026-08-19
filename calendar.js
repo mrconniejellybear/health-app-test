@@ -1,55 +1,33 @@
-// Web Audio API generator for date clicks
-function playDateSelectSound() {
-    try {
-        const audioCtx = window.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === "suspended") audioCtx.resume();
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSnapSound() {
+  if (audioCtx.state === "suspended") audioCtx.resume();
 
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+  // Generate 15ms of organic noise
+  const bufferSize = audioCtx.sampleRate * 0.015; 
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
 
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.012);
-
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.012);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.012);
-    } catch (e) {
-    }
-}
-// --- DEDICATED CALENDAR STRIP POP SOUND ---
-function playCalendarPopSound() {
-  try {
-    const audioCtx = window.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === "suspended") audioCtx.resume();
-
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    // Pure sine wave gives it a round, clean "pop"
-    osc.type = "sine";
-
-    // Quick frequency pitch-drop (750 Hz down to 200 Hz in 15 milliseconds)
-    osc.frequency.setValueAtTime(750, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.015);
-
-    // Fast volume envelope so it stays snappy
-    gain.gain.setValueAtTime(0.12, audioCtx.currentTime); // Volume
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.015);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.015);
-  } catch (e) {
-    // Silently ignore if audio isn't unlocked yet
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = Math.random() * 2 - 1; // Pure random noise
   }
+
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = buffer;
+
+  // Filter out low frequencies to make it sound like a crisp snap
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = "highpass";
+  filter.frequency.value = 700;
+
+  const gain = audioCtx.createGain();
+  gain.gain.setValueAtTime(1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.03, audioCtx.currentTime + 0.015);
+
+  noise.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  noise.start();
 }
 
 
@@ -95,13 +73,15 @@ function render7DayCalendarStrip(centerDate = new Date()) {
 `;
 
 
-    // Click handler to center on clicked date
-     pill.addEventListener("click", () => {
-      selectedActivitiesDate = new Date(d);
-      render7DayCalendarStrip(selectedActivitiesDate);
-      
-      playCalendarPopSound(); 
-    });
+  // Click handler to center on clicked date
+pill.addEventListener("click", () => {
+  selectedActivitiesDate = new Date(d);
+  render7DayCalendarStrip(selectedActivitiesDate);
+  
+  // 🔊 Trigger matching crisp snap
+  playSnapSound();
+});
+
     // "Today" Button Listener
 document.getElementById("strip-today-btn")?.addEventListener("click", () => {
   selectedActivitiesDate = new Date();

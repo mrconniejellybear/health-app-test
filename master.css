@@ -465,6 +465,7 @@ body {
   align-items: center;
   display: flex;
   gap: 6px;
+  letter-spacing: 0.2px;
   text-decoration: none;
 }
 

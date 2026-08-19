@@ -440,7 +440,7 @@ body {
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
-  color: #5d90c2;
+  color: var(--blue-accent);
   transition: all 0.3s;
 }
 

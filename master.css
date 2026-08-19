@@ -15,6 +15,10 @@
 
   --input-bg: #fafafa;
 
+
+  --pill-fix1: #fff;
+  --pill-fix2: #eeeeee;
+
   --feat-text: #fdf1ea;
 
   --border-2: #d3d8dc00;
@@ -34,8 +38,8 @@ body.dark-theme {
 
   --contrast-bg: #181b24;
 
-  --pill-fix1: #12141c;
-  --pill-fix2: #181b24;
+  --pill-fix1: #181b24;
+  --pill-fix2: #212430;
 }
 
 

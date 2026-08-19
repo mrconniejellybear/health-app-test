@@ -11,7 +11,7 @@
   display: flex;
   align-items: end;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: var(--text-3);
 }
 
@@ -38,29 +38,70 @@
 
 
 
+
+
+
+
+/* Container clipping with soft edge fade */
+.calendar-month-strip-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Optional: subtle side-fade masks for visual depth */
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Horizontal scrolling track with iOS momentum & snapping */
+.calendar-month-track {
+  display: flex;
+  height: 80px;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 0 calc(50vw - 26px); /* Centers first & last items in view */
+  scrollbar-width: none; /* Firefox */
+}
+
+.calendar-month-track::-webkit-scrollbar {
+  display: none; /* Safari & Chrome */
+}
+
+/* Day Pill - each item acts as a snap point */
+.calendar-month-track .day-pill {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--pill-fix2);
+  border-radius: 99px;
+  padding: 17px 0px 0px 0px;
+  width: 46px;
+}
+
+.calendar-month-track .day-pill.active {
+  background: var(--blue-accent);
+}
+
+
 /* 7 Equal-Spaced Columns */
 .calendar-7day-row {
   display: flex;
   grid-template-columns: repeat(7, 1fr);
   justify-content: space-between;
 }
-.day-pill {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  user-select: none;
-  background-color: var(--contrast-bg);
-  border-radius: 99px;
-  padding: 14px 0px 4px 0px;
-  width: 46px;
-}
+
 
 .day-pill .day-name {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-3);
-  font-weight: 300;
+  font-weight: 360;
 }
 
 .day-pill .pill-box {
@@ -71,7 +112,7 @@
   border-radius: 99px;
   width: 38px;
   height: 38px;
-  background: var(--card-bg);
+  background: var(--pill-fix1);
   border: 1px solid var(--border-color);
   box-shadow: 0px 4px 8px #00000006;
   transition: all 0.25s ease;
@@ -84,34 +125,11 @@
   color: var(--text-main);
 }
 
-/* Active State */
-.day-pill.active {
-  background: var(--blue-accent);
-  transform: translateY(-2px);
-}
-
-
 .day-pill.active .day-name {
   color: #fff;
   font-weight: 700;
 }
 
-
-/* Completion indicator dot */
-.day-pill .status-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #9efa00;
-  margin-bottom: 10px;
-  opacity: 0;
-  z-index: 5000;
-  display: none;
-}
-
-.day-pill.has-logs .status-dot {
-  opacity: 1;
-}
 
 .activities-body {
   min-height: 200px;

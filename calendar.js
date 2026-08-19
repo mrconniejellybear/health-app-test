@@ -33,76 +33,115 @@ function playSnapSound() {
 
 
 
-// --- ACTIVITES 7-DAY CALENDAR STRIP LOGIC ---
-let selectedActivitiesDate = new Date(); // Defaults to today
+let selectedActivitiesDate = new Date();
+let lastSnappedDay = null;
 
-function render7DayCalendarStrip(centerDate = new Date()) {
-  const rowContainer = document.getElementById("calendar-7day-row");
+function renderContinuousMonthCalendar(centerDate = new Date()) {
+  const track = document.getElementById("calendar-month-track");
   const monthYearLabel = document.getElementById("strip-month-year");
-  if (!rowContainer) return;
+  if (!track) return;
 
-  rowContainer.innerHTML = "";
+  track.innerHTML = "";
 
-  // 1. Update Month / Year Title
-  const monthNames = ['January', "February", "March", "April", "May", "June", 
-                      "July", "August", "September", "October", "November", "December"];
+  const year = centerDate.getFullYear();
+  const month = centerDate.getMonth();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   if (monthYearLabel) {
-    monthYearLabel.textContent = `${monthNames[centerDate.getMonth()]} ${centerDate.getFullYear()}`;
+    monthYearLabel.textContent = `${monthNames[month]} ${year}`;
   }
 
-  const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const selectedStr = centerDate.toISOString().split("T")[0];
 
-  // 2. Generate 7 days centered on target date (-3 to +3)
-  for (let offset = -3; offset <= 3; offset++) {
-    const d = new Date(centerDate);
-    d.setDate(centerDate.getDate() + offset);
-
+  for (let day = 1; day <= totalDays; day++) {
+    const d = new Date(year, month, day);
     const isoDate = d.toISOString().split("T")[0];
-    const isSelected = offset === 0; // Center item is always active
+    const isSelected = isoDate === selectedStr;
 
     const pill = document.createElement("div");
     pill.className = `day-pill ${isSelected ? "active" : ""}`;
     pill.dataset.date = isoDate;
+    pill.dataset.dayNum = day;
 
-   pill.innerHTML = `
-    <span class="day-name">${dayNames[d.getDay()]}</span>
+    pill.innerHTML = `
+      <span class="day-name">${dayNames[d.getDay()]}</span>
       <div class="pill-box">
         <span class="day-num">${d.getDate()}</span>
-     <span class="status-dot"></span>
-    </div>
-`;
+        <span class="status-dot"></span>
+      </div>
+    `;
 
+    // Click handler for direct taps
+    pill.addEventListener("click", () => {
+      document.querySelectorAll(".calendar-month-track .day-pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      pill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
 
-  // Click handler to center on clicked date
-pill.addEventListener("click", () => {
-  selectedActivitiesDate = new Date(d);
-  render7DayCalendarStrip(selectedActivitiesDate);
-  
-  // 🔊 Trigger matching crisp snap
-  playSnapSound();
-});
+      selectedActivitiesDate = new Date(d);
+      if (typeof playSnapSound === "function") playSnapSound();
+    });
 
-    // "Today" Button Listener
-document.getElementById("strip-today-btn")?.addEventListener("click", () => {
-  selectedActivitiesDate = new Date();
-  render7DayCalendarStrip(selectedActivitiesDate);
-});
-
-
-    rowContainer.appendChild(pill);
+    track.appendChild(pill);
   }
+
+  // Scroll to active date into view
+  setTimeout(() => {
+    const activePill = track.querySelector(".day-pill.active");
+    if (activePill) {
+      activePill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      lastSnappedDay = activePill.dataset.dayNum;
+    }
+  }, 60);
+
+  // Attach scroll audio listener
+  attachScrollAudioListener(track);
 }
+
+// Sound feedback while dragging/swiping
+function attachScrollAudioListener(track) {
+  track.addEventListener("scroll", () => {
+    const trackCenter = track.getBoundingClientRect().left + track.offsetWidth / 2;
+    const pills = track.querySelectorAll(".day-pill");
+
+    let closestPill = null;
+    let minDistance = Infinity;
+
+    pills.forEach((pill) => {
+      const rect = pill.getBoundingClientRect();
+      const pillCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(trackCenter - pillCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestPill = pill;
+      }
+    });
+
+    if (closestPill && closestPill.dataset.dayNum !== lastSnappedDay && minDistance < 24) {
+      lastSnappedDay = closestPill.dataset.dayNum;
+      if (typeof playSnapSound === "function") {
+        playCalendarPopSound();
+      }
+    }
+  }, { passive: true });
+}
+
 
 // "Today" Button Listener
 document.getElementById("strip-today-btn")?.addEventListener("click", () => {
+  if (typeof playSnapSound === "function") playSnapSound();
   selectedActivitiesDate = new Date();
-  render7DayCalendarStrip(selectedActivitiesDate);
+  renderContinuousMonthCalendar(selectedActivitiesDate);
 });
 
-// Trigger strip initial render on page load
+// Trigger initial render on page load
 document.addEventListener("DOMContentLoaded", () => {
-  render7DayCalendarStrip();
-
+  renderContinuousMonthCalendar(selectedActivitiesDate);
 
 
 
@@ -238,6 +277,9 @@ form?.addEventListener("submit", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   renderTasks();
 });
+
+
+
 
 });
 

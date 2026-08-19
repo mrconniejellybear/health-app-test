@@ -11,7 +11,7 @@
   
   --border-color: #d6dfea00;
   --green-check: #109d31;
-  --blue-accent: #ff0044;
+  --blue-accent: #ff0055;
 
   --input-bg: #fafafa;
 
@@ -84,12 +84,12 @@ body {
 }
 
 .account-icon{
-  margin-top: 8px;
+  margin-top: 6px;
   color: var(--blue-accent);
 }
 .account-icon svg{
-  height: 46px;
-  width: 46px;
+  height: 50px;
+  width: 50px;
 }
 
 

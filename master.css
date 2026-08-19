@@ -472,8 +472,8 @@ body {
 .order-btn{
   border: none;
   background: none;
-  margin-left: 4px;
-  margin-bottom: -8px;
+  margin-left: 0px;
+  margin-bottom: -10px;
   color: var(--text-3);
 }.order-btn svg{
 height: 36px;

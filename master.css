@@ -451,7 +451,7 @@ body {
   padding: 12px;
   border-radius: 16px;
   display: flex;
-  font-weight: 320;
+  font-weight: 340;
   font-size: 15px;
   color: var(--text-2);
   text-decoration: none;
@@ -464,7 +464,7 @@ body {
 .settings-inner{
   align-items: center;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   text-decoration: none;
 }
 

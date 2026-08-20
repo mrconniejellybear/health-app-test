@@ -1077,38 +1077,60 @@ function renderHomeWeightCard() {
 
 
 // --- 10. NAVIGATION & APP INITIALIZATION ---
+// --- REUSABLE TAB NAVIGATION HELPER ---
+function navigateToTab(targetTabId) {
+  const navButtons = document.querySelectorAll(".nav-btn");
+  const tabViews = document.querySelectorAll(".tab-view");
 
-const navButtons = document.querySelectorAll(".nav-btn");
-const tabViews = document.querySelectorAll(".tab-view");
-
-navButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const targetTabId = btn.dataset.tab;
-
-    navButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    tabViews.forEach(view => {
-      view.classList.remove("active");
-      if (view.id === targetTabId) {
-        view.classList.add("active");
-      }
-    });
-
-    if (targetTabId === "view-home") {
-      setTimeout(() => {
-        updateHomeDashboard();
-        if (typeof renderMoodScatterplot === "function") {
-          renderMoodScatterplot();
-        }
-      }, 50);
+  // 1. Update Active Bottom Nav Button (sync bottom bar)
+  navButtons.forEach((b) => {
+    if (b.dataset.tab === targetTabId) {
+      b.classList.add("active");
+    } else {
+      b.classList.remove("active");
     }
-
-    if (targetTabId === "view-meds") { 
-    updateMoodSubtitle();
-    }  
   });
+
+  // 2. Switch Active View
+  tabViews.forEach((view) => {
+    if (view.id === targetTabId) {
+      view.classList.add("active");
+    } else {
+      view.classList.remove("active");
+    }
+  });
+
+  // 3. Update Body/Theme Gradient if you have dynamic themes
+  const activeTabBtn = document.querySelector(`.nav-btn[data-tab="${targetTabId}"]`);
+  const theme = activeTabBtn?.dataset.theme || targetTabId.replace("view-", "");
+  document.body.setAttribute("data-theme", theme);
+
+  // 4. Hook triggers when switching tabs
+  if (targetTabId === "view-home") {
+    setTimeout(() => {
+      if (typeof updateHomeDashboard === "function") updateHomeDashboard();
+    }, 50);
+  } else if (targetTabId === "view-meds") {
+    if (typeof renderMedicationCalendar === "function") renderMedicationCalendar();
+  }
+
+  // Scroll to top of new view
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+// --- GLOBAL CLICK LISTENER FOR ANY DATA-TAB ELEMENT ---
+// This listens to bottom nav buttons AND your new home dashboard cards!
+document.addEventListener("click", (e) => {
+  const trigger = e.target.closest("[data-tab]");
+  if (!trigger) return;
+
+  // If clicked element or its container has data-tab, switch to that view!
+  const targetTabId = trigger.dataset.tab;
+  if (targetTabId) {
+    navigateToTab(targetTabId);
+  }
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
   renderMedications(); // Fixed: changed render() to renderMedications()

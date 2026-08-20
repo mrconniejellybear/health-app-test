@@ -127,6 +127,10 @@
 .day-pill.active .day-name {
   color: #fff;
   font-weight: 700;
+}.day-pill.active .pill-box{
+  background-color: white;
+}.day-pill.active .day-num{
+  color:black ;
 }
 
 

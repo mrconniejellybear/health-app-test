@@ -392,7 +392,7 @@ body {
   justify-content: space-around;
   align-items: baseline;
   max-width: 93vw;
-  padding-top: 6px;
+  padding-top: 10px;
   border-radius: 999px;
   margin: 0 auto;
   z-index: 1000;
@@ -418,18 +418,21 @@ body {
   background: none;
   border: none;
   outline: none;
-  height: 50px;
-  width: 50px;
-  border-radius: 99px;
+
   cursor: pointer;
   display: flex;
   flex-direction: column;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 400;
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
   color: var(--text-2);
+}
+
+.nav-btn svg{
+  height: 32px;
+  width: auto;
 }
 /* Active State Styling */
 .nav-btn.active {
@@ -441,6 +444,29 @@ body {
 .nav-btn.active .nav-icon {
   filter: grayscale(0%);
 }
+
+/* Default state (Inactive) */
+.nav-btn .icon-filled,
+.card .icon-filled {
+  display: none;
+}
+
+.nav-btn .icon-outline,
+.card .icon-outline {
+  display: block;
+}
+
+/* Active state */
+.nav-btn.active .icon-outline,
+.card.active .icon-outline {
+  display: none;
+}
+
+.nav-btn.active .icon-filled,
+.card.active .icon-filled {
+  display: block;
+}
+
 
 
 .settings-card{

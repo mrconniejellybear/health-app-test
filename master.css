@@ -352,8 +352,8 @@ body {
   background: transparent;
   border: none;
   color: var(--link-blue);
-  font-size: 13px;
-  font-weight: 280;
+  font-size: 14px;
+  font-weight: 300;
   cursor: pointer;
   margin-top: 2px;
   text-align: left;

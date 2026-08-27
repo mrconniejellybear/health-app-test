@@ -49,9 +49,9 @@
     <span id="user-display-name" onclick="promptChangeName()" title="Tap to change name">Tap to Add Name</span>
   </h2>
 
-    <button class="nav-btn" data-tab="view-settings" aria-label="Settings">
-    <span class="nav-icon">
-<svg width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg" fill="#8d939c">
+    <button class="settings-trigger-btn" data-open-drawer="view-settings" aria-label="Open Settings">
+
+<svg class="row-btn" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg" fill="#8d939c">
  <path d="m888 324h-576c-19.801 0-36 16.199-36 36s16.199 36 36 36h576c19.801 0 36-16.199 36-36s-16.199-36-36-36z"/>
  <path d="m888 804h-288c-19.801 0-36 16.199-36 36s16.199 36 36 36h288c19.801 0 36-16.199 36-36s-16.199-36-36-36z"/>
  <path d="m888 564h-576c-19.801 0-36 16.199-36 36s16.199 36 36 36h576c19.801 0 36-16.199 36-36s-16.199-36-36-36z"/>
@@ -1276,9 +1276,14 @@ Note to self: MOVE THIS SHIT SOMEWHERE ELSE!!!!!!!
 
 
 
-<section id="view-settings" class="tab-view">
-  <h1 class="title tab2">App Settings</h1>
+<section id="view-settings" class="settings-drawer">
+  <div class="drawer-nav">
+    <button class="drawer-back-btn" data-close-drawer>‹ Back</button>
 
+  <h1 class="title tab2">App Settings</h1>
+  </div>
+
+    <div class="drawer-content">
 
   <!-- Appearance / Horizontal Swiper -->
   <div class="settings-group-label">Appearance</div>
@@ -1372,7 +1377,6 @@ Note to self: MOVE THIS SHIT SOMEWHERE ELSE!!!!!!!
     </button>
   
   </div>
-
 
 
   <!-- Display & Visibility Controls -->
@@ -1485,8 +1489,6 @@ Note to self: MOVE THIS SHIT SOMEWHERE ELSE!!!!!!!
   </div>
 
 
-
-
   <!-- About & Support -->
   <div class="settings-group-label">If you aren't sick of us yet...</div>
   <div class="settings-group">
@@ -1550,6 +1552,9 @@ Note to self: MOVE THIS SHIT SOMEWHERE ELSE!!!!!!!
     </a>
 
   </div>
+
+
+</div>
 </section>
 
 <!-- ========================================== -->

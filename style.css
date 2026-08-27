@@ -953,7 +953,7 @@
 }
 
 /* Top Settings Row */
-.settings-row{
+.display-row{
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -1,35 +1,217 @@
-
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Google Sans";
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-body {
-  background-color: var(--bg-color);
+.settings-card{
+  background-color: var(--card-bg);
+  padding: 12px;
+  border-radius: 16px;
   display: flex;
-  justify-content: center;
+  font-weight: 320;
+  font-size: 15px;
+  color: var(--text-2);
+  text-decoration: none;
+  justify-content: space-between;
+  transition: all 0.1s;
+}
+.settings-card:hover{
+  color: var(--link-blue);
+}
+.settings-inner{
   align-items: center;
-  flex-direction: column;
-  gap: 14px;
-  padding: 16px;
-
-  background-repeat: no-repeat;
-  background-position: top center;
-  /* Restrict background width to match phone dimensions */
+  display: flex;
+  gap: 6px;
+  letter-spacing: 0.1px;
+  text-decoration: none;
+  
 }
 
 
-.drug-pref{
+
+/* --- SETTINGS PAGE STYLES --- */
+#view-settings {
+  padding-bottom: 90px;
+}
+
+
+
+.settings-group-label {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-3);
+  margin-left: 4px;
+}
+
+.settings-group {
   background: var(--card-bg);
+  border-radius: 16px;
+  
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.settings-row, .settings-row-btn, .settings-check-row, .settings-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
   width: 100%;
-  max-width: 440px;
+  background: transparent;
+  color: var(--text-2);
+  font-weight: 320;
+  font-size: 15px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.settings-group > *:last-child {
+  border-bottom: none;
+}
+
+.settings-row-btn {
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid #f1f2f4;
+}
+
+.row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.settings-icon{
+    background-color: #efeff0;
+    padding: 1px;
+    border-radius: 4px;
+    height: 24px;
+    width: 24px;
+}
+
+.chevron {
+  font-size: 1.2rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Horizontal Theme Swiper */
+.settings-theme-carousel {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.theme-card {
+  flex: 0 0 110px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.theme-preview {
+  width: 100%;
+  height: 64px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.theme-card.active .theme-preview {
+  border-color: #38bdf8;
+  transform: scale(1.04);
+}
+
+.light-prev { background: linear-gradient(135deg, #f8fafc 50%, #ffffff 50%); border: 1px solid #cbd5e1; }
+.dark-prev { background: linear-gradient(135deg, #0f172a 50%, #1e293b 50%); }
+.dagobah-prev { background: linear-gradient(135deg, #0d160e 50%, #52b788 50%); }
+
+/* iOS Toggle Switches */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #cbd5e1;
   border-radius: 24px;
-  border: 1px solid var(--border-color);
-  padding: 14px 12px;
-  box-shadow: 0px 1px 5px #0000000e;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+input:checked + .slider { background-color: #34d399; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* Slide-In Sub-Drawers (/// Views) */
+.settings-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-main, #f8fafc);
+  z-index: 100;
+  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-drawer.open {
+  right: 0;
+}
+
+.drawer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+}
+
+.drawer-back-btn, .drawer-save-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #38bdf8;
+  cursor: pointer;
+}
+
+.drawer-content {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.drawer-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted, #94a3b8);
+  margin-bottom: 12px;
+}
+
+.settings-input-row input, .settings-input-row select {
+  border: none;
+  background: transparent;
+  text-align: right;
+  color: var(--text-main, #0f172a);
+  font-size: 0.9rem;
 }

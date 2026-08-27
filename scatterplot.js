@@ -54,7 +54,7 @@ function renderMoodScatterplot() {
 
   // 1. Build the rolling 7 dates (Past 6 days + Today)
   const rollingDays = [];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   
   for (let i = 6; i >= 0; i--) {
     const d = new Date();

@@ -225,6 +225,7 @@ gap: 8px;
   background:none;
   font-size: 14px;
   border: none;
+  margin-top: 6px;
   color: var(--link-blue);
 }
 .med-edit-btn:hover{

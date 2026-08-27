@@ -957,10 +957,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: end;
+  margin-bottom: -6px;
+
 }
 .settings-btns{
   display: flex;
-  gap: 10px;
   align-items: center;
 }
 
@@ -971,13 +972,16 @@
   width: 38px;
   border: 1px solid var(--border-color);
   border-radius: 99px;
-  box-shadow: 0px 3px 5px #00000003;
+  box-shadow: 0px 3px 5px #00000000;
   padding-top: 3px;
-  margin-bottom: -6px;
 }
 .row-btn svg{
   height: 30px;
   width: auto;
+}
+.row-btns{
+  display: flex;
+  gap: 6px;
 }
 
 .alarm svg{
@@ -1321,7 +1325,7 @@ body {
 }
 
 .scatter-y-labels {
-  display: flex;
+  display: none;
   flex-direction: column-reverse;
   justify-content: space-between;
   padding-bottom: 26px; /* aligns with bottom grid border */
@@ -1357,7 +1361,8 @@ body {
   position: relative;
   height: 340px; /* 14 moods * 28px */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient( #1d0b35de 0%, #12141e 100%);
+  background: linear-gradient( #ffca1a09 0%, #1228a609 100%);
+  background-color: #f5f7f83f;
   border-radius: 10px;
 
 }
@@ -1367,7 +1372,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: #8c8896;
+  background: #81878b42;
 }
 
 .scatter-grid-col {
@@ -1375,20 +1380,20 @@ body {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: #4441527b;
+  background: #92969d0e;
 }
 
 .scatter-x-labels {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  padding-top: 8px;
+  padding-top: 12px;
   text-align: center;
 }
 
 .scatter-x-item {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-2);
-  font-weight: 500;
+  font-weight: 340;
 }
 
 .scatter-x-item.today {
@@ -1472,28 +1477,30 @@ body {
   display: flex;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 3px;
+  padding: 2px;
   border-radius: 12px;
   gap: 2px;
+  gap: 10px;
 }
 
 .mood-toggle-btn {
-  background: transparent;
+  background: #f3f5f58d;
   border: none;
-  color: #94a3b8;
-  padding: 6px 10px;
+  color: var(--text-2);
+  padding: 4px 6px;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+}.mood-toggle-btn svg{
+  height: 34px;
+  width: auto;
 }
 
 .mood-toggle-btn.active {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: var(--blue-accent);
 }
 
 /* Display Pane Visibility */
@@ -1521,7 +1528,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.15);
+  background: #ffffff26;
 }
 
 .axis-y {

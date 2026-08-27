@@ -12,6 +12,7 @@
   font-size: 14px;
   font-weight: 280;
   margin-bottom: 12px;
+  display: none;
 }
 .cycle-builder-intro p{
   font-size: 13px;

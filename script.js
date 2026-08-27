@@ -91,7 +91,7 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
 
 
 // --- MULTI-THEME TOGGLE CONTROLLER ---
-const THEME_CLASSES = ["light", "dark", "dagobah", "midnight", "breakfast"];
+const THEME_CLASSES = ["light", "dark", "dagobah", "midnight", "accessibility"];
 
 function applyTheme(themeClass) {
   // 1. Strip any existing theme classes so they don't conflict
@@ -881,6 +881,8 @@ if (symptomForm) {
 }
 
 
+
+
 // --- DYNAMIC CUSTOM SYMPTOMS LOGIC ---
 
 const customSymptomsList = document.getElementById("custom-symptoms-list");
@@ -1143,6 +1145,11 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  initThemeToggle();
+  initSettings();
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
   renderMedications(); // Fixed: changed render() to renderMedications()
@@ -1183,6 +1190,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restoreCardOrder("view-home");
   initCardReordering("#view-home");
+
+  
   
 
   const customizeCycleBtn = document.getElementById("customize-cycle-btn");

@@ -22,7 +22,13 @@
   
 }
 
-
+.action-btn{
+border: none;
+padding: 8px 14px;
+border-radius: 8px;
+font-size: 15px;
+color: var(--text-2);
+}
 
 /* --- SETTINGS PAGE STYLES --- */
 #view-settings {
@@ -85,7 +91,13 @@
 }
 .settings-icon-cycle{
     background-color: #f7b5db;
-    color: #86457d;
+    color: #913e86;
+    border-radius: 11px;
+    height: 30px;
+    width: 30px;
+}.settings-icon-rest{
+    background-color: #dccde9;
+    color: #7c43ae;
     border-radius: 11px;
     height: 30px;
     width: 30px;
@@ -221,8 +233,8 @@ input:checked + .slider:before { transform: translateX(20px); }
 .drawer-back-btn, .drawer-save-btn {
   background: transparent;
   border: none;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 400;
   color: #38bdf8;
   cursor: pointer;
 }
@@ -233,8 +245,9 @@ input:checked + .slider:before { transform: translateX(20px); }
 }
 
 .drawer-hint {
-  font-size: 0.78rem;
-  color: var(--text-muted, #94a3b8);
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 320;
   margin-bottom: 12px;
 }
 
@@ -242,6 +255,6 @@ input:checked + .slider:before { transform: translateX(20px); }
   border: none;
   background: transparent;
   text-align: right;
-  color: var(--text-main, #0f172a);
-  font-size: 0.9rem;
+  color: var(--text-2);
+  font-size: 15px;
 }

@@ -1,10 +1,10 @@
 :root {
-  --bg-color: #f3f5fa;
+  --bg-color: #f1f3f7;
   --card-bg: #fff;
   --contrast-bg: #eeeeee;
 
   --text-main: #252627;
-  --text-2: #60646b;
+  --text-2: #5b5f65;
   --text-3: #8d939c;
 
   --text-muted: #b2bbc7;
@@ -38,7 +38,7 @@ body.dark {
   --text-2: #94a3b8;
   --text-3: #5e6472;
 
-  --contrast-bg: #17191f;
+  --contrast-bg: #313950;
 }
 body.dagobah {
   --bg-color: #f1f6ee;
@@ -62,15 +62,28 @@ body.midnight {
   --contrast-bg: #f2efdf00;
 }
 body.accessibility {
-  --bg-color: #f4f4f4;
+  --bg-color: #eae8e8;
   --card-bg: #ffffff;
   --shadows: #1a1a1a2f;
-  --card-border: #3f3f3f;
+  --card-border: #898989;
   --text-main: #000000;
   --text-2: #151515;
   --text-3: #232323;
 
   --contrast-bg: #c3c3c300;
+  .card{
+    border-radius: 6px;
+  }
+  .article-tease{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .article-title{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+  }
 }
 
 

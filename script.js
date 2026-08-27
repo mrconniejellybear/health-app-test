@@ -172,7 +172,7 @@ function updateDashboardGreeting() {
   }
 
   if (userNameEl) {
-    const savedName = localStorage.getItem("user_profile_name") || "Friend";
+    const savedName = localStorage.getItem("user_profile_name") || "Tap to Add Name";
     userNameEl.textContent = savedName;
   }
 }

@@ -84,12 +84,11 @@ body {
 }
 
 .account-icon{
-  margin-top: 2px;
-  color: var(--text-3);
+  color: var(--bg-color);
 }
 .account-icon svg{
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
 }
 
 
@@ -103,20 +102,24 @@ body {
   padding: 12px;
   box-shadow: 0px 2px 4px #00000004;
 }
+.article-icon{
+  height: 80px;
+  width: 80px;
+}
 
 .card.wellbeing{
-  background-color:#04c75c;
+  background-color:#c6e7d1;
 }.article-header.wellbeing{
-  color: #fff;
+  color: #116632;
 }.article-icon.wellbeing{
-  color: #00aa14;
+  color: #116632;
 }
 
 
 .card.cycle{
-  background-color:#ff81ee;
+  background-color:#ffa2d86a;
 }.article-header.cycle{
-  color: #fff;
+  color: #ff00a2;
 }.article-icon.cycle{
   color: #ff00a2;
 }
@@ -124,13 +127,14 @@ body {
 
 
 .card.perscription{
-  background-color:#ff9100;
+  background-color:#ff6f0052;
 }
 .article-header.perscription{
-  color: #fff;
+  color: #883d00;
 }
 .article-icon.perscription{
-  color: #ff7300;
+  color: #883d00;
+  padding: 6px;
 }
 
 .card-header {
@@ -198,13 +202,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.article-icon{
-  background-color: #fff;
-  height: 56px;
-  width: 56px;
-  border-radius: 999px;
-  padding: 8px;
-}
+
 
 .article-title{
   display: flex;
@@ -212,8 +210,8 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
-  margin-bottom: 1px;
-  font-weight: 500;
+  margin-bottom: 4px;
+  font-weight: 600;
 
 }
 .article-tease{
@@ -222,7 +220,7 @@ body {
   font-weight: 300;
 }
 .article-text-wrap{
-  max-width: calc((100%) - (68px));
+  max-width: calc((100%) - (100px));
 }
 
 
@@ -381,18 +379,18 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  height: 67px;
+  height: 64px;
 
   border: none;
-  background-color: #171617;
+  background-color: #212430;
   box-shadow: 0px 10px 40px #00000041;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
   display: flex;
   justify-content: space-around;
   align-items: baseline;
   max-width: 93vw;
-  padding-top: 12px;
+  padding-top: 8px;
   border-radius: 999px;
   margin: 0 auto;
   z-index: 1000;
@@ -426,17 +424,17 @@ body {
   justify-content: center;
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  color: #eff3f5a7;
+  color: #eff3f56d;
 }
 
 .nav-btn svg{
-  height: 44px;
+  height: 48px;
   width: auto;
 }
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
-  color: var(--blue-accent);
+  color: #fff;
   transition: all 0.3s;
 }
 

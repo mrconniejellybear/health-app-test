@@ -90,37 +90,49 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
 
 
 
-// --- THEME TOGGLE CONTROLLER ---
+// --- MULTI-THEME TOGGLE CONTROLLER ---
+const THEME_CLASSES = ["light", "dark", "dagobah", "midnight", "breakfast"];
+
+function applyTheme(themeClass) {
+  // 1. Strip any existing theme classes so they don't conflict
+  document.body.classList.remove(...THEME_CLASSES);
+
+  // 2. Add the selected theme class and save to localStorage
+  document.body.classList.add(themeClass);
+  localStorage.setItem("healthApp_theme", themeClass);
+}
+
 function initThemeToggle() {
   const themeBtn = document.getElementById("theme-tog");
   const savedTheme = localStorage.getItem("healthApp_theme") || "light";
 
-  // Apply saved theme on initial load
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-theme");
-  } else {
-    document.body.classList.remove("dark-theme");
-  }
+  // Apply saved theme on initial page load
+  applyTheme(savedTheme);
 
+  // Hook up your #theme-tog button
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("dark-theme");
-      const isDark = document.body.classList.contains("dark-theme");
+      // Find whichever theme class is currently active on <body>
+      const currentTheme = THEME_CLASSES.find((c) => document.body.classList.contains(c)) || "light";
+      const currentIndex = THEME_CLASSES.indexOf(currentTheme);
 
-      // Save preference so it persists across refreshes/tabs
-      localStorage.setItem("healthApp_theme", isDark ? "dark" : "light");
+      // Cycle to the next theme in the array (loops back to index 0)
+      const nextIndex = (currentIndex + 1) % THEME_CLASSES.length;
+      const nextTheme = THEME_CLASSES[nextIndex];
 
-      // Optional: Audio feedback
+      applyTheme(nextTheme);
+
+      // Audio feedback
       if (typeof playClickSound === "function") playClickSound();
     });
   }
 }
 
-// Add initThemeToggle() inside your DOMContentLoaded listener:
+// Attach to DOM load
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
-  // ... your other init functions
 });
+
 
 
 

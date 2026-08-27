@@ -26,7 +26,7 @@
 
 /* --- SETTINGS PAGE STYLES --- */
 #view-settings {
-  padding-bottom: 90px;
+  padding-bottom: 70px;
 }
 
 
@@ -36,7 +36,7 @@
   font-weight: 340;
   color: var(--text-3);
   margin-left: 4px;
-  margin-bottom: -6px;
+  margin-bottom: -8px;
 }
 
 .settings-group {
@@ -69,7 +69,7 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  border-bottom: 1px solid #f1f2f4;
+  border-bottom: 1px solid var(--bg-color);
 }
 
 .row-left {
@@ -79,7 +79,7 @@
 }
 .settings-icon{
     background-color: #ebebeb;
-    border-radius: 8px;
+    border-radius: 10px;
     height: 30px;
     width: 30px;
 }

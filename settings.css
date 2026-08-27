@@ -101,6 +101,12 @@
     border-radius: 11px;
     height: 30px;
     width: 30px;
+}.settings-icon-mind{
+    background-color: #cde9d7;
+    color: #198159;
+    border-radius: 11px;
+    height: 30px;
+    width: 30px;
 }
 
 .chevron {

@@ -274,10 +274,8 @@ body {
   width: auto;
   color: var(--text-main);
 }
-.tab1 svg{
-  background-color: #ebafc5cb;
-  color: #ca0a54
-}
+
+
 .tab2 {
   margin-left: 4px;
   font-size: 26px;
@@ -286,22 +284,6 @@ body {
 }
 
 
-.tab3 svg{
-  background-color: #ebc4fddc;
-  color: #8a4cbd
-}
-
-.tab4 svg{
-  background-color: #fff;
-  color: #0299ea;
-  height: 40px;
-  width: auto;
-  padding: 6px;
-}
-.tab5 svg{
-  background-color: #fed2fccb;
-  color: #f440d6
-}
 
 
 .mini-pill-header{

@@ -79,7 +79,26 @@
 }
 .settings-icon{
     background-color: #ebebeb;
-    border-radius: 10px;
+    border-radius: 11px;
+    height: 30px;
+    width: 30px;
+}
+.settings-icon-cycle{
+    background-color: #f7b5db;
+    color: #86457d;
+    border-radius: 11px;
+    height: 30px;
+    width: 30px;
+}.settings-icon-cals{
+    background-color: #b5d9f7;
+    color: #3c669f;
+    border-radius: 11px;
+    height: 30px;
+    width: 30px;
+}.settings-icon-meds{
+    background-color: #f7ceb5;
+    color: #a16134;
+    border-radius: 11px;
     height: 30px;
     width: 30px;
 }

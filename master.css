@@ -217,8 +217,9 @@ body {
 }
 .article-tease{
   color: #222;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 320;
 }
 .article-text-wrap{
   max-width: calc((100%) - (100px));
@@ -249,7 +250,7 @@ body {
   margin-left: 4px;
   font-size: 26px;
   font-weight: 500;
-  margin-bottom:1px;
+  margin-bottom:2px;
 }
 
 

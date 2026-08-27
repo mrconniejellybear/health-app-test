@@ -1372,7 +1372,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: #81878b42;
+  background: #b3b9bc2a;
 }
 
 .scatter-grid-col {
@@ -1380,7 +1380,7 @@ body {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: #92969d0e;
+  background: #cacfd40e;
 }
 
 .scatter-x-labels {

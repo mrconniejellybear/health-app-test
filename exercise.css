@@ -147,11 +147,11 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 380px;
+  height: 350px;
   overflow: hidden;
   touch-action: none;
   user-select: none;
-  margin-top: -90px;
+  margin-top: -20px;
 }
 
 /* Mental Health Tab View Container - Ensure positioning boundary */
@@ -270,9 +270,9 @@ position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 190px;
+  height: 100px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, var(--bg-color)
- 45%);
+ 60%);
   pointer-events: none;
   z-index: 5; /* Above wheel (z:2), below text (z:10) */
 }

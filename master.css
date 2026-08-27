@@ -112,11 +112,14 @@ body {
 }
 
 .account-icon{
-  color: var(--bg-color);
+  color: #000;
+  display: flex;
+  align-items: center;
+  background-color: var(--card-bg);
 }
 .account-icon svg{
-  height: 30px;
-  width: 30px;
+  height: 24px;
+  width: 24px;
 }
 
 

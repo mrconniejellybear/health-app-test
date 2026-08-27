@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 14px;
+  padding: 10px 14px;
   width: 100%;
   background: var(--card-bg);
   color: var(--text-2);
@@ -80,8 +80,8 @@
 .settings-icon{
     background-color: #ebebeb;
     border-radius: 8px;
-    height: 26px;
-    width: 26px;
+    height: 30px;
+    width: 30px;
 }
 
 .chevron {

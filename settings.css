@@ -33,9 +33,10 @@
 
 .settings-group-label {
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 340;
   color: var(--text-3);
   margin-left: 4px;
+  margin-bottom: -6px;
 }
 
 .settings-group {
@@ -52,7 +53,7 @@
   justify-content: space-between;
   padding: 12px 14px;
   width: 100%;
-  background: transparent;
+  background: var(--card-bg);
   color: var(--text-2);
   font-weight: 320;
   font-size: 15px;
@@ -77,16 +78,20 @@
   gap: 12px;
 }
 .settings-icon{
-    background-color: #efeff0;
-    padding: 1px;
-    border-radius: 4px;
-    height: 24px;
-    width: 24px;
+    background-color: #ebebeb;
+    border-radius: 8px;
+    height: 26px;
+    width: 26px;
 }
 
 .chevron {
   font-size: 1.2rem;
   color: var(--text-muted, #94a3b8);
+}
+.ext-link{
+  height: 30px;
+  width: 30px;
+  color: var(--text-muted);
 }
 
 /* Horizontal Theme Swiper */

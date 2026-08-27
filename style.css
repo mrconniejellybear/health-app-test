@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: 14px
 }
 
 #dashboard-greeting-prefix{
@@ -968,20 +969,20 @@
 .row-btn{
   background-color: var(--card-bg);
   color: var(--text-2);
-  height: 38px;
-  width: 38px;
+  height: 36px;
+  width: 36px;
   border: 1px solid var(--border-color);
   border-radius: 99px;
   box-shadow: 0px 3px 5px #00000000;
   padding-top: 3px;
 }
 .row-btn svg{
-  height: 30px;
+  height: 28px;
   width: auto;
 }
 .row-btns{
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 .alarm svg{
@@ -1237,8 +1238,9 @@ body {
   touch-action: none;
   outline: 3px dashed #0084ff !important;
   outline-offset: -3px;
-  transition: all 0.1s;
+  transition: all 0.05s;
 }
+
 
 .card.is-draggable:active {
   cursor: grabbing;
@@ -1265,8 +1267,7 @@ body {
 
 /* Button active state */
 .reorder-btn.active {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #ffffff;
+  background: var(--blue-link);
 }
 
 

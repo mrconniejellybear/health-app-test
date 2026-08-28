@@ -73,7 +73,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 3px;
-  height: 36px;
+  height: 40px;
   width: 100%;
 }
 
@@ -81,14 +81,14 @@
   flex: 1;
   height: 100%;
   max-width: 6px;
-  background: var(--text-muted);
+  background: var(--contrast-bg);
   border-radius: 2px;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 /* Completed day styling */
 .pill-tick.logged {
-  background: #0884ff;
+  background: var(--link-blue);
 }
 
 /* Faded placeholder for days not yet reached */
@@ -144,7 +144,7 @@
   height: 60px;
 }
 .calendar-month-track .day-pill.active {
-  background: var(--text-muted);
+  background: var(--contrast-bg);
   border-radius: 14px;
 }
 

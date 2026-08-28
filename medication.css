@@ -32,7 +32,11 @@
   width: 28px;
   height: auto;
 }
-
+.item-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 /* --- Medication List Item Styles --- */
 /* Card Container */

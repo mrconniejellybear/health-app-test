@@ -52,6 +52,8 @@ body.dagobah {
 
   --contrast-bg: #f0f0ef;
   --blue-accent: #293a23;
+
+  --link-blue: #01aa47;
 }
 body.midnight {
   --bg-color: #161419;
@@ -64,31 +66,7 @@ body.midnight {
 
   --contrast-bg: #b5a6bf27;
 }
-body.accessibility {
-  --bg-color: #eae8e8;
-  --card-bg: #ffffff;
-  --shadows: #1a1a1a2f;
-  --card-border: #898989;
-  --text-main: #000000;
-  --text-2: #151515;
-  --text-3: #232323;
 
-  --contrast-bg: #c3c3c300;
-  .card{
-    border-radius: 6px;
-    padding: 18px;
-  }
-  .article-tease{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 26px;
-  }
-  .article-title{
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 26px;
-  }
-}
 
 
 .contraceptive-qs{
@@ -377,9 +355,9 @@ body {
 
 
 .status-counter {
-  font-size: 14px;
-  font-weight: 280;
-  color: var(--text-3);
+  font-size: 15px;
+  font-weight: 340;
+  color: var(--text-2);
 }
 
 
@@ -395,19 +373,19 @@ body {
 }
 
 .add-btn-mini{
-  background-color: var(--blue-accent);
-  color: #fff;
+  background-color: var(--contrast-bg);
+  color: var(--text-2);
   font-weight: 640;
   border: none;
-  border-radius: 99px;
-  padding: 6px;
+  border-radius: 11px;
+  padding: 0px;
 
   display: flex;
   align-items: center;
   gap: 6px;
 }
 .add-btn-mini svg{
-  width: 19px;
+  width: 30px;
   height: auto;
 }
 

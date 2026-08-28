@@ -14,8 +14,8 @@
 }
 .dashboard-header h2 span{
     font-weight: 700;
-    font-size: 32px;
-      margin-top: -4px;
+    font-size: 36px;
+      margin-top: -2px;
     color: var(--text-main);
 }
 

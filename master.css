@@ -44,6 +44,29 @@ body.dark {
   .bottom-nav{
     background-color: var(--card-bg);
   }
+
+
+
+  .article-tease{
+  color: #ededed;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 320;
+  }
+
+
+  .card.wellbeing{
+  background-color:#255737;
+ }.article-header.wellbeing, .article-icon.wellbeing{
+  color: #daf3e4;
+  }
+
+  .card.cycle{
+  background-color:#412134;
+ }.article-header.cycle, .article-icon.cycle{
+  color: #eed9e7;
+}
+
 }
 body.dagobah {
   --bg-color: #f1f6ee;
@@ -139,9 +162,7 @@ body {
 
 .card.cycle{
   background-color:#fad4eb;
-}.article-header.cycle{
-  color: #ff00a2;
-}.article-icon.cycle{
+}.article-header.cycle, .article-icon.cycle{
   color: #ff00a2;
 }
 

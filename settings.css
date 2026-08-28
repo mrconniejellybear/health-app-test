@@ -33,7 +33,7 @@ background-color: var(--contrast-bg);
 
 /* --- SETTINGS PAGE STYLES --- */
 #view-settings {
-  padding-bottom: 70px;
+  padding-bottom: 120px;
 }
 
 
@@ -52,7 +52,6 @@ background-color: var(--contrast-bg);
   border-radius: 16px;
   
   overflow: hidden;
-  margin-bottom: 14px;
 }
 
 .settings-row, .settings-row-btn, .settings-check-row, .settings-input-row {
@@ -195,19 +194,24 @@ input:checked + .slider:before { transform: translateX(20px); }
   align-items: baseline;
   padding: 16px;
   color: var(--text-2);
-  font-size: 15px;
-  font-weight: 320;
+  margin-right: 6px;
+
   border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+}.drawer-nav h3{
+  font-weight: 420;
+  font-size: 15px;
 }
+
 
 .drawer-back-btn {
   background: transparent;
   border: none;
   font-size: 15px;
   font-weight: 400;
-  color: #38bdf8;
+  color: var(--link-blue);
   cursor: pointer;
 }
+
 .drawer-save-btn{
     border: none;
     color: var(--text-main);
@@ -218,6 +222,10 @@ input:checked + .slider:before { transform: translateX(20px); }
     margin: 0 auto;
     width: 92vw;
     font-weight: 360;
+    transition: 0.1s;
+}
+.drawer-save-btn:hover{
+    background-color: #cdd1d7;
 }
 
 .drawer-content {

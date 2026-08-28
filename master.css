@@ -406,11 +406,11 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  height: 64px;
+  height: 60px;
 
   border: none;
   background-color: var(--card-bg);
-  box-shadow: 1px 5px 10px rgba(15, 16, 19, 0.06);
+  box-shadow: 1px 4px 10px rgba(28, 34, 45, 0.1);
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -431,7 +431,7 @@ body {
   background: none;
   border: none;
   outline: none;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 1px;
 
   cursor: pointer;
@@ -442,11 +442,11 @@ body {
   align-items: center;
   transition: opacity 0.2s ease, transform 0.2s ease;
   color: var(--text-2);
-  background-color: var(--contrast-bg);
+  background-color: #eeeeeedf;
 }
 
 .nav-btn svg{
-  height: 42px;
+  height: 41px;
   width: auto;
 }
 /* Active State Styling */
@@ -457,9 +457,7 @@ body {
   transition: all 0.4s;
 }
 
-.nav-btn.active .nav-icon {
-  filter: grayscale(0%);
-}
+
 
 /* Default state (Inactive) */
 .nav-btn .icon-filled,

@@ -98,17 +98,6 @@ body {
 
 
 
-.credit{
-  color: var(--text-main);
-  position: absolute;
-  top: 14px;
-  font-size: 13px;
-  display: none;
-}
-.credit a{
-  text-decoration: none;
-  color: #9755e3;
-}
 
 .account-icon{
   color: #000;
@@ -127,9 +116,9 @@ body {
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
-  border-radius: 22px;
+  border-radius: 20px;
   border: 3px solid var(--card-border);
-  padding: 12px;
+  padding: 12px 10px;
   box-shadow: 0px 0px 20px var(--shadows);
 }
 .article-icon{
@@ -279,7 +268,6 @@ body {
   margin-left: 4px;
   font-size: 26px;
   font-weight: 500;
-  margin-bottom:2px;
 }
 
 
@@ -356,7 +344,7 @@ body {
 
 .status-counter {
   font-size: 15px;
-  font-weight: 340;
+  font-weight: 360;
   color: var(--text-2);
 }
 
@@ -385,7 +373,7 @@ body {
   gap: 6px;
 }
 .add-btn-mini svg{
-  width: 30px;
+  width: 32px;
   height: auto;
 }
 

@@ -180,7 +180,7 @@ function updateDashboardGreeting() {
 // 3. Prompt user to change their name when tapped
 function promptChangeName() {
   const currentName = localStorage.getItem("user_profile_name") || "";
-  const newName = prompt("What should we call you?", currentName);
+  const newName = prompt("Put anything you like! Doesn't have to be your real name.", currentName);
 
   if (newName !== null && newName.trim() !== "") {
     const cleanName = newName.trim();

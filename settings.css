@@ -220,7 +220,7 @@ input:checked + .slider:before { transform: translateX(20px); }
     font-size: 15px;
     border-radius: 12px;
     margin: 0 auto;
-    width: 92vw;
+    width: 93vw;
     font-weight: 360;
     transition: 0.1s;
 }

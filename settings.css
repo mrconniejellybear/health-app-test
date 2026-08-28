@@ -67,6 +67,7 @@ background-color: var(--contrast-bg);
   font-size: 15px;
   text-decoration: none;
   box-sizing: border-box;
+  border-bottom: 1px solid var(--bg-color);
 }
 
 .settings-group > *:last-child {
@@ -136,45 +137,6 @@ background-color: var(--contrast-bg);
   color: var(--text-muted);
 }
 
-/* Horizontal Theme Swiper */
-.settings-theme-carousel {
-  display: flex;
-  gap: 12px;
-  padding: 14px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-.theme-card {
-  flex: 0 0 110px;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.theme-preview {
-  width: 100%;
-  height: 64px;
-  border-radius: 12px;
-  border: 2px solid transparent;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.theme-card.active .theme-preview {
-  border-color: #38bdf8;
-  transform: scale(1.04);
-}
-
-.light-prev { background: linear-gradient(135deg, #f8fafc 50%, #ffffff 50%); border: 1px solid #cbd5e1; }
-.dark-prev { background: linear-gradient(135deg, #0f172a 50%, #1e293b 50%); }
-.dagobah-prev { background: linear-gradient(135deg, #0d160e 50%, #52b788 50%); }
-
 /* iOS Toggle Switches */
 .switch {
   position: relative;
@@ -190,7 +152,7 @@ background-color: var(--contrast-bg);
   inset: 0;
   background-color: #cbd5e1;
   border-radius: 24px;
-  transition: 0.3s;
+  transition: 0.2s;
   cursor: pointer;
 }
 
@@ -203,7 +165,7 @@ background-color: var(--contrast-bg);
   bottom: 3px;
   background-color: white;
   border-radius: 50%;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 input:checked + .slider { background-color: #34d399; }
@@ -230,18 +192,32 @@ input:checked + .slider:before { transform: translateX(20px); }
 .drawer-nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   padding: 16px;
+  color: var(--text-2);
+  font-size: 15px;
+  font-weight: 320;
   border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
 }
 
-.drawer-back-btn, .drawer-save-btn {
+.drawer-back-btn {
   background: transparent;
   border: none;
   font-size: 15px;
   font-weight: 400;
   color: #38bdf8;
   cursor: pointer;
+}
+.drawer-save-btn{
+    border: none;
+    color: var(--text-main);
+    background-color: #dfe3e9;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 12px;
+    margin: 0 auto;
+    width: 92vw;
+    font-weight: 360;
 }
 
 .drawer-content {
@@ -263,6 +239,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   color: var(--text-2);
   font-size: 15px;
 }
+
 
 
 

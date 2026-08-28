@@ -138,150 +138,59 @@ document.getElementById("strip-today-btn")?.addEventListener("click", () => {
   selectedActivitiesDate = new Date();
   renderContinuousMonthCalendar(selectedActivitiesDate);
 });
-
-// Trigger initial render on page load
-document.addEventListener("DOMContentLoaded", () => {
-  renderContinuousMonthCalendar(selectedActivitiesDate);
-
-
-
-
-  // --- TASKS STATE & RENDER LOGIC ---
-let tasksList = JSON.parse(localStorage.getItem("goodhealth_tasks")) || [];
-
-// Save to localStorage & render
-function saveAndRenderTasks() {
-  localStorage.setItem("goodhealth_tasks", JSON.stringify(tasksList));
-  renderTasks();
-}
-
-
-
-// Render Task Cards
-function renderTasks() {
-  const container = document.getElementById("task-list-container");
+// --- MONTHLY CHECK-IN MATRIX RENDERER ---
+function renderMonthlyCheckinMatrix(year = 2026, month = 7) { // 7 = August (0-indexed)
+  const container = document.getElementById("monthly-pill-matrix");
+  const statLabel = document.getElementById("checkin-streak-stat");
   if (!container) return;
 
   container.innerHTML = "";
 
-  if (tasksList.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state-card" style="background:#fff; border-radius:16px; padding:24px; text-align:center; color:#94a3b8;">
-        No tasks for today yet. Tap <strong>+ Add Task</strong> above!
-      </div>`;
-    return;
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  const currentDay = today.getDate();
+
+  let completedCount = 0;
+
+  for (let day = 1; day <= totalDays; day++) {
+    const formattedDay = String(day).padStart(2, "0");
+    const formattedMonth = String(month + 1).padStart(2, "0");
+    const dateStr = `${year}-${formattedMonth}-${formattedDay}`;
+
+    // Safe fallbacks to prevent errors if arrays are uninitialized
+    const medList = typeof medications !== "undefined" ? medications : [];
+    const medAdh = typeof medAdherenceLogs !== "undefined" ? medAdherenceLogs : {};
+    const moods = typeof moodLogs !== "undefined" ? moodLogs : [];
+    const symptoms = typeof symptomLogs !== "undefined" ? symptomLogs : [];
+    const weights = typeof weightLogs !== "undefined" ? weightLogs : [];
+
+    // Check if any metric had activity on this date
+    const hasMed = medList.some(m => (m.history || []).includes(dateStr));
+    const hasAdherence = medAdh[dateStr] === "taken";
+    const hasMood = moods.some(m => m.date === dateStr);
+    const hasSymptom = symptoms.some(s => s.date === dateStr);
+    const hasWeight = weights.some(w => w.date === dateStr);
+
+    const isLogged = hasMed || hasAdherence || hasMood || hasSymptom || hasWeight;
+    const isFuture = (year === currentYear && month === currentMonth && day > currentDay) || (year > currentYear) || (year === currentYear && month > currentMonth);
+
+    if (isLogged) completedCount++;
+
+    const tick = document.createElement("div");
+    tick.className = `pill-tick ${isLogged ? "logged" : ""} ${isFuture ? "future" : ""}`;
+    tick.title = dateStr;
+    container.appendChild(tick);
   }
 
-  tasksList.forEach((task, index) => {
-    const card = document.createElement("div");
-    card.className = `task-card ${task.completed ? "completed" : ""}`;
-    card.draggable = true;
-    card.dataset.index = index;
-
-    card.innerHTML = `
-      <span class="drag-handle">⋮⋮</span>
-      <input type="checkbox" class="task-checkbox" ${task.completed ? "checked" : ""} />
-      <div class="task-content">
-        <h4 class="task-title">${task.title}</h4>
-        <div class="task-meta">
-          ${task.time ? `<span>${task.time}</span>` : ""}
-          ${task.desc ? `<span>${task.desc}</span>` : ""}
-        </div>
-      </div>
-      <button class="delete-task-btn" style="background:none; border:none; color:#cbd5e1; cursor:pointer;">&times;</button>
-    `;
-
-    // Toggle Complete
-    const checkbox = card.querySelector(".task-checkbox");
-    checkbox.addEventListener("change", () => {
-      task.completed = checkbox.checked;
-      if (task.completed && typeof playLogSound === "function") playLogSound();
-      saveAndRenderTasks();
-    });
-
-    // Delete Task
-    const deleteBtn = card.querySelector(".delete-task-btn");
-    deleteBtn.addEventListener("click", () => {
-      tasksList.splice(index, 1);
-      saveAndRenderTasks();
-    });
-
-    // Drag and Drop Reordering
-    card.addEventListener("dragstart", (e) => {
-      card.classList.add("dragging");
-      e.dataTransfer.setData("text/plain", index);
-    });
-
-    card.addEventListener("dragend", () => card.classList.remove("dragging"));
-    card.addEventListener("dragover", (e) => e.preventDefault());
-
-    card.addEventListener("drop", (e) => {
-      e.preventDefault();
-      const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"), 10);
-      const targetIndex = index;
-
-      if (draggedIndex !== targetIndex) {
-        const [draggedItem] = tasksList.splice(draggedIndex, 1);
-        tasksList.splice(targetIndex, 0, draggedItem);
-        saveAndRenderTasks();
-      }
-    });
-
-    container.appendChild(card);
-  });
-}
-
-// --- MODAL CONTROLS & SUBMIT ---
-const modal = document.getElementById("task-modal");
-const openBtn = document.getElementById("open-task-modal-btn");
-const closeBtn = document.getElementById("close-task-modal-btn");
-const cancelBtn = document.getElementById("cancel-task-btn");
-const form = document.getElementById("create-task-form");
-
-function toggleModal(show) {
-  if (show) modal?.classList.remove("hidden");
-  else {
-    modal?.classList.add("hidden");
-    form?.reset();
+  if (statLabel) {
+    statLabel.textContent = `${completedCount} / ${totalDays} Days Logged`;
   }
 }
 
-openBtn?.addEventListener("click", () => toggleModal(true));
-closeBtn?.addEventListener("click", () => toggleModal(false));
-cancelBtn?.addEventListener("click", () => toggleModal(false));
-
-form?.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const titleInput = document.getElementById("task-title");
-  const timeInput = document.getElementById("task-time");
-  const categoryInput = document.getElementById("task-category");
-  const descInput = document.getElementById("task-desc");
-
-  const newTask = {
-    id: Date.now(),
-    title: titleInput ? titleInput.value : "",
-    time: timeInput ? timeInput.value : "",
-    category: categoryInput ? categoryInput.value : "General",
-    desc: descInput ? descInput.value : "",
-    completed: false
-  };
-
-  tasksList.push(newTask);
-  if (typeof playLogSound === "function") playLogSound();
-  saveAndRenderTasks();
-  toggleModal(false);
-});
-
-// Initial Render on Page Load
+// Trigger renders when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
-  renderTasks();
+  renderContinuousMonthCalendar(selectedActivitiesDate);
+  renderMonthlyCheckinMatrix(2026, 7); // <-- Invokes the matrix for August 2026!
 });
-
-
-
-
-});
-
-
-

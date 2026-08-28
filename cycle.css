@@ -6,19 +6,7 @@
   color: #b900aa;
 }
 
-.cycle-builder-intro{
-  margin-left: 6px;
-  color: var(--text-2);
-  font-size: 14px;
-  font-weight: 280;
-  margin-bottom: 12px;
-  display: none;
-}
-.cycle-builder-intro p{
-  font-size: 13px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-}
+
 
 
 .color-slider-container {
@@ -80,7 +68,7 @@
 
 /* Educational Info Card */
 .color-edu-card {
-  background:  #92929215;
+  background:  #9292920e;
   border-radius: 18px;
   padding: 14px;
   text-align: left;
@@ -103,13 +91,13 @@
 }
 
 .color-edu-card h4 {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--text-main);
 }
 
 .color-edu-card p {
   margin: 0 0 16px 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-2);
   line-height: 1.4;
   font-weight: 280;

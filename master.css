@@ -7,7 +7,7 @@
   --text-2: #5b5f65;
   --text-3: #8d939c;
 
-  --text-muted: #b2bbc7;
+  --text-muted: #e6ebf3;
   
   --card-border: #eeeeee00;
   --border-color: #d6dfea00;
@@ -37,6 +37,9 @@ body.dark {
   --text-main: #dde3e9;
   --text-2: #94a3b8;
   --text-3: #5e6472;
+
+    --text-muted: #4d4558;
+
 
   --contrast-bg: #313950;
 }

@@ -967,7 +967,7 @@
 }
 
 .row-btn{
-  background-color: #ebebeb;
+  background-color: var(--contrast-bg);
   color: var(--text-2);
   height: 35px;
   width: 35px;

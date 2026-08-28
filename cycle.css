@@ -229,7 +229,6 @@
 .texture-selector-grid {
   margin: 14px 0px;
   display: grid;
-  gap: 10px 0px;
   grid-template-columns: repeat(5, 1fr);
 }
 .texture-tile {
@@ -237,8 +236,8 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  background-color: #f2f5f7;
-  border-radius: 10px;
+  background-color: #f2f5f700;
+  border-radius: 18px;
   width: 60px;
   padding: 8px 0px;
 
@@ -261,15 +260,15 @@
 
 /* Default Empty Tile Box */
 .tile-box {
-  width: 48px;
-  height: 48px;
-  border-radius:8px;
-  background-color: #f249ba;
+  width: 56px;
+  height: 50px;
+  border-radius:16px;
+  background-color: #fbcbe7;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff; /* Default SVG icon color */
+  color: #913e86; /* Default SVG icon color */
   transition: all 0.2s ease;
 }
 .tile-box svg{
@@ -280,10 +279,10 @@
 
 /* Label Below Box */
 .tile-label {
-  margin-top: 0.4rem;
+  margin-top: 6px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-3); /* Default light gray text */
+  font-weight: 400;
+  color: var(--text-2); /* Default light gray text */
   transition: color 0.2s ease;
   text-align: center;
 }
@@ -325,18 +324,21 @@
 /* Custom Symptom Creation Row */
 .add-custom-symptom-group {
   display: flex;
-  gap: 0.5rem;
-  margin: 1rem 0 1.5rem 0;
+  gap: 8px;
+  margin: 1rem 0 0rem 0;
+  
 }
+
+
 
 .custom-symptom-input {
   flex: 1;
-  border: 1px solid #dde1e6;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
   outline: none;
-  background-color: #f8fbfc;
+  background-color: #f1f3f5d4;
   transition: ease-in-out 0.2s;
 }
 

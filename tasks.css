@@ -20,7 +20,7 @@
 
 .strip-title {
   font-size: 14px;
-  font-weight: 360;
+  font-weight: 380;
   margin: 0;
 }
 .month-icon{
@@ -39,8 +39,8 @@
   border: none;
   color:var(--text-2);
   background: none;
-  font-size: 14px;
-  font-weight: 360;
+  font-size: 13px;
+  font-weight: 380;
   cursor: pointer;
 }
 

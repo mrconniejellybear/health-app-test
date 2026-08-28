@@ -926,9 +926,9 @@
 
 
 .subcard-subtitle {
-  font-size:17px;
-  font-weight: 600;
-  color: var(--text-2);
+    color: var(--text-3);
+    font-size: 13px;
+    font-weight: 360;
 }
 
 

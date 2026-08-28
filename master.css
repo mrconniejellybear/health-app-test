@@ -365,7 +365,7 @@ body {
 
 
 .status-counter {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 360;
   margin-top: 1px;
   color: var(--text-2);
@@ -388,7 +388,7 @@ body {
   color: var(--text-2);
   font-weight: 640;
   border: none;
-  border-radius: 11px;
+  border-radius: 13px;
   padding: 0px;
 
   display: flex;

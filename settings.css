@@ -79,6 +79,9 @@ background-color: var(--contrast-bg);
   text-align: left;
   border-bottom: 1px solid var(--bg-color);
 }
+.settings-row-btn:hover{
+    background-color: #8080800d;
+}
 
 .row-left {
   display: flex;

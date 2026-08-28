@@ -20,12 +20,12 @@
 
 .strip-title {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 340;
   margin: 0;
 }
 .month-icon{
   display: flex;
-  gap: 2px;
+  gap: 6px;
   flex-direction: row;
   align-items: center;
   height: 26px;
@@ -40,7 +40,7 @@
   color:var(--text-2);
   background: none;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 340;
   cursor: pointer;
 }
 

@@ -369,7 +369,7 @@ body {
 .status-counter {
   font-size: 15px;
   font-weight: 360;
-  margin-top: 0px;
+  margin-top: 1px;
   color: var(--text-2);
 }
 

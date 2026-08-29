@@ -521,7 +521,7 @@ gap: 8px;
   align-items: center;
   gap: 7px;
   width: 100%;
-  padding:10px;
+  padding:8px 10px;
   background: none;
   border: none;
   color: var(--text-2);

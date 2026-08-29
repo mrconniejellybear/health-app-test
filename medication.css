@@ -289,7 +289,7 @@
   flex-shrink: 0;
 }
 #med-form input[type="time"]{
-    width: 100%;
+    width: 92%;
 }
 #med-form input[type="text"], #med-form select {
   width: 100%;
@@ -298,11 +298,11 @@
 #med-form input[type="text"],
 #med-form input[type="time"],
 #med-form select {
-  padding: 12px 14px;
+  padding: 11px 14px;
   border-radius: 14px;
-  background:var(--bg-color);
-  box-shadow:  inset 0px 2px 3px rgba(25, 25, 26, 0.018);
-  border: none;
+  border: 1px solid #e9ebedba;
+  background: #e9ebed53;
+  box-shadow:  inset 0px 2px 3px rgba(25, 25, 26, 0.066);
   color: var(--text-2);
   font-size: 15px;
   font-weight: 380;
@@ -355,21 +355,7 @@
   height: 22px;
 }
 
-.icon-option input[type="radio"]:checked + .icon-box {
-  background: var(--blue-accent);
-  color: #ffffff;
-}
 
-
-.color-option {
-  margin: 0 !important;
-  display: flex;
-  justify-content: center;
-}
-
-.color-option input[type="radio"] {
-  display: none;
-}
 
 
 

@@ -188,54 +188,86 @@
 
 
 
-/* --- Modal Selection Grids --- */
+/* --- UNIFIED 4x2 GRIDS FOR ICONS & COLORS --- */
 .icon-selector-grid,
 .color-selector-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0px 10px;
-  margin-bottom: 28px;
+  gap: 10px; /* Uniform horizontal and vertical spacing */
+  width: 100%;
+  margin-top: 6px;
+  box-sizing: border-box;
 }
 
-/* Hide Native Radio Inputs */
+/* Hide raw radio inputs */
 .icon-option input[type="radio"],
 .color-option input[type="radio"] {
   display: none;
 }
 
-/* Icon Choice Box */
+/* Option Label Wrappers */
+.icon-option,
+.color-option {
+  margin: 0 !important;
+  width: 100%;
+  display: flex;
+}
+
+/* --- 1. ICON BOXES --- */
 .icon-box {
-    width: 68px;
+  width: 100%;
+  height: 44px; /* Explicit height matching the color buttons */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--contrast-bg);
-  border-radius: 12px;
-  margin-bottom: 12px;
-  font-size: 1.2rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #e9ebedba;
+  background: #e9ebed53;
+  box-shadow:  inset 0px 2px 3px rgba(25, 25, 26, 0.066);
   cursor: pointer;
-  transition: all 0.1s ease;
+  box-sizing: border-box;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease;
 }
 
+.icon-box svg {
+  width: 20px;
+  height: 20px;
+}
 
+/* Icon Selected State */
+.icon-option input[type="radio"]:checked + .icon-box {
+  background: var(--blue-accent);
+  border-color: #1d85f4;
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 123, 255, 0),   inset 0px 2px 4px rgba(7, 29, 75, 0.345);
+}
 
-/* Color Circle Buttons */
+/* --- 2. COLOR BUTTONS --- */
 .color-btn {
+  width: 100%;
+  height: 44px; /* Same 44px height as .icon-box */
+  border-radius: 14px; /* Same 14px radius as .icon-box */
   display: block;
-  width: 62px;
-  height: 40px;
-  border-radius: 12px;
-  margin: 0 auto;
   cursor: pointer;
-  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Color Selected State */
 .color-option input[type="radio"]:checked + .color-btn {
-  transform: scale(1.1);
-  border: 5px solid var(--blue-accent);
+  border-color: #ffffff;
+  transform: scale(1.03);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
+
+
+
+
+
+
+
 
 .reminder-chip {/* Matches pink theme accent */
   color: var(--text-2);

@@ -12,7 +12,7 @@
   --card-border: #eeeeee00;
   --border-color: #d6dfea00;
   --green-check: #109d31;
-  --blue-accent: #0091ff;
+  --blue-accent: #007aff;
 
   --input-bg: #fafafa;
 
@@ -25,7 +25,7 @@
 
   --medicon: #fff;
 
-  --link-blue: #0091ff;
+  --link-blue: #007aff;
 }
 
 body.dark {

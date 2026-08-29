@@ -416,6 +416,8 @@
   cursor: pointer;
 }
 .btn-primary { background: var(--blue-accent); color: #ffffff; border: none;
+    box-shadow: 0 3px 10px rgba(48, 134, 255, 0.398);
+
  }
 .btn-secondary { background:#dfe3e9; color: var(--text-2);
   margin-right: 8px; border: none
@@ -596,8 +598,8 @@ gap: 8px;
 
 /* Visual squeeze feedback during the 500ms hold */
 .med-item.holding {
-  transform: scale(0.5);
-  box-shadow: 0 0 0 2px rgba(255, 13, 0, 0.81);
+  transform: scale(0.9);
+  box-shadow: 0 0 0 3px rgba(255, 13, 0, 0.81);
 }
 
 /* Method 1: Existing Batch Edit Mode delete button */
@@ -610,18 +612,19 @@ gap: 8px;
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #fd2a00;
-  color: #ffffff;
+  background: #fd2600;
+  color: #ffece9;
   border: none;
   border-radius: 50%;
   width: 28px;
   height: 28px;
   font-size: 13px;
+  padding: 2px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.45);
+  box-shadow: 0 4px 12px rgba(255, 58, 48, 0.408);
   cursor: pointer;
   z-index: 25;
   animation: popInBadge 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;

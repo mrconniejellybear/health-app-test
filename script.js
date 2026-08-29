@@ -469,7 +469,7 @@ function attachLongPressDelete(element, medId) {
 
     const deleteBadge = document.createElement("button");
     deleteBadge.className = "med-hold-delete-btn";
-    deleteBadge.innerHTML = "✕";
+    deleteBadge.innerHTML = '<svg width="100pt" fill="currentColor" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="m74 40h1.8281c1.5938 0.039062 2.957-1.125 3.1719-2.6992 0.085938-0.84766-0.19141-1.6914-0.76562-2.3203-0.57031-0.62891-1.3828-0.98438-2.2344-0.98047h-13v-6c0-4.9688-4.0312-9-9-9h-8c-4.9688 0-9 4.0312-9 9v6h-12.828c-1.5938-0.039062-2.957 1.125-3.1719 2.6992-0.085938 0.84766 0.19141 1.6914 0.76562 2.3203 0.57031 0.62891 1.3828 0.98438 2.2344 0.98047h2v32c0 4.9688 4.0312 9 9 9h30c4.9688 0 9-4.0312 9-9zm-31-12c0-1.6562 1.3438-3 3-3h8c1.6562 0 3 1.3438 3 3v6h-14zm25 44c0 1.6562-1.3438 3-3 3h-30c-1.6562 0-3-1.3438-3-3v-32h36z"/></svg>';
     deleteBadge.setAttribute("aria-label", "Delete medication");
 
     deleteBadge.addEventListener("click", (e) => {

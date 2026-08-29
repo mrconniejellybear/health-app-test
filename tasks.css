@@ -137,7 +137,7 @@
   gap: 4px;
   cursor: pointer;
   user-select: none;
-  background-color: var(--contrast-bg);
+  background-color: var(--card-bg);
   padding: 10px 0px 0px 0px;
   width: 50px;
 }
@@ -145,7 +145,7 @@
   height: 60px;
 }
 .calendar-month-track .day-pill.active {
-  background: var(--card-bg);
+  background: var(--bg-color);
   border-radius: 14px;
 }
 
@@ -175,11 +175,11 @@
 .day-pill .day-num {
   font-size: 14px;
   font-weight: 540;
-  color: var(--text-main);
+  color: var(--text-2);
 }
 
 .day-pill.active .day-name {
-  color: var(--text-2);
+  color: var(--text-main);
   font-weight: 700;
 }.day-pill.active .day-num{
   color:var(--text-main) ;

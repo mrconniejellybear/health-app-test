@@ -152,6 +152,9 @@
   align-items: center;
   gap: 6px;
 }
+.symptom-title svg{
+  height: 16px;
+}
 
 .severity-badge {
   font-size: 13px;

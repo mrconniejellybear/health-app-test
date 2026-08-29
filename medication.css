@@ -222,24 +222,155 @@ gap: 8px;
   font-size: 16px;
   color: white;
 }
-.flame-icon{
-  background-color: #ffffff;
-  color: #ff9d00;
-  border-radius: 50%;
-  height: 44px;
-  width: 44px;
-  padding: 2px;
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container Wrapper */
+.action-menu-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
-
-
-.med-edit-btn{
-  background:none;
-  font-size: 14px;
+/* Trigger Button (Three Dots) */
+.menu-trigger-btn {
+  background: none;
   border: none;
-  margin-top: 6px;
-  color: var(--link-blue);
+  color: var(--text-3);
+  margin-right: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.med-edit-btn:hover{
-  color: var(--blue-accent);
+
+.menu-trigger-btn:active {
+  transform: scale(0.8);
+  background: #eee;
+}
+
+/* Dark Floating Popover */
+.action-menu-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 210px;
+  background: var(--card-bg);
+  border: none;
+  border-radius: 16px;
+  padding: 4px 0px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 30px rgba(47, 58, 71, 0.172);
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  transform-origin: top right;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.action-menu-popover.hidden {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Popover Row Item */
+.action-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  height: 48px;
+  background: none;
+  border: none;
+  color: var(--text-2);
+  font-size: 15px;
+  font-weight: 360;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+.action-menu-item:not(:last-child) {
+  border-bottom: 1px solid var(--bg-color);
+}
+
+.action-menu-item svg {
+  flex-shrink: 0;
+    padding: 1px;
+
+  width:31px;
+  height: 31px;
+
+  background-color: var(--contrast-bg);
+  border-radius: 10px;
+}
+
+.action-menu-item:hover,
+.action-menu-item:active {
+  background: #e0e0e045;
+}
+
+
+
+
+
+
+
+
+
+/* Card container relative position & touch isolation */
+.med-item {
+  position: relative;
+  -webkit-touch-callout: none; /* Disables browser default link/image popups on iOS */
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, opacity 0.3s ease;
+}
+
+/* Visual squeeze feedback during the 500ms hold */
+.med-item.holding {
+  transform: scale(0.96);
+  box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.5);
+}
+
+/* Method 1: Existing Batch Edit Mode delete button */
+.med-list.editing .med-delete-btn {
+  display: inline-flex;
+}
+
+/* Method 2: iOS-Style Floating Corner Delete Badge */
+.med-hold-delete-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff3b30;
+  color: #ffffff;
+  border: 2px solid #1e1e24;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.45);
+  cursor: pointer;
+  z-index: 25;
+  animation: popInBadge 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popInBadge {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }

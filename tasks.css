@@ -3,7 +3,7 @@
 ---------------------------------------------------- */
 .calendar-strip-container {
   border-radius: 22px;
-  background: var(--contrast-bg);
+  background: var(--card-bg);
   padding: 12px 12px 0px 12px;
   margin-bottom: 30px;
 }

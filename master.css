@@ -1,7 +1,7 @@
 :root {
   --bg-color: #f1f3f7;
   --card-bg: #fff;
-  --contrast-bg: #e5e8ef;
+  --contrast-bg: #eee;
 
   --text-main: #252627;
   --text-2: #5b5f65;
@@ -400,15 +400,15 @@ body {
   color: var(--text-2);
   font-weight: 640;
   border: none;
-  border-radius: 13px;
-  padding: 1px;
+  border-radius: 50px;
+  padding: 4px;
 
   display: flex;
   align-items: center;
 }
 .add-btn-mini svg{
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
 
 .bottom-nav {
@@ -419,14 +419,14 @@ body {
   height: 64px;
 
   border: none;
-  background-color: var(--card-bg);
+  background-color: #19202e;
   box-shadow: 1px 3px 8px rgba(28, 34, 45, 0.09);
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 14px;
+  padding-right: 14px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 92vw;
+  max-width: 74vw;
   border-radius: 999px;
   margin: 0 auto;
   z-index: 1000;
@@ -440,7 +440,8 @@ body {
   background: none;
   border: none;
   outline: none;
-  border-radius: 14px;
+  border-radius: 50px;
+  padding: 3px;
 
   cursor: pointer;
   display: flex;
@@ -448,13 +449,13 @@ body {
 
   justify-content: center;
   align-items: center;
-  color: var(--text-2);
-  background-color: #eeeeeedf;
+  color: var(--text-3);
+  background-color: #252d3c;
   transition: all 0.2s;
 }
 
 .nav-btn svg{
-  height: 44px;
+  height: 42px;
   width: auto;
 }
 /* Active State Styling */

@@ -217,6 +217,115 @@ function formatTime(timeStr) {
   return minutes === "00" ? `${h} ${ampm}` : `${h}:${minutes} ${ampm}`;
 }
 
+
+const medMenuBtn = document.getElementById("med-menu-btn");
+const medActionMenu = document.getElementById("med-action-menu");
+const menuAddMed = document.getElementById("menu-add-med");
+const menuEditMeds = document.getElementById("menu-edit-meds");
+const menuEditText = document.getElementById("menu-edit-text");
+
+// Toggle Menu Popover
+medMenuBtn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  medActionMenu.classList.toggle("hidden");
+});
+
+// Close menu when tapping anywhere outside
+document.addEventListener("click", (e) => {
+  if (!medActionMenu?.contains(e.target) && e.target !== medMenuBtn) {
+    medActionMenu?.classList.add("hidden");
+  }
+});
+
+// Action 1: Open Add Medication Modal
+menuAddMed?.addEventListener("click", () => {
+  medActionMenu.classList.add("hidden");
+  document.getElementById("modal-overlay")?.classList.remove("hidden");
+});
+
+// Action 2: Toggle Edit Mode (Delete buttons)
+menuEditMeds?.addEventListener("click", () => {
+  medActionMenu.classList.add("hidden");
+  isMedEditMode = !isMedEditMode;
+
+  if (menuEditText) {
+    menuEditText.textContent = isMedEditMode ? "Done Editing" : "Edit Prescriptions";
+  }
+
+  const listEl = document.getElementById("med-list");
+  if (listEl) {
+    listEl.classList.toggle("editing", isMedEditMode);
+  }
+});
+
+function attachLongPressDelete(element, medId) {
+  let pressTimer = null;
+  const HOLD_DURATION = 500;
+
+  function startHold(e) {
+    // If edit mode is active or tapping an existing button/badge, skip
+    if (isMedEditMode || e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
+
+    element.classList.add("holding");
+
+    pressTimer = setTimeout(() => {
+      triggerQuickDelete(element, medId);
+    }, HOLD_DURATION);
+  }
+
+  function cancelHold() {
+    clearTimeout(pressTimer);
+    element.classList.remove("holding");
+  }
+
+  function triggerQuickDelete(el, id) {
+    el.classList.remove("holding");
+
+    // Tactile & audio feedback
+    if (navigator.vibrate) navigator.vibrate(15);[span_5](start_span)[span_5](end_span)
+    if (typeof playClickSound === "function") playClickSound();[span_6](start_span)[span_6](end_span)
+
+    // Clear any active floating badges from other cards
+    document.querySelectorAll(".med-hold-delete-btn").forEach(btn => btn.remove());
+
+    // Create and position floating delete button
+    const deleteBadge = document.createElement("button");
+    deleteBadge.className = "med-hold-delete-btn";
+    deleteBadge.innerHTML = "✕";
+    deleteBadge.setAttribute("aria-label", "Delete medication");
+
+    deleteBadge.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteMedication(id);[span_7](start_span)[span_7](end_span)
+    });
+
+    el.appendChild(deleteBadge);
+
+    // Auto-dismiss when tapping outside this card
+    const dismissHandler = (event) => {
+      if (!el.contains(event.target)) {
+        deleteBadge.remove();
+        document.removeEventListener("pointerdown", dismissHandler);
+      }
+    };
+    setTimeout(() => document.addEventListener("pointerdown", dismissHandler), 20);
+  }
+
+  // Touch Events (Mobile)
+  element.addEventListener("touchstart", startHold, { passive: true });
+  element.addEventListener("touchmove", cancelHold, { passive: true }); // Prevents triggering while swiping/scrolling
+  element.addEventListener("touchend", cancelHold);
+  element.addEventListener("touchcancel", cancelHold);
+
+  // Pointer/Mouse Events (Desktop Testing)
+  element.addEventListener("mousedown", startHold);
+  element.addEventListener("mousemove", cancelHold);
+  element.addEventListener("mouseup", cancelHold);
+  element.addEventListener("mouseleave", cancelHold);
+}
+
+
+
 const medList = document.getElementById("med-list");
 const statusCounter = document.getElementById("status-counter");
 const addBtn = document.getElementById("add-med-btn") || document.getElementById("add-btn");
@@ -358,6 +467,8 @@ function renderMedications() {
     if (typeof attachSwipeGesture === "function") {
       attachSwipeGesture(li, med, today);
     }
+
+    attachLongPressDelete(li, med.id);
     
     medList.appendChild(li);
   });

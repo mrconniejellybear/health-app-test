@@ -426,23 +426,42 @@ if (medForm) {
 // --- PRESS & HOLD QUICK-DELETE BADGE ---
 function attachLongPressDelete(element, medId) {
   let pressTimer = null;
+  let touchStartPos = { x: 0, y: 0 };
   const HOLD_DURATION = 500;
 
   function startHold(e) {
     if (isMedEditMode || e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
+    
+    const touch = e.touches ? e.touches[0] : e;
+    touchStartPos = { x: touch.clientX, y: touch.clientY };
+
     element.classList.add("holding");
+
     pressTimer = setTimeout(() => {
       triggerQuickDelete(element, medId);
     }, HOLD_DURATION);
   }
 
+  function moveHold(e) {
+    if (!pressTimer) return;
+    const touch = e.touches ? e.touches[0] : e;
+    const moveX = Math.abs(touch.clientX - touchStartPos.x);
+    const moveY = Math.abs(touch.clientY - touchStartPos.y);
+
+    // Only cancel hold if finger moves significantly (>10px) to allow natural touch wobble
+    if (moveX > 10 || moveY > 10) {
+      cancelHold();
+    }
+  }
+
   function cancelHold() {
     clearTimeout(pressTimer);
+    pressTimer = null;
     element.classList.remove("holding");
   }
 
   function triggerQuickDelete(el, id) {
-    el.classList.remove("holding");
+    cancelHold();
     if (navigator.vibrate) navigator.vibrate(15);
     if (typeof playClickSound === "function") playClickSound();
 
@@ -470,15 +489,16 @@ function attachLongPressDelete(element, medId) {
   }
 
   element.addEventListener("touchstart", startHold, { passive: true });
-  element.addEventListener("touchmove", cancelHold, { passive: true });
+  element.addEventListener("touchmove", moveHold, { passive: true });
   element.addEventListener("touchend", cancelHold);
   element.addEventListener("touchcancel", cancelHold);
 
   element.addEventListener("mousedown", startHold);
-  element.addEventListener("mousemove", cancelHold);
+  element.addEventListener("mousemove", moveHold);
   element.addEventListener("mouseup", cancelHold);
   element.addEventListener("mouseleave", cancelHold);
 }
+
 
 // --- DELETE FUNCTION ---
 function deleteMedication(id) {
@@ -493,16 +513,24 @@ function deleteMedication(id) {
 function attachSwipeGesture(element, med, today) {
   let startX = 0;
   let currentX = 0;
+  let isSwiping = false;
 
   element.addEventListener("touchstart", (e) => {
+    // If tapping an active delete badge or in edit mode, ignore swipe
+    if (e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
+
     startX = e.touches[0].clientX;
+    currentX = startX; // CRITICAL: Prevents diffX from defaulting to -startX on a stationary press
+    isSwiping = true;
   }, { passive: true });
 
   element.addEventListener("touchmove", (e) => {
+    if (!isSwiping) return;
     currentX = e.touches[0].clientX;
     const diffX = currentX - startX;
     const isTakenToday = med.history.includes(today);
 
+    // Visual drag feedback
     if (diffX < 0 && !isTakenToday) {
       element.style.transform = `translateX(${Math.max(diffX, -80)}px)`;
     } else if (diffX > 0 && isTakenToday) {
@@ -511,10 +539,20 @@ function attachSwipeGesture(element, med, today) {
   }, { passive: true });
 
   element.addEventListener("touchend", () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+
+    // If the long-press delete badge just spawned, cancel any swipe completion
+    if (element.querySelector('.med-hold-delete-btn')) {
+      element.style.transform = "translateX(0px)";
+      return;
+    }
+
     const diffX = currentX - startX;
     element.style.transform = "translateX(0px)";
     const isTakenToday = med.history.includes(today);
 
+    // Swiped LEFT past -60px threshold -> TAKE PILL
     if (diffX < -60 && !isTakenToday) {
       med.history.push(today);
       if (typeof playLogSound === "function") playLogSound();
@@ -522,6 +560,7 @@ function attachSwipeGesture(element, med, today) {
       renderMedications();
       if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
 
+    // Swiped RIGHT past 60px threshold -> UNDO PILL
     } else if (diffX > 60 && isTakenToday) {
       med.history = med.history.filter(date => date !== today);
       saveAppState();
@@ -533,6 +572,7 @@ function attachSwipeGesture(element, med, today) {
     currentX = 0;
   });
 }
+
 
 // --- RENDER MEDICATIONS ---
 function renderMedications() {

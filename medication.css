@@ -45,6 +45,30 @@
   gap: 10px;
 }
 
+
+.med-item {
+  /* Prevents iOS from popping up callout menus / loupes on press & hold */
+  -webkit-touch-callout: none;
+  
+  /* Prevents text highlighting/selection across all browsers */
+  -webkit-user-select: none;
+  user-select: none;
+
+  /* Crucial for mobile: Tells browser this element handles horizontal swipes */
+  touch-action: pan-y;
+}
+/* Ensure child text elements inherit user-select: none, NOT pointer-events: none */
+.med-card-wrapper,
+.med-grid,
+.med-name,
+.med-dosage,
+.med-time,
+.logged-status {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto; /* Restore standard pointer events */
+}
+
 /* --- Medication List Item Styles --- */
 /* Card Container */
 .med-item {
@@ -88,7 +112,6 @@
   font-size: 17px;
   font-weight: 440;
   color: #030303;
-  pointer-events: none;
 }
 
 .med-dosage {
@@ -97,8 +120,6 @@
   font-size: 12px;
   font-weight: 360;
   color: var(--text-main);
-    pointer-events: none;
-
 }
 .med-time {
   grid-column: 2;
@@ -110,8 +131,6 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--text-main);
-    pointer-events: none;
-
 }
 
 .logged-status {
@@ -124,8 +143,6 @@
   padding: 0px;
   width: fit-content;
   justify-self: end;
-    pointer-events: none;
-
 }
 
 

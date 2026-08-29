@@ -419,7 +419,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  padding: 22px 0;
   border-radius: 15px;
   cursor: pointer;
   transition: transform 0.15s ease, opacity 0.15s ease;
@@ -430,7 +430,7 @@
 }
 
 .btn-primary,.btn-secondary, svg{
-  height: 32px;
+  height: 30px;
   width: auto;
 }
 

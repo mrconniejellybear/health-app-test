@@ -311,6 +311,8 @@
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
+
+
 #med-form input[type="text"]:focus,
 #med-form input[type="time"]:focus,
 #med-form select:focus {

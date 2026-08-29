@@ -231,16 +231,27 @@
 }
 
 .icon-box svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 /* Icon Selected State */
 .icon-option input[type="radio"]:checked + .icon-box {
   background: var(--blue-accent);
-  border-color: #1d85f4;
   color: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 123, 255, 0),   inset 0px 2px 4px rgba(7, 29, 75, 0.345);
+  background: var(--blue-accent);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  border-radius: 14px;
+  border: 1px solid #60a8ff;
+  box-shadow: 
+    0 8px 32px rgba(16, 70, 186, 0),
+    inset 1px 3px 5px #63a1ffc9,
+    inset -0.4px -2px 1px rgba(0, 63, 210, 0.98),
+    inset 2px 2px 10px 6px #0863ff,
+    inset -10px -6px 20px 12px #0052ec;
+  position: relative;
+  overflow: hidden;
 }
 
 /* --- 2. COLOR BUTTONS --- */

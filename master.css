@@ -151,21 +151,7 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  border: 3px solid var(--card-border);
-  padding: 10px 8px;
-  
-
-  background: #ffffff00;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur (6px);
-  border-radius: 20px;
-  border: 1px solid #eff3f6;
-  box-shadow: 
-    0 8px 32px rgba(16, 19, 26, 0.163),
-    inset 0px 1px 8px rgba(211, 217, 221, 0.903),
-    inset -1px -2px 3px rgb(214, 221, 226),
-    inset 6px 6px 24px 2px #f7f7f76d;
-
+  padding: 10px 9px;
 }
 .article-icon{
   height: 80px;

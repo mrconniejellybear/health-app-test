@@ -2,14 +2,10 @@
    7-DAY CENTERED CALENDAR STRIP
 ---------------------------------------------------- */
 .calendar-strip-container {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
+  border-radius: 22px;
   background: var(--contrast-bg);
   padding: 12px 12px 0px 12px;
   margin-bottom: 30px;
-      box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.01);
-
 }
 
 .calendar-strip-header {
@@ -32,7 +28,6 @@
   align-items: center;
   height: 26px;
   border-radius: 11px;
-
 }
 
 .strip-today-badge {

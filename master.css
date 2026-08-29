@@ -420,14 +420,13 @@ body {
 
   border: none;
   background-color: var(--card-bg);
-  box-shadow: 1px 4px 10px rgba(28, 34, 45, 0.1);
+  box-shadow: 1px 3px 8px rgba(28, 34, 45, 0.09);
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
   justify-content: space-around;
-  align-items: baseline;
+  align-items: center;
   max-width: 92vw;
-  padding-top: 8px;
   border-radius: 999px;
   margin: 0 auto;
   z-index: 1000;
@@ -441,8 +440,8 @@ body {
   background: none;
   border: none;
   outline: none;
-  border-radius: 18px;
-  padding: 1px;
+  border-radius: 16px;
+  padding: 0px;
 
   cursor: pointer;
   display: flex;
@@ -450,13 +449,13 @@ body {
 
   justify-content: center;
   align-items: center;
-  transition: opacity 0.2s ease, transform 0.2s ease;
   color: var(--text-2);
   background-color: #eeeeeedf;
+  transition: all 0.4s;
 }
 
 .nav-btn svg{
-  height: 41px;
+  height: 42px;
   width: auto;
 }
 /* Active State Styling */

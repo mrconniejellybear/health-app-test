@@ -430,26 +430,25 @@
 }
 
 .btn-primary,.btn-secondary, svg{
-  height: 30px;
+  height: 29px;
   width: auto;
 }
-
 .btn-primary, .btn-secondary {
   flex: 1;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
 }
-.btn-primary { background: var(--blue-accent); color: #ffffff;
-    box-shadow: 0 2px 14px rgba(0, 123, 255, 0.317), inset 2px 3px 18px 0px #a0cdfeed;
-    border: 1px solid rgb(64, 154, 239);
+.btn-primary { background: var(--blue-accent); color: #ffffff; border: none;
  }
-.btn-secondary { background:#cfd2d6; color: var(--text-2);
-  margin-right: 8px; box-shadow: 0 2px 14px rgba(130, 139, 148, 0.312), inset 2px 3px 18px 0px #ffffffbb;
-    border: 1px solid #d7d9dd;
- }
+.btn-secondary { background:#dfe3e9; color: var(--text-2);
+  margin-right: 8px; border: none
+}
 
-
+.med-reminder-icon{
+  height: 14px;
+  width: 14px;
+}
 
 .med-test-btn{
   border: none;

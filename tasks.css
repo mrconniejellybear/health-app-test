@@ -29,6 +29,10 @@
   height: 26px;
   border-radius: 11px;
 }
+.month-icon svg{
+  height: 13px;
+  width: auto;
+}
 
 .strip-today-badge {
   margin-left: -1px;

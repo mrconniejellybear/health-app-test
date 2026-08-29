@@ -551,7 +551,7 @@ gap: 8px;
 .action-menu-item {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   width: 100%;
   padding:8px 10px;
   background: none;
@@ -569,8 +569,8 @@ gap: 8px;
 
 .action-menu-item svg {
   flex-shrink: 0;
-  width:26px;
-  height: 26px;
+  width:25px;
+  height: 25px;
 }
 
 .action-menu-item:hover,

@@ -147,7 +147,6 @@
 }
 
 .form-group {
-  margin-bottom: 14px;
   display: flex;
   flex-direction: column;
 }
@@ -160,15 +159,7 @@
 
 .form-group.half { flex: 1; }
 
-.form-group label {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--text-3);
-  margin-bottom: 5px;
-  font-size: 15px;
-}
 
-.optional { font-weight: 400; color: #94a3b8; }
 
 .form-group input,
 .form-group select,
@@ -177,7 +168,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 10px;
   padding: 10px 12px;
-  font-size:14px;
+  font-size:11px;
   color: #0f172a;
   outline: none;
 }
@@ -282,3 +273,42 @@
   border-radius: 8px;
   transition: all 0.1s ease;
 }
+
+
+
+
+/* --- Condensed 2-Column Form Rows --- */
+.form-row-2col {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.form-row-2col .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.time-reminder-row {
+  align-items: flex-end; /* Aligns input and toggle visually */
+}
+
+.flex-grow {
+  flex: 1;
+}
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+
+.toggle-group label {
+  margin-bottom: 8px !important;
+}
+

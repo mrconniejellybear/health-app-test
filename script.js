@@ -382,30 +382,32 @@ if (medForm) {
     e.preventDefault();
 
     const name = document.getElementById("med-name").value.trim();
-    const dosage = document.getElementById("med-dosage").value.trim();
-    const rawTime = document.getElementById("med-time").value;
+    const dosage = document.getElementById("med-dosage")?.value.trim() || "";
+    const rawTime = document.getElementById("med-time")?.value || "";
     const freqInput = document.getElementById("med-frequency");
     const frequency = freqInput ? freqInput.value : "Daily";
+
+    // Read the iOS toggle switch
+    const reminderToggle = document.getElementById("med-reminder-toggle");
+    const hasReminder = reminderToggle ? reminderToggle.checked : false;
 
     const selectedIcon = document.querySelector('input[name="med_icon"]:checked')?.value || "pill-1";
     const selectedColorKey = document.querySelector('input[name="med_color"]:checked')?.value || "color-1";
 
-    const checkedChips = Array.from(document.querySelectorAll('input[name="med-reminder-offset"]:checked'))
-      .map(el => el.value);
-    const reminders = calculateReminderTimes(rawTime, checkedChips);
+    // ONLY require 'name' to save the card
+    if (name) {
+      // Format time only if provided; otherwise, leave empty
+      const formattedTime = rawTime ? formatTime(rawTime) : "";
 
-    if (name && rawTime) {
-      const formattedTime = formatTime(rawTime);
       const newMed = {
         id: Date.now(),
         name,
-        dosage,
+        dosage: dosage,
         scheduledTime: formattedTime,
         frequency,
         icon: selectedIcon,
         colorKey: selectedColorKey,
-        hasReminder: checkedChips.length > 0,
-        reminders: reminders,
+        hasReminder: hasReminder,
         history: []
       };
 
@@ -415,10 +417,11 @@ if (medForm) {
       closeBottomSheet();
       renderMedications();
       if (typeof playLogSound === "function") playLogSound();
-      if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
+      if (typeof updateHomeDashboard === "function") updateHomeDashboard();
     }
   });
 }
+
 
 // --- PRESS & HOLD QUICK-DELETE BADGE ---
 function attachLongPressDelete(element, medId) {

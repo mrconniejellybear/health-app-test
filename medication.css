@@ -16,7 +16,6 @@
   color: var(--text-3);
   font-size: 13px;
   font-weight: 360;
-  margin-top: -2px;
 }
 /* --- Card Icon + Grid Alignment --- */
 .med-card-wrapper {
@@ -203,6 +202,7 @@
   inset: 0;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+  transition: all 1.2s;
 }
 
 /* Floating Bottom Sheet Card */
@@ -217,10 +217,9 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  max-height: 86vh;
-  height: auto;
+  height: 74vh;
   transform: translateY(100%);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
@@ -229,7 +228,7 @@
 }
 
 .bottom-sheet-card.fullscreen {
-  height: 92vh;
+  height: 96vh;
   border-radius: 20px 20px 0 0;
 }
 
@@ -290,7 +289,7 @@
   flex-shrink: 0;
 }
 #med-form input[type="time"]{
-    width: 92%;
+    width: 100%;
 }
 #med-form input[type="text"], #med-form select {
   width: 100%;
@@ -340,14 +339,6 @@
 }
 
 
-/* --- ICON SELECTOR (4 Columns x 2 Rows) --- */
-.icon-selector-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  width: 100%;
-  margin-top: 20px;
-}
 
 .icon-option {
   margin: 0 !important;
@@ -367,17 +358,8 @@
 .icon-option input[type="radio"]:checked + .icon-box {
   background: var(--blue-accent);
   color: #ffffff;
-  transform: scale(1.04);
 }
 
-/* --- COLOR SELECTOR (4 Columns x 2 Rows) --- */
-.color-selector-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  width: 100%;
-  margin-top: 4px;
-}
 
 .color-option {
   margin: 0 !important;
@@ -389,22 +371,7 @@
   display: none;
 }
 
-.color-btn {
-  display: block;
-  width: 100%;
-  height: 38px;
-  border-radius: 12px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
-  box-sizing: border-box;
-}
 
-.color-option input[type="radio"]:checked + .color-btn {
-  border-color: #ffffff;
-  transform: scale(1.06);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-}
 
 /* --- BOTTOM ACTION BUTTONS --- */
 .modal-btn-group {
@@ -419,18 +386,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 22px 0;
+  padding: 21px 0;
   border-radius: 15px;
   cursor: pointer;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.modal-btn-group button:active {
-  transform: scale(0.97);
-}
+
 
 .btn-primary,.btn-secondary, svg{
-  height: 29px;
+  height: 28px;
   width: auto;
 }
 .btn-primary, .btn-secondary {
@@ -557,10 +522,10 @@ gap: 8px;
 .action-menu-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
   width: 100%;
   padding: 8px 10px;
-  height: 48px;
+  height: 44px;
   background: none;
   border: none;
   color: var(--text-2);
@@ -576,13 +541,8 @@ gap: 8px;
 
 .action-menu-item svg {
   flex-shrink: 0;
-    padding: 1px;
-
-  width:31px;
-  height: 31px;
-
-  background-color: var(--bg-color);
-  border-radius: 10px;
+  width:29px;
+  height: 29px;
 }
 
 .action-menu-item:hover,

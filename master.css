@@ -1,7 +1,7 @@
 :root {
   --bg-color: #f1f3f7;
   --card-bg: #fff;
-  --contrast-bg: #f1f1f1;
+  --contrast-bg: #eee;
 
   --text-main: #252627;
   --text-2: #5b5f65;
@@ -152,7 +152,7 @@ body {
   max-width: 440px;
   border-radius: 20px;
   border: 3px solid var(--card-border);
-  padding: 12px 8px;
+  padding: 10px 8px;
   box-shadow: 0px 0px 20px var(--shadows);
     box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.01);
 
@@ -426,7 +426,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 74vw;
+  max-width: 92vw;
   border-radius: 999px;
   margin: 0 auto;
   z-index: 1000;

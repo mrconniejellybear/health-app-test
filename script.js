@@ -513,24 +513,34 @@ function deleteMedication(id) {
 function attachSwipeGesture(element, med, today) {
   let startX = 0;
   let currentX = 0;
-  let isSwiping = false;
+  let startY = 0;
+  let currentY = 0;
+  let hasMovedHorizontally = false;
+  const isTakenToday = med.history && med.history.includes(today);
 
   element.addEventListener("touchstart", (e) => {
-    // If tapping an active delete badge or in edit mode, ignore swipe
     if (e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
 
     startX = e.touches[0].clientX;
-    currentX = startX; // CRITICAL: Prevents diffX from defaulting to -startX on a stationary press
-    isSwiping = true;
+    startY = e.touches[0].clientY;
+    currentX = startX;
+    currentY = startY;
+    hasMovedHorizontally = false;
   }, { passive: true });
 
   element.addEventListener("touchmove", (e) => {
-    if (!isSwiping) return;
     currentX = e.touches[0].clientX;
+    currentY = e.touches[0].clientY;
     const diffX = currentX - startX;
-    const isTakenToday = med.history.includes(today);
+    const diffY = currentY - startY;
 
-    // Visual drag feedback
+    // If moving vertically (scrolling), ignore swipe
+    if (Math.abs(diffY) > Math.abs(diffX)) return;
+
+    if (Math.abs(diffX) > 8) {
+      hasMovedHorizontally = true;
+    }
+
     if (diffX < 0 && !isTakenToday) {
       element.style.transform = `translateX(${Math.max(diffX, -80)}px)`;
     } else if (diffX > 0 && isTakenToday) {
@@ -539,39 +549,32 @@ function attachSwipeGesture(element, med, today) {
   }, { passive: true });
 
   element.addEventListener("touchend", () => {
-    if (!isSwiping) return;
-    isSwiping = false;
-
-    // If the long-press delete badge just spawned, cancel any swipe completion
-    if (element.querySelector('.med-hold-delete-btn')) {
+    // If the card didn't drag horizontally (e.g. was a tap or hold), do not evaluate swipe thresholds
+    if (!hasMovedHorizontally || element.querySelector('.med-hold-delete-btn')) {
       element.style.transform = "translateX(0px)";
       return;
     }
 
     const diffX = currentX - startX;
     element.style.transform = "translateX(0px)";
-    const isTakenToday = med.history.includes(today);
 
-    // Swiped LEFT past -60px threshold -> TAKE PILL
     if (diffX < -60 && !isTakenToday) {
+      if (!med.history) med.history = [];
       med.history.push(today);
       if (typeof playLogSound === "function") playLogSound();
       saveAppState();
       renderMedications();
       if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
 
-    // Swiped RIGHT past 60px threshold -> UNDO PILL
     } else if (diffX > 60 && isTakenToday) {
       med.history = med.history.filter(date => date !== today);
       saveAppState();
       renderMedications();
       if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
     }
-
-    startX = 0;
-    currentX = 0;
   });
 }
+
 
 
 // --- RENDER MEDICATIONS ---

@@ -142,7 +142,7 @@
 /* Hidden by default */
 .med-delete-btn {
   display: none;
-  background: #ff3b30;
+  background: #ff4000;
   color: #fffbf6;
   border: none;
   border-radius: 12px;
@@ -579,8 +579,8 @@ gap: 8px;
 
 /* Visual squeeze feedback during the 500ms hold */
 .med-item.holding {
-  transform: scale(0.96);
-  box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.5);
+  transform: scale(0.9);
+  box-shadow: 0 0 0 2px rgba(255, 13, 0, 0.81);
 }
 
 /* Method 1: Existing Batch Edit Mode delete button */
@@ -593,9 +593,9 @@ gap: 8px;
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #ff3b30;
+  background: #fd2a00;
   color: #ffffff;
-  border: 2px solid #1e1e24;
+  border: none;
   border-radius: 50%;
   width: 28px;
   height: 28px;

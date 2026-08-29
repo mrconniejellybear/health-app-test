@@ -419,7 +419,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  padding: 22px 0;
   border-radius: 15px;
   cursor: pointer;
   transition: transform 0.15s ease, opacity 0.15s ease;
@@ -430,19 +430,18 @@
 }
 
 .btn-primary,.btn-secondary, svg{
-  height: 24px;
+  height: 28px;
   width: auto;
 }
 
 .btn-primary, .btn-secondary {
   flex: 1;
-  padding: 5px 8px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
 }
 .btn-primary { background: var(--blue-accent); color: #ffffff;
-    box-shadow: 0 2px 14px rgba(0, 123, 255, 0.317), inset 0px 3px 12px 0px #95c5f8ab;
+    box-shadow: 0 2px 14px rgba(0, 123, 255, 0.317), inset 0px 3px 12px 0px #94c4f7ee;
     border: 1px solid rgb(64, 154, 239);
  }
 .btn-secondary { background:#dfe3e9; color: var(--text-2);

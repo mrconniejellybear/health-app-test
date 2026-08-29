@@ -290,7 +290,7 @@
   flex-shrink: 0;
 }
 #med-form input[type="time"]{
-    width: 91%;
+    width: 92%;
 }
 #med-form input[type="text"], #med-form select {
   width: 100%;
@@ -441,11 +441,12 @@
   cursor: pointer;
 }
 .btn-primary { background: var(--blue-accent); color: #ffffff;
-    box-shadow: 0 2px 14px rgba(0, 123, 255, 0.317), inset 0px 3px 18px 0px #a0cdfe;
+    box-shadow: 0 2px 14px rgba(0, 123, 255, 0.317), inset 2px 3px 18px 0px #a0cdfeed;
     border: 1px solid rgb(64, 154, 239);
  }
-.btn-secondary { background:#dfe3e9; color: var(--text-2);
-  margin-right: 8px; border: none;
+.btn-secondary { background:#cfd2d6; color: var(--text-2);
+  margin-right: 8px; box-shadow: 0 2px 14px rgba(130, 139, 148, 0.312), inset 2px 3px 18px 0px #ffffffbb;
+    border: 1px solid #d7d9dd;
  }
 
 

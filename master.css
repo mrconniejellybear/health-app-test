@@ -360,6 +360,7 @@ body {
   flex-direction: row;
   align-items:center;
   gap: 10px;
+  margin-left: 4px;
 }
 
 .title-icon{

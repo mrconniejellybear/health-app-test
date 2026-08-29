@@ -486,23 +486,41 @@ gap: 8px;
   top: calc(100% + 8px);
   right: 0;
   width: 210px;
-  background: var(--card-bg);
-  border: none;
-  border-radius: 16px;
+
   padding: 4px 0px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 70px rgba(21, 21, 22, 0.203);
-  z-index: 100;
-  backdrop-filter: blur(12px);
-  transform-origin: top right;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  
+  background: #ffffff00;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur (6px);
+  border-radius: 20px;
+  border: 1px solid #eff3f6;
+  box-shadow: 
+    0 8px 32px rgba(16, 19, 26, 0.163),
+    inset 0px 1px 8px rgba(211, 217, 221, 0.903),
+    inset -1px -2px 3px rgb(214, 221, 226),
+    inset 6px 6px 24px 2px #f7f7f76d;
+
+
+ transform-origin: top right;
+  opacity: 0;
+  transform: scale(0.3) translateY(-6px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: 
+    opacity 0.2s ease,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    visibility 0.2s;
+  will-change: transform, opacity;
+
+  z-index: 999;
 }
 
-.action-menu-popover.hidden {
-  display: none;
-  opacity: 0;
-  transform: scale(0.95);
+
+.action-menu-popover:not(.hidden) {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  visibility: visible;
 }
 
 /* Popover Row Item */
@@ -534,7 +552,7 @@ gap: 8px;
 
 .action-menu-item:hover,
 .action-menu-item:active {
-  background: #e0e0e045;
+  background: #fcfcfc54;
 }
 
 

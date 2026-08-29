@@ -137,15 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Medication reminder alarm clock SVG icon
-const reminderClockIcon = `
-  <svg class="med-reminder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="13" height="13" fill="currentColor" style="display: inline-block; vertical-align: -1px; margin-left: 2px; margin-bottom: 2px; flex-shrink: 0;">
-    <path d="M528-458v-134q0-20-14-34t-34-14q-20 0-34 14t-14 34v150q0 13 4.5 24t13.5 20l100 100q14 14 34.5 13.5T619-299q14-14 14-34.5T619-368l-91-90ZM327-77q-72-31-125.5-84.5T117-287q-31-72-31-153t31-153q31-72 84.5-125.5T327-803q72-31 153-31t153 31q72 31 125.5 84.5T843-593q31 72 31 153t-31 153q-31 72-84.5 125.5T633-77q-72 31-153 31T327-77Zm153-363ZM45-677q-14-14-13.5-34T46-745l130-130q14-14 33.5-14t33.5 14q14 14 14 34t-14 34L113-677q-14 14-34 14t-34-14Zm870 0q-14 14-34 14t-34-14L717-807q-14-14-14-34t14-34q14-14 34-13.5t34 14.5l130 130q14 14 14 33.5T915-677ZM480-172q112 0 190-78t78-190q0-112-78-190t-190-78q-112 0-190 78t-78 190q0 112 78 190t190 78Z"/></svg>
-`;
-
-
-
-
 
 // --- DYNAMIC GREETING & USER PROFILE ---
 
@@ -198,54 +189,68 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
+// ==========================================
 // --- 3. MEDICATION TRACKER LOGIC ---
+// ==========================================
 
-function getTodayStr() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-}
+// Global state tracking
+let isMedEditMode = false;
 
-// Helper: Time Format (e.g., "20:00" -> "8:00 PM")
-function formatTime(timeStr) {
-  if (!timeStr) return "";
-  const [hours, minutes] = timeStr.split(":");
-  let h = parseInt(hours, 10);
-  const ampm = h >= 12 ? "PM" : "AM";
-  h = h % 12 || 12;
-  return minutes === "00" ? `${h} ${ampm}` : `${h}:${minutes} ${ampm}`;
-}
+// DOM Elements
+const medList = document.getElementById("med-list");
+const statusCounter = document.getElementById("status-counter");
+const medForm = document.getElementById("med-form");
 
+// Bottom Sheet Elements
+const sheetOverlay = document.getElementById("modal-overlay");
+const sheetBackdrop = document.getElementById("sheet-backdrop");
+const sheetCard = document.getElementById("sheet-card");
+const sheetGrabberZone = document.getElementById("sheet-grabber-zone");
+const cancelBtn = document.getElementById("cancel-btn") || document.getElementById("cancel-med-btn");
 
+// Action Menu Elements
 const medMenuBtn = document.getElementById("med-menu-btn");
 const medActionMenu = document.getElementById("med-action-menu");
 const menuAddMed = document.getElementById("menu-add-med");
 const menuEditMeds = document.getElementById("menu-edit-meds");
 const menuEditText = document.getElementById("menu-edit-text");
 
-// Toggle Menu Popover
+// Clock Icon for Reminders
+const reminderClockIcon = `<svg class="med-reminder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="14" height="14" fill="currentColor" style="display: inline-block; vertical-align: -1px;  margin-bottom: 1px; flex-shrink: 0;">
+    <path d="m433-420-51-51q-14-14-34-14t-34 14q-14 14-14 33.5t14 33.5l74 75q19 19 45 19t45-19l158-158q14-14 14-34t-14-34q-14-14-34-14t-34 14L433-420ZM327-77q-72-31-125.5-84.5T117-287q-31-72-31-153t31-153q31-72 84.5-125.5T327-803q72-31 153-31t153 31q72 31 125.5 84.5T843-593q31 72 31 153t-31 153q-31 72-84.5 125.5T633-77q-72 31-153 31T327-77ZM45-677q-14-14-13.5-34T46-745l130-130q14-14 33.5-14t33.5 14q14 14 14 34t-14 34L113-677q-14 14-34 14t-34-14Zm870 0q-14 14-34 14t-34-14L717-807q-14-14-14-34t14-34q14-14 34-13.5t34 14.5l130 130q14 14 14 33.5T915-677Z"/></svg>
+`;
+ 
+// Color Palette
+const MED_COLOR_PALETTE = {
+  "color-1": { main: "#a855f7", bg: "rgba(168, 85, 247, 0.15)" }, // Purple
+  "color-2": { main: "#176efa", bg: "rgba(45, 132, 255, 0.15)" },  // Blue
+  "color-3": { main: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },  // Green
+  "color-4": { main: "#fb9405", bg: "rgba(245, 158, 11, 0.15)" },  // Amber
+  "color-5": { main: "#ec4899", bg: "rgba(236, 72, 153, 0.15)" },  // Pink
+  "color-6": { main: "#06b6d4", bg: "rgba(6, 182, 212, 0.15)" },   // Cyan
+  "color-7": { main: "#84cc16", bg: "rgba(132, 204, 22, 0.15)" },  // Lime
+  "color-8": { main: "#f43f5e", bg: "rgba(244, 63, 94, 0.15)" }    // Rose
+};
+
+// --- POP-UP ACTION MENU LOGIC ---
 medMenuBtn?.addEventListener("click", (e) => {
   e.stopPropagation();
-  medActionMenu.classList.toggle("hidden");
+  medActionMenu?.classList.toggle("hidden");
 });
 
-// Close menu when tapping anywhere outside
 document.addEventListener("click", (e) => {
-  if (!medActionMenu?.contains(e.target) && e.target !== medMenuBtn) {
-    medActionMenu?.classList.add("hidden");
+  if (medActionMenu && !medActionMenu.contains(e.target) && e.target !== medMenuBtn) {
+    medActionMenu.classList.add("hidden");
   }
 });
 
-// Action 1: Open Add Medication Modal
 menuAddMed?.addEventListener("click", () => {
-  medActionMenu.classList.add("hidden");
-  document.getElementById("modal-overlay")?.classList.remove("hidden");
+  medActionMenu?.classList.add("hidden");
+  openBottomSheet();
 });
 
-// Action 2: Toggle Edit Mode (Delete buttons)
 menuEditMeds?.addEventListener("click", () => {
-  medActionMenu.classList.add("hidden");
+  medActionMenu?.classList.add("hidden");
   isMedEditMode = !isMedEditMode;
 
   if (menuEditText) {
@@ -258,99 +263,120 @@ menuEditMeds?.addEventListener("click", () => {
   }
 });
 
-function attachLongPressDelete(element, medId) {
-  let pressTimer = null;
-  const HOLD_DURATION = 500;
+// --- BOTTOM SHEET CONTROLLER & DRAG GESTURES ---
+function openBottomSheet() {
+  if (!sheetOverlay) return;
+  sheetOverlay.classList.remove("hidden");
+  void sheetOverlay.offsetWidth;
+  sheetOverlay.classList.add("open");
+  if (navigator.vibrate) navigator.vibrate(10);
+}
 
-  function startHold(e) {
-    // If edit mode is active or tapping an existing button/badge, skip
-    if (isMedEditMode || e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
+function closeBottomSheet() {
+  if (!sheetOverlay || !sheetCard) return;
+  sheetOverlay.classList.remove("open");
+  sheetCard.classList.remove("fullscreen");
+  sheetCard.style.transform = "";
+  setTimeout(() => {
+    sheetOverlay.classList.add("hidden");
+  }, 320);
+}
 
-    element.classList.add("holding");
+sheetBackdrop?.addEventListener("click", closeBottomSheet);
+cancelBtn?.addEventListener("click", closeBottomSheet);
 
-    pressTimer = setTimeout(() => {
-      triggerQuickDelete(element, medId);
-    }, HOLD_DURATION);
+let startSheetY = 0;
+let currentSheetY = 0;
+let isDraggingSheet = false;
+
+function onGrabStart(e) {
+  isDraggingSheet = true;
+  startSheetY = e.touches ? e.touches[0].clientY : e.clientY;
+  if (sheetCard) sheetCard.style.transition = "none";
+}
+
+function onGrabMove(e) {
+  if (!isDraggingSheet || !sheetCard) return;
+  currentSheetY = e.touches ? e.touches[0].clientY : e.clientY;
+  const deltaY = currentSheetY - startSheetY;
+
+  if (deltaY > 0) {
+    sheetCard.style.transform = `translateY(${deltaY}px)`;
+  } else if (deltaY < 0 && !sheetCard.classList.contains("fullscreen")) {
+    sheetCard.style.transform = `translateY(${Math.max(deltaY, -140)}px)`;
+  }
+}
+
+function onGrabEnd(e) {
+  if (!isDraggingSheet || !sheetCard) return;
+  isDraggingSheet = false;
+  sheetCard.style.transition = "";
+
+  const deltaY = currentSheetY - startSheetY;
+
+  if (deltaY > 90) {
+    closeBottomSheet();
+  } else if (deltaY < -40) {
+    sheetCard.classList.add("fullscreen");
+    sheetCard.style.transform = "translateY(0)";
+    if (navigator.vibrate) navigator.vibrate(12);
+  } else {
+    sheetCard.style.transform = "translateY(0)";
   }
 
-  function cancelHold() {
-    clearTimeout(pressTimer);
-    element.classList.remove("holding");
-  }
+  startSheetY = 0;
+  currentSheetY = 0;
+}
 
-  function triggerQuickDelete(el, id) {
-    el.classList.remove("holding");
+sheetGrabberZone?.addEventListener("touchstart", onGrabStart, { passive: true });
+window.addEventListener("touchmove", onGrabMove, { passive: true });
+window.addEventListener("touchend", onGrabEnd);
 
-    // Tactile & audio feedback
-    if (navigator.vibrate) navigator.vibrate(15);[span_5](start_span)[span_5](end_span)
-    if (typeof playClickSound === "function") playClickSound();[span_6](start_span)[span_6](end_span)
+sheetGrabberZone?.addEventListener("mousedown", onGrabStart);
+window.addEventListener("mousemove", onGrabMove);
+window.addEventListener("mouseup", onGrabEnd);
 
-    // Clear any active floating badges from other cards
-    document.querySelectorAll(".med-hold-delete-btn").forEach(btn => btn.remove());
+// --- TIME & REMINDER HELPERS ---
+function formatTime(timeStr) {
+  if (!timeStr) return "";
+  const [hours, minutes] = timeStr.split(":");
+  let h = parseInt(hours, 10);
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  return minutes === "00" ? `${h} ${ampm}` : `${h}:${minutes} ${ampm}`;
+}
 
-    // Create and position floating delete button
-    const deleteBadge = document.createElement("button");
-    deleteBadge.className = "med-hold-delete-btn";
-    deleteBadge.innerHTML = "✕";
-    deleteBadge.setAttribute("aria-label", "Delete medication");
+function calculateReminderTimes(doseTimeStr, selectedOffsets) {
+  if (!doseTimeStr) return [];
+  let [hours, minutes] = doseTimeStr.includes(":") ? doseTimeStr.split(":") : [9, 0];
+  hours = parseInt(hours, 10);
+  minutes = parseInt(minutes, 10);
 
-    deleteBadge.addEventListener("click", (e) => {
-      e.stopPropagation();
-      deleteMedication(id);[span_7](start_span)[span_7](end_span)
-    });
+  const baseMinutes = hours * 60 + minutes;
 
-    el.appendChild(deleteBadge);
+  return selectedOffsets.map(offset => {
+    let targetMinutes = baseMinutes;
 
-    // Auto-dismiss when tapping outside this card
-    const dismissHandler = (event) => {
-      if (!el.contains(event.target)) {
-        deleteBadge.remove();
-        document.removeEventListener("pointerdown", dismissHandler);
-      }
+    if (offset === "30_before") targetMinutes -= 30;
+    if (offset === "15_before") targetMinutes -= 15;
+    if (offset === "15_after")  targetMinutes += 15;
+    if (offset === "30_after")  targetMinutes += 30;
+
+    targetMinutes = (targetMinutes + 1440) % 1440;
+
+    const h = Math.floor(targetMinutes / 60);
+    const m = targetMinutes % 60;
+    const formattedTime = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+
+    return {
+      type: offset,
+      triggerTime: formattedTime,
+      label: offset.replace('_', ' ')
     };
-    setTimeout(() => document.addEventListener("pointerdown", dismissHandler), 20);
-  }
-
-  // Touch Events (Mobile)
-  element.addEventListener("touchstart", startHold, { passive: true });
-  element.addEventListener("touchmove", cancelHold, { passive: true }); // Prevents triggering while swiping/scrolling
-  element.addEventListener("touchend", cancelHold);
-  element.addEventListener("touchcancel", cancelHold);
-
-  // Pointer/Mouse Events (Desktop Testing)
-  element.addEventListener("mousedown", startHold);
-  element.addEventListener("mousemove", cancelHold);
-  element.addEventListener("mouseup", cancelHold);
-  element.addEventListener("mouseleave", cancelHold);
+  });
 }
 
-
-
-const medList = document.getElementById("med-list");
-const statusCounter = document.getElementById("status-counter");
-const addBtn = document.getElementById("add-med-btn") || document.getElementById("add-btn");
-const modalOverlay = document.getElementById("modal-overlay");
-const cancelBtn = document.getElementById("cancel-btn") || document.getElementById("cancel-med-btn");
-const medForm = document.getElementById("med-form");
-
-if (addBtn && modalOverlay) {
-  addBtn.addEventListener("click", () => modalOverlay.classList.remove("hidden"));
-}
-if (cancelBtn && modalOverlay) {
-  cancelBtn.addEventListener("click", () => modalOverlay.classList.add("hidden"));
-}
-
-const MED_COLOR_PALETTE = {
-  "color-1": { main: "#a855f7", bg: "rgba(168, 85, 247, 0.15)" }, // Purple
-  "color-2": { main: "#176efa", bg: "rgba(45, 132, 255, 0.15)" },  // Blue
-  "color-3": { main: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },  // Green
-  "color-4": { main: "#fb9405", bg: "rgba(245, 158, 11, 0.15)" },  // Amber
-  "color-5": { main: "#ec4899", bg: "rgba(236, 72, 153, 0.15)" },  // Pink
-  "color-6": { main: "#06b6d4", bg: "rgba(6, 182, 212, 0.15)" },   // Cyan
-  "color-7": { main: "#84cc16", bg: "rgba(132, 204, 22, 0.15)" },  // Lime
-  "color-8": { main: "#f43f5e", bg: "rgba(244, 63, 94, 0.15)" }    // Rose
-};
-
+// --- FORM SUBMIT LOGIC ---
 if (medForm) {
   medForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -364,13 +390,12 @@ if (medForm) {
     const selectedIcon = document.querySelector('input[name="med_icon"]:checked')?.value || "pill-1";
     const selectedColorKey = document.querySelector('input[name="med_color"]:checked')?.value || "color-1";
 
+    const checkedChips = Array.from(document.querySelectorAll('input[name="med-reminder-offset"]:checked'))
+      .map(el => el.value);
+    const reminders = calculateReminderTimes(rawTime, checkedChips);
+
     if (name && rawTime) {
       const formattedTime = formatTime(rawTime);
-      
-      // Check if your reminder checkbox/toggle is checked (or default to true if every created med has an alarm)
-      const reminderInput = document.getElementById("med-reminder") || document.getElementById("med-alarm");
-      const hasReminder = reminderInput ? reminderInput.checked : true;
-
       const newMed = {
         id: Date.now(),
         name,
@@ -379,124 +404,89 @@ if (medForm) {
         frequency,
         icon: selectedIcon,
         colorKey: selectedColorKey,
-        hasReminder: hasReminder, // <-- Added this property
+        hasReminder: checkedChips.length > 0,
+        reminders: reminders,
         history: []
       };
 
       medications.push(newMed);
       saveAppState();
       medForm.reset();
-      if (modalOverlay) modalOverlay.classList.add("hidden");
+      closeBottomSheet();
       renderMedications();
+      if (typeof playLogSound === "function") playLogSound();
       if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
     }
-
   });
 }
 
-function renderMedications() {
-  const medList = document.getElementById("med-list");
-  if (!medList) return;
-  medList.innerHTML = "";
+// --- PRESS & HOLD QUICK-DELETE BADGE ---
+function attachLongPressDelete(element, medId) {
+  let pressTimer = null;
+  const HOLD_DURATION = 500;
 
-  const today = getTodayStr ? getTodayStr() : new Date().toISOString().split("T")[0];
-
-  // 1. Maintain Edit Mode class state
-  if (isMedEditMode) {
-    medList.classList.add("editing");
+  function startHold(e) {
+    if (isMedEditMode || e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
+    element.classList.add("holding");
+    pressTimer = setTimeout(() => {
+      triggerQuickDelete(element, medId);
+    }, HOLD_DURATION);
   }
 
-  // 2. Data Migration Fallbacks
-  medications.forEach(med => {
-    if (!med.history) med.history = [];
-    if (!med.dosage) med.dosage = "200mg";
-    if (!med.colorKey) med.colorKey = "color-1";
-    if (!med.icon) med.icon = "pill-1";
-  });
-
-  const total = medications.length;
-  const takenCount = medications.filter(m => m.history.includes(today)).length;
-
-  if (statusCounter) {
-    statusCounter.textContent = total === 0 ? "None Listed" : `${takenCount}/${total} Taken`;
+  function cancelHold() {
+    clearTimeout(pressTimer);
+    element.classList.remove("holding");
   }
 
-  // 3. Sort: Pending first, Taken last
-  const sortedMeds = [...medications].sort((a, b) => {
-    const aTaken = a.history.includes(today);
-    const bTaken = b.history.includes(today);
-    return aTaken === bTaken ? 0 : aTaken ? 1 : -1;
-  });
+  function triggerQuickDelete(el, id) {
+    el.classList.remove("holding");
+    if (navigator.vibrate) navigator.vibrate(15);
+    if (typeof playClickSound === "function") playClickSound();
 
-  // 4. Render Items
-  sortedMeds.forEach((med) => {
-    const isTakenToday = med.history.includes(today);
-    const colorTheme = (typeof MED_COLOR_PALETTE !== "undefined" && MED_COLOR_PALETTE[med.colorKey])
-      ? MED_COLOR_PALETTE[med.colorKey] 
-      : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.1)" };
+    document.querySelectorAll(".med-hold-delete-btn").forEach(btn => btn.remove());
 
-    // --- Check if an alarm/reminder is active ---
-    const hasAlarm = Boolean(med.hasReminder || med.reminder || med.alarm);
+    const deleteBadge = document.createElement("button");
+    deleteBadge.className = "med-hold-delete-btn";
+    deleteBadge.innerHTML = "✕";
+    deleteBadge.setAttribute("aria-label", "Delete medication");
 
-    const li = document.createElement("li");
-    li.className = `med-item ${isTakenToday ? "completed" : ""}`;
-    li.dataset.id = med.id;
-    li.style.backgroundColor = colorTheme.bg;
-    li.style.borderColor = `${colorTheme.main}40`;
+    deleteBadge.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteMedication(id);
+    });
 
-    // UNIFIED SINGLE INNERHTML: Delete Button + Icon + Info Card
-    li.innerHTML = `
-      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520q-17 0-28.5-11.5T160-760q0-17 11.5-28.5T200-800h160q0-17 11.5-28.5T400-840h160q17 0 28.5 11.5T600-800h160q17 0 28.5 11.5T800-760q0 17-11.5 28.5T760-720v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM428.5-291.5Q440-303 440-320v-280q0-17-11.5-28.5T400-640q-17 0-28.5 11.5T360-600v280q0 17 11.5 28.5T400-280q17 0 28.5-11.5Zm160 0Q600-303 600-320v-280q0-17-11.5-28.5T560-640q-17 0-28.5 11.5T520-600v280q0 17 11.5 28.5T560-280q17 0 28.5-11.5ZM280-720v520-520Z"/></svg></button>
-      <div class="med-card-wrapper">
-        <div class="med-icon-display" style="color: ${colorTheme.main}">
-          ${typeof getIconSVG === "function" ? getIconSVG(med.icon) : ""}
-        </div>
-        <div class="med-grid">
-          <span class="med-name" style="color: ${colorTheme.main}">${med.name}</span>
-          <span class="med-dosage">${med.dosage}</span>
-          <span class="med-time" style="color: ${colorTheme.main}">
-            ${med.scheduledTime || med.time || ''} ${hasAlarm ? reminderClockIcon : ''}
-          </span>
-          <span class="logged-status">
-            ${isTakenToday ? "Taken" : "Not Taken"}
-          </span>
-        </div>
-      </div>
-    `;
+    el.appendChild(deleteBadge);
 
-    if (typeof attachSwipeGesture === "function") {
-      attachSwipeGesture(li, med, today);
-    }
+    const dismissHandler = (event) => {
+      if (!el.contains(event.target)) {
+        deleteBadge.remove();
+        document.removeEventListener("pointerdown", dismissHandler);
+      }
+    };
+    setTimeout(() => document.addEventListener("pointerdown", dismissHandler), 20);
+  }
 
-    attachLongPressDelete(li, med.id);
-    
-    medList.appendChild(li);
-  });
+  element.addEventListener("touchstart", startHold, { passive: true });
+  element.addEventListener("touchmove", cancelHold, { passive: true });
+  element.addEventListener("touchend", cancelHold);
+  element.addEventListener("touchcancel", cancelHold);
+
+  element.addEventListener("mousedown", startHold);
+  element.addEventListener("mousemove", cancelHold);
+  element.addEventListener("mouseup", cancelHold);
+  element.addEventListener("mouseleave", cancelHold);
 }
 
-
-function getIconSVG(iconKey) {
-  const iconMap = {
-    "pill-1": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m698-352 90-89q34.91-35.02 53.45-79.89Q860-565.75 860-615q0-102.36-71.32-173.68Q717.36-860 615-860q-49 0-93.96 18.55Q476.09-822.91 441-788l-89 90 346 346ZM345-100q49 0 93.96-18.55Q483.91-137.09 519-172l89-90-346-346-90 89q-34.91 35.02-53.45 79.89Q100-394.25 100-345q0 102.36 71.32 173.68Q242.64-100 345-100Z"/></svg>',
-
-    "2tablets": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 13C10.5376 13 13 10.5376 13 7.5C13 4.46243 10.5376 2 7.5 2C4.46243 2 2 4.46243 2 7.5C2 10.5376 4.46243 13 7.5 13ZM9.03033 7.03033C9.32322 6.73744 9.32322 6.26256 9.03033 5.96967C8.73744 5.67678 8.26256 5.67678 7.96967 5.96967L5.96967 7.96967C5.67678 8.26256 5.67678 8.73744 5.96967 9.03033C6.26256 9.32322 6.73744 9.32322 7.03033 9.03033L9.03033 7.03033Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 22C19.5376 22 22 19.5376 22 16.5C22 13.4624 19.5376 11 16.5 11C13.4624 11 11 13.4624 11 16.5C11 19.5376 13.4624 22 16.5 22ZM16.9697 18.0303C17.2626 18.3232 17.7374 18.3232 18.0303 18.0303C18.3232 17.7374 18.3232 17.2626 18.0303 16.9697L16.0303 14.9697C15.7374 14.6768 15.2626 14.6768 14.9697 14.9697C14.6768 15.2626 14.6768 15.7374 14.9697 16.0303L16.9697 18.0303Z" fill="currentColor"/></svg>',
-
-    "3tablets": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 11C14.4853 11 16.5 8.98528 16.5 6.5C16.5 4.01472 14.4853 2 12 2C9.51472 2 7.5 4.01472 7.5 6.5C7.5 8.98528 9.51472 11 12 11ZM12.7071 7.25008C13.1213 7.25008 13.4571 6.91429 13.4571 6.50008C13.4571 6.08586 13.1213 5.75008 12.7071 5.75008H11.2929C10.8787 5.75008 10.5429 6.08586 10.5429 6.50008C10.5429 6.91429 10.8787 7.25008 11.2929 7.25008H12.7071Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 22C8.98528 22 11 19.9853 11 17.5C11 15.0147 8.98528 13 6.5 13C4.01472 13 2 15.0147 2 17.5C2 19.9853 4.01472 22 6.5 22ZM7.53033 17.5303C7.82322 17.2374 7.82322 16.7626 7.53033 16.4697C7.23744 16.1768 6.76256 16.1768 6.46967 16.4697L5.46967 17.4697C5.17678 17.7626 5.17678 18.2374 5.46967 18.5303C5.76256 18.8232 6.23744 18.8232 6.53033 18.5303L7.53033 17.5303Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 20C18.9853 20 21 17.9853 21 15.5C21 13.0147 18.9853 11 16.5 11C14.0147 11 12 13.0147 12 15.5C12 17.9853 14.0147 20 16.5 20ZM16.4697 16.5303C16.7626 16.8232 17.2374 16.8232 17.5303 16.5303C17.8232 16.2374 17.8232 15.7626 17.5303 15.4697L16.5303 14.4697C16.2374 14.1768 15.7626 14.1768 15.4697 14.4697C15.1768 14.7626 15.1768 15.2374 15.4697 15.5303L16.4697 16.5303Z" fill="currentColor"/></svg>',
-
-    "med-bottle": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M420-354.5v40q0 25 17.5 42.5t42.5 17.5q25 0 42.5-17.5t17.5-42.5v-40h40q25 0 42.5-17.5t17.5-42.5q0-25-17.5-42.5T580-474.5h-40v-40q0-25-17.5-42.5T480-574.5q-25 0-42.5 17.5T420-514.5v40h-40q-25 0-42.5 17.5T320-414.5q0 25 17.5 42.5t42.5 17.5h40Zm-140 251q-37.54 0-64.27-26.73Q189-156.96 189-194.5v-440q0-37.54 26.73-64.27Q242.46-725.5 280-725.5h400q37.54 0 64.27 26.73Q771-672.04 771-634.5v440q0 37.54-26.73 64.27Q717.54-103.5 680-103.5H280Zm-1.91-662q-19.16 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.17-13.17 32.33-13.17h403.82q19.16 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.17 13.17-32.33 13.17H278.09Z"/></svg>',
-
-    "IV-bag": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M520-32.11q-35.39 0-60.45-25.05-25.05-25.06-25.05-60.45v-83.96q-102.76-15.91-171.02-95.01-68.26-79.09-68.26-185.81v-353.78q0-37.79 26.61-64.4 26.6-26.6 64.39-26.6h387.56q37.79 0 64.39 26.6 26.61 26.61 26.61 64.4v353.78q0 106.72-68.26 185.81-68.26 79.1-171.02 95.01v78.46H720q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33Q739.15-32.11 720-32.11H520Zm25.22-415.54h127.67q1.76-8.81 2.52-16.99.76-8.19.76-17.75v-38.09H565.5q-18.2 0-30.65-12.45-12.46-12.46-12.46-30.66 0-18.19 12.46-30.65 12.45-12.46 30.65-12.46h110.67v-72.82H515.93q-18.19 0-30.65-12.46-12.45-12.45-12.45-30.65t12.45-30.65q12.46-12.46 30.65-12.46h160.24v-72.83H283.83v310.92h96.6q32.29 0 61.43 13.8 29.14 13.81 49.86 38.37 10.15 11.72 23.99 19.77 13.83 8.06 29.51 8.06Z"/></svg>',
-
-    "syringe": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M150.02-509.89q-12.43-13.2-12.43-31.49t12.43-31.49L260.35-683.2l-40.37-40.37-12.24 12.48q-13.2 13.2-31.49 13.2t-31.49-13.2q-12.43-13.19-12.43-31.49 0-18.29 12.43-30.72l86.7-86.94q13.19-13.2 31.49-13.2 18.29 0 31.48 13.2 13.2 12.44 13.2 31.11t-13.2 31.11l-12.47 12.48 40.37 40.37 110.56-110.57q13.2-13.19 31.49-13.19t31.49 13.19q13.2 13.2 13.2 31.49t-13.2 31.49l-24.13 23.13 57.46 57.46-113 112q-12.44 13.19-12.44 31.49 0 18.29 12.44 31.48 13.19 13.2 31.48 13.2 18.3 0 31.49-13.2l112.24-112.76 53.11 52.35-112.76 113q-13.19 13.2-13.19 31.49t13.19 31.49q12.44 12.43 30.73 12.05 18.29-.38 31.49-12.81l112-113L761-480.37q26.35 26.35 26.35 64.27 0 37.93-26.35 64.27l-21.78 22.31L893.5-176q11.2 11.2 5.48 24.99-5.72 13.79-21.39 13.79h-42.92q-13.67 0-26.49-5.48-12.81-5.47-22.25-14.91L676.24-267.3l-21.54 22.54q-26.35 26.35-64.28 26.35-37.92 0-64.27-26.35L236.89-534.02 213-509.89q-13.2 12.43-31.49 12.43t-31.49-12.43Z"/></svg>',
-
-    "med-vile": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-71.87q-86.35 0-146.76-60.89T272.83-280v-351.87q-33.48-2.39-57.22-26.49-23.74-24.1-23.74-57.57v-87.18q0-35.39 25.41-60.21 25.42-24.81 61.05-24.81h403.58q35.63 0 60.93 24.81 25.29 24.82 25.29 60.21v87.18q0 33.47-23.74 57.57t-57.22 26.49V-280q0 86.35-60.41 147.24Q566.35-71.87 480-71.87Zm84.04-123.61q34.53-35 34.53-84.52h-78.81q-18.19 0-30.65-12.46-12.46-12.45-12.46-30.65 0-18.19 12.46-30.65 12.46-12.46 30.65-12.46h78.81v-72.82h-78.81q-18.19 0-30.65-12.46-12.46-12.46-12.46-30.65 0-18.2 12.46-30.65 12.46-12.46 30.65-12.46h78.81v-105.65H361.43V-280q0 49.52 34.53 84.52 34.52 35 84.04 35t84.04-35Z"/></svg>',
-
-    "marijuana": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M436.65-240.54q-41.52 27-85.78 46.76-44.26 19.76-93.02 19.76-53.96 0-102.18-21.22-48.21-21.22-90.93-54.93-14.2-10.96-14.2-28.63 0-17.68 13.96-28.87 30.52-24.76 65.18-42.88 34.67-18.12 72.95-26.84-59.04-49.68-89.45-118.27-30.4-68.6-38.4-145.08-2.24-19.91 12.2-34.47 14.43-14.55 35.11-12.31 59.28 6 113.68 27.26 54.4 21.26 100.16 57.02v-6.09q.48-79.95 32.1-151.55 31.62-71.6 79.62-135.56 12.2-16.15 32.35-16.15 20.15 0 32.35 16.15 47.76 63.96 79.26 135.56 31.5 71.6 32.46 151.55 0 1.53-.39 3.05-.38 1.52-.38 3.04 46.53-35.76 100.93-56.52 54.4-20.76 113.68-27.76 19.92-2.24 34.85 11.93 14.94 14.18 12.7 34.85-7.24 76.48-38.76 145.08-31.53 68.59-90.33 118.27 38.28 8.72 72.56 26.84 34.29 18.12 65.57 42.88 13.96 10.95 14.08 28.75.12 17.79-14.08 28.75-42.72 33.71-90.67 54.93-47.96 21.22-101.92 21.22-49.52 0-93.9-19.76t-84.9-46.76v125.56q0 18.2-12.34 30.65Q498.43-71.87 480-71.87t-30.89-12.46q-12.46-12.45-12.46-30.89v-125.32Z"/></svg>'
-
-  };
-  return iconMap[iconKey] || "💊";
+// --- DELETE FUNCTION ---
+function deleteMedication(id) {
+  medications = medications.filter(med => String(med.id) !== String(id));
+  saveAppState();
+  if (typeof playClickSound === "function") playClickSound();
+  renderMedications();
+  if (typeof updateHomeDashboard === "function") updateHomeDashboard();
 }
 
+// --- SWIPE GESTURE (Left to Log / Right to Undo) ---
 function attachSwipeGesture(element, med, today) {
   let startX = 0;
   let currentX = 0;
@@ -541,109 +531,102 @@ function attachSwipeGesture(element, med, today) {
   });
 }
 
-let isMedEditMode = false;
+// --- RENDER MEDICATIONS ---
+function renderMedications() {
+  const medList = document.getElementById("med-list");
+  if (!medList) return;
+  medList.innerHTML = "";
 
-// Toggle Edit Mode on button click
-document.getElementById("edit-meds-btn")?.addEventListener("click", () => {
-  isMedEditMode = !isMedEditMode;
-  
-  const editBtn = document.getElementById("edit-meds-btn");
-  const listEl = document.getElementById("med-list");
+  const today = (typeof getTodayStr === "function") 
+    ? getTodayStr() 
+    : new Date().toISOString().split("T")[0];
 
-   if (editBtn) {
-    editBtn.textContent = isMedEditMode ? "Done" : "Edit List";
-    editBtn.style.color = isMedEditMode ? "#1bb040" : "#3883e0"; // Green for Done, Blue for Edit
+  if (isMedEditMode) {
+    medList.classList.add("editing");
   }
-  
-  
-  if (listEl) {
-    listEl.classList.toggle("editing", isMedEditMode);
+
+  medications.forEach(med => {
+    if (!med.history) med.history = [];
+    if (!med.dosage) med.dosage = "200mg";
+    if (!med.colorKey) med.colorKey = "color-1";
+    if (!med.icon) med.icon = "pill-1";
+  });
+
+  const total = medications.length;
+  const takenCount = medications.filter(m => m.history.includes(today)).length;
+
+  if (statusCounter) {
+    statusCounter.textContent = total === 0 ? "None Listed" : `${takenCount}/${total} Taken`;
   }
-});
 
-function deleteMedication(id) {
-  // Remove from master list
-  medications = medications.filter(med => String(med.id) !== String(id));
-  
-  // Save updated state to localStorage
-  saveAppState();
+  const sortedMeds = [...medications].sort((a, b) => {
+    const aTaken = a.history.includes(today);
+    const bTaken = b.history.includes(today);
+    return aTaken === bTaken ? 0 : aTaken ? 1 : -1;
+  });
 
-  // Play click/tap sound
-  if (typeof playClickSound === "function") playClickSound();
+  sortedMeds.forEach((med) => {
+    const isTakenToday = med.history.includes(today);
+    const colorTheme = (typeof MED_COLOR_PALETTE !== "undefined" && MED_COLOR_PALETTE[med.colorKey])
+      ? MED_COLOR_PALETTE[med.colorKey] 
+      : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.1)" };
 
-  // Re-render the list and home dashboard summary
-  renderMedications();
-  if (typeof updateHomeDashboard === "function") updateHomeDashboard();
-}
+    const hasAlarm = Boolean(med.hasReminder || med.reminder || med.alarm);
 
-function calculateReminderTimes(doseTimeStr, selectedOffsets) {
-  // doseTimeStr format: "21:00" or "09:00 PM"
-  let [hours, minutes] = doseTimeStr.includes(":") ? doseTimeStr.split(":") : [9, 0];
-  hours = parseInt(hours, 10);
-  minutes = parseInt(minutes, 10);
+    const li = document.createElement("li");
+    li.className = `med-item ${isTakenToday ? "completed" : ""}`;
+    li.dataset.id = med.id;
+    li.style.backgroundColor = colorTheme.bg;
+    li.style.borderColor = `${colorTheme.main}40`;
 
-  const baseMinutes = hours * 60 + minutes;
+    li.innerHTML = `
+      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+          <path d="M280-120q-33 0-56.5-23.5T200-200v-520q-17 0-28.5-11.5T160-760q0-17 11.5-28.5T200-800h160q0-17 11.5-28.5T400-840h160q17 0 28.5 11.5T600-800h160q17 0 28.5 11.5T800-760q0 17-11.5 28.5T760-720v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM428.5-291.5Q440-303 440-320v-280q0-17-11.5-28.5T400-640q-17 0-28.5 11.5T360-600v280q0 17 11.5 28.5T400-280q17 0 28.5-11.5Zm160 0Q600-303 600-320v-280q0-17-11.5-28.5T560-640q-17 0-28.5 11.5T520-600v280q0 17 11.5 28.5T560-280q17 0 28.5-11.5ZM280-720v520-520Z"/>
+        </svg>
+      </button>
+      <div class="med-card-wrapper">
+        <div class="med-icon-display" style="color: ${colorTheme.main}">
+          ${typeof getIconSVG === "function" ? getIconSVG(med.icon) : ""}
+        </div>
+        <div class="med-grid">
+          <span class="med-name" style="color: ${colorTheme.main}">${med.name}</span>
+          <span class="med-dosage">${med.dosage}</span>
+          <span class="med-time" style="color: ${colorTheme.main}">
+            ${med.scheduledTime || med.time || ''} ${hasAlarm ? reminderClockIcon : ''}
+          </span>
+          <span class="logged-status">
+            ${isTakenToday ? "Taken" : "Not Taken"}
+          </span>
+        </div>
+      </div>
+    `;
 
-  return selectedOffsets.map(offset => {
-    let targetMinutes = baseMinutes;
+    if (typeof attachSwipeGesture === "function") {
+      attachSwipeGesture(li, med, today);
+    }
 
-    if (offset === "30_before") targetMinutes -= 30;
-    if (offset === "15_before") targetMinutes -= 15;
-    if (offset === "15_after")  targetMinutes += 15;
-    if (offset === "30_after")  targetMinutes += 30;
-
-    // Wrap around 24-hour clock (1440 minutes in a day)
-    targetMinutes = (targetMinutes + 1440) % 1440;
-
-    const h = Math.floor(targetMinutes / 60);
-    const m = targetMinutes % 60;
-    const formattedTime = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-
-    return {
-      type: offset,
-      triggerTime: formattedTime,
-      label: offset.replace('_', ' ')
-    };
+    attachLongPressDelete(li, med.id);
+    
+    medList.appendChild(li);
   });
 }
 
-// 2. Updated Med Save / Submit Handler
-function handleMedicationFormSubmit(e) {
-  e.preventDefault();
-
-  const medName = document.getElementById("med-name").value;
-  const medDosage = document.getElementById("med-dosage").value;
-  const medTime = document.getElementById("med-time").value; // e.g. "21:00"
-  const medFreq = document.getElementById("med-frequency") ? document.getElementById("med-frequency").value : "Daily";
-
-  // Gather all selected reminder chips
-  const checkedChips = Array.from(document.querySelectorAll('input[name="med-reminder-offset"]:checked'))
-    .map(el => el.value);
-
-  const reminders = calculateReminderTimes(medTime, checkedChips);
-
-  const hasReminderInput = document.getElementById("med-reminder-toggle");
-  const hasReminder = hasReminderInput ? hasReminderInput.checked : false;
-
-  const newMed = {
-  id: Date.now(),
-  name,
-  dosage,
-  scheduledTime: formattedTime,
-  frequency,
-  icon: selectedIcon,
-  colorKey: selectedColorKey,
-  hasReminder: hasReminder, // <-- Make sure this flag is included!
-  history: []
-};
-
-  medications.push(newMed);
-  if (typeof saveAppState === "function") saveAppState();
-  if (typeof playLogSound === "function") playLogSound();
-  
-  renderMedications();
-  toggleMedModal(false);
+// --- ICON SVG MAPPER ---
+function getIconSVG(iconKey) {
+  const iconMap = {
+    "pill-1": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m698-352 90-89q34.91-35.02 53.45-79.89Q860-565.75 860-615q0-102.36-71.32-173.68Q717.36-860 615-860q-49 0-93.96 18.55Q476.09-822.91 441-788l-89 90 346 346ZM345-100q49 0 93.96-18.55Q483.91-137.09 519-172l89-90-346-346-90 89q-34.91 35.02-53.45 79.89Q100-394.25 100-345q0 102.36 71.32 173.68Q242.64-100 345-100Z"/></svg>',
+    "2tablets": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 13C10.5376 13 13 10.5376 13 7.5C13 4.46243 10.5376 2 7.5 2C4.46243 2 2 4.46243 2 7.5C2 10.5376 4.46243 13 7.5 13ZM9.03033 7.03033C9.32322 6.73744 9.32322 6.26256 9.03033 5.96967C8.73744 5.67678 8.26256 5.67678 7.96967 5.96967L5.96967 7.96967C5.67678 8.26256 5.67678 8.73744 5.96967 9.03033C6.26256 9.32322 6.73744 9.32322 7.03033 9.03033L9.03033 7.03033Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 22C19.5376 22 22 19.5376 22 16.5C22 13.4624 19.5376 11 16.5 11C13.4624 11 11 13.4624 11 16.5C11 19.5376 13.4624 22 16.5 22ZM16.9697 18.0303C17.2626 18.3232 17.7374 18.3232 18.0303 18.0303C18.3232 17.7374 18.3232 17.2626 18.0303 16.9697L16.0303 14.9697C15.7374 14.6768 15.2626 14.6768 14.9697 14.9697C14.6768 15.2626 14.6768 15.7374 14.9697 16.0303L16.9697 18.0303Z" fill="currentColor"/></svg>',
+    "3tablets": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 11C14.4853 11 16.5 8.98528 16.5 6.5C16.5 4.01472 14.4853 2 12 2C9.51472 2 7.5 4.01472 7.5 6.5C7.5 8.98528 9.51472 11 12 11ZM12.7071 7.25008C13.1213 7.25008 13.4571 6.91429 13.4571 6.50008C13.4571 6.08586 13.1213 5.75008 12.7071 5.75008H11.2929C10.8787 5.75008 10.5429 6.08586 10.5429 6.50008C10.5429 6.91429 10.8787 7.25008 11.2929 7.25008H12.7071Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 22C8.98528 22 11 19.9853 11 17.5C11 15.0147 8.98528 13 6.5 13C4.01472 13 2 15.0147 2 17.5C2 19.9853 4.01472 22 6.5 22ZM7.53033 17.5303C7.82322 17.2374 7.82322 16.7626 7.53033 16.4697C7.23744 16.1768 6.76256 16.1768 6.46967 16.4697L5.46967 17.4697C5.17678 17.7626 5.17678 18.2374 5.46967 18.5303C5.76256 18.8232 6.23744 18.8232 6.53033 18.5303L7.53033 17.5303Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 20C18.9853 20 21 17.9853 21 15.5C21 13.0147 18.9853 11 16.5 11C14.0147 11 12 13.0147 12 15.5C12 17.9853 14.0147 20 16.5 20ZM16.4697 16.5303C16.7626 16.8232 17.2374 16.8232 17.5303 16.5303C17.8232 16.2374 17.8232 15.7626 17.5303 15.4697L16.5303 14.4697C16.2374 14.1768 15.7626 14.1768 15.4697 14.4697C15.1768 14.7626 15.1768 15.2374 15.4697 15.5303L16.4697 16.5303Z" fill="currentColor"/></svg>',
+    "med-bottle": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M420-354.5v40q0 25 17.5 42.5t42.5 17.5q25 0 42.5-17.5t17.5-42.5v-40h40q25 0 42.5-17.5t17.5-42.5q0-25-17.5-42.5T580-474.5h-40v-40q0-25-17.5-42.5T480-574.5q-25 0-42.5 17.5T420-514.5v40h-40q-25 0-42.5 17.5T320-414.5q0 25 17.5 42.5t42.5 17.5h40Zm-140 251q-37.54 0-64.27-26.73Q189-156.96 189-194.5v-440q0-37.54 26.73-64.27Q242.46-725.5 280-725.5h400q37.54 0 64.27 26.73Q771-672.04 771-634.5v440q0 37.54-26.73 64.27Q717.54-103.5 680-103.5H280Zm-1.91-662q-19.16 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.33q13.17-13.17 32.33-13.17h403.82q19.16 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.17 13.17-32.33 13.17H278.09Z"/></svg>',
+    "IV-bag": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M520-32.11q-35.39 0-60.45-25.05-25.05-25.06-25.05-60.45v-83.96q-102.76-15.91-171.02-95.01-68.26-79.09-68.26-185.81v-353.78q0-37.79 26.61-64.4 26.6-26.6 64.39-26.6h387.56q37.79 0 64.39 26.6 26.61 26.61 26.61 64.4v353.78q0 106.72-68.26 185.81-68.26 79.1-171.02 95.01v78.46H720q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33Q739.15-32.11 720-32.11H520Zm25.22-415.54h127.67q1.76-8.81 2.52-16.99.76-8.19.76-17.75v-38.09H565.5q-18.2 0-30.65-12.45-12.46-12.46-12.46-30.66 0-18.19 12.46-30.65 12.45-12.46 30.65-12.46h110.67v-72.82H515.93q-18.19 0-30.65-12.46-12.45-12.45-12.45-30.65t12.45-30.65q12.46-12.46 30.65-12.46h160.24v-72.83H283.83v310.92h96.6q32.29 0 61.43 13.8 29.14 13.81 49.86 38.37 10.15 11.72 23.99 19.77 13.83 8.06 29.51 8.06Z"/></svg>',
+    "syringe": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M150.02-509.89q-12.43-13.2-12.43-31.49t12.43-31.49L260.35-683.2l-40.37-40.37-12.24 12.48q-13.2 13.2-31.49 13.2t-31.49-13.2q-12.43-13.19-12.43-31.49 0-18.29 12.43-30.72l86.7-86.94q13.19-13.2 31.49-13.2 18.29 0 31.48 13.2 13.2 12.44 13.2 31.11t-13.2 31.11l-12.47 12.48 40.37 40.37 110.56-110.57q13.2-13.19 31.49-13.19t31.49 13.19q13.2 13.2 13.2 31.49t-13.2 31.49l-24.13 23.13 57.46 57.46-113 112q-12.44 13.19-12.44 31.49 0 18.29 12.44 31.48 13.19 13.2 31.48 13.2 18.3 0 31.49-13.2l112.24-112.76 53.11 52.35-112.76 113q-13.19 13.2-13.19 31.49t13.19 31.49q12.44 12.43 30.73 12.05 18.29-.38 31.49-12.81l112-113L761-480.37q26.35 26.35 26.35 64.27 0 37.93-26.35 64.27l-21.78 22.31L893.5-176q11.2 11.2 5.48 24.99-5.72 13.79-21.39 13.79h-42.92q-13.67 0-26.49-5.48-12.81-5.47-22.25-14.91L676.24-267.3l-21.54 22.54q-26.35 26.35-64.28 26.35-37.92 0-64.27-26.35L236.89-534.02 213-509.89q-13.2 12.43-31.49 12.43t-31.49-12.43Z"/></svg>',
+    "med-vile": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-71.87q-86.35 0-146.76-60.89T272.83-280v-351.87q-33.48-2.39-57.22-26.49-23.74-24.1-23.74-57.57v-87.18q0-35.39 25.41-60.21 25.42-24.81 61.05-24.81h403.58q35.63 0 60.93 24.81 25.29 24.82 25.29 60.21v87.18q0 33.47-23.74 57.57t-57.22 26.49V-280q0 86.35-60.41 147.24Q566.35-71.87 480-71.87Zm84.04-123.61q34.53-35 34.53-84.52h-78.81q-18.19 0-30.65-12.46-12.46-12.45-12.46-30.65 0-18.19 12.46-30.65 12.46-12.46 30.65-12.46h78.81v-72.82h-78.81q-18.19 0-30.65-12.46-12.46-12.46-12.46-30.65 0-18.2 12.46-30.65 12.46-12.46 30.65-12.46h78.81v-105.65H361.43V-280q0 49.52 34.53 84.52 34.52 35 84.04 35t84.04-35Z"/></svg>',
+    "marijuana": '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M436.65-240.54q-41.52 27-85.78 46.76-44.26 19.76-93.02 19.76-53.96 0-102.18-21.22-48.21-21.22-90.93-54.93-14.2-10.96-14.2-28.63 0-17.68 13.96-28.87 30.52-24.76 65.18-42.88 34.67-18.12 72.95-26.84-59.04-49.68-89.45-118.27-30.4-68.6-38.4-145.08-2.24-19.91 12.2-34.47 14.43-14.55 35.11-12.31 59.28 6 113.68 27.26 54.4 21.26 100.16 57.02v-6.09q.48-79.95 32.1-151.55 31.62-71.6 79.62-135.56 12.2-16.15 32.35-16.15 20.15 0 32.35 16.15 47.76 63.96 79.26 135.56 31.5 71.6 32.46 151.55 0 1.53-.39 3.05-.38 1.52-.38 3.04 46.53-35.76 100.93-56.52 54.4-20.76 113.68-27.76 19.92-2.24 34.85 11.93 14.94 14.18 12.7 34.85-7.24 76.48-38.76 145.08-31.53 68.59-90.33 118.27 38.28 8.72 72.56 26.84 34.29 18.12 65.57 42.88 13.96 10.95 14.08 28.75.12 17.79-14.08 28.75-42.72 33.71-90.67 54.93-47.96 21.22-101.92 21.22-49.52 0-93.9-19.76t-84.9-46.76v125.56q0 18.2-12.34 30.65Q498.43-71.87 480-71.87t-30.89-12.46q-12.46-12.45-12.46-30.89v-125.32Z"/></svg>'
+  };
+  return iconMap[iconKey] || "💊";
 }
+
 
 
 

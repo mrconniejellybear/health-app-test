@@ -1,20 +1,5 @@
-:root{
---input-bg: #fff;
-}
 
-.btn-primary, .btn-secondary {
-  flex: 1;
-  padding: 5px 8px;
-  border-radius: 8px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-}
-.btn-primary { background: var(--blue-accent); color: #ffffff; ;
- }
-.btn-secondary { background: #f1f5f9; color: #475569;  margin-right: 8px;
- }
+
 
 .modal-btn-group{
     display: flex; 
@@ -150,14 +135,6 @@
 }
 
 
-.section-sublabel{
-    display: flex;
-    align-items: baseline;
-    color: var(--text-3);
-    font-size: 14px;
-    gap: 6px;
-    margin-top: 10px;
-}
 
 .modal-med-list {
   list-style: none;
@@ -266,19 +243,15 @@
   justify-content: center;
   padding: 10px;
   border: 1px solid var(--border-color);
-  background-color: var(--card-bg);
+  background-color: var(--contrast-bg);
   border-radius: 12px;
+  margin-bottom: 12px;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.1s ease;
 }
 
-.icon-option input[type="radio"]:checked + .icon-box {
-  border-color: #ffffff;
-  background: rgba(63, 213, 255, 0.2);
-  transform: scale(1.05);
-  color: var(--blue-accent);
-}
+
 
 /* Color Circle Buttons */
 .color-btn {
@@ -323,7 +296,7 @@
 }
 
 .reminder-chip .chip-bubble {
-  background-color: var(--card-bg);
+  background-color: var(--contrast-bg);
   border: 1px solid var(--border-color);
   user-select: none;
   color: var(--text-2);

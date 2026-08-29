@@ -596,7 +596,7 @@ gap: 8px;
 
 /* Visual squeeze feedback during the 500ms hold */
 .med-item.holding {
-  transform: scale(0.9);
+  transform: scale(0.5);
   box-shadow: 0 0 0 2px rgba(255, 13, 0, 0.81);
 }
 

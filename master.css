@@ -1,7 +1,7 @@
 :root {
   --bg-color: #f1f3f7;
   --card-bg: #fff;
-  --contrast-bg: #eeeeee;
+  --contrast-bg: #e5e8ef;
 
   --text-main: #252627;
   --text-2: #5b5f65;
@@ -12,15 +12,12 @@
   --card-border: #eeeeee00;
   --border-color: #d6dfea00;
   --green-check: #109d31;
-  --blue-accent: #e50045;
+  --blue-accent: #0091ff;
 
   --input-bg: #fafafa;
 
   --shadows: #ffffff00;
 
-
-  --pill-fix1: #fff;
-  --pill-fix2: #eeeeee;
 
   --feat-text: #fdf1ea;
 
@@ -28,7 +25,7 @@
 
   --medicon: #fff;
 
-  --link-blue: #0088ff;
+  --link-blue: #0091ff;
 }
 
 body.dark {
@@ -79,6 +76,18 @@ body.dagobah {
   --blue-accent: #293a23;
 
   --link-blue: #01aa47;
+}
+body.accessibility {
+  --bg-color: #ffffff;
+  --card-bg: #f1f3f7;
+  --text-main: #33493c;
+  --text-2: #53685a;
+  --text-3: #5e7262;
+
+  --contrast-bg: #ffffff;
+  --blue-accent: #0091ff;
+
+  --link-blue: #0091ff;
 }
 body.midnight {
   --bg-color: #161419;
@@ -291,7 +300,8 @@ body {
 
 .tab2 {
   margin-left: 4px;
-  font-size: 26px;
+  margin-bottom: -2px;
+  font-size: 22px;
   font-weight: 500;
 }
 
@@ -391,14 +401,14 @@ body {
   font-weight: 640;
   border: none;
   border-radius: 13px;
-  padding: 0px;
+  padding: 1px;
 
   display: flex;
   align-items: center;
 }
 .add-btn-mini svg{
-  width: 33px;
-  height: 33px;
+  width: 30px;
+  height: 30px;
 }
 
 .bottom-nav {
@@ -406,7 +416,7 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 64px;
 
   border: none;
   background-color: var(--card-bg);

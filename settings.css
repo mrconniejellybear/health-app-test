@@ -91,39 +91,39 @@ background-color: var(--contrast-bg);
 .settings-icon{
     background-color: var(--contrast-bg);
     border-radius: 11px;
-    height: 30px;
-    width: 30px;
+    height: 31px;
+    width: 31px;
 }
 .settings-icon-cycle{
     background-color: #f7b5db;
     color: #913e86;
     border-radius: 11px;
-    height: 30px;
-    width: 30px;
+    height: 31px;
+    width: 31px;
 }.settings-icon-rest{
     background-color: #dccde9;
     color: #7c43ae;
     border-radius: 11px;
-    height: 30px;
-    width: 30px;
+    height: 31px;
+    width: 31px;
 }.settings-icon-cals{
     background-color: #b5d9f7;
     color: #3c669f;
     border-radius: 11px;
-    height: 30px;
-    width: 30px;
+    height: 31px;
+    width: 31px;
 }.settings-icon-meds{
     background-color: #f7ceb5;
     color: #a16134;
     border-radius: 11px;
-    height: 30px;
-    width: 30px;
+    height: 31px;
+    width: 31px;
 }.settings-icon-mind{
     background-color: #cde9d7;
     color: #198159;
     border-radius: 11px;
-    height: 30px;
-    width: 30px;
+    height: 31px;
+    width: 31px;
 }
 
 .chevron {
@@ -256,16 +256,15 @@ input:checked + .slider:before { transform: translateX(20px); }
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--text-3);
+  color: var(--text-2);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  margin-right: 2px;
-  margin-top: 3px;
+  margin-top: 1px;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }.settings-trigger-btn svg{
-  height: 32px;
+  height: 38px;
   width: auto;
 }
 

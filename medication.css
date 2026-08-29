@@ -5,6 +5,9 @@
 .meds.article-header{
   color: #d00646;
 }
+#edit-meds-btn{
+  display: none;
+}
 
 .card-header.meds{
   margin-bottom: 18px;
@@ -13,7 +16,7 @@
   color: var(--text-3);
   font-size: 13px;
   font-weight: 360;
-  margin-top: -3px;
+  margin-top: -2px;
 }
 /* --- Card Icon + Grid Alignment --- */
 .med-card-wrapper {

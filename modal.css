@@ -238,6 +238,9 @@
   background: var(--blue-accent);
   border-color: var(--blue-accent);
   color: #ffffff;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
 }
 
 /* --- 2. COLOR BUTTONS --- */

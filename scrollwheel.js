@@ -199,7 +199,7 @@ function initRotaryWheel() {
   });
 
   // Calculate starting rotation for index 2 (Happy)
-  activeMoodIndex = 2;
+  activeMoodIndex = 1;
   currentRotationAngle = FOCAL_TARGET_ANGLE - (activeMoodIndex * step);
   wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
 

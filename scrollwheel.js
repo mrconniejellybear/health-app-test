@@ -2,6 +2,7 @@
 // --- ROTARY WHEEL & MOOD DRAWER ENGINE ---
 // ==========================================
 
+// 1. Dynamic Subtitle Prompt Variations
 const moodPrompts = [
   "I'm feeling...",
   "I feel...",
@@ -22,6 +23,7 @@ function updateMoodSubtitle() {
   subtitleEl.textContent = moodPrompts[randomIndex];
 }
 
+// 2. Complete Emotion Configuration Array
 const moodConfig = [
   { id: "neutral", label: "Neutral", score: 3, color: "rgba(148,163,184,0.35)", primaryColor: "#94a3b8", svg: 
     `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M620-520q25 0 42.5-17.5T680-580q0-25-17.5-42.5T620-640q-25 0-42.5 17.5T560-580q0 25 17.5 42.5T620-520Zm-280 0q25 0 42.5-17.5T400-580q0-25-17.5-42.5T340-640q-25 0-42.5 17.5T280-580q0 25 17.5 42.5T340-520Zm20 180h240v-60H360v60Zm-36 228.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5Z"/></svg>` },
@@ -72,7 +74,7 @@ const moodConfig = [
     `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M620-520q25 0 42.5-17.5T680-580q0-25-17.5-42.5T620-640q-25 0-42.5 17.5T560-580q0 25 17.5 42.5T620-520Zm-280 0q25 0 42.5-17.5T400-580q0-25-17.5-42.5T340-640q-25 0-42.5 17.5T280-580q0 25 17.5 42.5T340-520Zm16.5 138.5Q301-343 276-280h66q22-37 58.5-58.5T480-360q43 0 79.5 21.5T618-280h66q-25-63-80.5-101.5T480-420q-68 0-123.5 38.5Zm-32.5 270Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5Z"/></svg>` }
 ];
 
-// Web Audio
+// 3. Audio & Haptic Feedback Engine
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function playMicroTickSound() {
@@ -117,16 +119,18 @@ function triggerHapticFeedback() {
   if (navigator.vibrate) navigator.vibrate(10);
 }
 
-// State
+// 4. Geometry & Wheel Coordinates
 let currentRotationAngle = 0;
 let startAngle = 0;
 let isDragging = false;
 let activeMoodIndex = 2; // Happy
 let lastTickAngle = 0;
-const FOCAL_TARGET_ANGLE = 315; 
-const TRACK_RADIUS = 240;
 
-// Drawer Controls
+const FOCAL_TARGET_ANGLE = -45; // Top-left focal apex target
+const TRACK_RADIUS = 240;
+const EMOJI_RADIUS = 286;  
+
+// 5. Drawer Lifecycle Controls
 const moodDrawer = document.getElementById("view-mood-drawer");
 const closeDrawerBtn = document.getElementById("close-mood-drawer-btn");
 
@@ -148,7 +152,8 @@ document.querySelectorAll('[data-open-drawer="view-mood"], #open-mood-drawer-btn
   btn.addEventListener("click", openMoodDrawer);
 });
 
-// Wheel Builder
+// 6. Build and Initialize the Rotary Wheel Track
+// 2. Update initRotaryWheel()
 function initRotaryWheel() {
   const wheel = document.getElementById("rotary-wheel-track") || document.getElementById("rotary-wheel");
   if (!wheel) return;
@@ -159,7 +164,7 @@ function initRotaryWheel() {
   const ticksPerSegment = 4;
   const totalTicks = total * ticksPerSegment;
 
-  // 1. Ticks
+  // 6a. Generate Gauge Ticks (Using TRACK_RADIUS = 240px)
   for (let i = 0; i < totalTicks; i++) {
     const tickAngle = (i * 360) / totalTicks;
     const isMajor = i % ticksPerSegment === 0;
@@ -174,12 +179,12 @@ function initRotaryWheel() {
     wheel.appendChild(tick);
   }
 
-  // 2. Emojis (Storing static X/Y in dataset to prevent position wipe)
+  // 6b. Position Emojis (Using EMOJI_RADIUS = 286px to sit outside the ticks)
   moodConfig.forEach((item, index) => {
     const slotAngle = index * step;
     const rad = (slotAngle * Math.PI) / 180;
-    const x = Math.sin(rad) * TRACK_RADIUS;
-    const y = -Math.cos(rad) * TRACK_RADIUS;
+    const x = Math.sin(rad) * EMOJI_RADIUS;
+    const y = -Math.cos(rad) * EMOJI_RADIUS;
 
     const slot = document.createElement("div");
     slot.className = "emoji-slot";
@@ -193,8 +198,9 @@ function initRotaryWheel() {
     wheel.appendChild(slot);
   });
 
-  // Calculate starting rotation to lock index 2 (Happy) under arrow at 135 deg
-  currentRotationAngle = -(activeMoodIndex * step - FOCAL_TARGET_ANGLE);
+  // Calculate starting rotation for index 2 (Happy)
+  activeMoodIndex = 2;
+  currentRotationAngle = FOCAL_TARGET_ANGLE - (activeMoodIndex * step);
   wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
 
   updateEmojiUprightAngles();
@@ -202,7 +208,7 @@ function initRotaryWheel() {
   updateRotarySelection(activeMoodIndex);
 }
 
-// Helper to keep emojis upright while preserving their circle radius
+// 7. Helper: Keep Emojis Upright Without Losing Circle Coordinates
 function updateEmojiUprightAngles() {
   const wheel = document.getElementById("rotary-wheel-track") || document.getElementById("rotary-wheel");
   if (!wheel) return;
@@ -214,7 +220,7 @@ function updateEmojiUprightAngles() {
   });
 }
 
-// Rotary Physics & Drag
+// 8. Rotary Drag Physics
 function attachRotaryPhysics() {
   const viewport = document.getElementById("rotary-viewport");
   const wheel = document.getElementById("rotary-wheel-track") || document.getElementById("rotary-wheel");
@@ -261,12 +267,12 @@ function attachRotaryPhysics() {
     const total = moodConfig.length;
     const step = 360 / total;
 
-    // Snap to nearest mood slot
-    let normalized = (-(currentRotationAngle - FOCAL_TARGET_ANGLE)) % 360;
+    // Snap to nearest focal slot
+    let normalized = (FOCAL_TARGET_ANGLE - currentRotationAngle) % 360;
     if (normalized < 0) normalized += 360;
 
     activeMoodIndex = Math.round(normalized / step) % total;
-    currentRotationAngle = -(activeMoodIndex * step - FOCAL_TARGET_ANGLE);
+    currentRotationAngle = FOCAL_TARGET_ANGLE - (activeMoodIndex * step);
 
     wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
     updateEmojiUprightAngles();
@@ -284,11 +290,12 @@ function attachRotaryPhysics() {
   window.addEventListener("mouseup", onEnd);
 }
 
-// Calculate Focal Mood
+// 9. Synchronize Active Emotion with Headline and Arrow
 function calculateActiveFocalEmoji() {
   const total = moodConfig.length;
   const step = 360 / total;
-  let normalized = (-(currentRotationAngle - FOCAL_TARGET_ANGLE)) % 360;
+  
+  let normalized = (FOCAL_TARGET_ANGLE - currentRotationAngle) % 360;
   if (normalized < 0) normalized += 360;
 
   const nearestIndex = Math.round(normalized / step) % total;
@@ -301,7 +308,6 @@ function calculateActiveFocalEmoji() {
   }
 }
 
-// Update Active Selection UI
 function updateRotarySelection(index) {
   const activeMood = moodConfig[index];
   const headline = document.getElementById("rotary-headline") || document.getElementById("rotary-label");
@@ -323,7 +329,7 @@ function updateRotarySelection(index) {
   });
 }
 
-// Save Mood Handler
+// 10. Save Action
 document.getElementById("save-mood-btn")?.addEventListener("click", () => {
   const activeMood = moodConfig[activeMoodIndex];
 
@@ -349,6 +355,7 @@ document.getElementById("save-mood-btn")?.addEventListener("click", () => {
   closeMoodDrawer();
 });
 
+// Initialization
 document.addEventListener("DOMContentLoaded", () => {
   initRotaryWheel();
   updateMoodSubtitle();

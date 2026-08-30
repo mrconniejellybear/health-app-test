@@ -91,49 +91,49 @@ background-color: var(--contrast-bg);
 .settings-icon{
     background-color: var(--contrast-bg);
     border-radius: 11px;
-    height: 29px;
-    width: 29px;
+    height: 30px;
+    width: 30px;
 }
 .settings-icon-cycle{
     background-color: #f7b5db;
     color: #913e86;
     border-radius: 11px;
-    height: 29px;
-    width: 29px;
+    height: 30px;
+    width: 30px;
 }.settings-icon-rest{
     background-color: #dccde9;
     color: #7c43ae;
     border-radius: 11px;
-    height: 29px;
-    width: 29px;
+    height: 30px;
+    width: 30px;
 }.settings-icon-cals{
     background-color: #b5d9f7;
     color: #3c669f;
     border-radius: 11px;
-    height: 29px;
-    width: 29px;
+    height: 30px;
+    width: 30px;
 }.settings-icon-meds{
     background-color: #f7ceb5;
     color: #a16134;
     border-radius: 11px;
-    height: 29px;
-    width: 29px;
+    height: 30px;
+    width: 30px;
 }.settings-icon-mind{
     background-color: #cde9d7;
     color: #198159;
     border-radius: 11px;
-    height: 29px;
-    width: 29px;
+    height: 30px;
+    width: 30px;
 }
 
 .chevron {
   font-size: 1.2rem;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-3);
 }
 .ext-link{
-  height: 29px;
-  width: 29px;
-  color: var(--text-muted);
+  height: 30px;
+  width: 30px;
+  color: var(--text-3);
 }
 
 /* iOS Toggle Switches */

@@ -1,7 +1,7 @@
 :root {
   --bg-color: #f1f3f7;
   --card-bg: #fff;
-  --contrast-bg: #eee;
+  --contrast-bg: #ececec;
 
   --text-main: #252627;
   --text-2: #5b5f65;
@@ -133,16 +133,6 @@ body {
 
 
 
-.account-icon{
-  color: #000;
-  display: flex;
-  align-items: center;
-  background-color: var(--card-bg);
-}
-.account-icon svg{
-  height: 24px;
-  width: 24px;
-}
 
 
 
@@ -154,38 +144,34 @@ body {
   padding: 11px 9px;
 }
 .article-icon{
-  height: 80px;
+  height: 70px;
   width: 80px;
+}
+.article-icon .cycle{
+  padding: 4px;
+
 }
 
 .card.wellbeing{
-  background-color:#c6e7d1;
-}.article-header.wellbeing{
-  color: #116632;
-}.article-icon.wellbeing{
-  color: #116632;
-}
+  border: none;
+  background-color:rgb(206, 238, 225);
+}.article-header.wellbeing, .article-icon.wellbeing{
+  color: #057456;}
 
 
 .card.cycle{
-  background-color:#fad4eb;
+  background-color:#f2d3ec;
 }.article-header.cycle, .article-icon.cycle{
-  color: #ff00a2;
+  color: #ab1f81;
 }
 
 
-
-.card.perscription{
+.card.meds{
   text-decoration: none;
-  display: none;
-  background-color:#fef0e0;
-}
-.article-header.perscription{
-  color: #fb9405;
-}
-.article-icon.perscription{
-  color: #f48301;
-  padding: 6px;
+  border: none;
+  background-color: #e3eec4d1;
+}.article-header.meds, .article-icon.meds{
+  color: #668800;
 }
 
 .card-header {
@@ -241,38 +227,36 @@ body {
 
 
 
-.baby-card{
-  padding: 12px;
-  border-radius: 18px;
-  border: none;
-  text-decoration: none;
-  background-color: #b1e7acf8
-}
 .article-header{
-  color: #1f8d18;
+  font-size: 17px;
   display: flex;
   justify-content: space-between;
 }
 
+.article-title svg{
+  height: 30px;
+  width: auto;
+  padding-bottom: 2px;
+}
 
 .article-title{
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
-  margin-bottom: 4px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 700;
 
 }
 .article-tease{
-  color: #222;
+  color: var(--text-main);
+  text-align: left;
   font-size: 14px;
   line-height: 20px;
   font-weight: 320;
 }
 .article-text-wrap{
-  max-width: calc((100%) - (100px));
+  max-width: calc((100%) - (86px));
 }
 
 
@@ -296,7 +280,6 @@ body {
 
 .tab2 {
   margin-left: 4px;
-  margin-bottom: -4px;
   font-size: 22px;
   font-weight: 500;
 }

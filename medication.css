@@ -1,22 +1,4 @@
 
-.baby-card.meds{
-  background-color: #f9d5e4be
-}
-.meds.article-header{
-  color: #d00646;
-}
-#edit-meds-btn{
-  display: none;
-}
-
-.card-header.meds{
-  margin-bottom: 6px;
-}
-.header-titles{
-  color: var(--text-3);
-  font-size: 13px;
-  font-weight: 360;
-}
 /* --- Card Icon + Grid Alignment --- */
 .med-card-wrapper {
   display: flex;

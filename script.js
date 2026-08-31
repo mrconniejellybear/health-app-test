@@ -254,7 +254,7 @@ menuEditMeds?.addEventListener("click", () => {
   isMedEditMode = !isMedEditMode;
 
   if (menuEditText) {
-    menuEditText.textContent = isMedEditMode ? "Done Editing" : "Edit Prescriptions";
+    menuEditText.textContent = isMedEditMode ? "Removing..." : "Remove";
   }
 
   const listEl = document.getElementById("med-list");
@@ -627,9 +627,10 @@ function renderMedications() {
 
     li.innerHTML = `
       <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
-          <path d="M280-120q-33 0-56.5-23.5T200-200v-520q-17 0-28.5-11.5T160-760q0-17 11.5-28.5T200-800h160q0-17 11.5-28.5T400-840h160q17 0 28.5 11.5T600-800h160q17 0 28.5 11.5T800-760q0 17-11.5 28.5T760-720v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM428.5-291.5Q440-303 440-320v-280q0-17-11.5-28.5T400-640q-17 0-28.5 11.5T360-600v280q0 17 11.5 28.5T400-280q17 0 28.5-11.5Zm160 0Q600-303 600-320v-280q0-17-11.5-28.5T560-640q-17 0-28.5 11.5T520-600v280q0 17 11.5 28.5T560-280q17 0 28.5-11.5ZM280-720v520-520Z"/>
+        <svg width="100pt" fill="currentColor" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="m74 40h1.8281c1.5938 0.039062 2.957-1.125 3.1719-2.6992 0.085938-0.84766-0.19141-1.6914-0.76562-2.3203-0.57031-0.62891-1.3828-0.98438-2.2344-0.98047h-13v-6c0-4.9688-4.0312-9-9-9h-8c-4.9688 0-9 4.0312-9 9v6h-12.828c-1.5938-0.039062-2.957 1.125-3.1719 2.6992-0.085938 0.84766 0.19141 1.6914 0.76562 2.3203 0.57031 0.62891 1.3828 0.98438 2.2344 0.98047h2v32c0 4.9688 4.0312 9 9 9h30c4.9688 0 9-4.0312 9-9zm-31-12c0-1.6562 1.3438-3 3-3h8c1.6562 0 3 1.3438 3 3v6h-14zm25 44c0 1.6562-1.3438 3-3 3h-30c-1.6562 0-3-1.3438-3-3v-32h36z"/>
         </svg>
+
       </button>
       <div class="med-card-wrapper">
         <div class="med-icon-display" style="color: ${colorTheme.main}">

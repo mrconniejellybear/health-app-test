@@ -345,15 +345,11 @@ body {
   gap: 10px;
   margin-left: 4px;
 }
-
-.title-icon{
-  background-color: #e9c1709a;
-  color: #ca8a0c;
-  height: 38px;
-  width: 38px;
-  padding: 4px;
-  border-radius: 99px;
+.header-titles p{
+  font-size: 13px;
+  color: var(--text-3);
 }
+
 
 
 .status-counter {
@@ -422,7 +418,7 @@ body {
   border: none;
   outline: none;
   border-radius: 50px;
-  padding: 1px;
+  padding: 0px;
 
   cursor: pointer;
   display: flex;
@@ -431,8 +427,8 @@ body {
   justify-content: center;
   align-items: center;
   color: var(--text-3);
-  background-color: #252d3c;
-  transition: all 0.2s;
+  background-color: #252d3c00;
+  transition: all 0.1s;
 }
 
 .nav-btn svg{
@@ -442,8 +438,7 @@ body {
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
-  color: #fff;
-  background-color: var(--link-blue);
+  color: #e9f6ff;
 }
 
 

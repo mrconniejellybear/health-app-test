@@ -1361,7 +1361,6 @@ body {
   position: relative;
   height: 340px; /* 14 moods * 28px */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient( #ffca1a09 0%, #1228a609 100%);
   background-color: #f5f7f83f;
   border-radius: 10px;
 

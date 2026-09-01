@@ -10,7 +10,7 @@
   z-index: 10000;
   width: 100vw;
   height: 100vh;
-  background: #ffffff;
+  background: #fbf8f2;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -80,8 +80,8 @@
 /* Red Indicator Arrow */
 .focal-arrow-indicator {
   position: absolute;
-  top: 15%;
-  left: 36%;
+  top: 5%;
+  left: 40%;
   color: #ef4444;
   transform: rotate(44deg);
   z-index: 20;
@@ -93,8 +93,7 @@
   position: absolute;
   width: 580px;
   height: 580px;
-  top: 14%;
-  left: 34%;
+  left: 40%;
   border-radius: 50%;
   pointer-events: auto;
   cursor: grab;

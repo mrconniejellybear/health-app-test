@@ -215,6 +215,119 @@ const FOCAL_TARGET_ANGLE = -45; // Top-left focal apex target
 const TRACK_RADIUS = 240;
 const EMOJI_RADIUS = 286;  
 
+
+
+
+
+
+
+// --- PRIZE WHEEL PHYSICS & MOMENTUM ENGINE ---
+let velocity = 0;
+let lastMoveAngle = 0;
+let lastMoveTime = 0;
+let physicsFrameId = null;
+
+const FRICTION = 0.975;           // Deceleration rate (0.92 = quick stop, 0.97 = long spin)
+const SNAP_VELOCITY_LIMIT = 0.50; // Speed threshold where free-spin hands off to the magnetic catch
+
+function attachRotaryPhysics() {
+  const viewport = document.getElementById("rotary-viewport");
+  const wheel = document.getElementById("rotary-wheel-track") || document.getElementById("rotary-wheel");
+  if (!viewport || !wheel) return;
+
+  function getAngle(e) {
+    const rect = wheel.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const rad = Math.atan2(clientY - centerY, clientX - centerX);
+    return rad * (180 / Math.PI);
+  }
+
+  // --- DRAG START ---
+  function onStart(e) {
+    isDragging = true;
+    velocity = 0;
+    cancelAnimationFrame(physicsFrameId);
+    wheel.classList.remove("snapping");
+
+    const pointerAngle = getAngle(e);
+    startAngle = pointerAngle - currentRotationAngle;
+    lastMoveAngle = pointerAngle;
+    lastMoveTime = performance.now();
+  }
+
+
+function onMove(e) {
+  if (!isDragging) return;
+  const pointerAngle = getAngle(e);
+  const now = performance.now();
+
+  let deltaAngle = pointerAngle - lastMoveAngle;
+  if (deltaAngle > 180) deltaAngle -= 360;
+  if (deltaAngle < -180) deltaAngle += 360;
+
+  const deltaTime = Math.max(now - lastMoveTime, 1);
+  const instantVelocity = (deltaAngle / deltaTime) * 20.0;
+
+  // Smooth velocity blending to prevent zero-drops on release
+  velocity = velocity * 0.4 + instantVelocity * 0.6;
+
+  currentRotationAngle = pointerAngle - startAngle;
+  applyWheelTransform();
+
+  lastMoveAngle = pointerAngle;
+  lastMoveTime = now;
+}
+
+function onEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+
+  // Zero-velocity cutoff check
+  if (Math.abs(velocity) < SNAP_VELOCITY_LIMIT) {
+    snapToNearestFocalSlot();
+  } else {
+    runPrizeWheelInertia();
+  }
+}
+
+
+  // Bind pointer events
+  viewport.addEventListener("touchstart", onStart, { passive: true });
+  window.addEventListener("touchmove", onMove, { passive: true });
+  window.addEventListener("touchend", onEnd);
+
+  viewport.addEventListener("mousedown", onStart);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onEnd);
+}
+
+// --- FREE-SPIN FRICTION LOOP ---
+function runPrizeWheelInertia() {
+  velocity *= FRICTION;
+
+  if (Math.abs(velocity) > SNAP_VELOCITY_LIMIT) {
+    // 1. Wheel is actively spinning from momentum
+    currentRotationAngle += velocity;
+    applyWheelTransform();
+
+    physicsFrameId = requestAnimationFrame(runPrizeWheelInertia);
+  } else {
+    // 2. Wheel slowed down below threshold -> engage magnetic catch
+    velocity = 0;
+    snapToNearestFocalSlot();
+  }
+}
+
+
+
+
+
+
+
+
 // 5. Drawer Lifecycle Controls
 const moodDrawer = document.getElementById("view-mood-drawer");
 const closeDrawerBtn = document.getElementById("close-mood-drawer-btn");
@@ -305,88 +418,64 @@ function updateEmojiUprightAngles() {
   });
 }
 
-// 8. Rotary Drag Physics
-function attachRotaryPhysics() {
-  const viewport = document.getElementById("rotary-viewport");
-  const wheel = document.getElementById("rotary-wheel-track") || document.getElementById("rotary-wheel");
-  if (!viewport || !wheel) return;
 
-  function getAngle(e) {
-    const rect = wheel.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const rad = Math.atan2(clientY - centerY, clientX - centerX);
-    return rad * (180 / Math.PI);
-  }
-
-  function onStart(e) {
-    isDragging = true;
-    wheel.classList.remove("snapping");
-    startAngle = getAngle(e) - currentRotationAngle;
-  }
-
-  function onMove(e) {
-    if (!isDragging) return;
-    const angle = getAngle(e);
-    currentRotationAngle = angle - startAngle;
-    wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
-
-    updateEmojiUprightAngles();
-
-    // Check Micro-Ticks Audio (every 5 degrees)
-    if (Math.abs(currentRotationAngle - lastTickAngle) >= 5) {
-      playMicroTickSound();
-      lastTickAngle = currentRotationAngle;
-    }
-
-    calculateActiveFocalEmoji();
-  }
-
-  function onEnd() {
-  if (!isDragging) return;
-  isDragging = false;
-
+// --- MAGNETIC CATCH TO TARGET SLOT ---
+function snapToNearestFocalSlot() {
   const total = moodConfig.length;
   const step = 360 / total;
 
-  // 1. Calculate which index is physically closest to the focal target
+  // Find nearest discrete slot
   let normalized = (FOCAL_TARGET_ANGLE - currentRotationAngle) % 360;
   if (normalized < 0) normalized += 360;
 
   activeMoodIndex = Math.round(normalized / step) % total;
 
-  // 2. Compute the SHORTEST relative angle difference to snap without jumping
-  const idealNormalizedAngle = activeMoodIndex * step;
-  let angleDelta = (FOCAL_TARGET_ANGLE - idealNormalizedAngle) - (currentRotationAngle % 360);
+  // Shortest delta to final target angle
+  const idealSlotAngle = FOCAL_TARGET_ANGLE - (activeMoodIndex * step);
+  let angleDelta = idealSlotAngle - (currentRotationAngle % 360);
 
-  // Shortest path correction across 360 boundary
   if (angleDelta > 180) angleDelta -= 360;
   if (angleDelta < -180) angleDelta += 360;
 
-  // Apply the delta relative to current angle (preserves momentum position)
-  currentRotationAngle += angleDelta;
+  const targetAngle = currentRotationAngle + angleDelta;
 
-  // 3. Add smooth snap class
-  wheel.classList.add("snapping");
+  // Smooth lerp into the final resting notch
+  function animateMagneticLock() {
+    const diff = targetAngle - currentRotationAngle;
+
+    if (Math.abs(diff) > 0.08) {
+      currentRotationAngle += diff * 0.08; // Magnetic spring strength
+      applyWheelTransform();
+      physicsFrameId = requestAnimationFrame(animateMagneticLock);
+    } else {
+      currentRotationAngle = targetAngle;
+      applyWheelTransform();
+      updateRotarySelection(activeMoodIndex);
+      playMajorSnapSound();
+      triggerHapticFeedback();
+    }
+  }
+
+  animateMagneticLock();
+}
+
+// Visual sync helper for rotation + audio ticks + SVG orientation
+function applyWheelTransform() {
+  const wheel = document.getElementById("rotary-wheel-track") || document.getElementById("rotary-wheel");
+  if (!wheel) return;
+
   wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
-
   updateEmojiUprightAngles();
-  updateRotarySelection(activeMoodIndex);
-  playMajorSnapSound();
-  triggerHapticFeedback();
+
+  // Tick sound every 5 degrees of rotation
+  if (Math.abs(currentRotationAngle - lastTickAngle) >= 5) {
+    playMicroTickSound();
+    lastTickAngle = currentRotationAngle;
+  }
+
+  calculateActiveFocalEmoji();
 }
 
-
-  viewport.addEventListener("touchstart", onStart, { passive: true });
-  window.addEventListener("touchmove", onMove, { passive: true });
-  window.addEventListener("touchend", onEnd);
-
-  viewport.addEventListener("mousedown", onStart);
-  window.addEventListener("mousemove", onMove);
-  window.addEventListener("mouseup", onEnd);
-}
 
 // 9. Synchronize Active Emotion with Headline and Arrow
 function calculateActiveFocalEmoji() {

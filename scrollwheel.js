@@ -55,6 +55,16 @@ const moodConfig = [
 </svg>
 ` },
 
+{ id: "hopeful", label: "Hopeful", score: 6, color: "#d4ca106c", primaryColor: "#ff8c00d6", svg: 
+    `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.5 0C19.3151 0 26.1388 5.50631 24.8398 12.7715C24.279 15.9082 23.1729 16.3341 21.5479 15.8076C22.7146 17.5929 23.2774 19.7736 22.8652 22.1748C21.7741 28.5315 18.2246 22.1748 12.5 22.1748C6.7754 22.1748 3.22624 28.5315 2.13477 22.1748C1.72256 19.7739 2.28382 17.5927 3.4502 15.8076C1.82626 16.3331 0.721003 15.9069 0.160156 12.7715C-1.13918 5.50631 5.68494 6.38989e-06 12.5 0Z" fill="#FFFDD0"/>
+<path d="M8 11.325C8 10.3999 10.0147 13.5 12.5 13.5C14.9853 13.5 17 10.3999 17 11.325C17 12.2501 14.9853 14.5 12.5 14.5C10.0147 14.5 8 12.2501 8 11.325Z" fill="black" fill-opacity="0.4"/>
+<path d="M18.8911 9.47027C18.6516 10.3638 17.9845 8.02923 16.6509 7.67187C15.3172 7.31452 13.822 9.06974 14.0614 8.17617C14.3009 7.28261 15.8172 6.31422 17.1509 6.67157C18.4845 7.02893 19.1305 8.57671 18.8911 9.47027Z" fill="black" fill-opacity="0.3"/>
+<path d="M6.58307 9.47027C6.82249 10.3638 7.48958 8.02923 8.82324 7.67187C10.1569 7.31452 11.6521 9.06974 11.4127 8.17617C11.1733 7.28261 9.6569 6.31422 8.32324 6.67157C6.98957 7.02893 6.34364 8.57671 6.58307 9.47027Z" fill="black" fill-opacity="0.3"/>
+</svg>
+
+` },
+
     { id: "loved", label: "Loved", score: 6, color: "#ff0a3f31", primaryColor: "#ff00c3d6", svg: 
     `<svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15.8193 0C18.2214 0 20.3735 0.604978 21.3867 2.63184C21.773 3.17952 22 4.0389 22 5.31055C22 5.37262 21.9971 5.43444 21.9961 5.49609C21.9971 5.55572 22.0001 5.61592 22 5.67676C21.9993 6.37832 21.922 6.98914 21.7813 7.52051C20.2416 15.2799 11 19.1602 11 19.1602C10.988 19.1551 1.94585 15.3556 0.266603 7.76172C0.096042 7.17613 0.00071994 6.48708 1.16333e-06 5.67676C-5.46043e-05 5.61193 0.00190841 5.54782 0.00293085 5.48438C0.00206287 5.42661 2.5213e-06 5.36868 1.16333e-06 5.31055C1.1645e-06 4.13641 0.185781 3.31318 0.507814 2.7627C1.41413 0.63134 3.42994 0 5.68652 0C7.93058 0.000149752 9.99033 1.3623 10.9346 3.32129C11.6741 1.36191 13.3798 2.35359e-05 15.8193 0Z" fill="#F56080"/>
@@ -81,18 +91,38 @@ const moodConfig = [
 <path d="M15.3601 11.2029C15.3601 9.69528 16.8644 12.2948 18.7201 12.2948C20.5758 12.2948 22.0801 9.69528 22.0801 11.2029C22.0801 12.7105 20.5758 13.9326 18.7201 13.9326C16.8644 13.9326 15.3601 12.7105 15.3601 11.2029Z" fill="black" fill-opacity="0.3"/>
 <ellipse cx="11.5" cy="16" rx="1.5" ry="1" fill="white" fill-opacity="0.3"/>
 </svg>
+` },
+
+  { id: "uncomfortable", label: "Uncomfortable", score: 2, color: "#3fcb7737", primaryColor: "#5a00d7", svg: 
+    `<svg width="33" height="30" viewBox="0 0 33 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.3604 11.5742L15.0801 20.0518L11.0801 26.0518L2.08057 18.5518L11.3604 11.5742Z" fill="#3FCB77"/>
+<path d="M9.74461 8.24965L21.7706 5.00001L28.5774 15.4332L20.7583 25.1309L9.11898 20.6912L9.74461 8.24965Z" fill="#3FCB77"/>
+<path d="M9.08008 15.0512L1.58023 11.0518L11.5793 2.05178L19.5801 7.55176L9.08008 15.0512Z" fill="#3FCB77"/>
+<path d="M13.5776 9.9873C15.5567 10.5874 15.6602 12.1872 15.3689 12.8372C15.0776 13.4873 13.7647 12.3504 11.7856 11.7503C9.80657 11.1501 7.92415 11.5807 8.20214 10.6639C8.48013 9.74721 11.5986 9.38717 13.5776 9.9873Z" fill="black" fill-opacity="0.3"/>
+<path d="M21.2185 11.4738C22.4002 10.9645 23.8777 11.7569 24.2557 12.634C24.6338 13.511 23.2977 13.0466 22.116 13.5559C20.9344 14.0653 20.3546 15.3555 19.9766 14.4785C19.5985 13.6014 20.0369 11.9831 21.2185 11.4738Z" fill="black" fill-opacity="0.3"/>
+<path d="M12.5786 15.5504C15.6162 15.5504 18.0786 17.1107 18.0786 18.0506C18.0786 18.9905 17.1162 17.0508 14.0786 17.0508C11.041 17.0508 7.07861 18.9905 7.07861 18.0506C7.07861 17.1107 9.54105 15.5504 12.5786 15.5504Z" fill="white" fill-opacity="0.4"/>
+</svg>
+` },
+
+{ id: "annoyed", label: "Annoyed", score: 1, color: "#ea603234", primaryColor: "#ff0000", svg: 
+    `<svg width="27" height="23" viewBox="0 0 27 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.89147 6.62655C-4.10853 6.12655 0.866825 26.7411 7.36683 19.7411C21.8668 27.2411 24.3668 18.8162 24.3668 12.7411C31.3665 5.24215 19.3916 -3.87312 13.3668 1.7411C7.36683 -0.373047 4.3916 2.12688 4.89147 6.62655Z" fill="#EA6032"/>
+<path d="M12.1064 10.6279C12.1064 11.732 10.5394 12.627 8.60645 12.627C6.67345 12.627 5.10645 11.732 5.10645 10.6279C5.10645 10.6279 6.67345 10.627 8.60645 10.627C10.5394 10.627 12.1064 10.6279 12.1064 10.6279Z" fill="black" fill-opacity="0.4"/>
+<path d="M21.1064 10.6279C21.1064 11.732 19.5394 12.627 17.6064 12.627C15.6734 12.627 14.1064 11.732 14.1064 10.6279C14.1064 10.6279 15.6734 10.627 17.6064 10.627C19.5394 10.627 21.1064 10.6279 21.1064 10.6279Z" fill="black" fill-opacity="0.4"/>
+<path d="M8.16535 15.3336C8.66063 16.187 11.3733 14.907 14.1087 14.907C16.844 14.907 18.5657 15.3336 19.0614 14.907C19.5572 14.4803 15.8534 13.627 13.1181 13.627C10.3828 13.627 7.67008 14.4803 8.16535 15.3336Z" fill="black" fill-opacity="0.2"/>
+</svg>
 
 ` },
 
 
+
   { id: "angry", label: "Angry", score: 1, color: "#e5280f2e", primaryColor: "#ff0000", svg: 
     `<svg width="27" height="22" viewBox="0 0 27 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M6.81907 20.1113C1.29138 1.76866 25.7055 0.828977 20.1781 20.1113" stroke="#DD2A0A" stroke-width="12"/>
-<path d="M14.1442 6.83848C14.5045 8.21126 16.389 8.88848 18.3533 8.35109C20.3177 7.8137 22.2776 4.62839 21.0975 4.28153C19.9174 3.93467 16.1086 6.30109 14.1442 6.83848Z" fill="white" fill-opacity="0.6"/>
-<path d="M12.9996 6.80668C12.6347 8.19723 10.7464 8.88886 8.78203 8.35147C6.81766 7.81408 4.86619 4.59677 6.04841 4.24182C7.23064 3.88687 11.0353 6.26929 12.9996 6.80668Z" fill="white" fill-opacity="0.6"/>
-<path d="M18.9985 12.7731C18.9985 14.7049 16.5361 10.4413 13.4985 10.4413C10.461 10.4413 7.99854 14.7049 7.99854 12.7731C7.99854 10.8414 10.461 9.27539 13.4985 9.27539C16.5361 9.27539 18.9985 10.8414 18.9985 12.7731Z" fill="black" fill-opacity="0.4"/>
+<path d="M6.81907 20.1113C1.29138 1.76866 25.7055 0.828977 20.1781 20.1113" stroke="#D02F13" stroke-width="12"/>
+<path d="M15.1789 6.72282C15.4933 7.92083 17.1379 8.51183 18.8522 8.04286C20.5665 7.57388 22.2768 4.79409 21.247 4.49139C20.2171 4.18869 16.8932 6.25385 15.1789 6.72282Z" fill="black" fill-opacity="0.4"/>
+<path d="M12.8675 6.68366C12.5553 7.87336 10.9397 8.46509 9.25911 8.00532C7.57847 7.54554 5.90886 4.79294 6.92033 4.48926C7.9318 4.18558 11.1869 6.22389 12.8675 6.68366Z" fill="black" fill-opacity="0.4"/>
+<path d="M18.999 12.7731C18.999 14.7049 16.5366 10.4413 13.499 10.4413C10.4615 10.4413 7.99902 14.7049 7.99902 12.7731C7.99902 10.8414 10.4615 9.27539 13.499 9.27539C16.5366 9.27539 18.999 10.8414 18.999 12.7731Z" fill="black" fill-opacity="0.2"/>
 </svg>
-
 
 ` },
 
@@ -105,6 +135,15 @@ const moodConfig = [
 <path d="M13 15C14.8 15 14.3431 15 16 15C17.6569 15 16.6 15 19 15C19 16.1046 17.6569 17 16 17C14.3431 17 13 16.1046 13 15Z" fill="white" fill-opacity="0.4"/>
 <path d="M5 15C6.8 15 6.34315 15 8 15C9.65685 15 8.6 15 11 15C11 16.1046 9.65685 17 8 17C6.34315 17 5 16.1046 5 15Z" fill="white" fill-opacity="0.4"/>
 <circle cx="21" cy="5" r="4" fill="#3E4360"/>
+</svg>
+` },
+
+{ id: "hurt", label: "Hurt", score: 1, color: "#28262d44", primaryColor: "#2f385e", svg: 
+    `<svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 13.8163C0 22.1221 7.72531 16.932 14.5 16.932C21.2747 16.932 24 22.1221 24 13.8163C24 0.0851927 16 -2.46387 9 2.03612C4 -0.464374 0 5.51059 0 13.8163Z" fill="#839FB0"/>
+<path d="M18 13.4505C18 14.4773 16.35 12.7012 13.05 12.7012C9.75 12.7012 7 15.1155 7 13.4505C7 12.4236 8.91243 11.0361 11.95 11.0361C14.9876 11.0361 18 12.4236 18 13.4505Z" fill="black" fill-opacity="0.2"/>
+<path d="M10.3564 6.03613C10.5951 6.37746 10.7362 6.78184 10.7363 7.21777C10.7363 7.7648 10.5165 8.26333 10.1562 8.64746C9.69553 8.57589 9.09299 8.57776 8.44629 8.67188C7.90666 8.75043 7.41799 8.88153 7.03027 9.03809C6.48703 8.70237 6.10149 8.16769 6 7.5459C6.54779 7.5436 7.13404 7.47488 7.72949 7.32812C8.81084 7.0616 9.72687 6.58943 10.3564 6.03613Z" fill="black" fill-opacity="0.4"/>
+<path d="M14.3799 6.03613C14.1413 6.37746 14.0001 6.78184 14 7.21777C14 7.7648 14.2198 8.26333 14.5801 8.64746C15.0408 8.57589 15.6433 8.57776 16.29 8.67188C16.8297 8.75043 17.3183 8.88153 17.7061 9.03809C18.2493 8.70237 18.6348 8.16769 18.7363 7.5459C18.1885 7.5436 17.6023 7.47488 17.0068 7.32812C15.9255 7.0616 15.0095 6.58943 14.3799 6.03613Z" fill="black" fill-opacity="0.4"/>
 </svg>
 ` },
 
@@ -304,26 +343,39 @@ function attachRotaryPhysics() {
   }
 
   function onEnd() {
-    if (!isDragging) return;
-    isDragging = false;
-    wheel.classList.add("snapping");
+  if (!isDragging) return;
+  isDragging = false;
 
-    const total = moodConfig.length;
-    const step = 360 / total;
+  const total = moodConfig.length;
+  const step = 360 / total;
 
-    // Snap to nearest focal slot
-    let normalized = (FOCAL_TARGET_ANGLE - currentRotationAngle) % 360;
-    if (normalized < 0) normalized += 360;
+  // 1. Calculate which index is physically closest to the focal target
+  let normalized = (FOCAL_TARGET_ANGLE - currentRotationAngle) % 360;
+  if (normalized < 0) normalized += 360;
 
-    activeMoodIndex = Math.round(normalized / step) % total;
-    currentRotationAngle = FOCAL_TARGET_ANGLE - (activeMoodIndex * step);
+  activeMoodIndex = Math.round(normalized / step) % total;
 
-    wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
-    updateEmojiUprightAngles();
-    updateRotarySelection(activeMoodIndex);
-    playMajorSnapSound();
-    triggerHapticFeedback();
-  }
+  // 2. Compute the SHORTEST relative angle difference to snap without jumping
+  const idealNormalizedAngle = activeMoodIndex * step;
+  let angleDelta = (FOCAL_TARGET_ANGLE - idealNormalizedAngle) - (currentRotationAngle % 360);
+
+  // Shortest path correction across 360 boundary
+  if (angleDelta > 180) angleDelta -= 360;
+  if (angleDelta < -180) angleDelta += 360;
+
+  // Apply the delta relative to current angle (preserves momentum position)
+  currentRotationAngle += angleDelta;
+
+  // 3. Add smooth snap class
+  wheel.classList.add("snapping");
+  wheel.style.transform = `rotate(${currentRotationAngle}deg)`;
+
+  updateEmojiUprightAngles();
+  updateRotarySelection(activeMoodIndex);
+  playMajorSnapSound();
+  triggerHapticFeedback();
+}
+
 
   viewport.addEventListener("touchstart", onStart, { passive: true });
   window.addEventListener("touchmove", onMove, { passive: true });

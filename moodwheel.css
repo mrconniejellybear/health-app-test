@@ -101,8 +101,9 @@
   will-change: transform;
 }
 
+/* Change from the spring overshoot to a smooth ease-out */
 .rotary-wheel-track.snapping {
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Neutral Grey Dial Ticks */
@@ -121,11 +122,11 @@
 }
 
 .wheel-tick.major {
-  width: 3.5px;
-  height: 28px;
+  width: 3px;
+  height: 20px;
   margin-left: -1.75px;
   margin-top: -11px;
-  background-color: #848d9b;
+  background-color: #9ba1a9;
 }
 
 /* Emoji Slot Styling */

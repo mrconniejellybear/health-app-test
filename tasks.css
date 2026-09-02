@@ -4,7 +4,7 @@
 .calendar-strip-container {
   border-radius: 22px;
   background: var(--card-bg);
-  padding: 12px 12px 0px 12px;
+  padding: 12px 12px 4px 12px;
   margin-bottom: 30px;
   width: 100%;
 }
@@ -102,6 +102,13 @@
 
 
 
+.calendar-7day-row .pill-box {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
@@ -122,91 +129,65 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  padding-bottom: 14px;
   height:84px;
 }
 
-
-/* Day Pill - each item acts as a snap point */
+/* Container column rules */
 .calendar-7day-row .day-pill {
-  flex-shrink: 0;
-  scroll-snap-align: center;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: flex-start;
+  gap: 6px;
   border-radius: 14px;
   cursor: pointer;
   user-select: none;
-  background-color: var(--card-bg);
-  padding: 8px 0px 0px 0px;
-  width: 50px;
-}
-.day-pill{
-  height:66px;
+  background: transparent;
+  padding: 12px 0;
+  height: 66px;
+  max-width: 54px;
 }
 
-
-
-/* 7 Equal-Spaced Columns */
-.calendar-7day-row {
-  display: flex;
-  grid-template-columns: repeat(7, 1fr);
-  justify-content: space-between;
-}
-
-
-.day-pill .day-name {
-  font-size: 14px;
+.calendar-7day-row .day-pill .day-name {
+  font-size: 13px;
   color: var(--text-3);
-  font-weight: 360;
+  font-weight: 500;
+  line-height: 1;
 }
 
-.day-pill .pill-box {
+.calendar-7day-row .day-pill .day-num {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+  line-height: 1;
+}
+
+/* Center Active Container */
+.calendar-7day-row .day-pill.active {
+  background: var(--link-blue) !important;
+}
+
+.calendar-7day-row .day-pill.active .day-name,
+.calendar-7day-row .day-pill.active .day-num {
+  color: #ffffff !important;
+}
+
+.calendar-7day-row .pill-slot {
+  width: 28px;
+  height: 28px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-
-.day-pill .day-num {
-  font-size: 14px;
-  font-weight: 540;
-  color: var(--text-2);
+.calendar-7day-row .day-check-circle {
+  display: block;
+  width: 24px;
+  height: 24px;
+  color: #00d06f;
 }
 
-.day-pill.active .day-name {
-  color:#fff;
-  font-weight: 500;
-}.day-pill.active .day-num{
-  color:#fff;
-}
-
-.calendar-7day-row .day-pill.active{
-  background: var(--link-blue);
-}
-
-
-
-/* Base Dot (Hidden/Dormant) */
-.calendar-7day-row .status-dot {
-  width: 4px;
-  height: 4px;
-  margin-top: 4px;
-  border-radius: 50%;
-  background: transparent;
-  transition: all 0.2s ease;
-}
-
-/* Active Activity Dot */
-.calendar-7day-row .status-dot.has-activity {
-  background: #00eb5a; /* Emerald green fill[span_9](start_span)[span_9](end_span) */
-  box-shadow: 0 0 10px #0dac1af6;
-}
-
-/* Contrast adjustment when the active day pill is selected */
-.calendar-7day-row .day-pill.active .status-dot.has-activity {
-  background: #ffffff;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.85);
+.calendar-7day-row .day-pill.active .day-check-circle {
+  color: #ffffff !important;
 }

@@ -1288,13 +1288,16 @@ function navigateToTab(targetTabId) {
   const theme = activeTabBtn?.dataset.theme || targetTabId.replace("view-", "");
   document.body.setAttribute("data-theme", theme);
 
-  // 4. Hook triggers when switching tabs
   if (targetTabId === "view-home") {
     setTimeout(() => {
       if (typeof updateHomeDashboard === "function") updateHomeDashboard();
     }, 50);
   } else if (targetTabId === "view-meds") {
     if (typeof renderMedicationCalendar === "function") renderMedicationCalendar();
+  } else if (targetTabId === "view-entries") {
+    if (typeof render7DayCalendarStrip === "function") {
+      render7DayCalendarStrip(selectedActivitiesDate);
+    }
   }
 
   // Scroll to top of new view

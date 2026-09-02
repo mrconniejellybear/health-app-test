@@ -137,7 +137,7 @@ body {
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 14px 11px;
 
     box-shadow:1px 4px 8px #00000010;
@@ -393,7 +393,7 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  height: 64px;
+  height: 66px;
 
   border: none;
   background-color: #19202e;
@@ -434,7 +434,7 @@ body {
 }
 
 .nav-btn svg{
-  height: 42px;
+  height: 46px;
   width: auto;
 }
 /* Active State Styling */

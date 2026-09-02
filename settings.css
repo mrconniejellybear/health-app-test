@@ -266,7 +266,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   margin-right: -4px;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }.settings-trigger-btn svg{
-  height: 46px;
+  height: 42px;
   width: auto;
 }
 

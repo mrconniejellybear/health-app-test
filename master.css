@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f5f7fa;
+  --bg-color: #f3f5f9;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -140,7 +140,7 @@ body {
   border-radius: 20px;
   padding: 11px 9px;
 
-    box-shadow:1px 4px 20px #00000008;
+    box-shadow:1px 6px 20px #00000011;
 }
 .article-icon{
   height: 70px;
@@ -152,6 +152,7 @@ body {
 }
 
 .card.wellbeing{
+  box-shadow: none;
   border: none;
   background-color:rgb(206, 238, 225);
 }.article-header.wellbeing, .article-icon.wellbeing{
@@ -159,6 +160,7 @@ body {
 
 
 .card.cycle{
+  box-shadow: none;
   background-color:#f2d3ec;
 }.article-header.cycle, .article-icon.cycle{
   color: #ab1f81;
@@ -166,6 +168,7 @@ body {
 
 
 .card.meds{
+  box-shadow: none;
   text-decoration: none;
   border: none;
   background-color: #e3eec4d1;

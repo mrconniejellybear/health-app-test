@@ -40,8 +40,8 @@ function renderContinuousMonthCalendar(centerDate = new Date()) {
   const month = centerDate.getMonth();
   const totalDays = new Date(year, month + 1, 0).getDate();
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
   const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 

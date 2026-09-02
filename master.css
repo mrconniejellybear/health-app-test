@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f1f3f7;
+  --bg-color: #f5f7fa;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -133,15 +133,14 @@ body {
 
 
 
-
-
-
 .card {
   background: var(--card-bg);
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
   padding: 11px 9px;
+
+    box-shadow:1px 4px 20px #00000008;
 }
 .article-icon{
   height: 70px;

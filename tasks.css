@@ -30,8 +30,9 @@
   border-radius: 11px;
 }
 .month-icon svg{
-  height: 21px;
+  height: 22px;
   width: auto;
+  margin-bottom: 1px;
 }
 
 .strip-today-badge {
@@ -40,8 +41,8 @@
   border: none;
   color:var(--text-3);
   background: none;
-  font-size: 13px;
-  font-weight: 640;
+  font-size: 14px;
+  font-weight: 660;
   cursor: pointer;
 }
 

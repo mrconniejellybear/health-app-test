@@ -26,111 +26,101 @@ function playSnapSound() {
 
 
 
-let selectedActivitiesDate = new Date();
-let lastSnappedDay = null;
 
-function renderContinuousMonthCalendar(centerDate = new Date()) {
-  const track = document.getElementById("calendar-month-track");
+// --- ACTIVITES 7-DAY CALENDAR STRIP LOGIC ---
+let selectedActivitiesDate = new Date(); // Defaults to local today
+
+// Helper to get local date string YYYY-MM-DD (prevents UTC date skipping)
+function getLocalDateStr(dateObj = new Date()) {
+  const y = dateObj.getFullYear();
+  const m = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const d = String(dateObj.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+function render7DayCalendarStrip(centerDate = new Date()) {
+  const rowContainer = document.getElementById("calendar-7day-row");
   const monthYearLabel = document.getElementById("strip-month-year");
-  if (!track) return;
+  if (!rowContainer) return;
 
-  track.innerHTML = "";
+  rowContainer.innerHTML = "";
 
-  const year = centerDate.getFullYear();
-  const month = centerDate.getMonth();
-  const totalDays = new Date(year, month + 1, 0).getDate();
+  // 1. Update Header Month / Year
   const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
   ];
-  const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-
   if (monthYearLabel) {
-    monthYearLabel.textContent = `${monthNames[month]} ${year}`;
+    monthYearLabel.textContent = `${monthNames[centerDate.getMonth()]} ${centerDate.getFullYear()}`;
   }
 
-  const selectedStr = centerDate.toISOString().split("T")[0];
+  const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const localTodayStr = getLocalDateStr(new Date());
 
-  for (let day = 1; day <= totalDays; day++) {
-    const d = new Date(year, month, day);
-    const isoDate = d.toISOString().split("T")[0];
-    const isSelected = isoDate === selectedStr;
+  // Inside render7DayCalendarStrip loop in calendar.js:
+  for (let offset = -3; offset <= 3; offset++) {
+    const d = new Date(centerDate);
+    d.setDate(centerDate.getDate() + offset);
+
+    const isoDate = getLocalDateStr(d);
+    const isSelected = offset === 0;
+    const isToday = isoDate === localTodayStr;
+
+    // --- DATA CHECK FOR STATUS DOT ---
+    // Safe fallbacks to prevent errors if arrays are uninitialized[span_5](start_span)[span_5](end_span)
+    const currentMeds = typeof medications !== "undefined" ? medications : [];
+    const currentMoods = typeof moodLogs !== "undefined" ? moodLogs : [];
+    const currentSymptoms = typeof symptomLogs !== "undefined" ? symptomLogs : [];
+
+    // Check if any logged activity happened on this exact date[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)
+    const hasMedTaken = currentMeds.some(m => (m.history || []).includes(isoDate));
+    const hasMood = currentMoods.some(m => m.date === isoDate);
+    const hasSymptom = currentSymptoms.some(s => s.date === isoDate);
+
+    const isLoggedDay = hasMedTaken || hasMood || hasSymptom; // Add/remove variables as you prefer[span_8](start_span)[span_8](end_span)
 
     const pill = document.createElement("div");
-    pill.className = `day-pill ${isSelected ? "active" : ""}`;
+    pill.className = `day-pill ${isSelected ? "active" : ""} ${isToday ? "is-today" : ""}`;
     pill.dataset.date = isoDate;
-    pill.dataset.dayNum = day;
 
     pill.innerHTML = `
       <span class="day-name">${dayNames[d.getDay()]}</span>
       <div class="pill-box">
         <span class="day-num">${d.getDate()}</span>
-        <span class="status-dot"></span>
+        <span class="status-dot ${isLoggedDay ? 'has-activity' : ''}"></span>
       </div>
     `;
 
-    // Click handler for direct taps
-    pill.addEventListener("click", () => {
-      document.querySelectorAll(".calendar-month-track .day-pill").forEach(p => p.classList.remove("active"));
-      pill.classList.add("active");
-      pill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    // Pill click handler ...
 
+    // Click handler to re-center window on tapped date
+    pill.addEventListener("click", () => {
       selectedActivitiesDate = new Date(d);
+      render7DayCalendarStrip(selectedActivitiesDate);
+      if (typeof playCalendarPopSound === "function") playCalendarPopSound();
       if (typeof playSnapSound === "function") playSnapSound();
     });
 
-    track.appendChild(pill);
+    rowContainer.appendChild(pill);
   }
-
-  // Scroll to active date into view
-  setTimeout(() => {
-    const activePill = track.querySelector(".day-pill.active");
-    if (activePill) {
-      activePill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      lastSnappedDay = activePill.dataset.dayNum;
-    }
-  }, 60);
-
-  // Attach scroll audio listener
-  attachScrollAudioListener(track);
 }
-
-// Sound feedback while dragging/swiping
-function attachScrollAudioListener(track) {
-  track.addEventListener("scroll", () => {
-    const trackCenter = track.getBoundingClientRect().left + track.offsetWidth / 2;
-    const pills = track.querySelectorAll(".day-pill");
-
-    let closestPill = null;
-    let minDistance = Infinity;
-
-    pills.forEach((pill) => {
-      const rect = pill.getBoundingClientRect();
-      const pillCenter = rect.left + rect.width / 2;
-      const distance = Math.abs(trackCenter - pillCenter);
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestPill = pill;
-      }
-    });
-
-    if (closestPill && closestPill.dataset.dayNum !== lastSnappedDay && minDistance < 24) {
-      lastSnappedDay = closestPill.dataset.dayNum;
-      if (typeof playSnapSound === "function") {
-        playCalendarPopSound();
-      }
-    }
-  }, { passive: true });
-}
-
 
 // "Today" Button Listener
 document.getElementById("strip-today-btn")?.addEventListener("click", () => {
-  if (typeof playSnapSound === "function") playSnapSound();
   selectedActivitiesDate = new Date();
-  renderContinuousMonthCalendar(selectedActivitiesDate);
+  render7DayCalendarStrip(selectedActivitiesDate);
+  if (typeof playCalendarPopSound === "function") playCalendarPopSound();
+  if (typeof playSnapSound === "function") playSnapSound();
 });
+
+// Trigger strip initial render on page load
+document.addEventListener("DOMContentLoaded", () => {
+  render7DayCalendarStrip(selectedActivitiesDate);
+});
+
+
+
+
 // --- MONTHLY CHECK-IN MATRIX RENDERER ---
 function renderMonthlyCheckinMatrix(year = 2026, month = 7) { // 7 = August (0-indexed)
   const container = document.getElementById("monthly-pill-matrix");

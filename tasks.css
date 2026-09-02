@@ -6,6 +6,7 @@
   background: var(--card-bg);
   padding: 12px 12px 0px 12px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .calendar-strip-header {
@@ -102,6 +103,9 @@
 
 
 
+
+
+
 /* Container clipping with soft edge fade */
 .calendar-month-strip-container {
   width: 100%;
@@ -112,45 +116,36 @@
   -webkit-mask-image: linear-gradient(to right, transparent, black 0%, black 100%, transparent);
 }
 
-/* Horizontal scrolling track with iOS momentum & snapping */
-.calendar-month-track {
+.calendar-7day-row {
   display: flex;
-  height: 70px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  border-radius: 0px 0px 22px 22px;
-  padding: 0 calc(50vw - 26px); /* Centers first & last items in view */
-  scrollbar-width: none; /* Firefox */
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 14px;
+  height:84px;
 }
 
-.calendar-month-track::-webkit-scrollbar {
-  display: none; /* Safari & Chrome */
-}
 
 /* Day Pill - each item acts as a snap point */
-.calendar-month-track .day-pill {
+.calendar-7day-row .day-pill {
   flex-shrink: 0;
   scroll-snap-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  border-radius: 14px;
   cursor: pointer;
   user-select: none;
   background-color: var(--card-bg);
-  padding: 10px 0px 0px 0px;
+  padding: 8px 0px 0px 0px;
   width: 50px;
 }
 .day-pill{
-  height: 60px;
+  height:66px;
 }
-.calendar-month-track .day-pill.active {
-  background: var(--link-blue);
-  border-radius: 12px;
-  color:#fff;
-}
+
 
 
 /* 7 Equal-Spaced Columns */
@@ -174,6 +169,7 @@
   justify-content: center;
 }
 
+
 .day-pill .day-num {
   font-size: 14px;
   font-weight: 540;
@@ -187,3 +183,30 @@
   color:#fff;
 }
 
+.calendar-7day-row .day-pill.active{
+  background: var(--link-blue);
+}
+
+
+
+/* Base Dot (Hidden/Dormant) */
+.calendar-7day-row .status-dot {
+  width: 4px;
+  height: 4px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+/* Active Activity Dot */
+.calendar-7day-row .status-dot.has-activity {
+  background: #00eb5a; /* Emerald green fill[span_9](start_span)[span_9](end_span) */
+  box-shadow: 0 0 10px #0dac1af6;
+}
+
+/* Contrast adjustment when the active day pill is selected */
+.calendar-7day-row .day-pill.active .status-dot.has-activity {
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.85);
+}

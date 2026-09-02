@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f4f3f3;
+  --bg-color: #f2f2f2;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -351,14 +351,14 @@ body {
 .header-titles p{
   font-size: 13px;
   color: var(--text-3);
-  font-weight: 460;
+  font-weight: 560;
 }
 
 
 
 .status-counter {
   font-size: 14px;
-  font-weight: 560;
+  font-weight: 660;
   color: var(--text-2);
 }
 

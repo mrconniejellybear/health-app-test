@@ -12,8 +12,8 @@
   display: flex;
   align-items: end;
   justify-content: space-between;
-  color: var(--text-2);
-  margin: 0px 2px 2px 0px;
+  color: var(--text-3);
+  margin: 0px 2px 4px 2px;
 }
 
 .strip-title {
@@ -26,10 +26,8 @@
   gap: 6px;
   flex-direction: row;
   align-items: center;
-  height: 25px;
+  height: 26px;
   border-radius: 11px;
-  background-color:var(--contrast-bg);
-  padding: 0px 8px;
 }
 .month-icon svg{
   height: 17px;
@@ -41,7 +39,7 @@
   margin-left: -1px;
   padding-right: 4px;
   border: none;
-  color:var(--text-2);
+  color:var(--text-3);
   background: none;
   font-size: 14px;
   font-weight: 400;
@@ -76,15 +74,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 3px;
+  gap: 2px;
   height: 40px;
-  width: 100%;
+  margin: auto;
+  width: 98%;
 }
 
 .pill-tick {
   flex: 1;
   height: 100%;
-  max-width: 6px;
+  max-width: 8px;
   background: var(--contrast-bg);
   border-radius: 2px;
   transition: background-color 0.2s ease, transform 0.15s ease;
@@ -148,8 +147,9 @@
   height: 60px;
 }
 .calendar-month-track .day-pill.active {
-  background: var(--bg-color);
-  border-radius: 14px;
+  background: var(--link-blue);
+  border-radius: 12px;
+  color:#fff;
 }
 
 
@@ -162,7 +162,7 @@
 
 
 .day-pill .day-name {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-3);
   font-weight: 360;
 }
@@ -172,7 +172,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s ease;
 }
 
 .day-pill .day-num {
@@ -182,9 +181,9 @@
 }
 
 .day-pill.active .day-name {
-  color: var(--text-main);
-  font-weight: 700;
+  color:#fff;
+  font-weight: 500;
 }.day-pill.active .day-num{
-  color:var(--text-main) ;
+  color:#fff;
 }
 

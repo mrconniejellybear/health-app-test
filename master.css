@@ -138,9 +138,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 20px;
-  padding: 11px 9px;
+  padding: 14px 11px;
 
-    box-shadow:1px 6px 20px #00000011;
+    box-shadow:1px 3px 20px #00000010;
 }
 .article-icon{
   height: 70px;

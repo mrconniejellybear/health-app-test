@@ -69,8 +69,8 @@
 .modal input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
-  background-color: var(--card-bg);
+  border: none;
+  background-color: #f7f7fc;
   border-radius:8px;
   font-size: 15px;
   outline: none;
@@ -82,8 +82,8 @@
 .modal select {
   width: 100%;
   padding: 12px 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--card-bg);
+  border: none;
+  background-color: #f7f7fc;
   border-radius:8px;
   font-size: 15px;
   outline: none;
@@ -164,8 +164,8 @@
 .form-group input,
 .form-group select,
 .form-group textarea {
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
+  background: #f7f7fc;
+  border: none;
   border-radius: 10px;
   padding: 10px 12px;
   font-size:11px;
@@ -221,8 +221,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  border: 1px solid #e9ebedba;
-  background: #e9ebed53;
+  border: none;
+  background: #f7f7fc;
   cursor: pointer;
   box-sizing: border-box;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease;
@@ -295,8 +295,7 @@
 }
 
 .reminder-chip .chip-bubble {
-  background-color: var(--contrast-bg);
-  border: 1px solid var(--border-color);
+  background-color: #f7f7fc;
   user-select: none;
   color: var(--text-2);
   padding: 10px 12px;  

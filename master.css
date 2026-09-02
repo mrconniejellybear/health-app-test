@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f2f2f2;
+  --bg-color: #f0f3f4;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -9,8 +9,7 @@
 
   --text-muted: #e6ebf3;
   
-  --card-border: #eeeeee00;
-  --border-color: #d6dfea00;
+  --border-color: #e8e8e800;
   --green-check: #109d31;
   --blue-accent: #0088ff;
 
@@ -141,8 +140,8 @@ body {
   max-width: 440px;
   border-radius: 26px;
   padding: 14px 12px;
-
-    box-shadow:1px 4px 20px #00000000;
+  border: 1px solid var(--border-color);
+  box-shadow:1px 4px 20px #00000000;
 }
 .article-icon{
   height: 70px;

@@ -57,9 +57,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 20px 10px 10px;
+  padding: 10px 16px 10px 10px;
   border: none;
-  border-radius: 20px;
+  border-radius: 18px;
   transition: opacity 0.3s ease, transform 0.15s ease;
   user-select: none;
   touch-action: pan-y;
@@ -282,9 +282,9 @@
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  font-weight: 380;
+  font-weight: 540;
   color: var(--text-3);
-  margin: 12px 0 3px 4px;
+  margin: 12px 0 6px 4px;
 }
 
 #med-form label svg,
@@ -301,10 +301,9 @@
 #med-form input[type="text"],
 #med-form input[type="time"],
 #med-form select {
-  padding: 11px 14px;
+  padding: 10px 14px;
   border-radius: 14px;
-  border: 1px solid #e9ebedba;
-  background: #e9ebed53;
+  background: #f7f7fc;
   color: var(--text-2);
   font-size: 15px;
   font-weight: 380;

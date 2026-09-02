@@ -83,7 +83,7 @@
 .pill-tick {
   flex: 1;
   height: 100%;
-  max-width: 8px;
+  max-width: 7px;
   background: var(--contrast-bg);
   border-radius: 2px;
   transition: background-color 0.2s ease, transform 0.15s ease;

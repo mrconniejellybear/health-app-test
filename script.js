@@ -224,14 +224,14 @@ const reminderClockIcon = `<svg class="med-reminder-icon" xmlns="http://www.w3.o
  
 // Color Palette
 const MED_COLOR_PALETTE = {
-  "color-1": { main: "#a855f7", bg: "rgba(169, 85, 247, 0.27)" }, // Purple
-  "color-2": { main: "#6584f3", bg: "#7492ff3b" },  // Blue
-  "color-3": { main: "#09b083", bg: "rgba(16, 185, 129, 0.21)" },  // Green
-  "color-4": { main: "#ea8901", bg: "rgba(245, 159, 11, 0.21)" },  // Amber
-  "color-5": { main: "#e8559f", bg: "rgba(238, 92, 165, 0.24)" },  // Pink
-  "color-6": { main: "#06b1cf", bg: "rgba(6, 181, 212, 0.24)" },   // Cyan
-  "color-7": { main: "#66b60a", bg: "rgba(131, 204, 22, 0.26)" },  // Lime
-  "color-8": { main: "#eb3c5a", bg: "rgba(240, 43, 76, 0.19)" }    // Rose
+  "color-1": { main: "#a855f7", bg: "#eee" }, // Purple
+  "color-2": { main: "#6584f3", bg: "#eee" },  // Blue
+  "color-3": { main: "#09b083", bg: "#eee" },  // Green
+  "color-4": { main: "#ea8901", bg: "#eee" },  // Amber
+  "color-5": { main: "#e8559f", bg: "#eee" },  // Pink
+  "color-6": { main: "#06b1cf", bg: "#eee" },   // Cyan
+  "color-7": { main: "#66b60a", bg: "#eee" },  // Lime
+  "color-8": { main: "#eb3c5a", bg: "#eee" }    // Rose
 };
 
 // --- POP-UP ACTION MENU LOGIC ---

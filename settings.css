@@ -40,7 +40,7 @@ background-color: var(--contrast-bg);
 
 .settings-group-label {
   font-size: 14px;
-  font-weight: 340;
+  font-weight: 500;
   color: var(--text-3);
   margin-left: 4px;
   margin-bottom: 6px;
@@ -61,7 +61,7 @@ background-color: var(--contrast-bg);
   width: 100%;
   background: var(--card-bg);
   color: var(--text-2);
-  font-weight: 340;
+  font-weight: 500;
   font-size: 15px;
   text-decoration: none;
   box-sizing: border-box;

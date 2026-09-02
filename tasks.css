@@ -19,8 +19,8 @@
 }
 
 .strip-title {
-  font-size: 14px;
-  font-weight: 680;
+  font-size: 12px;
+  font-weight: 640;
   margin: 0;
 }
 .month-icon{
@@ -32,7 +32,7 @@
   border-radius: 11px;
 }
 .month-icon svg{
-  height: 21px;
+  height: 18px;
   width: auto;
   margin-bottom: 2px;
 }
@@ -43,8 +43,8 @@
   border: none;
   color:var(--text-3);
   background: none;
-  font-size: 14px;
-  font-weight: 680;
+  font-size: 12px;
+  font-weight: 640;
   cursor: pointer;
 }
 

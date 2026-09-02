@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f6fafc;
+  --bg-color: #f6f7f8;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -23,7 +23,7 @@
 
   --border-2: #d3d8dc00;
 
-  --medicon: #fff;
+  --medicon: #ffffff;
 
   --link-blue: #0088ff;
 }
@@ -37,6 +37,8 @@ body.dark {
 
     --text-muted: #4d4558;
   --contrast-bg: #313950;
+
+  --medicon: #b7c9f01e;
 
   .bottom-nav{
     background-color: var(--card-bg);

@@ -18,8 +18,8 @@
 }
 
 .strip-title {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
   margin: 0;
 }
 .month-icon{
@@ -31,9 +31,9 @@
   border-radius: 11px;
 }
 .month-icon svg{
-  height: 16px;
+  height: 15px;
   width: auto;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .strip-today-badge {
@@ -42,8 +42,8 @@
   border: none;
   color:var(--text-3);
   background: none;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
 }
 

@@ -18,9 +18,9 @@
       <link rel="stylesheet" href="settings.css">
       <link rel="stylesheet" href="moodwheel.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Mono:wght@100..900&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Mono:wght@100..900&family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
    
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,14 +40,12 @@
   <!-- TAB 1: DASHBOARD -->
 <section id="view-home" class="tab-view active">
   <div class="dashboard-header">
-  <h2>
-    <span id="dashboard-greeting-prefix">Good morning,</span>
-    <br>
-    <span id="user-display-name" onclick="promptChangeName()" title="Tap to change name">Tap to Add Name</span>
-  </h2>
+<div class="header-date-greeting">
+    <span class="dashboard-date" id="dashboard-current-date">September 2, 2026</span>
+    <h2 class="dashboard-greeting" id="dashboard-greeting-text">Good morning</h2>
+  </div>
 
-    <button class="settings-trigger-btn" data-open-drawer="view-settings" aria-label="Open Settings">
-
+<button class="settings-trigger-btn" data-open-drawer="view-settings" aria-label="Open Settings">
 <svg width="100pt" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
  <path d="m74 27h-48c-1.6484 0-3 1.3516-3 3s1.3516 3 3 3h48c1.6484 0 3-1.3516 3-3s-1.3516-3-3-3z"/>
  <path d="m74 47h-32c-1.6484 0-3 1.3516-3 3s1.3516 3 3 3h32c1.6484 0 3-1.3516 3-3s-1.3516-3-3-3z"/>
@@ -1151,6 +1149,11 @@ Note to self: MOVE THIS SHIT SOMEWHERE ELSE!!!!!!!
 <div class="card">
     <div class="card-header meds">
      <div class="header-title-row">
+      <svg class="settings-icon-meds" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+ <path d="m396 900c41.375 0 81.055-16.438 110.31-45.691s45.691-68.934 45.691-110.31v-288c0-55.734-29.734-107.23-78-135.1-48.266-27.863-107.73-27.863-156 0-48.266 27.867-78 79.367-78 135.1v288c0 41.375 16.438 81.055 45.691 110.31s68.934 45.691 110.31 45.691zm-84-444c0-30.012 16.012-57.742 42-72.746s58.012-15.004 84 0 42 42.734 42 72.746v108h-168zm0 180h168v108c0 30.012-16.012 57.742-42 72.746s-58.012 15.004-84 0-42-42.734-42-72.746z"/>
+ <path d="m816 660c-38.191 0-74.816 15.172-101.82 42.176-27.004 27.008-42.176 63.633-42.176 101.82s15.172 74.816 42.176 101.82c27.008 27.004 63.633 42.176 101.82 42.176s74.816-15.172 101.82-42.176c27.004-27.008 42.176-63.633 42.176-101.82s-15.172-74.816-42.176-101.82c-27.008-27.004-63.633-42.176-101.82-42.176zm0 216c-19.094 0-37.41-7.5859-50.91-21.09-13.504-13.5-21.09-31.816-21.09-50.91s7.5859-37.41 21.09-50.91c13.5-13.504 31.816-21.09 50.91-21.09s37.41 7.5859 50.91 21.09c13.504 13.5 21.09 31.816 21.09 50.91s-7.5859 37.41-21.09 50.91c-13.5 13.504-31.816 21.09-50.91 21.09z"/>
+ <path d="m816 252c-38.191 0-74.816 15.172-101.82 42.176-27.004 27.008-42.176 63.633-42.176 101.82s15.172 74.816 42.176 101.82c27.008 27.004 63.633 42.176 101.82 42.176s74.816-15.172 101.82-42.176c27.004-27.008 42.176-63.633 42.176-101.82s-15.172-74.816-42.176-101.82c-27.008-27.004-63.633-42.176-101.82-42.176zm0 216c-19.094 0-37.41-7.5859-50.91-21.09-13.504-13.5-21.09-31.816-21.09-50.91s7.5859-37.41 21.09-50.91c13.5-13.504 31.816-21.09 50.91-21.09s37.41 7.5859 50.91 21.09c13.504 13.5 21.09 31.816 21.09 50.91s-7.5859 37.41-21.09 50.91c-13.5 13.504-31.816 21.09-50.91 21.09z"/>
+</svg>
         <div class="header-titles">
           <p>Prescriptions</p>
            <div id="status-counter" class="status-counter">None Listed</div>

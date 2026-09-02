@@ -2,30 +2,31 @@
 /* --- HOME DASHBOARD GRID STYLING --- */
 .dashboard-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: start;
-  margin-bottom: 14px
+  margin-bottom: 20px;
 }
 
-#dashboard-greeting-prefix{
-  font-weight: 400;
-  font-size: 20px;
-  color: var(--text-2);
-}
-.dashboard-header h2 span{
-    font-weight: 700;
-    font-size: 36px;
-      margin-top: -4px;
-    color: var(--text-main);
+.header-date-greeting {
+  display: flex;
+  margin-top: 6px;
+  flex-direction: column;
 }
 
-.date-badge {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 10px;
-  border-radius: 12px;
+.dashboard-date {
+  font-size: 14px;
+  font-weight: 460;
+  color: var(--text-3);
 }
+
+.dashboard-greeting {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+
+
 
 /* 2-Column Responsive Grid */
 .home-grid {
@@ -971,7 +972,7 @@
   height: 38px;
   border: 1px solid var(--border-color);
   border-radius: 50px;
-  box-shadow: 1px 3px 6px #00000010;
+  box-shadow: 1px 3px 6px #00000000;
   background-color: var(--card-bg);
 }
 .row-btn svg{

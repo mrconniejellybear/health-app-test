@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f5f6f7;
+  --bg-color: #f4f3f3;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -113,7 +113,7 @@ body.midnight {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Stack Sans Headline";
+  font-family: "Plus Jakarta Sans";
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
@@ -140,9 +140,9 @@ body {
   width: 100%;
   max-width: 440px;
   border-radius: 22px;
-  padding: 14px 11px;
+  padding: 14px 12px;
 
-    box-shadow:1px 4px 20px #00000008;
+    box-shadow:1px 4px 20px #00000000;
 }
 .article-icon{
   height: 70px;
@@ -249,7 +249,7 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 660;
 
 }
 .article-tease{
@@ -257,7 +257,7 @@ body {
   text-align: left;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 320;
+  font-weight: 460;
 }
 .article-text-wrap{
   max-width: calc((100%) - (86px));
@@ -285,7 +285,7 @@ body {
 .tab2 {
   margin-left: 4px;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 
@@ -346,19 +346,19 @@ body {
   display: flex;
   flex-direction: row;
   align-items:center;
-  gap: 10px;
-  margin-left: 4px;
+  gap: 11px;
 }
 .header-titles p{
   font-size: 13px;
   color: var(--text-3);
+  font-weight: 460;
 }
 
 
 
 .status-counter {
   font-size: 14px;
-  font-weight: 360;
+  font-weight: 560;
   color: var(--text-2);
 }
 
@@ -395,7 +395,7 @@ body {
   bottom: 14px;
   left: 0;
   right: 0;
-  height: 66px;
+  height: 64px;
 
   border: none;
   background-color: #19202e;

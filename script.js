@@ -148,55 +148,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// --- DYNAMIC GREETING & USER PROFILE ---
+// --- DYNAMIC DATE & GREETING ---
 
-// 1. Get relative time-of-day greeting
+// 1. Format current date: e.g. "December 10, 2025"
+function getFormattedCurrentDate() {
+  const now = new Date();
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  return now.toLocaleDateString("en-US", options);
+}
+
+// 2. Relative time-of-day greeting
 function getTimeBasedGreeting() {
   const currentHour = new Date().getHours();
 
   if (currentHour >= 4 && currentHour < 12) {
-    return 'Good morning,';
+    return "Good morning";
   } else if (currentHour >= 12 && currentHour < 17) {
-    return "Good afternoon,";
+    return "Good afternoon";
   } else {
-    return "Good evening,";
+    return "Good evening";
   }
 }
 
-// 2. Update Header UI
+// 3. Update Dashboard Header UI
 function updateDashboardGreeting() {
-  const greetingPrefixEl = document.getElementById("dashboard-greeting-prefix");
-  const userNameEl = document.getElementById("user-display-name");
+  const dateEl = document.getElementById("dashboard-current-date");
+  const greetingEl = document.getElementById("dashboard-greeting-text");
 
-  if (greetingPrefixEl) {
-    greetingPrefixEl.textContent = getTimeBasedGreeting();
+  if (dateEl) {
+    dateEl.textContent = getFormattedCurrentDate();
   }
 
-  if (userNameEl) {
-    const savedName = localStorage.getItem("user_profile_name") || "Tap to Add Name";
-    userNameEl.textContent = savedName;
-  }
-}
-
-// 3. Prompt user to change their name when tapped
-function promptChangeName() {
-  const currentName = localStorage.getItem("user_profile_name") || "";
-  const newName = prompt("Put anything you like! Doesn't have to be your real name.", currentName);
-
-  if (newName !== null && newName.trim() !== "") {
-    const cleanName = newName.trim();
-    localStorage.setItem("user_profile_name", cleanName);
-    updateDashboardGreeting();
-    
-    if (typeof playLogSound === "function") playLogSound();
-    if (navigator.vibrate) navigator.vibrate(10);
+  if (greetingEl) {
+    greetingEl.textContent = getTimeBasedGreeting();
   }
 }
 
-// 4. Hook into page initialization & tab switching
+// 4. Hook into page initialization
 document.addEventListener("DOMContentLoaded", () => {
   updateDashboardGreeting();
 });
+
 
 
 // ==========================================
@@ -232,14 +224,14 @@ const reminderClockIcon = `<svg class="med-reminder-icon" xmlns="http://www.w3.o
  
 // Color Palette
 const MED_COLOR_PALETTE = {
-  "color-1": { main: "#a855f7", bg: "rgba(168, 85, 247, 0.15)" }, // Purple
-  "color-2": { main: "#176efa", bg: "rgba(45, 132, 255, 0.15)" },  // Blue
-  "color-3": { main: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },  // Green
-  "color-4": { main: "#fb9405", bg: "rgba(245, 158, 11, 0.15)" },  // Amber
+  "color-1": { main: "#a855f7", bg: "rgba(169, 85, 247, 0.27)" }, // Purple
+  "color-2": { main: "#176efa", bg: "rgba(45, 132, 255, 0.23)" },  // Blue
+  "color-3": { main: "#10b981", bg: "rgba(16, 185, 129, 0.21)" },  // Green
+  "color-4": { main: "#fb9405", bg: "rgba(245, 159, 11, 0.21)" },  // Amber
   "color-5": { main: "#ec4899", bg: "rgba(236, 72, 153, 0.15)" },  // Pink
-  "color-6": { main: "#06b6d4", bg: "rgba(6, 182, 212, 0.15)" },   // Cyan
-  "color-7": { main: "#84cc16", bg: "rgba(132, 204, 22, 0.15)" },  // Lime
-  "color-8": { main: "#f43f5e", bg: "rgba(244, 63, 94, 0.15)" }    // Rose
+  "color-6": { main: "#06b6d4", bg: "rgba(6, 181, 212, 0.26)" },   // Cyan
+  "color-7": { main: "#84cc16", bg: "rgba(131, 204, 22, 0.23)" },  // Lime
+  "color-8": { main: "#f43f5e", bg: "rgba(244, 63, 93, 0.23)" }    // Rose
 };
 
 // --- POP-UP ACTION MENU LOGIC ---

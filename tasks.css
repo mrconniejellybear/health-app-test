@@ -14,24 +14,23 @@
   align-items: end;
   justify-content: space-between;
   color: var(--text-3);
-  margin: 0px 2px;
 }
 
 .strip-title {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 640;
   margin: 0;
 }
 .month-icon{
   display: flex;
-  gap: 4px;
+  gap: 6px;
   flex-direction: row;
   align-items: center;
   height: 26px;
   border-radius: 11px;
 }
 .month-icon svg{
-  height: 22px;
+  height: 21px;
   width: auto;
 }
 
@@ -42,7 +41,7 @@
   color:var(--text-3);
   background: none;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 640;
   cursor: pointer;
 }
 

@@ -1,10 +1,10 @@
 :root {
-  --bg-color: #f0f3f4;
+  --bg-color: #f0f4f5;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
   --text-main: #252627;
-  --text-2: #5b5f65;
+  --text-2: #6c7075;
   --text-3: #8d939c;
 
   --text-muted: #e6ebf3;
@@ -284,7 +284,7 @@ body {
 .tab2 {
   margin-left: 4px;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 
@@ -349,7 +349,7 @@ body {
 }
 .header-titles p{
   font-size: 13px;
-  color: var(--text-3);
+  color: var(--text-2);
   font-weight: 560;
 }
 
@@ -358,7 +358,7 @@ body {
 .status-counter {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-2);
+  color: var(--text-main);
 }
 
 

@@ -14,7 +14,7 @@
   align-items: end;
   justify-content: space-between;
   color: var(--text-3);
-  margin: 0px 2px 4px 2px;
+  margin: 0px 2px;
 }
 
 .strip-title {
@@ -145,7 +145,7 @@
   user-select: none;
   background: transparent;
   padding: 12px 0;
-  height: 66px;
+  height: 64px;
   max-width: 54px;
 }
 

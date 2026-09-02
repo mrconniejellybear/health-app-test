@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f1f7fbd3;
+  --bg-color: #f6fafc;
   --card-bg: #fff;
   --contrast-bg: #ececec;
 
@@ -140,7 +140,7 @@ body {
   border-radius: 20px;
   padding: 14px 11px;
 
-    box-shadow:1px 5px 10px #00000010;
+    box-shadow:1px 4px 8px #00000010;
 }
 .article-icon{
   height: 70px;

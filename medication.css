@@ -57,9 +57,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 24px 10px 10px;
+  padding: 10px 20px 10px 10px;
   border: none;
-  border-radius: 28px;
+  border-radius: 20px;
   transition: opacity 0.3s ease, transform 0.15s ease;
   user-select: none;
   touch-action: pan-y;
@@ -586,7 +586,7 @@ gap: 8px;
 
 .med-list{
   background-color: #f8f8f8;
-  border-radius: 34px;
+  border-radius: 26px;
   padding: 8px;
   display: flex;
   flex-direction: column;

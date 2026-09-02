@@ -283,6 +283,7 @@ body {
 .tab2 {
   margin-left: 4px;
   font-size: 22px;
+  margin-bottom: -2px;
   font-weight: 500;
 }
 

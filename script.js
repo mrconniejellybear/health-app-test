@@ -92,7 +92,7 @@ async function triggerMedicationTestAlert(medName, scheduledTime) {
 
 // Path relative to your HTML file (or /assets/sound.mp3)
 const actionSound = new Audio("universfield-bubble-pop-04-323580.mp3"); 
-actionSound.volume = 0.1; // Optional: 0.0 to 1.0
+actionSound.volume = 0.04; // Optional: 0.0 to 1.0
 
 window.addEventListener("pointerdown", () => {
   actionSound.load();

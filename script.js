@@ -675,23 +675,24 @@ function renderMedications() {
     li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
 
-    li.innerHTML = `
-      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
-      <div class="med-card-wrapper">
-        <div class="med-icon-badge" style="background-color: ${colorTheme.bg}; color: ${colorTheme.main};">
-          ${typeof getIconSVG === "function" ? getIconSVG(med.icon) : "💊"}
-        </div>
-        <div class="med-info-stack">
-          <div class="med-name-label">${med.name}</div>
-          <div class="med-sub-details">
-            ${hasAlarm && typeof reminderClockIcon !== "undefined" ? reminderClockIcon : ""}
-            <span>${timeDisplay}</span>
-            <span>${med.dosage}</span>
-          </div>
-        </div>
+li.innerHTML = `
+  <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
+  <div class="med-card-wrapper">
+    <div class="med-icon-badge" style="background-color: ${colorTheme.bg};">
+      ${getMedIconMarkup(med.icon)}
+    </div>
+    <div class="med-info-stack">
+      <div class="med-name-label">${med.name}</div>
+      <div class="med-sub-details">
+        ${hasAlarm && typeof reminderClockIcon !== "undefined" ? reminderClockIcon : ""}
+        <span>${timeDisplay}</span>
+        <span>${med.dosage}</span>
       </div>
-      <span class="med-chevron">›</span>
-    `;
+    </div>
+  </div>
+  <span class="med-chevron">›</span>
+`;
+
 
     // Reattach touch gestures
     if (typeof attachSwipeGesture === "function") {
@@ -707,167 +708,31 @@ function renderMedications() {
 
 
 // --- ICON SVG MAPPER ---
-function getIconSVG(iconKey) {
-  const iconMap = {
-    // 1. CAPSULE (Two-Tone Pill with Specular Highlights - Shadow Removed)
-    "pill-1": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <g transform="rotate(-35 50 50)">
-          <!-- Lower Half Colored Cap -->
-          <path d="M 33 50 L 33 67 A 17 17 0 0 0 67 67 L 67 50 Z" fill="currentColor" />
-          <!-- Lower Ambient Inner Tone -->
-          <path d="M 33 50 L 33 67 A 17 17 0 0 0 67 67 L 67 50 Z" fill="#000000" opacity="0.14" />
-          <!-- Upper Half Glossy Off-White Cap -->
-          <path d="M 33 50 L 33 33 A 17 17 0 0 1 67 33 L 67 50 Z" fill="#f8fafc" />
-          <!-- Center Separator Ring -->
-          <ellipse cx="50" cy="50" rx="17" ry="1.5" fill="#000000" opacity="0.16" />
-          <!-- Gloss Reflections -->
-          <ellipse cx="44" cy="27" rx="5" ry="9" fill="#ffffff" opacity="0.9" transform="rotate(-15 44 27)" />
-          <ellipse cx="43" cy="62" rx="3.5" ry="7" fill="#ffffff" opacity="0.35" transform="rotate(-10 43 62)" />
-        </g>
-      </svg>
-    `,
+function getMedIconMarkup(iconKey) {
+  const iconFiles = {
+    // Legacy keys stored in existing localStorage items
+    "pill-1": "pill-3d-icon_158757-3345.avif",
+    "2tablets": "ointment.png",
+    "3tablets": "medical-pills-capsule-drug-flying-3d-icon-illustration-png.png",
+    "med-bottle": "vitamins-pills-3d-icon-png-download-14221073.png",
+    "pill-bottle": "pillbottle.png",
+    "syringe": "3d-injection-illustration_541443-3646.png",
+    "med-vile": "medicinejar.png",
+    "IV-bag": "files.png",
+    "marijuana": "leaf.png",
 
-    // 2. SCORED TABLET (Circular Pill with 3D Center Groove - Shadow Removed)
-    "2tablets": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <!-- Pill Base Disk -->
-        <circle cx="50" cy="50" r="34" fill="currentColor" />
-        <circle cx="50" cy="50" r="34" fill="#ffffff" opacity="0.16" />
-        <!-- Inner Chamfer Rim -->
-        <circle cx="50" cy="50" r="31.5" fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.45" />
-        <!-- Embossed Bevel Score Line -->
-        <g transform="rotate(-40 50 50)">
-          <line x1="50" y1="19" x2="50" y2="81" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.25" />
-          <line x1="51.5" y1="20" x2="51.5" y2="80" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.75" />
-        </g>
-        <!-- Specular Highlight -->
-        <ellipse cx="40" cy="32" rx="9" ry="5" fill="#ffffff" opacity="0.6" transform="rotate(-25 40 32)" />
-      </svg>
-    `,
-
-    // 3. ROUND DISK TABLET (Minimal Clay Bead - Shadow Removed)
-    "3tablets": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <circle cx="50" cy="50" r="30" fill="currentColor" />
-        <circle cx="50" cy="50" r="30" fill="#ffffff" opacity="0.18" />
-        <!-- Specular Bubble Reflection -->
-        <ellipse cx="42" cy="38" rx="8" ry="4.5" fill="#ffffff" opacity="0.8" transform="rotate(-30 42 38)" />
-      </svg>
-    `,
-
-    // 4. MEDICINE BOTTLE (Chunky Playful Vial - Shadow Removed)
-    "med-bottle": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <g transform="rotate(-15 50 50)">
-          <!-- Bottle Body -->
-          <rect x="33" y="30" width="34" height="48" rx="8" fill="currentColor" />
-          <rect x="33" y="30" width="34" height="48" rx="8" fill="#000000" opacity="0.12" />
-          <!-- Glossy Edge Sheen -->
-          <line x1="39" y1="34" x2="39" y2="73" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" opacity="0.45" />
-          <!-- Yellow Clay Lid -->
-          <rect x="30" y="24" width="40" height="9" rx="4.5" fill="#f59e0b" />
-          <ellipse cx="50" cy="24" rx="19" ry="5.5" fill="#fcd34d" />
-          <ellipse cx="50" cy="23.5" rx="15" ry="3.5" fill="#fef3c7" />
-        </g>
-      </svg>
-    `,
-
-    // 5. IV INFUSION BAG (Volumetric Fluid Pack with Ports)
-    "IV-bag": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <!-- Hanger Bracket Tab -->
-        <rect x="42" y="14" width="16" height="8" rx="4" fill="#cbd5e1" />
-        <circle cx="50" cy="18" r="2.5" fill="#f1f5f9" />
-        <!-- Soft Saline Fluid Body -->
-        <rect x="29" y="22" width="42" height="54" rx="12" fill="currentColor" />
-        <rect x="29" y="22" width="42" height="54" rx="12" fill="#000000" opacity="0.1" />
-        <!-- Plastic Welded Seam Lines -->
-        <rect x="32" y="25" width="36" height="48" rx="9" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.4" />
-        <!-- Measurement Scale Bars -->
-        <line x1="61" y1="36" x2="65" y2="36" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.5" />
-        <line x1="59" y1="45" x2="65" y2="45" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.5" />
-        <line x1="61" y1="54" x2="65" y2="54" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.5" />
-        <!-- Gloss Curvature Sheen -->
-        <path d="M 35 30 Q 34 50 35 68" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6" />
-        <!-- Bottom Injection Ports -->
-        <rect x="38" y="76" width="7" height="10" rx="3.5" fill="#94a3b8" />
-        <rect x="55" y="76" width="7" height="8" rx="3.5" fill="#94a3b8" />
-      </svg>
-    `,
-
-    // 6. SYRINGE (Angled Barrel with Plunger & Volume Fluid)
-    "syringe": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <g transform="rotate(45 50 50)">
-          <!-- Steel Needle Tip -->
-          <line x1="50" y1="12" x2="50" y2="28" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" />
-          <!-- Needle Hub Stopper -->
-          <rect x="47" y="28" width="6" height="5" rx="1" fill="#64748b" />
-          <!-- Main Acrylic Barrel -->
-          <rect x="40" y="33" width="20" height="42" rx="4" fill="#f1f5f9" />
-          <!-- Medication Fluid Dose Inside Barrel -->
-          <rect x="41" y="44" width="18" height="29" rx="2" fill="currentColor" />
-          <rect x="41" y="44" width="18" height="29" rx="2" fill="#000000" opacity="0.1" />
-          <!-- Plunger Gasket -->
-          <rect x="42" y="41" width="16" height="3" rx="1.5" fill="#334155" />
-          <!-- Plunger Stem & Flange -->
-          <rect x="47.5" y="75" width="5" height="12" fill="#cbd5e1" />
-          <rect x="39" y="87" width="22" height="4" rx="2" fill="#cbd5e1" />
-          <!-- Cylinder Light Sheen -->
-          <line x1="43" y1="36" x2="43" y2="72" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" opacity="0.75" />
-        </g>
-      </svg>
-    `,
-
-    // 7. MEDICINE VIAL (Glass Injection Ampoule with Rubber Seal Cap)
-    "med-vile": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <!-- Colored Rubber Crimp Cap -->
-        <rect x="38" y="19" width="24" height="7" rx="3.5" fill="#ef4444" />
-        <!-- Metal Collar -->
-        <rect x="40" y="26" width="20" height="5" rx="2" fill="#94a3b8" />
-        <!-- Narrow Glass Neck -->
-        <rect x="43" y="31" width="14" height="6" fill="#e2e8f0" />
-        <!-- Glass Vial Shoulder & Body -->
-        <path d="M 43 37 Q 32 40 32 46 L 32 74 A 8 8 0 0 0 40 82 L 60 82 A 8 8 0 0 0 68 74 L 68 46 Q 68 40 57 37 Z" fill="#e2e8f0" />
-        <!-- Liquid Core Dosage -->
-        <path d="M 34 54 L 34 73 A 6 6 0 0 0 40 79 L 60 79 A 6 6 0 0 0 66 73 L 66 54 Z" fill="currentColor" />
-        <path d="M 34 54 L 34 73 A 6 6 0 0 0 40 79 L 60 79 A 6 6 0 0 0 66 73 L 66 54 Z" fill="#000000" opacity="0.12" />
-        <!-- Meniscus Liquid Top Edge -->
-        <ellipse cx="50" cy="54" rx="16" ry="2" fill="#ffffff" opacity="0.35" />
-        <!-- Glossy Glass Surface Sheen -->
-        <path d="M 37 46 L 37 75" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.8" />
-      </svg>
-    `,
-
-    // 8. BOTANICAL / CANNABIS (Clay Palm Leaf with Raised Center Rib)
-    "marijuana": `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-        <!-- Center Primary Leaf Blade -->
-        <path d="M 50 18 C 45 32 45 48 50 68 C 55 48 55 32 50 18 Z" fill="currentColor" />
-        <!-- Mid-Tier Serrated Leaf Blades -->
-        <path d="M 50 68 C 42 47 28 32 23 35 C 23 44 38 58 50 68 Z" fill="currentColor" />
-        <path d="M 50 68 C 58 47 72 32 77 35 C 77 44 62 58 50 68 Z" fill="currentColor" />
-        <!-- Lower Base Foliage Blades -->
-        <path d="M 50 68 C 39 56 22 51 18 57 C 22 65 37 68 50 68 Z" fill="currentColor" />
-        <path d="M 50 68 C 61 56 78 51 82 57 C 78 65 63 68 50 68 Z" fill="currentColor" />
-        <!-- Leaf Volume Lighting Mask -->
-        <g opacity="0.15" fill="#ffffff">
-          <path d="M 50 18 C 46 32 46 48 50 68 Z" />
-          <path d="M 50 68 C 44 47 30 32 23 35 Z" />
-          <path d="M 50 68 C 58 47 72 32 77 35 Z" />
-        </g>
-        <!-- Stem -->
-        <line x1="50" y1="68" x2="50" y2="84" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-        <!-- Embossed Spine Highlights -->
-        <line x1="50" y1="26" x2="50" y2="68" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity="0.65" />
-      </svg>
-    `
+    // New keys
+    "gel": "gel.png",
+    "ointment": "ointment.png",
+    "files": "files.png"
   };
 
-  return iconMap[iconKey] || "💊";
+  // Safe fallback to a real file if a key is missing
+  const fileName = iconFiles[iconKey] || "pillbottle.png";
+
+  return `<img src="med-icons/${fileName}" alt="${iconKey}" class="med-3d-img" />`;
 }
+
 
 
 

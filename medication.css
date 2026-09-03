@@ -77,9 +77,10 @@
   flex: 1;
 }
 
+/* Circular container using your app's theme tint */
 .med-icon-badge {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -87,10 +88,17 @@
   flex-shrink: 0;
 }
 
-.med-icon-badge svg {
-  width: 42px;
+/* 3D PNG scaling & lighting lift */
+.med-3d-img {
+  width: 36px;
   height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  user-select: none;
+  pointer-events: none;
 }
+
+
 .item-actions{
   display: flex;
   align-items: center;

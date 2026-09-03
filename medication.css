@@ -3,7 +3,7 @@
 .header-titles .status-counter {
   font-size: 20px;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-main);
 }
 
 #edit-meds-btn,
@@ -41,7 +41,7 @@
   gap: 8px;
   color: var(--text-3);
   background-color: #00000009;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.1s ease;
@@ -51,11 +51,12 @@
 .med-empty-vacancy:active {
   background-color: #006aff1f;
   border-color: var(--blue-accent);
+  color: var(--blue-accent);
   transform: scale(0.99);
 }
 
 .med-empty-vacancy svg {
-  width: 32px;
+  width: 26px;
   height: auto;
 }
 
@@ -77,8 +78,8 @@
 }
 
 .med-icon-badge {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -87,8 +88,8 @@
 }
 
 .med-icon-badge svg {
-  width: 24px;
-  height: 24px;
+  width: 42px;
+  height: auto;
 }
 .item-actions{
   display: flex;
@@ -110,7 +111,7 @@
 
 .med-sub-details {
   font-size: 11px;
-  font-weight: 560;
+  font-weight: 600;
   color: var(--text-3);
   display: flex;
   align-items: center;
@@ -159,10 +160,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
-  background: #ffffff !important;
+  background: var(--card-bg);
   border-radius: 16px;
   border: none !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   position: relative;
   user-select: none;
   touch-action: pan-y;
@@ -195,7 +196,7 @@
   grid-column: 1;
   grid-row: 1;
   font-size: 17px;
-  font-weight: 660;
+  font-weight: 600;
 }
 
 .med-dosage {

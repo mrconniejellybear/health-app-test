@@ -9,7 +9,6 @@
 
 .header-date-greeting {
   display: flex;
-  margin-top: 6px;
   flex-direction: column;
 }
 
@@ -21,8 +20,9 @@
 
 .dashboard-greeting {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 660;
   color: var(--text-main);
+  font-family: "Plus Jakarta Sans";
 }
 
 

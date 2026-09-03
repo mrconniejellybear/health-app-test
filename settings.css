@@ -260,6 +260,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   align-items: center;
   justify-content: center;
   margin-right: -4px;
+  margin-top: -14px;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }.settings-trigger-btn svg{
   height: 42px;

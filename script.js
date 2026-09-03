@@ -240,45 +240,42 @@ const MED_COLOR_PALETTE = {
 // --- CAROUSEL ASSET LIST ---
 // 1. Single Master List of Icons
 const AVAILABLE_MED_ICONS = [
-  { key: "1-pill", file: "1-pill.png" },
+  { key: "1-pill", file: "pill-1.png" },
   { key: "2-pills", file: "P2PNG.png" },
 
-  { key: "1-tablet", file: "1-tablet.png" },
   { key: "2-tablets", file: "2-tablets.png" },
+  { key: "2-tabletsalt", file: "2-tablets-alt.png" },
 
 
   { key: "assorted-pills1", file: "assorted-pills1.png" },
 
 
-  { key: "blue-blister", file: "blue-blister.png" },
+  { key: "orange-blister", file: "pills-tablet-3d-icon-png-download-5889253.png" },
   { key: "pink-blister", file: "pink-blister.png" },
+  { key: "blue-blister", file: "blue-blister.png" },
 
-  { key: "pillbottle", file: "pill-jar.png" },
 
-  { key: "coughsyrup", file: "pill-jar-3d-icon-png-download-7387780.png" },
+  { key: "clear-bottle", file: "pill-jar.png" },
+  { key: "vaccine", file: "vaccine.png" },
+  { key: "sepia-bottle", file: "syrup-bottle-3d-icon-png-download-7387765.png" },
+
+
   { key: "soap", file: "acondicionador-3d-icon-png-download-14910010.png" },
 
 
   { key: "nasal-spray", file: "nasal-spray.png" },
 
-
-
   { key: "inahler", file: "inahler1.png" },
 
-
-  { key: "gel", file: "gel.png" },
   { key: "gel2", file: "face-wash.png" },
 
 
-  { key: "ointment1", file: "pink-ointment.png" },
-  { key: "ointment2", file: "face-cream.png" },
-
   { key: "injection", file: "syringe3.png" },
-  { key: "injection2", file: "syringe-bottle.png" },
+
+  { key: "spray", file: "foundation-3d-icon-png-download-14909999.png" },
 
   { key: "band-aid", file: "bandaid.png" },
  
-
   { key: "weed", file: "leaf.png" },
 
   { key: "no-icon", file: "files.png" },
@@ -851,7 +848,7 @@ function renderMedications() {
           </div>
         </div>
       </div>
-      <span class="med-chevron">›</span>
+      <span class="med-chevron"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-189.23q-24.75 0-42.37-17.63Q420-224.48 420-249.23q0-24.75 17.63-42.38 17.62-17.62 42.37-17.62 24.75 0 42.37 17.62Q540-273.98 540-249.23q0 24.75-17.63 42.37-17.62 17.63-42.37 17.63ZM480-420q-24.75 0-42.37-17.63Q420-455.25 420-480q0-24.75 17.63-42.37Q455.25-540 480-540q24.75 0 42.37 17.63Q540-504.75 540-480q0 24.75-17.63 42.37Q504.75-420 480-420Zm0-230.77q-24.75 0-42.37-17.62Q420-686.02 420-710.77q0-24.75 17.63-42.37 17.62-17.63 42.37-17.63 24.75 0 42.37 17.63Q540-735.52 540-710.77q0 24.75-17.63 42.38-17.62 17.62-42.37 17.62Z"/></svg></span>
     `;
 
     if (typeof attachSwipeGesture === "function") {

@@ -224,15 +224,16 @@ const reminderClockIcon = `<svg class="med-reminder-icon" xmlns="http://www.w3.o
  
 // Color Palette
 const MED_COLOR_PALETTE = {
-  "color-1": { main: "#a855f7", bg: "#eee" }, // Purple
-  "color-2": { main: "#6584f3", bg: "#eee" },  // Blue
-  "color-3": { main: "#09b083", bg: "#eee" },  // Green
-  "color-4": { main: "#ea8901", bg: "#eee" },  // Amber
-  "color-5": { main: "#e8559f", bg: "#eee" },  // Pink
-  "color-6": { main: "#06b1cf", bg: "#eee" },   // Cyan
-  "color-7": { main: "#66b60a", bg: "#eee" },  // Lime
-  "color-8": { main: "#eb3c5a", bg: "#eee" }    // Rose
+ "color-1": { main: "#a855f7", bg: "rgba(169, 85, 247, 0.27)" }, // Purple
+ "color-2": { main: "#6584f3", bg: "#7492ff3b" },  // Blue
+ "color-3": { main: "#09b083", bg: "rgba(16, 185, 129, 0.21)" },  // Green
+ "color-4": { main: "#ea8901", bg: "rgba(245, 159, 11, 0.21)" },  // Amber
+ "color-5": { main: "#e8559f", bg: "rgba(238, 92, 165, 0.24)" },  // Pink
+ "color-6": { main: "#06b1cf", bg: "rgba(6, 181, 212, 0.24)" },   // Cyan
+ "color-7": { main: "#66b60a", bg: "rgba(131, 204, 22, 0.26)" },  // Lime
+ "color-8": { main: "#eb3c5a", bg: "rgba(240, 43, 76, 0.19)" }    // Rose
 };
+
 
 // --- POP-UP ACTION MENU LOGIC ---
 medMenuBtn?.addEventListener("click", (e) => {
@@ -603,17 +604,19 @@ function renderMedications() {
   if (!medList) return;
   medList.innerHTML = "";
 
-  const today = (typeof getTodayStr === "function") 
-    ? getTodayStr() 
-    : new Date().toISOString().split("T")[0];
+  const today = typeof getTodayStr === "function" ? getTodayStr() : new Date().toISOString().split("T")[0];
 
+  // Apply legacy edit-mode class if toggled
   if (isMedEditMode) {
     medList.classList.add("editing");
+  } else {
+    medList.classList.remove("editing");
   }
 
+  // Ensure data migration fallbacks
   medications.forEach(med => {
     if (!med.history) med.history = [];
-    if (!med.dosage) med.dosage = "200mg";
+    if (!med.dosage) med.dosage = "100mg";
     if (!med.colorKey) med.colorKey = "color-1";
     if (!med.icon) med.icon = "pill-1";
   });
@@ -621,10 +624,36 @@ function renderMedications() {
   const total = medications.length;
   const takenCount = medications.filter(m => m.history.includes(today)).length;
 
+  // Header status label: "None Created" or "X/Y Taken"
   if (statusCounter) {
-    statusCounter.textContent = total === 0 ? "None Listed" : `${takenCount}/${total} Taken`;
+    statusCounter.textContent = total === 0 ? "None Created" : `${takenCount}/${total} Taken`;
   }
 
+  // EMPTY STATE: Render dashed vacancy container
+  if (total === 0) {
+    const vacancyBox = document.createElement("div");
+    vacancyBox.className = "med-empty-vacancy";
+    vacancyBox.innerHTML = `
+      <svg width="128pt" fill="currentColor" height="128pt" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+ <path d="m83.957 23.039h-0.12891c-5.582 0.039063-10.945 2.3281-15.078 6.4648l-37.492 37.492c-1.2305 1.2305-2.125 2.7539-2.6094 4.4297l-5.1211 17.922c-0.25781 0.91016-0.39844 1.8555-0.39844 2.8164 0 7.0547 5.7461 12.801 12.801 12.801 0.94531 0 1.8945-0.12891 2.8164-0.39844l17.922-5.1211c1.6758-0.47266 3.1992-1.3711 4.4297-2.6094l37.785-37.785c3.9805-3.9805 6.1836-9.2812 6.1836-14.926 0-11.637-9.4727-21.105-21.094-21.105zm-2.9961 39.461-27.098 27.098-17.922 5.1211c-1.4062 0-2.5586-1.1523-2.5586-2.5586l5.1211-17.922 28.379-28.379 15.359 15.359zm10.676-10.676-2.1641 2.1641-15.359-15.359 1.8672-1.8672c2.1133-2.1133 4.9297-3.457 7.9102-3.4688h0.0625c6.0039 0 10.867 4.8633 10.867 10.867 0 2.8789-1.1406 5.6445-3.1875 7.6797z"/>
+ <path d="m28.559 48.613c2.6641-0.25781 4.6211-2.6367 4.6211-5.3125v-4.9023c0-2.8281 2.293-5.1211 5.1211-5.1211h4.9023c2.6758 0 5.0703-1.957 5.3125-4.6211 0.29297-3.0586-2.0977-5.6211-5.0938-5.6211h-5.1211c-8.4883 0-15.359 6.875-15.359 15.359v5.1211c0 2.9961 2.5742 5.3906 5.6211 5.0938z"/>
+ <path d="m84.379 104.96h5.1211c8.4883 0 15.359-6.875 15.359-15.359v-5.1211c0-2.9961-2.5742-5.3906-5.6211-5.0938-2.6641 0.25781-4.6211 2.6367-4.6211 5.3125v4.9023c0 2.8281-2.293 5.1211-5.1211 5.1211h-4.9023c-2.6758 0-5.0547 1.957-5.3125 4.6211-0.29297 3.0586 2.0977 5.6211 5.0938 5.6211z"/>
+</svg>
+
+      <span>Tap to Create</span>
+    `;
+    vacancyBox.addEventListener("click", () => {
+      if (typeof openBottomSheet === "function") {
+        openBottomSheet();
+      } else if (modalOverlay) {
+        modalOverlay.classList.remove("hidden");
+      }
+    });
+    medList.appendChild(vacancyBox);
+    return;
+  }
+
+  // ACTIVE STATE: Sort items (Pending first, Taken last)
   const sortedMeds = [...medications].sort((a, b) => {
     const aTaken = a.history.includes(today);
     const bTaken = b.history.includes(today);
@@ -635,49 +664,45 @@ function renderMedications() {
     const isTakenToday = med.history.includes(today);
     const colorTheme = (typeof MED_COLOR_PALETTE !== "undefined" && MED_COLOR_PALETTE[med.colorKey])
       ? MED_COLOR_PALETTE[med.colorKey] 
-      : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.1)" };
+      : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.15)" };
 
     const hasAlarm = Boolean(med.hasReminder || med.reminder || med.alarm);
+    const timeDisplay = med.scheduledTime || med.time || "";
 
     const li = document.createElement("li");
     li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
-    li.style.backgroundColor = colorTheme.bg;
-    li.style.borderColor = `${colorTheme.main}40`;
 
     li.innerHTML = `
-      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">
-        <svg width="100pt" fill="currentColor" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="m74 40h1.8281c1.5938 0.039062 2.957-1.125 3.1719-2.6992 0.085938-0.84766-0.19141-1.6914-0.76562-2.3203-0.57031-0.62891-1.3828-0.98438-2.2344-0.98047h-13v-6c0-4.9688-4.0312-9-9-9h-8c-4.9688 0-9 4.0312-9 9v6h-12.828c-1.5938-0.039062-2.957 1.125-3.1719 2.6992-0.085938 0.84766 0.19141 1.6914 0.76562 2.3203 0.57031 0.62891 1.3828 0.98438 2.2344 0.98047h2v32c0 4.9688 4.0312 9 9 9h30c4.9688 0 9-4.0312 9-9zm-31-12c0-1.6562 1.3438-3 3-3h8c1.6562 0 3 1.3438 3 3v6h-14zm25 44c0 1.6562-1.3438 3-3 3h-30c-1.6562 0-3-1.3438-3-3v-32h36z"/>
-        </svg>
-
-      </button>
+      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
       <div class="med-card-wrapper">
-        <div class="med-icon-display" style="color: ${colorTheme.main}">
-          ${typeof getIconSVG === "function" ? getIconSVG(med.icon) : ""}
+        <div class="med-icon-badge" style="background-color: ${colorTheme.bg}; color: ${colorTheme.main};">
+          ${typeof getIconSVG === "function" ? getIconSVG(med.icon) : "💊"}
         </div>
-        <div class="med-grid">
-          <span class="med-name" style="color: ${colorTheme.main}">${med.name}</span>
-          <span class="med-dosage">${med.dosage}</span>
-          <span class="med-time" style="color: ${colorTheme.main}">
-            ${med.scheduledTime || med.time || ''} ${hasAlarm ? reminderClockIcon : ''}
-          </span>
-          <span class="logged-status">
-            ${isTakenToday ? "Taken" : "Not Taken"}
-          </span>
+        <div class="med-info-stack">
+          <div class="med-name-label">${med.name}</div>
+          <div class="med-sub-details">
+            ${hasAlarm && typeof reminderClockIcon !== "undefined" ? reminderClockIcon : ""}
+            <span>${timeDisplay}</span>
+            <span>${med.dosage}</span>
+          </div>
         </div>
       </div>
+      <span class="med-chevron">›</span>
     `;
 
+    // Reattach touch gestures
     if (typeof attachSwipeGesture === "function") {
       attachSwipeGesture(li, med, today);
     }
+    if (typeof attachLongPressDelete === "function") {
+      attachLongPressDelete(li, med.id);
+    }
 
-    attachLongPressDelete(li, med.id);
-    
     medList.appendChild(li);
   });
 }
+
 
 // --- ICON SVG MAPPER ---
 function getIconSVG(iconKey) {

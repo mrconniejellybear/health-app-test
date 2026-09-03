@@ -1,31 +1,132 @@
 
 /* --- Card Icon + Grid Alignment --- */
+.header-titles .status-counter {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+#edit-meds-btn,
+.menu-trigger-btn {
+  font-size: 14px;
+  font-weight: 500;
+  color: #007aff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* --- Invisible Outer Container --- */
+#med-list {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* --- Empty Vacancy Box --- */
+.med-empty-vacancy {
+  margin-top: 12px;
+  min-height: 140px;
+  border: 3px dashed #c5c7ca;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-3);
+  background-color: #00000009;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.med-empty-vacancy:active {
+  background-color: #006aff1f;
+  border-color: var(--blue-accent);
+  transform: scale(0.99);
+}
+
+.med-empty-vacancy svg {
+  width: 32px;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
 .med-card-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  width: 100%;
+  gap: 14px;
+  flex: 1;
 }
 
-.med-icon-display {
+.med-icon-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
   display: flex;
-  background-color: var(--medicon);
-  border-radius: 99px;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
   flex-shrink: 0;
 }
-.med-icon-display svg{
-  width: 28px;
-  height: auto;
+
+.med-icon-badge svg {
+  width: 24px;
+  height: 24px;
 }
 .item-actions{
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
+.med-info-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.med-name-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.med-sub-details {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Right Chevron */
+.med-chevron {
+  color: var(--text-3);
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 8px;
+  user-select: none;
+}
+
+
 
 
 .med-item {
@@ -56,19 +157,22 @@
 .med-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px 10px 10px;
-  border: none;
-  border-radius: 18px;
-  transition: opacity 0.3s ease, transform 0.15s ease;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #ffffff !important;
+  border-radius: 16px;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
   user-select: none;
   touch-action: pan-y;
+  transition: opacity 0.25s ease, transform 0.15s ease;
 }
 
 
 .med-item.completed {
   opacity: 0.4;
-  filter: grayscale(20%);
+  filter: grayscale(40%);
 }
 
 .med-item.completed .med-name {
@@ -125,15 +229,7 @@
 }
 
 
-/* Edit Mode Animation & Delete Button */
-.med-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  transition: all 0.2s ease;
 
-}
 
 /* Hidden by default */
 .med-delete-btn {
@@ -402,8 +498,8 @@
 }
 
 .med-reminder-icon{
-  height: 14px;
-  width: 14px;
+  height: 12px;
+  width: auto;
 }
 
 .med-test-btn{
@@ -625,3 +721,10 @@ gap: 8px;
   0% { transform: scale(0); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+
+
+
+
+
+

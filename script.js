@@ -238,18 +238,60 @@ const MED_COLOR_PALETTE = {
 
 
 // --- CAROUSEL ASSET LIST ---
-// Register your new 3D models here
+// 1. Single Master List of Icons
 const AVAILABLE_MED_ICONS = [
+  { key: "1-pill", file: "1-pill.png" },
+  { key: "2-pills", file: "P2PNG.png" },
+
+  { key: "1-tablet", file: "1-tablet.png" },
   { key: "2-tablets", file: "2-tablets.png" },
-  { key: "orange-gummy", file: "orange-gummy.png" },
+
+
+  { key: "assorted-pills1", file: "assorted-pills1.png" },
+
+
+  { key: "blue-blister", file: "blue-blister.png" },
   { key: "pink-blister", file: "pink-blister.png" },
-  { key: "pillbottle", file: "pillbottle.png" },
+
+  { key: "pillbottle", file: "pill-jar.png" },
+
+  { key: "coughsyrup", file: "pill-jar-3d-icon-png-download-7387780.png" },
+  { key: "soap", file: "acondicionador-3d-icon-png-download-14910010.png" },
+
+
+  { key: "nasal-spray", file: "nasal-spray.png" },
+
+
+
+  { key: "inahler", file: "inahler1.png" },
+
+
   { key: "gel", file: "gel.png" },
-  { key: "ointment", file: "ointment.png" },
-  { key: "injection", file: "injection.png" },
-  { key: "leaf", file: "leaf.png" },
-  { key: "files", file: "files.png" }
+  { key: "gel2", file: "face-wash.png" },
+
+
+  { key: "ointment1", file: "pink-ointment.png" },
+  { key: "ointment2", file: "face-cream.png" },
+
+  { key: "injection", file: "syringe3.png" },
+  { key: "injection2", file: "syringe-bottle.png" },
+
+  { key: "band-aid", file: "bandaid.png" },
+ 
+
+  { key: "weed", file: "leaf.png" },
+
+  { key: "no-icon", file: "files.png" },
 ];
+
+// 2. Lookup Helper that reads directly from the master list
+function getMedIconMarkup(iconKey) {
+  const match = AVAILABLE_MED_ICONS.find(item => item.key === iconKey);
+  const fileName = match ? match.file : "2-tablets.png"; // Fallback if key doesn't exist
+  return `<img src="med-icons/${fileName}" alt="${iconKey}" class="med-3d-img" />`;
+}
+
+
 
 let activeIconIndex = 0;
 
@@ -486,61 +528,59 @@ if (medForm) {
   medForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("med-name").value.trim();
-    const dosage = document.getElementById("med-dosage")?.value.trim() || "";
-    const rawTime = document.getElementById("med-time")?.value || "";
+    const nameInput = document.getElementById("med-name");
+    const dosageInput = document.getElementById("med-dosage");
+    const timeInput = document.getElementById("med-time");
     const freqInput = document.getElementById("med-frequency");
+
+    const name = nameInput ? nameInput.value.trim() : "";
+    const dosage = dosageInput ? dosageInput.value.trim() : "100mg";
+    const rawTime = timeInput ? timeInput.value : "";
     const frequency = freqInput ? freqInput.value : "Daily";
 
-    // Read the iOS toggle switch
-    const reminderToggle = document.getElementById("med-reminder-toggle");
-    const hasReminder = reminderToggle ? reminderToggle.checked : false;
+    // Read from the new studio carousel stage, with fallbacks
+    const iconInput = document.getElementById("selected-med-icon");
+    const colorInput = document.getElementById("selected-med-color");
+    const selectedIcon = iconInput ? iconInput.value : "2-tablets";
+    const selectedColor = colorInput ? colorInput.value : "#3883e0";
 
-// Inside medForm.addEventListener("submit", (e) => { ...
-const selectedIcon = document.getElementById("selected-med-icon")?.value || "2-tablets";
-const selectedColor = document.getElementById("selected-med-color")?.value || "#3883e0";
+    if (!name) return;
 
-const newMed = {
-  id: Date.now(),
-  name,
-  dosage,
-  scheduledTime: formattedTime,
-  frequency,
-  icon: selectedIcon,
-  customColor: selectedColor, // Direct hex color
-  colorKey: "custom", 
-  reminders: checkedChips,
-  history: []
-};
-
-
-    // ONLY require 'name' to save the card
-    if (name) {
-      // Format time only if provided; otherwise, leave empty
-      const formattedTime = rawTime ? formatTime(rawTime) : "";
-
-      const newMed = {
-        id: Date.now(),
-        name,
-        dosage: dosage,
-        scheduledTime: formattedTime,
-        frequency,
-        icon: selectedIcon,
-        colorKey: selectedColorKey,
-        hasReminder: hasReminder,
-        history: []
-      };
-
-      medications.push(newMed);
-      saveAppState();
-      medForm.reset();
-      closeBottomSheet();
-      renderMedications();
-      if (typeof playLogSound === "function") playLogSound();
-      if (typeof updateHomeDashboard === "function") updateHomeDashboard();
+    // Safe time formatting
+    let formattedTime = rawTime;
+    if (typeof formatTime === "function" && rawTime) {
+      formattedTime = formatTime(rawTime);
     }
+
+    const newMed = {
+      id: Date.now().toString(),
+      name,
+      dosage,
+      scheduledTime: formattedTime,
+      frequency,
+      icon: selectedIcon,
+      customColor: selectedColor,
+      colorKey: "custom",
+      history: []
+    };
+
+    medications.push(newMed);
+    if (typeof saveAppState === "function") saveAppState();
+
+    medForm.reset();
+
+    // Close Modal / Bottom Sheet
+    if (typeof closeBottomSheet === "function") {
+      closeBottomSheet();
+    } else if (modalOverlay) {
+      modalOverlay.classList.add("hidden");
+    }
+
+    renderMedications();
+    if (typeof updateHomeDashboard === "function") updateHomeDashboard();
   });
 }
+
 
 
 // --- PRESS & HOLD QUICK-DELETE BADGE ---
@@ -723,54 +763,56 @@ function renderMedications() {
 
   const today = typeof getTodayStr === "function" ? getTodayStr() : new Date().toISOString().split("T")[0];
 
-  // Apply legacy edit-mode class if toggled
   if (isMedEditMode) {
     medList.classList.add("editing");
   } else {
     medList.classList.remove("editing");
   }
 
-  // Ensure data migration fallbacks
+  // Ensure defaults exist on older records
   medications.forEach(med => {
     if (!med.history) med.history = [];
     if (!med.dosage) med.dosage = "100mg";
-    if (!med.colorKey) med.colorKey = "color-1";
-    if (!med.icon) med.icon = "pill-1";
+    if (!med.icon) med.icon = "2-tablets";
   });
 
   const total = medications.length;
-  const takenCount = medications.filter(m => m.history.includes(today)).length;
+  const takenCount = medications.filter(m => m.history && m.history.includes(today)).length;
 
-  // Header status label: "None Created" or "X/Y Taken"
   if (statusCounter) {
     statusCounter.textContent = total === 0 ? "None Created" : `${takenCount}/${total} Taken`;
   }
 
-  // EMPTY STATE: Render dashed vacancy container
+  // Render Vacancy Box if list is empty
+  // EMPTY STATE: Render dashed vacancy container with centered label + 3D icon
   if (total === 0) {
     const vacancyBox = document.createElement("div");
     vacancyBox.className = "med-empty-vacancy";
     vacancyBox.innerHTML = `
-      <svg width="128pt" fill="currentColor" height="128pt" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+      <div class="vacancy-label-group">
+         <svg width="128pt" height="128pt" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" fill="currentColor" >
  <path d="m83.957 23.039h-0.12891c-5.582 0.039063-10.945 2.3281-15.078 6.4648l-37.492 37.492c-1.2305 1.2305-2.125 2.7539-2.6094 4.4297l-5.1211 17.922c-0.25781 0.91016-0.39844 1.8555-0.39844 2.8164 0 7.0547 5.7461 12.801 12.801 12.801 0.94531 0 1.8945-0.12891 2.8164-0.39844l17.922-5.1211c1.6758-0.47266 3.1992-1.3711 4.4297-2.6094l37.785-37.785c3.9805-3.9805 6.1836-9.2812 6.1836-14.926 0-11.637-9.4727-21.105-21.094-21.105zm-2.9961 39.461-27.098 27.098-17.922 5.1211c-1.4062 0-2.5586-1.1523-2.5586-2.5586l5.1211-17.922 28.379-28.379 15.359 15.359zm10.676-10.676-2.1641 2.1641-15.359-15.359 1.8672-1.8672c2.1133-2.1133 4.9297-3.457 7.9102-3.4688h0.0625c6.0039 0 10.867 4.8633 10.867 10.867 0 2.8789-1.1406 5.6445-3.1875 7.6797z"/>
  <path d="m28.559 48.613c2.6641-0.25781 4.6211-2.6367 4.6211-5.3125v-4.9023c0-2.8281 2.293-5.1211 5.1211-5.1211h4.9023c2.6758 0 5.0703-1.957 5.3125-4.6211 0.29297-3.0586-2.0977-5.6211-5.0938-5.6211h-5.1211c-8.4883 0-15.359 6.875-15.359 15.359v5.1211c0 2.9961 2.5742 5.3906 5.6211 5.0938z"/>
  <path d="m84.379 104.96h5.1211c8.4883 0 15.359-6.875 15.359-15.359v-5.1211c0-2.9961-2.5742-5.3906-5.6211-5.0938-2.6641 0.25781-4.6211 2.6367-4.6211 5.3125v4.9023c0 2.8281-2.293 5.1211-5.1211 5.1211h-4.9023c-2.6758 0-5.0547 1.957-5.3125 4.6211-0.29297 3.0586 2.0977 5.6211 5.0938 5.6211z"/>
 </svg>
 
-      <span>Tap to Create</span>
+
+        <span>Tap to Create</span>
+      </div>
+      <img src="medication-all-types.png" alt="Pill Cluster" class="vacancy-cluster-img" />
     `;
+
     vacancyBox.addEventListener("click", () => {
-      if (typeof openBottomSheet === "function") {
-        openBottomSheet();
-      } else if (modalOverlay) {
-        modalOverlay.classList.remove("hidden");
-      }
+      if (typeof openBottomSheet === "function") openBottomSheet();
+      else if (modalOverlay) modalOverlay.classList.remove("hidden");
     });
+
     medList.appendChild(vacancyBox);
     return;
   }
 
-  // ACTIVE STATE: Sort items (Pending first, Taken last)
+
+  // Sort items: Pending first, Taken last
   const sortedMeds = [...medications].sort((a, b) => {
     const aTaken = a.history.includes(today);
     const bTaken = b.history.includes(today);
@@ -779,41 +821,39 @@ function renderMedications() {
 
   sortedMeds.forEach((med) => {
     const isTakenToday = med.history.includes(today);
-    const colorTheme = (typeof MED_COLOR_PALETTE !== "undefined" && MED_COLOR_PALETTE[med.colorKey])
-      ? MED_COLOR_PALETTE[med.colorKey] 
-      : { main: "#3883e0", bg: "rgba(56, 131, 224, 0.15)" };
-
-    const hasAlarm = Boolean(med.hasReminder || med.reminder || med.alarm);
+    const itemColor = med.customColor || (typeof MED_COLOR_PALETTE !== "undefined" && MED_COLOR_PALETTE[med.colorKey]?.main) || "#3883e0";
     const timeDisplay = med.scheduledTime || med.time || "";
+
+    // Safely retrieve icon markup whether named getMedIconMarkup or getIconSVG
+    let iconMarkup = "💊";
+    if (typeof getMedIconMarkup === "function") {
+      iconMarkup = getMedIconMarkup(med.icon);
+    } else if (typeof getIconSVG === "function") {
+      iconMarkup = getIconSVG(med.icon);
+    }
 
     const li = document.createElement("li");
     li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
 
-// Inside sortedMeds.forEach((med) => { ...
-const itemColor = med.customColor || (MED_COLOR_PALETTES[med.colorKey]?.main) || "#3883e0";
-
-li.innerHTML = `
-  <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
-  <div class="med-card-wrapper">
-    <div class="med-icon-badge" style="background-color: ${itemColor};">
-      ${getMedIconMarkup(med.icon)}
-    </div>
-    <div class="med-info-stack">
-      <div class="med-name-label">${med.name}</div>
-      <div class="med-sub-details">
-        ${hasAlarm && typeof reminderClockIcon !== "undefined" ? reminderClockIcon : ""}
-        <span>${timeDisplay}</span>
-        <span>${med.dosage}</span>
+    li.innerHTML = `
+      <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
+      <div class="med-card-wrapper">
+        <div class="med-icon-badge" style="background-color: ${itemColor};">
+          ${iconMarkup}
+        </div>
+        <div class="med-info-stack">
+          <div class="med-name-label">${med.name}</div>
+          <div class="med-sub-details">
+            ${typeof reminderClockIcon !== "undefined" && (med.hasReminder || med.reminder) ? reminderClockIcon : ""}
+            <span>${timeDisplay}</span>
+            <span>${med.dosage}</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <span class="med-chevron">›</span>
-`;
+      <span class="med-chevron">›</span>
+    `;
 
-
-
-    // Reattach touch gestures
     if (typeof attachSwipeGesture === "function") {
       attachSwipeGesture(li, med, today);
     }
@@ -823,33 +863,6 @@ li.innerHTML = `
 
     medList.appendChild(li);
   });
-}
-
-
-// --- ICON SVG MAPPER ---
-function getMedIconMarkup(iconKey) {
-  const iconFiles = {
-    // Legacy keys stored in existing localStorage items
-    "pill-1": "pill-3d-icon_158757-3345.avif",
-    "2tablets": "ointment.png",
-    "3tablets": "medical-pills-capsule-drug-flying-3d-icon-illustration-png.png",
-    "med-bottle": "vitamins-pills-3d-icon-png-download-14221073.png",
-    "pill-bottle": "pillbottle.png",
-    "syringe": "3d-injection-illustration_541443-3646.png",
-    "med-vile": "medicinejar.png",
-    "IV-bag": "files.png",
-    "marijuana": "leaf.png",
-
-    // New keys
-    "gel": "gel.png",
-    "ointment": "ointment.png",
-    "files": "files.png"
-  };
-
-  // Safe fallback to a real file if a key is missing
-  const fileName = iconFiles[iconKey] || "pillbottle.png";
-
-  return `<img src="med-icons/${fileName}" alt="${iconKey}" class="med-3d-img" />`;
 }
 
 

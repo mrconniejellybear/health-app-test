@@ -29,35 +29,54 @@
   gap: 10px;
 }
 
-/* --- Empty Vacancy Box --- */
+/* --- Empty Vacancy Box (Centered Vertical Stack) --- */
 .med-empty-vacancy {
   margin-top: 12px;
-  min-height: 140px;
-  border: 3px dashed #c5c7ca;
-  border-radius: 16px;
+  min-height: 180px;
+  border: 3px dashed #b0b5be;
+  border-radius: 18px;
   display: flex;
+  flex-direction: column; /* Stacks text on top, image directly below */
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  color: var(--text-3);
-  background-color: #00000009;
-  font-size: 18px;
-  font-weight: 600;
+  gap: 14px;
   cursor: pointer;
+  background: #dfe3e997;
   transition: background-color 0.15s ease, transform 0.1s ease;
   user-select: none;
 }
 
 .med-empty-vacancy:active {
-  background-color: #006aff1f;
+  background-color: #2890ff40;
   border-color: var(--blue-accent);
   color: var(--blue-accent);
   transform: scale(0.99);
 }
 
-.med-empty-vacancy svg {
-  width: 26px;
-  height: auto;
+/* Row wrapper for pen icon + "Tap to Create" text */
+.vacancy-label-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7b8290;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.vacancy-label-group svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Tactile 3D Cluster Image */
+.vacancy-cluster-img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+  pointer-events: none;
+  user-select: none;
 }
 
 
@@ -407,7 +426,7 @@
 #med-form select {
   padding: 10px 14px;
   border-radius: 14px;
-  background: #f7f7fc;
+  background: #ebebef;
   color: var(--text-2);
   font-size: 15px;
   font-weight: 380;
@@ -651,7 +670,7 @@
 
 .action-menu-item:hover,
 .action-menu-item:active {
-  background: #f7f7fc;
+  background: #ebebef;
   border-radius: 12px;
 }
 

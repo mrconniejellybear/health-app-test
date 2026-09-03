@@ -75,25 +75,28 @@
   align-items: center;
   gap: 14px;
   flex: 1;
+  min-width: 0;
 }
 
 /* Circular container using your app's theme tint */
 .med-icon-badge {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  width: 80px;
+  min-width: 80px;
+  align-self: stretch;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border-radius: 0; /* Box edges align with card */
 }
+
 
 /* 3D PNG scaling & lighting lift */
 .med-3d-img {
-  width: 36px;
-  height: auto;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.14));
   user-select: none;
   pointer-events: none;
 }
@@ -105,33 +108,40 @@
   gap: 10px;
 }
 
+/* --- Content Column --- */
 .med-info-stack {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
+  gap: 3px;
+  padding: 12px 14px;
+  flex: 1;
 }
 
 .med-name-label {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-main);
+  color: #1f242d;
+  line-height: 1.2;
 }
 
 .med-sub-details {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-3);
+  font-weight: 500;
+  color: #717784;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/* Right Chevron */
+/* Right Chevron Anchor */
 .med-chevron {
-  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  padding-right: 14px;
+  color: #b0b5be;
   font-size: 18px;
   font-weight: 600;
-  margin-left: 8px;
   user-select: none;
 }
 
@@ -165,17 +175,17 @@
 /* Card Container */
 .med-item {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
+  align-items: stretch; /* Stretches the left badge to full card height */
   background: var(--card-bg);
-  border-radius: 16px;
-  border: none !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  border-radius: 18px;
+  overflow: hidden; /* Clips the left badge to card corners */
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
   position: relative;
   user-select: none;
   touch-action: pan-y;
   transition: opacity 0.25s ease, transform 0.15s ease;
+  min-height: 74px;
 }
 
 

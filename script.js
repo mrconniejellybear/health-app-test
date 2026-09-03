@@ -237,6 +237,106 @@ const MED_COLOR_PALETTE = {
 };
 
 
+// --- CAROUSEL ASSET LIST ---
+// Register your new 3D models here
+const AVAILABLE_MED_ICONS = [
+  { key: "2-tablets", file: "2-tablets.png" },
+  { key: "orange-gummy", file: "orange-gummy.png" },
+  { key: "pink-blister", file: "pink-blister.png" },
+  { key: "pillbottle", file: "pillbottle.png" },
+  { key: "gel", file: "gel.png" },
+  { key: "ointment", file: "ointment.png" },
+  { key: "injection", file: "injection.png" },
+  { key: "leaf", file: "leaf.png" },
+  { key: "files", file: "files.png" }
+];
+
+let activeIconIndex = 0;
+
+// Initialize Carousel & Picker
+function initMedStudioCarousel() {
+  const slider = document.getElementById("stage-slider");
+  const stage = document.getElementById("med-picker-stage");
+  const iconInput = document.getElementById("selected-med-icon");
+  const colorInput = document.getElementById("selected-med-color");
+  const nativeColorPicker = document.getElementById("med-native-color-picker");
+  const prevBtn = document.getElementById("stage-prev-btn");
+  const nextBtn = document.getElementById("stage-next-btn");
+
+  if (!slider || !stage) return;
+
+  // 1. Build slides
+  slider.innerHTML = AVAILABLE_MED_ICONS.map((icon, idx) => `
+    <div class="stage-slide-item ${idx === 0 ? "active" : ""}" data-key="${icon.key}">
+      <img src="med-icons/${icon.file}" alt="${icon.key}" />
+    </div>
+  `).join("");
+
+  function updateSlidePosition() {
+    slider.style.transform = `translateX(-${activeIconIndex * 100}%)`;
+    
+    // Update active highlight classes
+    const slides = slider.querySelectorAll(".stage-slide-item");
+    slides.forEach((slide, idx) => {
+      slide.classList.toggle("active", idx === activeIconIndex);
+    });
+
+    // Update hidden input
+    if (iconInput) {
+      iconInput.value = AVAILABLE_MED_ICONS[activeIconIndex].key;
+    }
+
+    if (navigator.vibrate) navigator.vibrate(8);
+  }
+
+  // Prev / Next Button Navigation
+  prevBtn?.addEventListener("click", () => {
+    activeIconIndex = (activeIconIndex - 1 + AVAILABLE_MED_ICONS.length) % AVAILABLE_MED_ICONS.length;
+    updateSlidePosition();
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    activeIconIndex = (activeIconIndex + 1) % AVAILABLE_MED_ICONS.length;
+    updateSlidePosition();
+  });
+
+  // 2. Touch Swipe Navigation
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  stage.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  stage.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        // Swiped Right -> Previous
+        activeIconIndex = (activeIconIndex - 1 + AVAILABLE_MED_ICONS.length) % AVAILABLE_MED_ICONS.length;
+      } else {
+        // Swiped Left -> Next
+        activeIconIndex = (activeIconIndex + 1) % AVAILABLE_MED_ICONS.length;
+      }
+      updateSlidePosition();
+    }
+  });
+
+  // 3. Dynamic Color Picker Sync
+  nativeColorPicker?.addEventListener("input", (e) => {
+    const chosenColor = e.target.value;
+    stage.style.backgroundColor = chosenColor;
+    if (colorInput) colorInput.value = chosenColor;
+  });
+}
+
+// Call on startup
+document.addEventListener("DOMContentLoaded", initMedStudioCarousel);
+
+
+
+
 // --- POP-UP ACTION MENU LOGIC ---
 medMenuBtn?.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -396,8 +496,23 @@ if (medForm) {
     const reminderToggle = document.getElementById("med-reminder-toggle");
     const hasReminder = reminderToggle ? reminderToggle.checked : false;
 
-    const selectedIcon = document.querySelector('input[name="med_icon"]:checked')?.value || "pill-1";
-    const selectedColorKey = document.querySelector('input[name="med_color"]:checked')?.value || "color-1";
+// Inside medForm.addEventListener("submit", (e) => { ...
+const selectedIcon = document.getElementById("selected-med-icon")?.value || "2-tablets";
+const selectedColor = document.getElementById("selected-med-color")?.value || "#3883e0";
+
+const newMed = {
+  id: Date.now(),
+  name,
+  dosage,
+  scheduledTime: formattedTime,
+  frequency,
+  icon: selectedIcon,
+  customColor: selectedColor, // Direct hex color
+  colorKey: "custom", 
+  reminders: checkedChips,
+  history: []
+};
+
 
     // ONLY require 'name' to save the card
     if (name) {
@@ -675,10 +790,13 @@ function renderMedications() {
     li.className = `med-item ${isTakenToday ? "completed" : ""}`;
     li.dataset.id = med.id;
 
+// Inside sortedMeds.forEach((med) => { ...
+const itemColor = med.customColor || (MED_COLOR_PALETTES[med.colorKey]?.main) || "#3883e0";
+
 li.innerHTML = `
   <button class="med-delete-btn" onclick="deleteMedication('${med.id}')">✕</button>
   <div class="med-card-wrapper">
-    <div class="med-icon-badge" style="background-color: ${colorTheme.bg};">
+    <div class="med-icon-badge" style="background-color: ${itemColor};">
       ${getMedIconMarkup(med.icon)}
     </div>
     <div class="med-info-stack">
@@ -692,6 +810,7 @@ li.innerHTML = `
   </div>
   <span class="med-chevron">›</span>
 `;
+
 
 
     // Reattach touch gestures

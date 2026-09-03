@@ -45,7 +45,7 @@
   background: var(--other);
   transition: background-color 0.15s ease, transform 0.1s ease;
   user-select: none;
-  color:var(--text-muted)
+  color:var(--text-4)
 }
 
 .med-empty-vacancy:active {
@@ -72,8 +72,8 @@
 
 /* Tactile 3D Cluster Image */
 .vacancy-cluster-img {
-  width: 88px;
-  height: 88px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
   pointer-events: none;
@@ -522,7 +522,7 @@
   cursor: pointer;
 }
 .btn-primary { background: var(--blue-accent); color: #ffffff; border: none;
-    box-shadow: 0 3px 10px rgba(48, 134, 255, 0.398);
+    box-shadow: 0 1px 20px rgba(48, 134, 255, 0.204);
 
  }
 .btn-secondary { background:#dfe3e9; color: var(--text-2);

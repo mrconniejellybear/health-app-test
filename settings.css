@@ -255,12 +255,12 @@ input:checked + .slider:before { transform: translateX(20px); }
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--text-3);
+  color: var(--text-4);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: -4px;
-  margin-top: -14px;
+  margin-top: -20px;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }.settings-trigger-btn svg{
   height: 42px;

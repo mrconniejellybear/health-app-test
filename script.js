@@ -241,7 +241,9 @@ const MED_COLOR_PALETTE = {
 // 1. Single Master List of Icons
 const AVAILABLE_MED_ICONS = [
   { key: "1-pill", file: "pill-1.png" },
+  { key: "3-pill", file: "pill-3.png" },
   { key: "2-pills", file: "P2PNG.png" },
+
 
   { key: "2-tablets", file: "2-tablets.png" },
   { key: "2-tabletsalt", file: "2-tablets-alt.png" },
@@ -254,11 +256,9 @@ const AVAILABLE_MED_ICONS = [
   { key: "pink-blister", file: "pink-blister.png" },
   { key: "blue-blister", file: "blue-blister.png" },
 
+  { key: "pueple-bottle", file: "medicine-jar-3d-icon-png-download-4697203.png" },
 
-  { key: "clear-bottle", file: "pill-jar.png" },
   { key: "vaccine", file: "vaccine.png" },
-  { key: "sepia-bottle", file: "syrup-bottle-3d-icon-png-download-7387765.png" },
-
 
   { key: "soap", file: "acondicionador-3d-icon-png-download-14910010.png" },
 
@@ -269,8 +269,12 @@ const AVAILABLE_MED_ICONS = [
 
   { key: "gel2", file: "face-wash.png" },
 
-
   { key: "injection", file: "syringe3.png" },
+
+  { key: "clear-bottle", file: "pill-jar.png" },
+  { key: "glass-bottle", file: "vaccine-bottle-3d-icon-png-download-8609266.png" },
+  { key: "sepia-bottle", file: "syrup-bottle-3d-icon-png-download-7387765.png" },
+
 
   { key: "spray", file: "foundation-3d-icon-png-download-14909999.png" },
 

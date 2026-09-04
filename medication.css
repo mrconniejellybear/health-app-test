@@ -589,26 +589,22 @@
 .menu-trigger-btn {
   background: none;
   border: none;
-  color: var(--text-3);
-  margin-right: 4px;
+  color: var(--text-2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: -6px;
+  transition: all 0.07s ease;
 }
 .menu-trigger-btn svg{
   height: 34px;
-  transform: scaleX(-1);
-  transform-origin: center;
   width: auto;
 }
 
 .menu-trigger-btn:active {
-  transform: scale(0.7);
-  background: #eee;
+  transform: scale(0.8);
+  background: var(--other);
   color: var(--text-2);
 }
 

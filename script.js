@@ -259,6 +259,7 @@ const AVAILABLE_MED_ICONS = [
   { key: "pueple-bottle", file: "medicine-jar-3d-icon-png-download-4697203.png" },
 
   { key: "vaccine", file: "vaccine.png" },
+  { key: "glass-bottle", file: "vaccine-bottle-3d-icon-png-download-8609266.png" },
 
   { key: "soap", file: "acondicionador-3d-icon-png-download-14910010.png" },
 
@@ -272,15 +273,21 @@ const AVAILABLE_MED_ICONS = [
   { key: "injection", file: "syringe3.png" },
 
   { key: "clear-bottle", file: "pill-jar.png" },
-  { key: "glass-bottle", file: "vaccine-bottle-3d-icon-png-download-8609266.png" },
   { key: "sepia-bottle", file: "syrup-bottle-3d-icon-png-download-7387765.png" },
 
 
   { key: "spray", file: "foundation-3d-icon-png-download-14909999.png" },
+  { key: "spray2", file: "spray2.png" },
 
+
+  
+  { key: "pestle", file: "mortar-and-pestle-3d-icon-png-download-4754720.png"},
+
+  { key: "band-aid2", file: "band-aid-3d-icon-png-download-8614930.png" },
   { key: "band-aid", file: "bandaid.png" },
+
  
-  { key: "weed", file: "leaf.png" },
+  { key: "medical-marijuana", file: "leaf.png" },
 
   { key: "no-icon", file: "files.png" },
 ];

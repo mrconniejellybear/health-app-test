@@ -116,7 +116,6 @@
   width: 50px;
   height: 50px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.14));
   user-select: none;
   pointer-events: none;
 }
@@ -428,7 +427,7 @@
 #med-form select {
   padding: 10px 14px;
   border-radius: 14px;
-  background: var(--bg-color);
+  background: var(--other);
   color: var(--text-main);
   font-size: 15px;
   font-weight: 500;
@@ -503,16 +502,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 21px 0;
+  padding: 20px 0;
   border-radius: 15px;
   cursor: pointer;
   transition: transform 0.15s ease, opacity 0.15s ease;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 
 
 .btn-primary,.btn-secondary, svg{
-  height: 28px;
+  height: 25px;
   width: auto;
 }
 .btn-primary, .btn-secondary {
@@ -521,11 +522,11 @@
   font-weight: 500;
   cursor: pointer;
 }
-.btn-primary { background: var(--blue-accent); color: #ffffff; border: none;
-    box-shadow: 0 1px 20px rgba(48, 134, 255, 0.204);
+.btn-primary { background: #4f4476; color: #ffffff; border: none;
+    box-shadow: 0 1px 20px rgba(48, 134, 255, 0.056);
 
  }
-.btn-secondary { background:#dfe3e9; color: var(--text-2);
+.btn-secondary { background:var(--contrast-bg); color: var(--text-2);
   margin-right: 8px; border: none
 }
 

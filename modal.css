@@ -273,7 +273,7 @@
   position: relative;
   width: 100%;
   height: 200px;
-  background-color: var(--bg-color); /* Dynamically matches selected color */
+  background-color: var(--other); /* Dynamically matches selected color */
   border-radius: 20px;
   margin: 12px 0 20px 0;
   display: flex;

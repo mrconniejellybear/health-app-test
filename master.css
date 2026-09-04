@@ -159,6 +159,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom:12px;
 }
 
 
@@ -336,7 +337,6 @@ body {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-3);
-  margin-bottom: -14px;
   margin-left: 4px;
 }
 
@@ -416,11 +416,11 @@ body {
   align-items: center;
   color: var(--text-3);
   background-color: #252d3c00;
-  transition: all 0.1s;
+  transition: all 0.05s;
 }
 
 .nav-btn svg{
-  height: 46px;
+  height: 34px;
   width: auto;
 }
 /* Active State Styling */

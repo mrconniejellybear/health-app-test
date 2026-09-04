@@ -13,13 +13,13 @@
 }
 
 .dashboard-date {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 560;
   color: var(--text-3);
 }
 
 .dashboard-greeting {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 660;
   color: var(--text-main);
   font-family: "Plus Jakarta Sans";

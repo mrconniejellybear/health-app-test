@@ -31,7 +31,6 @@
 
 /* --- Empty Vacancy Box (Centered Vertical Stack) --- */
 .med-empty-vacancy {
-  margin-top: 12px;
   min-height: 180px;
   border: 3px dashed var(--text-muted)
 ;
@@ -408,7 +407,7 @@
   font-size: 13px;
   font-weight:600;
   color: var(--text-3);
-  margin: 12px 0 6px 4px;
+  margin: 12px 0 4px 4px;
 }
 
 #med-form label svg,
@@ -427,7 +426,7 @@
 #med-form select {
   padding: 10px 14px;
   border-radius: 14px;
-  background: var(--other);
+  background: var(--bg-color);
   color: var(--text-main);
   font-size: 15px;
   font-weight: 500;
@@ -526,7 +525,7 @@
     box-shadow: 0 1px 20px rgba(48, 134, 255, 0.056);
 
  }
-.btn-secondary { background:var(--contrast-bg); color: var(--text-2);
+.btn-secondary { background:var(--other); color: var(--text-2);
   margin-right: 8px; border: none
 }
 

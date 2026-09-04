@@ -382,7 +382,7 @@ body {
   height: 64px;
 
   border: none;
-  background-color: #19202e;
+  background-color: #19182b;
 
   
   box-shadow: 1px 3px 8px rgba(28, 34, 45, 0.09);
@@ -414,7 +414,7 @@ body {
 
   justify-content: center;
   align-items: center;
-  color: var(--text-3);
+  color: var(--text-2);
   background-color: #252d3c00;
   transition: all 0.05s;
 }
@@ -426,7 +426,7 @@ body {
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
-  color: #e9f6ff;
+  color: var(--text-muted);
 }
 
 

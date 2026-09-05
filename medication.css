@@ -130,7 +130,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   padding: 12px 14px;
   flex: 1;
 }
@@ -144,8 +144,8 @@
 
 .med-sub-details {
   font-size: 11px;
-  font-weight: 540;
-  color: var(--text-3);
+  font-weight: 560;
+  color: var(--text-2);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -155,7 +155,7 @@
 .med-chevron {
   display: flex;
   align-items: center;
-  padding-right: 8px;
+  padding-right: 10px;
   height: 40px;
   margin: auto;
   width: auto;
@@ -198,7 +198,7 @@
   border-radius: 18px;
   overflow: hidden; /* Clips the left badge to card corners */
   border: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   position: relative;
   user-select: none;
   touch-action: pan-y;
@@ -754,7 +754,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 2px 8px;
+  padding: 4px 8px;
   background: transparent;
   width: 100%;
   text-align: left;

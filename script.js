@@ -546,7 +546,6 @@ if (medForm) {
     const rawTime = timeInput ? timeInput.value : "";
     const frequency = freqInput ? freqInput.value : "Daily";
 
-    // Read from the new studio carousel stage, with fallbacks
     const iconInput = document.getElementById("selected-med-icon");
     const colorInput = document.getElementById("selected-med-color");
     const selectedIcon = iconInput ? iconInput.value : "2-tablets";
@@ -554,30 +553,45 @@ if (medForm) {
 
     if (!name) return;
 
-    // Safe time formatting
     let formattedTime = rawTime;
     if (typeof formatTime === "function" && rawTime) {
       formattedTime = formatTime(rawTime);
     }
 
-    const newMed = {
-      id: Date.now().toString(),
-      name,
-      dosage,
-      scheduledTime: formattedTime,
-      frequency,
-      icon: selectedIcon,
-      customColor: selectedColor,
-      colorKey: "custom",
-      history: []
-    };
+    if (currentEditMedId) {
+      // Update existing
+      const medIndex = medications.findIndex(m => m.id === currentEditMedId);
+      if (medIndex > -1) {
+        medications[medIndex].name = name;
+        medications[medIndex].dosage = dosage;
+        medications[medIndex].scheduledTime = formattedTime;
+        medications[medIndex].rawTime = rawTime; // Save raw for seamless editing
+        medications[medIndex].frequency = frequency;
+        medications[medIndex].icon = selectedIcon;
+        medications[medIndex].customColor = selectedColor;
+      }
+      currentEditMedId = null; 
+    } else {
+      // Create new
+      const newMed = {
+        id: Date.now().toString(),
+        name,
+        dosage,
+        scheduledTime: formattedTime,
+        rawTime: rawTime,
+        frequency,
+        icon: selectedIcon,
+        customColor: selectedColor,
+        colorKey: "custom",
+        history: [],
+        archived: false
+      };
+      medications.push(newMed);
+    }
 
-    medications.push(newMed);
     if (typeof saveAppState === "function") saveAppState();
-
     medForm.reset();
 
-    // Close Modal / Bottom Sheet
     if (typeof closeBottomSheet === "function") {
       closeBottomSheet();
     } else if (modalOverlay) {
@@ -591,34 +605,32 @@ if (medForm) {
 
 
 
+
 // --- PRESS & HOLD QUICK-DELETE BADGE ---
-// --- PRESS & HOLD QUICK-DELETE BADGE ---
-function attachLongPressDelete(element, medId) {
+let currentEditMedId = null;
+
+// --- PRESS & HOLD CONTEXT MENU ---
+function attachLongPressMenu(element, med) {
   let pressTimer = null;
   let touchStartPos = { x: 0, y: 0 };
   const HOLD_DURATION = 500;
 
   function startHold(e) {
-    if (isMedEditMode || e.target.closest('.med-hold-delete-btn') || e.target.closest('.med-delete-btn')) return;
+    if (isMedEditMode || e.target.closest('.item-action-menu-popover') || e.target.closest('.med-delete-btn')) return;
     
     const touch = e.touches ? e.touches[0] : e;
     touchStartPos = { x: touch.clientX, y: touch.clientY };
-
     element.classList.add("holding");
 
     pressTimer = setTimeout(() => {
-      triggerQuickDelete(element, medId);
+      triggerItemMenu(element, med);
     }, HOLD_DURATION);
   }
 
   function moveHold(e) {
     if (!pressTimer) return;
     const touch = e.touches ? e.touches[0] : e;
-    const moveX = Math.abs(touch.clientX - touchStartPos.x);
-    const moveY = Math.abs(touch.clientY - touchStartPos.y);
-
-    // Only cancel hold if finger moves significantly (>10px) to allow natural touch wobble
-    if (moveX > 10 || moveY > 10) {
+    if (Math.abs(touch.clientX - touchStartPos.x) > 10 || Math.abs(touch.clientY - touchStartPos.y) > 10) {
       cancelHold();
     }
   }
@@ -629,38 +641,81 @@ function attachLongPressDelete(element, medId) {
     element.classList.remove("holding");
   }
 
-  function triggerQuickDelete(el, id) {
+  function triggerItemMenu(el, med) {
     cancelHold();
     if (navigator.vibrate) navigator.vibrate(15);
     if (typeof playClickSound === "function") playClickSound();
 
-    document.querySelectorAll(".med-hold-delete-btn").forEach(btn => btn.remove());
+    // Clean up any existing menus first
+    document.querySelectorAll(".item-action-menu-popover").forEach(menu => menu.remove());
 
-    const deleteBadge = document.createElement("button");
-    deleteBadge.className = "med-hold-delete-btn";
-    deleteBadge.innerHTML = '<svg width="100pt" fill="currentColor" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="m74 40h1.8281c1.5938 0.039062 2.957-1.125 3.1719-2.6992 0.085938-0.84766-0.19141-1.6914-0.76562-2.3203-0.57031-0.62891-1.3828-0.98438-2.2344-0.98047h-13v-6c0-4.9688-4.0312-9-9-9h-8c-4.9688 0-9 4.0312-9 9v6h-12.828c-1.5938-0.039062-2.957 1.125-3.1719 2.6992-0.085938 0.84766 0.19141 1.6914 0.76562 2.3203 0.57031 0.62891 1.3828 0.98438 2.2344 0.98047h2v32c0 4.9688 4.0312 9 9 9h30c4.9688 0 9-4.0312 9-9zm-31-12c0-1.6562 1.3438-3 3-3h8c1.6562 0 3 1.3438 3 3v6h-14zm25 44c0 1.6562-1.3438 3-3 3h-30c-1.6562 0-3-1.3438-3-3v-32h36z"/></svg>';
-    deleteBadge.setAttribute("aria-label", "Delete medication");
+    // Get the exact coordinates of the medication card on the screen
+    const rect = el.getBoundingClientRect();
 
-    // ---> ADD / UPDATE THE LISTENER HERE
-    deleteBadge.addEventListener("click", (e) => {
+    const menu = document.createElement("div");
+    menu.className = "item-action-menu-popover";
+    
+    // Apply the coordinates so the menu centers directly over the card
+    menu.style.top = `${rect.top + (rect.height / 2)}px`;
+    menu.style.left = `${rect.left + (rect.width / 2)}px`;
+
+    menu.innerHTML = `
+      <button class="action-menu-item" id="item-edit-btn">
+<svg fill="currentColor" width="100pt" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <path d="m36 19h-6c-6.0703 0-11 4.9297-11 11v6c0 1.6484 1.3516 3 3 3s3-1.3516 3-3v-6c0-2.7617 2.2383-5 5-5h6c1.6484 0 3-1.3516 3-3s-1.3516-3-3-3z"/>
+ <path d="m81 64c0-1.6484-1.3516-3-3-3s-3 1.3516-3 3v6c0 2.7617-2.2383 5-5 5h-6c-1.6484 0-3 1.3516-3 3s1.3516 3 3 3h6c6.0703 0 11-4.9297 11-11z"/>
+ <path d="m62 21c-2.3984 0-4.6602 0.94141-6.3594 2.6406l-32.012 32c-1.6992 1.6992-2.6406 3.9609-2.6406 6.3594v8c0 4.9609 4.0391 9 9 9h8c2.4102 0 4.6719-0.94141 6.3711-2.6406l32-32c1.6992-1.6992 2.6289-3.9609 2.6289-6.3594 0-9.3711-7.6289-17-17-17zm-21.879 51.121c-0.57031 0.57812-1.3086 0.87891-2.1211 0.87891h-8c-1.6484 0-3-1.3516-3-3v-8c0-0.80078 0.30859-1.5508 0.87891-2.1211l21.879-21.879 12.238 12.238-21.879 21.879zm32-32-5.8789 5.8789-12.238-12.238 5.8789-5.8789c0.57813-0.57812 1.3086-0.87891 2.1211-0.87891 6.0703 0 11 4.9297 11 11 0 0.80859-0.30078 1.5508-0.87891 2.1211z"/>
+</svg>       
+<span>Edit</span>
+      </button>
+<button class="action-menu-item" id="item-archive-btn">
+<svg fill="currentColor" width="100pt" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+ <path d="m80.82 47.219c0.96094-5.1602-2.1016-10.219-7.1211-11.758l-0.69922-0.22266v-7.2383c0-4.9688-4.0312-9-9-9h-28c-4.9688 0-9 4.0312-9 9v7.2383l-0.71094 0.21875v0.003907c-5.0234 1.5391-8.0859 6.6055-7.1172 11.77l5 26.441c0.80078 4.2461 4.5078 7.3203 8.8281 7.3281h34c4.332 0.003906 8.0508-3.082 8.8516-7.3398zm-47.82-19.219c0-1.6562 1.3438-3 3-3h28c1.6562 0 3 1.3438 3 3v7h-34zm41.93 18.109-4.9297 26.441c-0.26953 1.4375-1.5352 2.4727-3 2.4492h-34c-1.4648 0.023438-2.7305-1.0117-3-2.4492l-5-26.43c-0.046875-0.26562-0.070312-0.53125-0.070312-0.80078 0-1.1602 0.46484-2.2695 1.2891-3.0781 0.82812-0.8125 1.9453-1.2617 3.1016-1.2422h41.359c1.2852 0 2.5039 0.57031 3.3242 1.5586 0.82031 0.98828 1.1602 2.2891 0.92578 3.5508z"/>
+ <path d="m57 50h-14c-1.6562 0-3 1.3438-3 3s1.3438 3 3 3h14c1.6562 0 3-1.3438 3-3s-1.3438-3-3-3z"/>
+</svg>       
+<span>Archive</span>
+      </button>
+      <button class="action-menu-item delete-text" id="item-delete-btn">
+<svg fill="currentColor" width="100pt" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <path d="m74 40h1.8281c1.5938 0.039062 2.957-1.125 3.1719-2.6992 0.085938-0.84766-0.19141-1.6914-0.76562-2.3203-0.57031-0.62891-1.3828-0.98438-2.2344-0.98047h-13v-6c0-4.9688-4.0312-9-9-9h-8c-4.9688 0-9 4.0312-9 9v6h-12.828c-1.5938-0.039062-2.957 1.125-3.1719 2.6992-0.085938 0.84766 0.19141 1.6914 0.76562 2.3203 0.57031 0.62891 1.3828 0.98438 2.2344 0.98047h2v32c0 4.9688 4.0312 9 9 9h30c4.9688 0 9-4.0312 9-9zm-31-12c0-1.6562 1.3438-3 3-3h8c1.6562 0 3 1.3438 3 3v6h-14zm25 44c0 1.6562-1.3438 3-3 3h-30c-1.6562 0-3-1.3438-3-3v-32h36z"/>
+</svg>
+<span>Delete</span>
+      </button>
+    `;
+
+    // Edit 
+    menu.querySelector("#item-edit-btn").addEventListener("click", (e) => {
       e.stopPropagation();
-
-      // 1. Trigger sound first so UI re-render crashes never block playback
-      actionSound.currentTime = 0;
-      actionSound.play().catch(err => console.warn("Audio playback failed:", err));
-
-      // 2. Remove medication and sync dashboard
-      deleteMedication(id);
+      menu.remove();
+      openEditMedSheet(med);
     });
 
-    el.appendChild(deleteBadge);
+    // Archive 
+    menu.querySelector("#item-archive-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      menu.remove();
+      archiveMedication(med.id);
+    });
 
+    // Delete 
+    menu.querySelector("#item-delete-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      actionSound.currentTime = 0;
+      actionSound.play().catch(err => console.warn("Audio playback failed:", err));
+      deleteMedication(med.id);
+    });
+
+    // Append to the BODY instead of the list item!
+    document.body.appendChild(menu);
+
+    // Dismiss menu if clicking anywhere outside of it
     const dismissHandler = (event) => {
-      if (!el.contains(event.target)) {
-        deleteBadge.remove();
+      if (!menu.contains(event.target)) {
+        menu.remove();
         document.removeEventListener("pointerdown", dismissHandler);
       }
     };
+    // Slight delay prevents the initial press from immediately closing it
     setTimeout(() => document.addEventListener("pointerdown", dismissHandler), 20);
   }
 
@@ -669,11 +724,61 @@ function attachLongPressDelete(element, medId) {
   element.addEventListener("touchmove", moveHold, { passive: true });
   element.addEventListener("touchend", cancelHold);
   element.addEventListener("touchcancel", cancelHold);
-
   element.addEventListener("mousedown", startHold);
   element.addEventListener("mousemove", moveHold);
   element.addEventListener("mouseup", cancelHold);
   element.addEventListener("mouseleave", cancelHold);
+}
+
+// --- ARCHIVE & EDIT LOGIC ---
+function archiveMedication(id) {
+  const medIndex = medications.findIndex(m => String(m.id) === String(id));
+  if (medIndex > -1) {
+    medications[medIndex].archived = true;
+    saveAppState();
+    renderMedications();
+    if (typeof updateHomeDashboard === "function") updateHomeDashboard();
+  }
+}
+
+function openEditMedSheet(med) {
+  currentEditMedId = med.id;
+  
+  // Pre-fill text inputs
+  document.getElementById("med-name").value = med.name || "";
+  document.getElementById("med-dosage").value = med.dosage || "";
+  
+  const freqInput = document.getElementById("med-frequency");
+  if (freqInput) freqInput.value = med.frequency || "Daily";
+
+  // Using rawTime ensures the HTML <input type="time"> accepts it perfectly
+  document.getElementById("med-time").value = med.rawTime || "";
+
+  // Pre-fill Visuals (Icon & Color)
+  const iconInput = document.getElementById("selected-med-icon");
+  const colorInput = document.getElementById("selected-med-color");
+  const nativeColorPicker = document.getElementById("med-native-color-picker");
+  const stage = document.getElementById("med-picker-stage");
+
+  if (iconInput) iconInput.value = med.icon;
+  if (colorInput) colorInput.value = med.customColor || "#3883e0";
+  if (nativeColorPicker) nativeColorPicker.value = med.customColor || "#3883e0";
+  if (stage) stage.style.backgroundColor = med.customColor || "#3883e0";
+
+  // Sync Carousel
+  const idx = AVAILABLE_MED_ICONS.findIndex(i => i.key === med.icon);
+  if (idx !== -1) {
+      activeIconIndex = idx;
+      const slider = document.getElementById("stage-slider");
+      if (slider) {
+          slider.style.transform = `translateX(-${activeIconIndex * 100}%)`;
+          slider.querySelectorAll(".stage-slide-item").forEach((slide, i) => {
+              slide.classList.toggle("active", i === activeIconIndex);
+          });
+      }
+  }
+
+  openBottomSheet();
 }
 
 
@@ -821,11 +926,13 @@ function renderMedications() {
 
 
   // Sort items: Pending first, Taken last
-  const sortedMeds = [...medications].sort((a, b) => {
-    const aTaken = a.history.includes(today);
-    const bTaken = b.history.includes(today);
-    return aTaken === bTaken ? 0 : aTaken ? 1 : -1;
-  });
+  const sortedMeds = [...medications]
+    .filter(m => !m.archived)
+    .sort((a, b) => {
+      const aTaken = a.history.includes(today);
+      const bTaken = b.history.includes(today);
+      return aTaken === bTaken ? 0 : aTaken ? 1 : -1;
+    });
 
   sortedMeds.forEach((med) => {
     const isTakenToday = med.history.includes(today);
@@ -869,8 +976,8 @@ function renderMedications() {
     if (typeof attachSwipeGesture === "function") {
       attachSwipeGesture(li, med, today);
     }
-    if (typeof attachLongPressDelete === "function") {
-      attachLongPressDelete(li, med.id);
+    if (typeof attachLongPressMenu === "function") {
+      attachLongPressMenu(li, med); // Pass the full 'med' object, not just 'med.id'
     }
 
     medList.appendChild(li);

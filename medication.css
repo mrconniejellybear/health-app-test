@@ -588,7 +588,7 @@
 .menu-trigger-btn {
   background: none;
   border: none;
-  color: var(--text-2);
+  color: var(--text-3);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -604,7 +604,6 @@
 .menu-trigger-btn:active {
   transform: scale(0.8);
   background: var(--other);
-  color: var(--text-2);
 }
 
 /* Dark Floating Popover */
@@ -694,7 +693,7 @@
 /* Visual squeeze feedback during the 500ms hold */
 .med-item.holding {
   transform: scale(0.9);
-  box-shadow: 0 0 0 3px rgba(255, 13, 0, 0.81);
+  box-shadow: 0 0 0 3px #0099ff;
 }
 .med-item.holding .med-item{
   background-color: #fd2600;
@@ -747,3 +746,66 @@
 
 
 
+
+
+
+
+
+/* --- ITEM ACTION CONTEXT MENU --- */
+.item-action-menu-popover {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--card-bg);
+  border: none;
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 2px 10px 200px rgba(0, 0, 0, 0.28);
+  z-index: 9999;
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  min-width: 180px;
+}
+
+.item-action-menu-popover .action-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  border: none;
+  font-size: 15px;
+  font-weight: 560;
+  color: var(--text-main);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.item-action-menu-popover .action-menu-item svg {
+  color: var(--text-3);
+  width: 28px;
+  height: auto;
+}
+
+.item-action-menu-popover .action-menu-item:hover,
+.item-action-menu-popover .action-menu-item:active {
+  background: var(--other);
+}
+
+.item-action-menu-popover .action-menu-item.delete-text {
+  color: #f64c1d; 
+}
+.item-action-menu-popover .action-menu-item.delete-text svg {
+  color: #f64c1d;
+}
+
+
+@keyframes popIn {
+  from { opacity: 0; transform: translate(-50%, -40%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}

@@ -423,6 +423,10 @@ body {
   height: 32px;
   width: auto;
 }
+.heart svg{
+  height: 35px;
+  width: auto;
+}
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;

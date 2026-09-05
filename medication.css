@@ -99,8 +99,7 @@
 
 /* Circular container using your app's theme tint */
 .med-icon-badge {
-  width: 80px;
-  min-width: 74px;
+  width: 74px;
   align-self: stretch;
   display: flex;
   align-items: center;
@@ -112,8 +111,8 @@
 
 /* 3D PNG scaling & lighting lift */
 .med-3d-img {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: auto;
   object-fit: contain;
   user-select: none;
   pointer-events: none;
@@ -144,9 +143,9 @@
 }
 
 .med-sub-details {
-  font-size: 12px;
-  font-weight: 480;
-  color: var(--text-4);
+  font-size: 11px;
+  font-weight: 540;
+  color: var(--text-3);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -160,7 +159,7 @@
   height: 40px;
   margin: auto;
   width: auto;
-  color: var(--text-4);
+  color: var(--text-muted);
   user-select: none;
 }
 
@@ -199,7 +198,7 @@
   border-radius: 18px;
   overflow: hidden; /* Clips the left badge to card corners */
   border: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   position: relative;
   user-select: none;
   touch-action: pan-y;
@@ -641,26 +640,7 @@
   visibility: visible;
 }
 
-/* Popover Row Item */
-.action-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  width: 100%;
-  padding:8px 6px;
-  background: none;
-  border: none;
-  color: var(--text-main);
-  font-size: 15px;
-  font-weight: 460;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s;
-}
 
-.action-menu-item:not(:last-child) {
-  border-bottom: 1px solid var(--bg-color);
-}
 
 .action-menu-item svg {
   flex-shrink: 0;
@@ -770,11 +750,11 @@
   min-width: 180px;
 }
 
-.item-action-menu-popover .action-menu-item {
+.action-menu-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 6px 8px;
+  padding: 2px 8px;
   background: transparent;
   width: 100%;
   text-align: left;

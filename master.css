@@ -34,7 +34,7 @@ body.dark {
   --text-2: #a3afc1;
   --text-3: #5e6472;
 
-  --text-muted: #4d4558;
+  --text-muted: #7122df;
   --contrast-bg: #313950;
 
   --medicon: #b7c9f01e;
@@ -429,7 +429,7 @@ body {
 /* Active State Styling */
 .nav-btn.active {
   opacity: 1;
-  color: var(--text-muted);
+  color: #f7f7ff;
 }
 
 
